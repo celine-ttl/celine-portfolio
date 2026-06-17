@@ -36,7 +36,7 @@ function WorkCard({ imageSrc, gifSrc, imageAlt, title, description, tags, href }
       </div>
       <div className="flex flex-col gap-[14px] px-6 pt-0 pb-6 mt-[25px]">
         <h3 className="text-[#2D2D2D] text-[24px] font-bold leading-tight" style={dm}>{title}</h3>
-        <p className="text-[#525252] text-[17px] font-light leading-[27px]" style={dm}>{description}</p>
+        <p className="text-[#525252] text-[17px] font-light leading-[27px]" style={{ ...dm, whiteSpace: 'pre-line' }}>{description}</p>
         <div className="flex flex-wrap gap-[10px]">
           {tags.map((tag) => (
             <span key={tag} className="bg-[#F3F3F3] rounded-full text-[14px] text-black font-normal" style={{ ...dm, padding: '8px 24px', lineHeight: '140%' }}>
@@ -115,7 +115,7 @@ export default function Home() {
               gifSrc="/images/ui-for-ai/work-card-thumbnail.gif"
               imageAlt="Re-imagining UI for AI"
               title="Re-imagining UI for AI"
-              description="Tackling the conversation flow problem with current chatbot design of AI."
+              description={"Tackling the conversation flow problem with\ncurrent chatbot design of AI."}
               tags={['Website Design', 'Interaction Design']}
             />
             <WorkCard
@@ -137,7 +137,7 @@ export default function Home() {
               imageSrc="/images/work-card-4.png"
               imageAlt="MyInfluency (Coming Soon)"
               title="MyInfluency (Coming Soon)"
-              description="Redesigning a Platform for Business–Influencer Collaboration and Management"
+              description={"Redesigning a platform for business–influencer\ncollaboration and management"}
               tags={['Product Design', 'SaSS Design']}
             />
           </div>
