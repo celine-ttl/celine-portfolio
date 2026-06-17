@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx playwright *)",
+      "Bash(node *)",
+      "Bash(npm install *)",
+      "Bash(grep -o '\"text\":\"[^\"]*function App[^\"]*\"' /Users/celinetseng/.claude/projects/-Users-celinetseng/f721b19c-6cad-45af-a921-35f35fd8d4f8.jsonl | head -3)",
+      "Read(//Users/celinetseng/.claude/projects/-Users-celinetseng/**)",
+      "Bash(python3 -c ' *)",
+      "Read(//Users/celinetseng/app/**)",
+      "Read(//Users/celinetseng/**)",
+      "Bash(grep -v -E \"^\\(Desktop|Documents|Downloads|Movies|Music|Pictures|Library|Public|Applications\\)$\")",
+      "Bash(npx tailwindcss *)",
+      "Bash(npm run *)",
+      "mcp__figma-developer-mcp__get_figma_data"
+    ]
+  }
+}

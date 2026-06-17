@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..900;1,9..40,100..900&family=Epilogue:wght@400;500;600&family=Inter:wght@400&display=swap');
+
+body {
+  margin: 0;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-animate {
+  animation: fadeInUp 0.7s ease-out both;
+}
+
+.fade-section {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.jump-btn {
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+.jump-btn:hover {
+  background: #3D3D3D !important;
+  box-shadow: 6px 6px 16px 0px rgba(0,0,0,0.12), -4px -4px 12px 0px rgba(0,0,0,0.05) !important;
+}
+.jump-btn:active {
+  background: #2D2D2D !important;
+  transform: scale(0.97);
+  box-shadow: 2px 2px 6px 0px rgba(0,0,0,0.08) !important;
+}
+
+/* Responsive: Case Study */
+@media (max-width: 900px) {
+  .cs-sidenav { display: none !important; }
+  .cs-hero-row { flex-direction: column !important; }
+  .cs-hero-image { width: 100% !important; max-width: 100% !important; }
+}
+
+@media (max-width: 768px) {
+  .cs-hero-outer { padding: 20px !important; }
+  .cs-metadata { padding: 24px 20px !important; flex-wrap: wrap !important; gap: 20px 40px !important; }
+  .cs-metadata > div { width: calc(50% - 20px) !important; }
+  .cs-hmw-row { flex-direction: column !important; }
+  .cs-overview-row { flex-direction: column !important; }
+  .cs-series-img { width: 100% !important; }
+  .cs-three-col { flex-direction: column !important; }
+  .cs-two-col { flex-direction: column !important; }
+  .cs-gif-container { height: auto !important; }
+  .cs-gif-container img { height: auto !important; }
+  .cs-next-project-outer { padding: 40px 24px !important; }
+  .cs-next-project-row { flex-direction: column !important; }
+  .cs-next-project-img { width: 100% !important; height: 220px !important; }
+  .cs-footer-inner { padding: 40px 24px !important; }
+  .cs-footer-top { flex-direction: column !important; align-items: flex-start !important; gap: 24px !important; }
+  .cs-footer-bottom { flex-direction: column !important; align-items: flex-start !important; gap: 16px !important; }
+  .cs-decision2-row { flex-direction: column !important; }
+  .cs-decision2-spacer { display: none !important; }
+}
