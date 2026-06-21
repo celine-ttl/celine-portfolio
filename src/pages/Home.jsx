@@ -75,7 +75,6 @@ const HERO_IMAGES = ['hero-bg', 'hero-shake-1', 'hero-shake-2', 'hero-bg-hover']
 export default function Home() {
   const [bubbles, setBubbles] = useState([])
   const [heroState, setHeroState] = useState(0) // 0=normal,1=shake1,2=shake2,3=spill
-  const [finalShaking, setFinalShaking] = useState(false)
   const ideaIndexRef = useRef(0)
   const imgRef = useRef(null)
   const lastPosRef = useRef(null)
@@ -114,11 +113,8 @@ export default function Home() {
             spilledRef.current = true
             shakeCountRef.current = 0
             lastDirectionRef.current = null
-            setFinalShaking(true)
-            setTimeout(() => {
-              setFinalShaking(false)
-              setHeroState(3)
-            }, 350)
+            setHeroState(2)
+            setTimeout(() => setHeroState(3), 320)
             return
           }
         }
@@ -177,7 +173,7 @@ export default function Home() {
             onClick={handleImageClick}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
-            className={`hidden lg:block${finalShaking ? ' hero-final-shake' : ''}`}
+            className="hidden lg:block"
             style={{
               position: 'absolute', right: 0, top: -96, bottom: 0, left: 0,
               cursor: 'pointer',
@@ -222,8 +218,9 @@ export default function Home() {
               overflow: 'hidden',
               boxShadow: '4px 4px 12px 0px rgba(0,0,0,0.08), -4px -4px 12px 0px rgba(0,0,0,0.05)',
               opacity: showHint && heroState !== 3 ? 1 : 0,
-              transform: showHint && heroState !== 3 ? 'translateY(0)' : 'translateY(-8px)',
+              transform: showHint && heroState !== 3 ? undefined : 'translateY(-8px)',
               transition: 'opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
+              animation: showHint && heroState !== 3 ? 'floatUpDown 2.8s ease-in-out infinite' : undefined,
               pointerEvents: 'none',
             }}
           >

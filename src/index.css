@@ -45,6 +45,11 @@ body {
   box-shadow: 2px 2px 6px 0px rgba(0,0,0,0.08) !important;
 }
 
+@keyframes floatUpDown {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
 /* Hero final spill shake */
 @keyframes finalShake {
   0%   { transform: scale(0.9) translateX(0); }
