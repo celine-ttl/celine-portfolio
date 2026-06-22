@@ -203,7 +203,7 @@ export default function UiForAiCaseStudy() {
           </Link>
           <div className="hidden sm:flex items-center" style={{ marginLeft: 'auto', gap: 52 }}>
             <Link to="/#work" className="text-[#2D2D2D] text-[17px] font-normal leading-7 hover:opacity-70 transition-opacity" style={dm}>Work</Link>
-            <Link to="/#about" className="text-[#2D2D2D] text-[17px] font-normal leading-7 hover:opacity-70 transition-opacity" style={dm}>About</Link>
+            <Link to="/about" className="text-[#2D2D2D] text-[17px] font-normal leading-7 hover:opacity-70 transition-opacity" style={dm}>About</Link>
             <Link to="/#contact" className="text-[#2D2D2D] text-[17px] font-normal leading-7 hover:opacity-70 transition-opacity" style={dm}>Contact</Link>
           </div>
         </div>
