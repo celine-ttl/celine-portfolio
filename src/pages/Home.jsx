@@ -285,14 +285,14 @@ export default function Home() {
               imageAlt="Amazon Music"
               title="Amazon Music (Coming soon)"
               description="Bridging the gap between listeners and creators through a reimagined Amazon Music experience"
-              tags={['Product Design', 'Interaction Design']}
+              tags={['Capstone', 'Interaction Design']}
             />
             <WorkCard
               imageSrc="/images/work-card-4.png"
               imageAlt="MyInfluency (Coming Soon)"
               title="MyInfluency (Coming Soon)"
               description={"Redesigning a platform for business–influencer\ncollaboration and management"}
-              tags={['Product Design', 'SaSS Design']}
+              tags={['Startup', 'SaSS Design']}
             />
           </div>
         </section>
