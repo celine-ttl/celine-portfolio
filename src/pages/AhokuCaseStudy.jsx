@@ -203,13 +203,13 @@ export default function AhokuCaseStudy() {
                   Redesigning interface for a compact health monitoring device for independent seniors: making it truly intuitive and empowering.
                 </p>
               </div>
-              <a
-                href="#solution-1"
-                onClick={e => { e.preventDefault(); document.getElementById('solution-1')?.scrollIntoView({ behavior: 'smooth' }) }}
-                style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 10, padding: '0 24px', height: 42, borderRadius: 100, background: '#525252', boxShadow: '4px 4px 12px 0px rgba(0,0,0,0.05), -4px -4px 12px 0px rgba(0,0,0,0.05)', cursor: 'pointer', textDecoration: 'none', width: 'fit-content' }}
+              <button
+                onClick={() => document.getElementById('solution-1')?.scrollIntoView({ behavior: 'smooth' })}
+                className="jump-btn"
+                style={{ ...dm, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', background: '#525252', borderRadius: 100, padding: '0 24px', width: 'fit-content', cursor: 'pointer', border: 'none', fontSize: 17, fontWeight: 600, lineHeight: '42px', color: '#FFFFFF', boxShadow: '4px 4px 12px 0px rgba(0,0,0,0.05), -4px -4px 12px 0px rgba(0,0,0,0.05)' }}
               >
-                <span className="text-[17px] font-semibold text-white" style={dm}>Jump to solution</span>
-              </a>
+                Jump to solution
+              </button>
             </div>
             <img
               src="/images/ahoku/hero-bg-new.png"
@@ -241,29 +241,26 @@ export default function AhokuCaseStudy() {
       <main>
         {/* CONTEXT */}
         <section id="context" className="flex flex-col items-center bg-white" style={{ position: 'relative', padding: '60px 55px', gap: 24, overflow: 'visible' }}>
-          {/* Decorative ANT device image — absolutely positioned per Figma */}
-          <img
-            src="/images/ahoku/ant-device2.png"
-            alt=""
-            aria-hidden="true"
-            style={{ position: 'absolute', left: 0, top: 172, width: 254, height: 229, objectFit: 'contain', pointerEvents: 'none' }}
-          />
           <div className="flex flex-col gap-[32px] fade-section" style={{ width: 800 }}>
             <div className="flex flex-col gap-[10px]">
               <SectionLabel text="Context" />
-              {/* Two-column row: title left, body right */}
-              <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 24, width: 800 }}>
-              <h2 className="text-[28px] font-semibold leading-[42px] text-black" style={{ ...dm, flex: 1 }}>
-                A device built for independence — that was quietly working against it.
+              <h2 className="text-[28px] font-semibold leading-[42px] text-black" style={dm}>
+                A device built for independence — that was quietly<br />working against it.
               </h2>
-              <div style={{ width: 446 }}>
-                <p className="text-[17px] font-light leading-[27px] text-[#525252]" style={dm}>
-                  The ANT health device was designed for seniors who live independently, people who want to manage health on their own terms without relying on a caregiver. But in practice, rather than feeling capable, many ended up asking for help when using the device.
-                  <br /><br />
-                  This lead me to the main challenge of this project:
-                </p>
-              </div>
             </div>
+            {/* Row: device image left, description right */}
+            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 32 }}>
+              <img
+                src="/images/ahoku/ant-device2.png"
+                alt=""
+                aria-hidden="true"
+                style={{ width: 254, height: 229, objectFit: 'contain', flexShrink: 0 }}
+              />
+              <p className="text-[17px] font-light leading-[27px] text-[#525252]" style={dm}>
+                The ANT health device was designed for seniors who live independently, people who want to manage health on their own terms without relying on a caregiver. But in practice, rather than feeling capable, many ended up asking for help when using the device.
+                <br /><br />
+                This lead me to the main challenge of this project:
+              </p>
             </div>
             {/* Callout card — full width below the row */}
             <CalloutCard
