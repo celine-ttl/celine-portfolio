@@ -110,6 +110,8 @@ function SectionLabel({ text }) {
 export default function AhokuCaseStudy() {
   const [navVisible, setNavVisible] = useState(false)
   const [activeSection, setActiveSection] = useState('context')
+  const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 })
+  const [cursorVisible, setCursorVisible] = useState(false)
   const heroRef = useRef(null)
   const nextProjectRef = useRef(null)
 
@@ -189,33 +191,45 @@ export default function AhokuCaseStudy() {
         </div>
       </nav>
 
-      {/* Hero background image */}
-      <div ref={heroRef} style={{ marginTop: 80 }}>
-        <img src="/images/ahoku/hero-bg.png" alt="" className="w-full object-cover" style={{ height: 560 }} />
-      </div>
-
       {/* Case study hero */}
-      <div className="flex justify-center" style={{ background: '#FFFFFF', padding: 40 }}>
-        <div className="flex flex-col gap-[32px]" style={{ width: 800, padding: '40px 0' }}>
-          <div className="flex flex-col gap-[16px]">
-            <h1 className="text-[48px] font-bold leading-[60px] text-black" style={dm}>ANT Health Device Redesign</h1>
-            <p className="text-[17px] font-light leading-[27px] text-[#2D2D2D]" style={dm}>
-              Redesigning a health monitoring device for independent seniors—making it truly intuitive and empowering.
-            </p>
+      <div ref={heroRef} className="flex justify-center" style={{ background: '#FFFFFF', padding: 40, marginTop: 80 }}>
+        <div className="flex flex-col gap-[32px]" style={{ width: 1000, padding: '40px 0' }}>
+          {/* Two-column row: text left, image right */}
+          <div className="flex flex-row items-center" style={{ gap: 48 }}>
+            <div className="flex flex-col gap-[32px]" style={{ flex: 1 }}>
+              <div className="flex flex-col gap-[16px]">
+                <h1 className="text-[48px] font-bold leading-[60px] text-black" style={dm}>ANT Health Device Redesign</h1>
+                <p className="text-[17px] font-normal leading-[27px] text-[#2D2D2D]" style={dm}>
+                  Redesigning interface for a compact health monitoring device for independent seniors: making it truly intuitive and empowering.
+                </p>
+              </div>
+              <a
+                href="#solution-1"
+                onClick={e => { e.preventDefault(); document.getElementById('solution-1')?.scrollIntoView({ behavior: 'smooth' }) }}
+                style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 10, padding: '0 24px', height: 42, borderRadius: 100, background: '#525252', boxShadow: '4px 4px 12px 0px rgba(0,0,0,0.05), -4px -4px 12px 0px rgba(0,0,0,0.05)', cursor: 'pointer', textDecoration: 'none', width: 'fit-content' }}
+              >
+                <span className="text-[17px] font-semibold text-white" style={dm}>Jump to solution</span>
+              </a>
+            </div>
+            <img
+              src="/images/ahoku/hero-bg-new.png"
+              alt="ANT health device interface"
+              style={{ width: 464, height: 307, objectFit: 'cover', borderRadius: 17, flexShrink: 0 }}
+            />
           </div>
           {/* Metadata row */}
-          <div className="flex justify-between rounded-[24px]" style={{ background: '#F3F3F3', padding: 24 }}>
+          <div className="flex justify-between rounded-[24px]" style={{ background: '#F3F3F3', padding: '24px 72px' }}>
             {[
               { label: 'Role', values: ['Product Designer'] },
-              { label: 'Timeline', values: ['Aug 2025 -', 'Dec 2025'] },
+              { label: 'Timeline', values: ['Dec 2024 -', 'Jul 2025 (7 months)'] },
               { label: 'Team', values: ['1 Designer (me!)', '3 Engineers'] },
               { label: 'Tools', values: ['Figma', 'User Research'] },
             ].map(({ label, values }) => (
-              <div key={label} className="flex flex-col gap-[8px]" style={{ width: 160 }}>
+              <div key={label} className="flex flex-col gap-[8px]">
                 <span className="text-[14px] font-black uppercase text-[#4A77FF]" style={{ ...dm, letterSpacing: '0.05em', lineHeight: '21px' }}>{label}</span>
                 <div className="flex flex-col">
                   {values.map(v => (
-                    <span key={v} className="text-[17px] font-light leading-[27px] text-[#2D2D2D]" style={dm}>{v}</span>
+                    <span key={v} className="text-[17px] font-normal leading-[27px] text-[#2D2D2D]" style={dm}>{v}</span>
                   ))}
                 </div>
               </div>
@@ -229,10 +243,10 @@ export default function AhokuCaseStudy() {
         <section id="context" className="flex flex-col items-center bg-white" style={{ position: 'relative', padding: '60px 55px', gap: 24, overflow: 'visible' }}>
           {/* Decorative ANT device image — absolutely positioned per Figma */}
           <img
-            src="/images/ahoku/ant-device.png"
+            src="/images/ahoku/ant-device2.png"
             alt=""
             aria-hidden="true"
-            style={{ position: 'absolute', left: -69, top: 172, width: 254, height: 229, objectFit: 'contain', pointerEvents: 'none' }}
+            style={{ position: 'absolute', left: 0, top: 172, width: 254, height: 229, objectFit: 'contain', pointerEvents: 'none' }}
           />
           <div className="flex flex-col gap-[32px] fade-section" style={{ width: 800 }}>
             <div className="flex flex-col gap-[10px]">
@@ -497,27 +511,59 @@ export default function AhokuCaseStudy() {
       </main>
 
       {/* Next Project */}
-      <div ref={nextProjectRef} style={{ borderTop: '1px solid #E5E5E5', padding: '61px 125px 60px' }}>
+      <div
+        ref={nextProjectRef}
+        onMouseMove={e => setCursorPos({ x: e.clientX, y: e.clientY })}
+        style={{ borderTop: '1px solid #E5E5E5', padding: '61px 125px 60px' }}
+      >
         <p className="text-[36px] font-semibold leading-[42px] text-black" style={{ ...dm, marginBottom: 40 }}>Next Project</p>
-        <div className="flex items-center gap-[48px]">
-          <img
-            src="/images/ahoku/next-project.png"
-            alt="Re-imagining UI for AI"
-            className="object-cover rounded-[20px] flex-shrink-0"
-            style={{ width: 499, height: 315, boxShadow: '4px 4px 12px rgba(0,0,0,0.12)' }}
-          />
-          <div className="flex flex-col gap-[16px]">
-            <h3 className="text-[24px] font-semibold leading-[30px] text-[#2D2D2D]" style={dm}>Re-imagining UI for AI</h3>
-            <p className="text-[17px] font-light leading-[27px] text-[#2D2D2D]" style={dm}>
-              Tackling the conversation flow problem with current chatbot design of AI.
-            </p>
-            <div className="flex gap-[10px]">
-              {['Website Design', 'Re-branding'].map(tag => (
-                <span key={tag} className="text-[14px] text-black rounded-[20px]" style={{ background: '#F3F3F3', padding: '8px 24px', fontFamily: 'Inter, sans-serif' }}>{tag}</span>
-              ))}
+        <Link to="/ui-for-ai" style={{ display: 'block', textDecoration: 'none' }}>
+          <div
+            className="flex items-center gap-[48px]"
+            onMouseEnter={() => setCursorVisible(true)}
+            onMouseLeave={() => setCursorVisible(false)}
+          >
+            <img
+              src="/images/ui-for-ai/work-card-thumbnail.gif"
+              alt="Re-imagining UI for AI"
+              className="object-cover rounded-[20px] flex-shrink-0"
+              style={{ width: 499, height: 315, boxShadow: '4px 4px 12px rgba(0,0,0,0.12)' }}
+            />
+            <div className="flex flex-col gap-[16px]">
+              <h3 className="text-[24px] font-semibold leading-[30px] text-[#2D2D2D]" style={dm}>Re-imagining UI for AI</h3>
+              <p className="text-[17px] font-light leading-[27px] text-[#2D2D2D]" style={dm}>
+                Tackling the conversation flow problem with current chatbot design of AI.
+              </p>
+              <div className="flex gap-[10px]">
+                {['Website Design', 'Re-branding'].map(tag => (
+                  <span key={tag} className="text-[14px] text-black rounded-[20px]" style={{ background: '#F3F3F3', padding: '8px 24px', fontFamily: 'Inter, sans-serif' }}>{tag}</span>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
+        </Link>
+      </div>
+
+      {/* Custom cursor for next project */}
+      <div style={{
+        position: 'fixed',
+        left: cursorPos.x,
+        top: cursorPos.y,
+        transform: 'translate(12px, -50%)',
+        pointerEvents: 'none',
+        zIndex: 9999,
+        opacity: cursorVisible ? 1 : 0,
+        transition: 'opacity 0.2s ease',
+        background: '#2D2D2D',
+        color: '#fff',
+        borderRadius: 100,
+        padding: '10px 20px',
+        fontFamily: 'DM Sans, sans-serif',
+        fontSize: 14,
+        fontWeight: 600,
+        whiteSpace: 'nowrap',
+      }}>
+        View Project
       </div>
 
       {/* Footer */}
