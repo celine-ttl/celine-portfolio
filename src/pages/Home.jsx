@@ -270,7 +270,7 @@ export default function Home() {
               imageAlt="Re-imagining UI for AI"
               title="Re-imagining UI for AI"
               description={"Tackling the conversation flow problem with\ncurrent chatbot design of AI."}
-              tags={['Website Design', 'Interaction Design']}
+              tags={['AI Design', 'Interaction Design']}
             />
             <WorkCard
               href="/ahoku"
