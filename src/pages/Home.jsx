@@ -182,7 +182,7 @@ export default function Home() {
             <img
               src={`/images/${HERO_IMAGES[heroState]}.png`}
               alt=""
-              style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'right top', transition: 'opacity 0.15s ease', display: 'block', transform: 'scale(0.9)', transformOrigin: 'right top' }}
+              style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'right top', transition: 'opacity 0.15s ease', display: 'block', transform: 'scale(0.9) translateX(12px)', transformOrigin: 'right top' }}
             />
             {/* Spill text */}
             <div style={{
@@ -242,7 +242,7 @@ export default function Home() {
               </p>
             </div>
             <p className="hero-animate text-[20px] font-normal leading-[30px]" style={{ ...dm, color: '#525252', animationDelay: '200ms' }}>
-              Currently Pursuing a Masters of Human Computer Interaction
+              Currently Pursuing a Master's of HCI
               <br />@ Carnegie Mellon University
             </p>
           </div>
