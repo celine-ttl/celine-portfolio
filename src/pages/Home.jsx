@@ -242,7 +242,7 @@ export default function Home() {
               </p>
             </div>
             <p className="hero-animate text-[20px] font-normal leading-[30px]" style={{ ...dm, color: '#525252', animationDelay: '200ms' }}>
-              Masters of Human Computer Interaction
+              Currently Pursuing a Masters of Human Computer Interaction
               <br />@ Carnegie Mellon University
             </p>
           </div>
@@ -265,7 +265,7 @@ export default function Home() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '80px 40px', width: '100%' }}>
             <WorkCard
               href="/ui-for-ai"
-              imageSrc="/images/work-card-2.png"
+              imageSrc="/images/ui-for-ai/work-card-thumbnail.gif"
               gifSrc="/images/ui-for-ai/work-card-thumbnail.gif"
               imageAlt="Re-imagining UI for AI"
               title="Re-imagining UI for AI"

@@ -5,7 +5,7 @@ const dm = { fontFamily: 'DM Sans, sans-serif' }
 
 const NAV_SECTIONS = [
   { id: 'overview', label: 'Overview' },
-  { id: 'user-interviews', label: 'Interviews' },
+  { id: 'user-interviews', label: 'Research' },
   { id: 'problem-space', label: 'Problem' },
   { id: 'ideation', label: 'Ideation' },
   { id: 'solution-01', label: 'Solution' },
@@ -379,7 +379,7 @@ export default function UiForAiCaseStudy() {
           {/* Body + cards */}
           <div className="fade-section" style={{ width: '100%', maxWidth: 800, display: 'flex', flexDirection: 'column', gap: 24 }}>
             <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#525252', margin: 0 }}>
-              From our HMW Statement, we explored three early concepts as sketches. To compare them, we had participants rank the concepts by preference and converted those rankings into points; we then used affinity diagramming to consolidate the qualitative feedback.
+              Our HMW defined a problem, not a solution, so we explored three potential approaches: navigation, retrieval, and non-linear structure. We tested the concepts with 12 participants, collected rankings to compare preferences, and used affinity diagramming to uncover patterns in the qualitative feedback.
             </p>
             <div className="cs-three-col" style={{ display: 'flex', flexDirection: 'row', gap: 12 }}>
               {[
@@ -422,9 +422,9 @@ export default function UiForAiCaseStudy() {
                       <p style={{ ...dm, fontSize: 24, fontWeight: 600, color: nameColor, margin: 0 }}>{name}</p>
                     </div>
                     {/* Desc + ranking */}
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', flex: 1 }}>
                       <p style={{ ...dm, fontSize: 14, fontWeight: 300, lineHeight: '20px', color: descColor, margin: 0 }}>{desc}</p>
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginTop: 24 }}>
                         {/* Rank pill */}
                         <div style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', background: rankBg, borderRadius: 100, padding: '0 24px', width: 'fit-content' }}>
                           <span style={{ ...dm, fontSize: 12, fontWeight: 500, lineHeight: '20px', color: rankColor }}>{rank}</span>
@@ -479,32 +479,34 @@ export default function UiForAiCaseStudy() {
                 </div>
               </div>
             </div>
-            {/* Affinity diagram */}
-            <img
-              src="/images/ui-for-ai/affinity-diagram.png"
-              alt="Affinity diagram"
-              style={{ width: '100%', height: 505, objectFit: 'cover', borderRadius: 20, display: 'block' }}
-            />
-            {/* Text block */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-              <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#525252', margin: 0 }}>
-                Timeline was helpful but too passive. Branching appealed to power users but overwhelmed others.
-                {' '}The overlap pointed toward a single integrated recall surface: <strong style={{ fontWeight: 600 }}>one that took the</strong>
-              </p>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-                {[
-                  'navigation simplicity of Timeline',
-                  'the flexibility of Branching',
-                  'the intuitiveness of Bookmarking',
-                ].map(line => (
-                  <p key={line} style={{ ...dm, fontSize: 17, fontWeight: 600, lineHeight: '27px', color: '#525252', margin: 0 }}>
-                    — {line}
-                  </p>
-                ))}
+            {/* Affinity diagram + text side by side */}
+            <div style={{ display: 'flex', flexDirection: 'row', gap: 32, alignItems: 'flex-start' }}>
+              <img
+                src="/images/ui-for-ai/affinity-diagram.png"
+                alt="Affinity diagram"
+                style={{ width: 340, height: 320, objectFit: 'cover', borderRadius: 20, display: 'block', flexShrink: 0 }}
+              />
+              {/* Text block */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 24, flex: 1 }}>
+                <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#525252', margin: 0 }}>
+                  Timeline was helpful but too passive. Branching appealed to power users but overwhelmed others.
+                  {' '}The overlap pointed toward a single integrated recall surface: <strong style={{ fontWeight: 600 }}>one that took the</strong>
+                </p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+                  {[
+                    'navigation simplicity of Timeline',
+                    'the flexibility of Branching',
+                    'the intuitiveness of Bookmarking',
+                  ].map(line => (
+                    <p key={line} style={{ ...dm, fontSize: 17, fontWeight: 600, lineHeight: '27px', color: '#525252', margin: 0 }}>
+                      • {line}
+                    </p>
+                  ))}
+                </div>
+                <p style={{ ...dm, fontSize: 17, fontWeight: 600, lineHeight: '27px', color: '#525252', margin: 0 }}>
+                  without the cognitive overhead of<br />any one concept alone.
+                </p>
               </div>
-              <p style={{ ...dm, fontSize: 17, fontWeight: 600, lineHeight: '27px', color: '#525252', margin: 0 }}>
-                without the cognitive overhead of any one concept alone.
-              </p>
             </div>
           </div>
         </section>
