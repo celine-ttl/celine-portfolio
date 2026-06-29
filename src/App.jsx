@@ -4,6 +4,7 @@ import Home from './pages/Home'
 import AhokuCaseStudy from './pages/AhokuCaseStudy'
 import UiForAiCaseStudy from './pages/UiForAiCaseStudy'
 import About from './pages/About'
+import Playground from './pages/Playground'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -20,6 +21,7 @@ export default function App() {
         <Route path="/ahoku" element={<AhokuCaseStudy />} />
         <Route path="/ui-for-ai" element={<UiForAiCaseStudy />} />
         <Route path="/about" element={<About />} />
+        <Route path="/playground" element={<Playground />} />
       </Routes>
     </BrowserRouter>
   )
