@@ -1,4 +1,5 @@
 import { Link, NavLink } from 'react-router-dom'
+import Nav from '../components/Nav'
 
 const dm = { fontFamily: 'DM Sans, sans-serif' }
 
