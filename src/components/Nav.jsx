@@ -1,12 +1,12 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 
 const dm = { fontFamily: 'DM Sans, sans-serif' }
 
 const RESUME_URL = 'https://drive.google.com/file/d/1GNHe7o3-5EYDOh62fgcGVD88N6AN_Lh7/view?usp=sharing'
 
-const activeClass = `text-[17px] leading-7 text-[#2D2D2D] font-bold transition-opacity`
-const inactiveClass = `text-[17px] leading-7 text-[#2D2D2D] font-normal hover:opacity-70 transition-opacity`
+const activeClass = `text-[17px] leading-7 text-[#000000] font-normal transition-opacity`
+const inactiveClass = `text-[17px] leading-7 text-[#525252] font-normal hover:opacity-70 transition-opacity`
 
 function navClass({ isActive }) {
   return isActive ? activeClass : inactiveClass
@@ -14,20 +14,48 @@ function navClass({ isActive }) {
 
 export default function Nav({ fixed = false }) {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [visible, setVisible] = useState(true)
+  const lastScrollY = useRef(0)
   const { pathname } = useLocation()
   const isHome = pathname === '/'
 
   const close = () => setMenuOpen(false)
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentY = window.scrollY
+      if (currentY < 80 || currentY < lastScrollY.current) {
+        setVisible(true)
+      } else {
+        setVisible(false)
+        setMenuOpen(false)
+      }
+      lastScrollY.current = currentY
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   return (
     <>
+      {/* Spacer keeps page layout intact when nav is fixed */}
+      {!fixed && <div style={{ height: 80 }} />}
+
       <nav
-        className={`bg-white w-full${fixed ? ' fixed top-0 left-0 right-0' : ''}`}
+        className="w-full"
         style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
           height: 80,
-          boxShadow: menuOpen ? 'none' : '0 1px 0 rgba(0,0,0,0.08)',
-          position: fixed ? undefined : 'relative',
           zIndex: 50,
+          boxShadow: 'none',
+          background: 'rgba(255,255,255,0.7)',
+          backdropFilter: 'blur(12px)',
+          WebkitBackdropFilter: 'blur(12px)',
+          transform: visible ? 'translateY(0)' : 'translateY(-100%)',
+          transition: 'transform 0.3s ease',
         }}
       >
         <div className="flex items-center justify-between h-full" style={{ padding: '0 24px' }}>
@@ -78,13 +106,16 @@ export default function Nav({ fixed = false }) {
       {/* Mobile dropdown menu */}
       {menuOpen && (
         <div
-          className="sm:hidden bg-white"
+          className="sm:hidden"
           style={{
-            position: fixed ? 'fixed' : 'relative',
-            top: fixed ? 80 : undefined,
-            left: fixed ? 0 : undefined,
-            right: fixed ? 0 : undefined,
+            position: 'fixed',
+            top: 80,
+            left: 0,
+            right: 0,
             zIndex: 49,
+            background: 'rgba(255,255,255,0.7)',
+            backdropFilter: 'blur(12px)',
+            WebkitBackdropFilter: 'blur(12px)',
             borderBottom: '1px solid rgba(0,0,0,0.08)',
             padding: '24px 24px 32px',
             display: 'flex',

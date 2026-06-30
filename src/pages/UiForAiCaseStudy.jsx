@@ -128,6 +128,7 @@ export default function UiForAiCaseStudy() {
   const [activeSection, setActiveSection] = useState('overview')
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 })
   const [cursorVisible, setCursorVisible] = useState(false)
+  const [seriesOpen, setSeriesOpen] = useState(false)
   const heroRef = useRef(null)
   const nextProjectRef = useRef(null)
   const heroInViewRef = useRef(true)
@@ -256,25 +257,50 @@ export default function UiForAiCaseStudy() {
                 Humans don't think in straight lines — but AI chat interfaces are built like they do
               </h2>
             </div>
-            <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#525252', margin: 0 }}>
-              Creative work is iterative. Research is non-linear. Ideas get revisited, refined, and built on over time. Yet most AI chat interfaces treat every conversation like a one-way scroll — outputs accumulate, good moments disappear, and users are left starting over instead of building forward.
+            <p style={{ ...dm, fontSize: 17, fontWeight: 400, lineHeight: '27px', color: '#525252', margin: 0 }}>
+              Creative work is iterative. Research is non-linear. Ideas get revisited, refined, and built on over time. Yet most AI chat interfaces treat every conversation like a one-way scroll: outputs accumulate, good moments disappear, and users are left starting over instead of building forward.
             </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+              <img
+                src="/images/ui-for-ai/infinite-scroll-demo.gif"
+                alt="Infinite scroll demo"
+                style={{ width: '100%', borderRadius: 12, display: 'block' }}
+              />
+              <p style={{ ...dm, fontSize: 17, fontWeight: 600, lineHeight: '27px', color: '#525252', margin: 0 }}>
+                A typical long chat: every output stacked in one endless column, with no way back.
+              </p>
+            </div>
             <CalloutCard
-              pill="Project Summary"
-              body="This project explores how AI chat interfaces might better support the way people actually work — making it easier to go back, find what mattered, and build on what's already there."
+              pill="Challenge"
+              body="Bring non-linear movement to the chat without breaking flow people already rely on. Add ways to go back, and build on past work, without making the interface feel unfamiliar."
             />
-            {/* UI for AI Series callout */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 10, borderRadius: 24, background: '#FFFFFF', border: '1px solid #F3F3F3', padding: 24 }}>
-              <p style={{ ...dm, fontSize: 16, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', color: '#4A77FF', margin: 0 }}>Part of the UI for AI series</p>
-              <div className="cs-overview-row" style={{ display: 'flex', flexDirection: 'row', gap: 24, alignItems: 'flex-start' }}>
-                <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#525252', margin: 0, flex: 1 }}>
-                  This is one entry in UI for AI: an ongoing project at Carnegie Mellon University, led by Dan Saffer, investigating how interfaces and interaction patterns need to change in the age of AI.
-                  <br /><br />
-                  See the full series at{' '}
-                  <a href="https://uiforai.design" target="_blank" rel="noopener noreferrer" className="underline hover:opacity-70">uiforai.design</a>
-                </p>
-                <img src="/images/ui-for-ai/series-screenshot.png" alt="UI for AI series screenshot" className="cs-series-img" style={{ width: 240, borderRadius: 16, flexShrink: 0, boxShadow: '4px 4px 12px rgba(0,0,0,0.1)' }} />
-              </div>
+            {/* UI for AI Series callout — dropdown */}
+            <div style={{ borderRadius: 24, background: '#FFFFFF', border: '1px solid #F3F3F3', overflow: 'hidden' }}>
+              <button
+                onClick={() => setSeriesOpen(o => !o)}
+                style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 24, background: 'none', border: 'none', cursor: 'pointer' }}
+              >
+                <p style={{ ...dm, fontSize: 16, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', color: '#4A77FF', margin: 0 }}>Part of the UI for AI series</p>
+                <svg
+                  width="20" height="20" viewBox="0 0 24 24" fill="none"
+                  style={{ flexShrink: 0, transform: seriesOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.25s ease' }}
+                >
+                  <path d="M6 9L12 15L18 9" stroke="#4A77FF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+              {seriesOpen && (
+                <div className="cs-overview-row" style={{ display: 'flex', flexDirection: 'row', gap: 24, alignItems: 'flex-start', padding: '0 24px 24px' }}>
+                  <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#525252', margin: 0, flex: 1 }}>
+                    This is one entry in UI for AI: an ongoing project at Carnegie Mellon University, led by Dan Saffer, investigating how interfaces and interaction patterns need to change in the age of AI.
+                    <br /><br />
+                    See the full series at{' '}
+                    <a href="https://uiforai.design" target="_blank" rel="noopener noreferrer" className="underline hover:opacity-70">uiforai.design</a>
+                    {' · '}
+                    <a href="https://INSERT_MEDIUM_URL" target="_blank" rel="noopener noreferrer" className="underline hover:opacity-70">Follow on Medium</a>
+                  </p>
+                  <img src="/images/ui-for-ai/series-screenshot.png" alt="UI for AI series screenshot" className="cs-series-img" style={{ width: 240, borderRadius: 16, flexShrink: 0, boxShadow: '4px 4px 12px rgba(0,0,0,0.1)' }} />
+                </div>
+              )}
             </div>
           </div>
         </section>
