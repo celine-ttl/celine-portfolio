@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 const dm = { fontFamily: 'DM Sans, sans-serif' }
 
@@ -35,10 +35,6 @@ const hoverStyles = `
       position: static !important;
       width: 100% !important;
     }
-    .pg-sidebar h1 {
-      font-size: 40px !important;
-      line-height: 44px !important;
-    }
     .pg-gallery {
       width: 100% !important;
       overflow-x: auto !important;
@@ -63,14 +59,10 @@ const hoverStyles = `
 
   @media (max-width: 639px) {
     .pg-layout {
-      padding: 32px 16px !important;
-    }
-    .pg-sidebar h1 {
-      font-size: 32px !important;
-      line-height: 36px !important;
+      padding: 32px 20px !important;
     }
     .pg-footer-inner {
-      padding: 40px 16px !important;
+      padding: 40px 20px !important;
       gap: 40px !important;
     }
     .pg-footer-top {
@@ -139,6 +131,29 @@ function ExternalLink({ href }) {
   )
 }
 
+function SidebarPill({ children, style }) {
+  return (
+    <span style={{
+      position: 'absolute',
+      display: 'inline-flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: '4px 12px',
+      background: '#fff',
+      border: '2px solid #525252',
+      borderRadius: 100,
+      fontFamily: 'DM Sans, sans-serif',
+      fontWeight: 700,
+      fontSize: 16,
+      color: '#525252',
+      whiteSpace: 'nowrap',
+      ...style,
+    }}>
+      {children}
+    </span>
+  )
+}
+
 function GlassTag({ children }) {
   return (
     <span style={{
@@ -171,30 +186,22 @@ export default function Playground() {
     <>
       <style>{hoverStyles}</style>
 
-      {/* Navigation */}
-      <nav className="bg-white w-full" style={{ height: 80, boxShadow: '0 1px 0 rgba(0,0,0,0.08)' }}>
-        <div className="flex items-center justify-between h-full" style={{ padding: '0 48px' }}>
-          <Link to="/">
-            <img src="/images/logo-46ec0d.png" alt="Celine Tseng logo" width={116} height={51} className="object-fill" />
-          </Link>
-          <div className="hidden sm:flex items-center" style={{ gap: 52 }}>
-            <Link to="/" className="text-[#2D2D2D] text-[17px] font-normal leading-7 hover:opacity-70 transition-opacity" style={dm}>Work</Link>
-            <Link to="/playground" className="text-[#2D2D2D] text-[17px] font-normal leading-7 hover:opacity-70 transition-opacity" style={dm}>Playground</Link>
-            <Link to="/about" className="text-[#2D2D2D] text-[17px] font-normal leading-7 hover:opacity-70 transition-opacity" style={dm}>About</Link>
-            <a href="https://drive.google.com/file/d/1GNHe7o3-5EYDOh62fgcGVD88N6AN_Lh7/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="text-[#2D2D2D] text-[17px] font-normal leading-7 hover:opacity-70 transition-opacity" style={dm}>Resume</a>
-          </div>
-        </div>
-      </nav>
+      <Nav />
 
       {/* Main content */}
       <div className="pg-layout" style={{ maxWidth: 1280, margin: '0 auto', padding: '80px 24px', display: 'flex', gap: 80, alignItems: 'flex-start' }}>
 
         {/* Left: heading + description */}
         <div className="pg-sidebar" style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 32, paddingBottom: 40, position: 'sticky', top: 80 }}>
-          <h1 style={{ ...dm, fontWeight: 700, fontSize: 64, lineHeight: '64px', color: '#000', margin: 0 }}>
-            Off The Menu
-          </h1>
-          <p style={{ ...dm, fontSize: 17, lineHeight: '27px', color: '#2D2D2D', margin: 0 }}>
+          <div className="pg-sidebar-heading" style={{ position: 'relative', minHeight: 160 }}>
+            <h1 style={{ ...dm, fontWeight: 700, fontSize: 64, lineHeight: '64px', color: '#000', margin: 0, paddingTop: 24, paddingLeft: 15, maxWidth: 265 }}>
+              Off The Menu
+            </h1>
+            <SidebarPill style={{ left: 0, top: 76, transform: 'rotate(-5deg)' }}>Code</SidebarPill>
+            <SidebarPill style={{ left: 160, top: 7, transform: 'rotate(8deg)' }}>Branding</SidebarPill>
+            <SidebarPill style={{ left: 173, top: 118, transform: 'rotate(-6deg)' }}>Design</SidebarPill>
+          </div>
+          <p style={{ ...dm, fontSize: 17, lineHeight: '27px', color: '#2D2D2D', margin: 0, paddingLeft: 15 }}>
             Here are some ideas I&apos;ve been brewing: an ever-growing collection of experiments in code, branding, design, and whatever sparks my curiosity next!
           </p>
         </div>

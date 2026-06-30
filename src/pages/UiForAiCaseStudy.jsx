@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
+import Nav from '../components/Nav'
 import { useState, useEffect, useRef } from 'react'
 
 const dm = { fontFamily: 'DM Sans, sans-serif' }
@@ -196,19 +197,7 @@ export default function UiForAiCaseStudy() {
       <SideNav visible={navVisible} active={activeSection} />
 
       {/* Fixed nav */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-white" style={{ height: 80, boxShadow: '0 1px 0 rgba(0,0,0,0.08)' }}>
-        <div className="flex items-center justify-between h-full" style={{ padding: '0 48px' }}>
-          <Link to="/" onClick={() => window.scrollTo(0, 0)}>
-            <img src="/images/logo-46ec0d.png" alt="Celine Tseng logo" width={116} height={51} className="object-fill" />
-          </Link>
-          <div className="hidden sm:flex items-center" style={{ marginLeft: 'auto', gap: 52 }}>
-            <Link to="/#work" className="text-[#2D2D2D] text-[17px] font-normal leading-7 hover:opacity-70 transition-opacity" style={dm}>Work</Link>
-            <Link to="/playground" className="text-[#2D2D2D] text-[17px] font-normal leading-7 hover:opacity-70 transition-opacity" style={dm}>Playground</Link>
-            <Link to="/about" className="text-[#2D2D2D] text-[17px] font-normal leading-7 hover:opacity-70 transition-opacity" style={dm}>About</Link>
-            <a href="https://drive.google.com/file/d/1GNHe7o3-5EYDOh62fgcGVD88N6AN_Lh7/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="text-[#2D2D2D] text-[17px] font-normal leading-7 hover:opacity-70 transition-opacity" style={dm}>Resume</a>
-          </div>
-        </div>
-      </nav>
+      <Nav fixed />
 
       {/* Case study hero */}
       <div ref={heroRef} className="cs-hero-outer" style={{ marginTop: 80, background: '#FFFFFF', display: 'flex', justifyContent: 'center', padding: 40 }}>

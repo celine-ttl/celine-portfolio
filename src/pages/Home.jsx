@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
+import Nav from '../components/Nav'
 import { useState, useRef, useEffect } from 'react'
 
 const dm = { fontFamily: 'DM Sans, sans-serif' }
@@ -151,18 +152,19 @@ export default function Home() {
 
   return (
     <>
-      {/* Navigation - full width */}
-      <nav className="bg-white w-full" style={{ height: 80 }}>
-        <div className="flex items-center justify-between h-full" style={{ padding: '0 48px' }}>
-          <img src="/images/logo-46ec0d.png" alt="Celine Tseng logo" width={116} height={51} className="object-fill" />
-          <div className="hidden sm:flex items-center" style={{ gap: 52 }}>
-            <a href="#work" className="text-[#2D2D2D] text-[17px] font-normal leading-7 hover:opacity-70 transition-opacity" style={dm}>Work</a>
-            <Link to="/playground" className="text-[#2D2D2D] text-[17px] font-normal leading-7 hover:opacity-70 transition-opacity" style={dm}>Playground</Link>
-            <Link to="/about" className="text-[#2D2D2D] text-[17px] font-normal leading-7 hover:opacity-70 transition-opacity" style={dm}>About</Link>
-            <a href="https://drive.google.com/file/d/1GNHe7o3-5EYDOh62fgcGVD88N6AN_Lh7/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="text-[#2D2D2D] text-[17px] font-normal leading-7 hover:opacity-70 transition-opacity" style={dm}>Resume</a>
-          </div>
-        </div>
-      </nav>
+      <style>{`
+        @media (max-width: 768px) {
+          .home-work-grid {
+            grid-template-columns: 1fr !important;
+            row-gap: 40px !important;
+          }
+          #work {
+            padding-left: 20px !important;
+            padding-right: 20px !important;
+          }
+        }
+      `}</style>
+      <Nav />
 
       <div className="bg-white" style={{ maxWidth: 1280, margin: '0 auto' }}>
 
@@ -263,7 +265,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '80px 40px', width: '100%' }}>
+          <div className="home-work-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '80px 40px', width: '100%' }}>
             <WorkCard
               href="/ui-for-ai"
               imageSrc="/images/ui-for-ai/work-card-thumbnail.gif"

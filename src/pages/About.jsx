@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
+import Nav from '../components/Nav'
 import { useState, useEffect, useRef } from 'react'
 
 const dm = { fontFamily: 'DM Sans, sans-serif' }
@@ -119,24 +120,33 @@ export default function About() {
 
   return (
     <>
-      {/* Nav */}
-      <nav className="bg-white w-full" style={{ height: 80, boxShadow: '0 1px 0 rgba(0,0,0,0.08)' }}>
-        <div className="flex items-center justify-between h-full" style={{ padding: '0 48px' }}>
-          <Link to="/" onClick={() => window.scrollTo(0, 0)}>
-            <img src="/images/logo-46ec0d.png" alt="Celine Tseng logo" width={116} height={51} className="object-fill" />
-          </Link>
-          <div className="hidden sm:flex items-center" style={{ gap: 52 }}>
-            <Link to="/" className="text-[#2D2D2D] text-[17px] font-normal leading-7 hover:opacity-70 transition-opacity" style={dm}>Work</Link>
-            <Link to="/playground" className="text-[#2D2D2D] text-[17px] font-normal leading-7 hover:opacity-70 transition-opacity" style={dm}>Playground</Link>
-            <Link to="/about" className="text-[#2D2D2D] text-[17px] font-normal leading-7 hover:opacity-70 transition-opacity" style={dm}>About</Link>
-            <a href="https://drive.google.com/file/d/1GNHe7o3-5EYDOh62fgcGVD88N6AN_Lh7/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="text-[#2D2D2D] text-[17px] font-normal leading-7 hover:opacity-70 transition-opacity" style={dm}>Resume</a>
-          </div>
-        </div>
-      </nav>
+      <Nav />
+
+      <style>{`
+        @media (max-width: 900px) {
+          .about-hero-section {
+            padding: 48px 24px !important;
+          }
+          .about-hero-inner {
+            flex-direction: column !important;
+            align-items: center !important;
+            gap: 40px !important;
+          }
+          .about-hero-inner .fade-section:first-child {
+            align-items: center !important;
+            text-align: center !important;
+          }
+          .about-hero-photo {
+            width: 100% !important;
+            height: auto !important;
+            max-width: 435px;
+          }
+        }
+      `}</style>
 
       {/* Hero */}
-      <section className="bg-white flex justify-center" style={{ padding: '60px 100px' }}>
-        <div style={{ width: '100%', maxWidth: 1080, display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+      <section className="about-hero-section bg-white flex justify-center" style={{ padding: '60px 100px' }}>
+        <div className="about-hero-inner" style={{ width: '100%', maxWidth: 1080, display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
           {/* Left: text */}
           <div className="fade-section" style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
             <p style={{ ...dm, fontSize: 48, fontWeight: 600, lineHeight: '42px', color: '#4F5256', margin: 0, maxWidth: 557 }}>
@@ -156,7 +166,7 @@ export default function About() {
 
           {/* Right: photo collage */}
           <img
-            className="fade-section"
+            className="about-hero-photo fade-section"
             ref={heroRef}
             src="/images/about/aboutme-collage.png"
             alt="Celine"
