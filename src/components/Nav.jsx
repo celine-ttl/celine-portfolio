@@ -5,8 +5,11 @@ const dm = { fontFamily: 'DM Sans, sans-serif' }
 
 const RESUME_URL = 'https://drive.google.com/file/d/1GNHe7o3-5EYDOh62fgcGVD88N6AN_Lh7/view?usp=sharing'
 
-function linkClass({ isActive }) {
-  return `text-[17px] leading-7 transition-opacity ${isActive ? 'text-[#2D2D2D] font-bold' : 'text-[#2D2D2D] font-normal hover:opacity-70'}`
+const activeClass = `text-[17px] leading-7 text-[#2D2D2D] font-bold transition-opacity`
+const inactiveClass = `text-[17px] leading-7 text-[#2D2D2D] font-normal hover:opacity-70 transition-opacity`
+
+function navClass({ isActive }) {
+  return isActive ? activeClass : inactiveClass
 }
 
 export default function Nav({ fixed = false }) {
@@ -15,22 +18,6 @@ export default function Nav({ fixed = false }) {
   const isHome = pathname === '/'
 
   const close = () => setMenuOpen(false)
-
-  const WorkLink = ({ mobile }) =>
-    isHome ? (
-      <a
-        href="#work"
-        onClick={close}
-        className={`text-[17px] leading-7 transition-opacity text-[#2D2D2D] font-bold${mobile ? ' block' : ''}`}
-        style={dm}
-      >
-        Work
-      </a>
-    ) : (
-      <NavLink to="/" end className={linkClass} style={dm} onClick={close}>
-        Work
-      </NavLink>
-    )
 
   return (
     <>
@@ -50,14 +37,18 @@ export default function Nav({ fixed = false }) {
 
           {/* Desktop links */}
           <div className="hidden sm:flex items-center" style={{ gap: 52 }}>
-            <WorkLink />
-            <NavLink to="/playground" className={linkClass} style={dm}>Playground</NavLink>
-            <NavLink to="/about" className={linkClass} style={dm}>About</NavLink>
+            {isHome ? (
+              <a href="#work" className={activeClass} style={dm}>Work</a>
+            ) : (
+              <NavLink to="/" end className={navClass} style={dm}>Work</NavLink>
+            )}
+            <NavLink to="/playground" className={navClass} style={dm}>Playground</NavLink>
+            <NavLink to="/about" className={navClass} style={dm}>About</NavLink>
             <a
               href={RESUME_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#2D2D2D] text-[17px] font-normal leading-7 hover:opacity-70 transition-opacity"
+              className={inactiveClass}
               style={dm}
             >
               Resume
@@ -101,14 +92,18 @@ export default function Nav({ fixed = false }) {
             gap: 28,
           }}
         >
-          <WorkLink mobile />
-          <NavLink to="/playground" className={linkClass} style={dm} onClick={close}>Playground</NavLink>
-          <NavLink to="/about" className={linkClass} style={dm} onClick={close}>About</NavLink>
+          {isHome ? (
+            <a href="#work" onClick={close} className={activeClass} style={dm}>Work</a>
+          ) : (
+            <NavLink to="/" end className={navClass} style={dm} onClick={close}>Work</NavLink>
+          )}
+          <NavLink to="/playground" className={navClass} style={dm} onClick={close}>Playground</NavLink>
+          <NavLink to="/about" className={navClass} style={dm} onClick={close}>About</NavLink>
           <a
             href={RESUME_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[#2D2D2D] text-[17px] font-normal leading-7 hover:opacity-70 transition-opacity"
+            className={inactiveClass}
             style={dm}
             onClick={close}
           >
