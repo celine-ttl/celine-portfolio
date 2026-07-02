@@ -241,10 +241,9 @@ export default function AhokuCaseStudy() {
             {/* Row: device image left, description right */}
             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 32 }}>
               <img
-                src="/images/ahoku/ant-device2.png"
-                alt=""
-                aria-hidden="true"
-                style={{ width: 254, height: 229, objectFit: 'contain', flexShrink: 0 }}
+                src="/images/ahoku/device-proportion-diagram.png"
+                alt="ANT device proportion diagram"
+                style={{ width: 480, objectFit: 'contain', flexShrink: 0 }}
               />
               <p className="text-[17px] font-light leading-[27px] text-[#525252]" style={dm}>
                 The ANT health device was designed for seniors who live independently, people who want to manage health on their own terms without relying on a caregiver. But in practice, rather than feeling capable, many ended up asking for help when using the device.
@@ -266,7 +265,7 @@ export default function AhokuCaseStudy() {
             <div className="flex flex-col gap-[10px]">
               <SectionLabel text="Problem Space" />
               <h2 className="text-[28px] font-semibold leading-[42px] text-black" style={dm}>
-                If elderly users can't log independently, caregivers lose visibility, medical teams lose trust, and the device loses its purpose.
+                If elderly users can't log independently, caregivers lose visibility, medical teams lose trust, and the device loses<br />its purpose.
               </h2>
             </div>
             <p className="text-[17px] font-light leading-[27px] text-[#525252]" style={dm}>
@@ -295,7 +294,7 @@ export default function AhokuCaseStudy() {
             <div className="grid grid-cols-2 gap-[24px]">
               {[
                 { heading: 'Information overload:', body: 'The device tracked dozens of metrics, but users only needed 2–3 relevant to their conditions.' },
-                { heading: 'Inputs that were hard to complete:', body: "Both manual entry and automatic device pairing were difficult enough that users regularly couldn't finish what they started and often stopped trying." },
+                { heading: 'Inputs that were hard to complete:', body: "Both manual entry and automatic device pairing were difficult enough that users stopped trying." },
                 { heading: 'No personalization:', body: 'Nothing about the experience reflected their individual needs.' },
                 { heading: 'A visual design that added friction:', body: 'Small tap targets, low contrast, and dense layouts made even basic navigation stressful.' },
               ].map(({ heading, body }) => (
@@ -309,15 +308,6 @@ export default function AhokuCaseStudy() {
               pill="Key takeaway"
               body="Elders didn't want help. They wanted to feel capable. The design made that difficult."
             />
-            <p className="text-[17px] font-light leading-[27px] text-[#525252]" style={dm}>
-              Example of the original Health Book Dashboard design:
-            </p>
-            <img
-              src="/images/ahoku/original-dashboard.png"
-              alt="Original Health Book Dashboard"
-              className="w-full rounded-[16px]"
-              style={{ height: 422, objectFit: 'cover', boxShadow: '5px 5px 12px 0px rgba(0,0,0,0.12), -4px -4px 12px 0px rgba(82,82,82,0.12)' }}
-            />
           </div>
         </section>
 
@@ -327,33 +317,38 @@ export default function AhokuCaseStudy() {
             <div className="flex flex-col gap-[10px]">
               <SectionLabel text="Key Insights" />
               <h2 className="text-[28px] font-semibold leading-[42px] text-black" style={dm}>
-                Two patterns kept surfacing: too much to see, and too hard to connect.
+                Two patterns kept surfacing: too much to see,<br />and too hard to connect.
               </h2>
             </div>
             {/* Insight 1 */}
-            <div className="flex flex-col gap-[16px] rounded-[20px]" style={{ padding: 32 }}>
+            <div className="flex flex-col gap-[16px]" style={{ padding: '24px 0 0 0' }}>
               <div className="flex items-center gap-[16px]">
                 <div className="flex items-center justify-center rounded-full text-[#4A77FF] text-[24px] font-semibold flex-shrink-0" style={{ width: 52, height: 52, background: 'rgba(137,197,234,0.35)' }}>1</div>
                 <h3 className="text-[24px] font-semibold leading-[27px] text-[#525252]" style={dm}>Showing everything meant nothing stood out</h3>
               </div>
               <p className="text-[17px] font-light leading-[27px] text-[#525252]" style={dm}>
-                The ANT device contain dozens of trackable metrics, detailed trend analysis, and broad device compatibility. But most of them were not used, simply the 2-3 metrics that tied to their specific conditions.
-              </p>
-              <p className="text-[17px] font-light leading-[27px] text-[#525252]" style={dm}>
-                All that capability, displayed at once with equal prominence, created a dense screen that users struggled to find the two things they came for.
+                The device tracked dozens of metrics with equal prominence — but most users needed only the 2–3 tied to their conditions. Everything competing at once turned a simple check into a search.
               </p>
             </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+              <p className="text-[14px] font-light leading-[27px] text-[#525252]" style={dm}>
+                Example of the original Health Book Dashboard design:
+              </p>
+              <img
+                src="/images/ahoku/original-dashboard.png"
+                alt="Original Health Book Dashboard"
+                className="w-full rounded-[16px]"
+                style={{ height: 422, objectFit: 'cover', boxShadow: '5px 5px 12px 0px rgba(0,0,0,0.12), -4px -4px 12px 0px rgba(82,82,82,0.12)' }}
+              />
+            </div>
             {/* Insight 2 */}
-            <div className="flex flex-col gap-[16px] rounded-[20px]" style={{ padding: 32 }}>
+            <div className="flex flex-col gap-[16px]" style={{ padding: '24px 0' }}>
               <div className="flex items-center gap-[16px]">
                 <div className="flex items-center justify-center rounded-full text-[#4A77FF] text-[24px] font-semibold flex-shrink-0" style={{ width: 52, height: 52, background: 'rgba(137,197,234,0.35)' }}>2</div>
-                <h3 className="text-[24px] font-semibold leading-[27px] text-[#525252]" style={dm}>A device for independent living was creating dependence</h3>
+                <h3 className="text-[24px] font-semibold leading-[27px] text-[#525252]" style={dm}>Logging was too hard to finish alone.</h3>
               </div>
               <p className="text-[17px] font-light leading-[27px] text-[#525252]" style={dm}>
-                When I asked users why they weren't syncing their wearables, many had simply given up — or were waiting for a family member to visit and help. Behavioral data confirmed it: <strong>80% abandoned the pairing process midway.</strong>
-              </p>
-              <p className="text-[17px] font-light leading-[27px] text-[#525252]" style={dm}>
-                A device built for independent living was making people dependent on others just to use it.
+                Manual entry and device pairing both broke down mid-task, and 80% abandoned pairing partway. Small tap targets, low contrast, and dense layouts made every step harder. Users gave up, or waited for family to visit and help.
               </p>
             </div>
             <CalloutCard
@@ -430,11 +425,11 @@ export default function AhokuCaseStudy() {
             <div className="flex flex-col gap-[10px]">
               <SectionLabel text="Results" />
               <h2 className="text-[28px] font-semibold leading-[42px] text-black" style={dm}>
-                From 80% abandonment to 95% success. From confusion to confidence.
+                95% paired their device and logged a reading on their own, up from 80% who abandoned the old setup.
               </h2>
             </div>
             <p className="text-[17px] font-light leading-[27px] text-[#2D2D2D]" style={dm}>
-              To validate the redesign, I tested with 25 elderly users — 15 from the original research group and 10 new participants. The results confirmed that simplifying the flows and personalizing the experience had a direct impact on users' ability to manage their health independently.
+              To validate the redesign, I tested with 25 elderly users — 15 from the original research group and 10 new participants. 24 of 25 completed device pairing and logging on their own, up from the 80% who abandoned the original flow.
             </p>
             <div className="rounded-[24px] bg-white" style={{ padding: 24, boxShadow: '4px 4px 12px 0px rgba(0,0,0,0.12), -4px -4px 12px 0px rgba(0,0,0,0.12)' }}>
               <table className="w-full" style={{ borderCollapse: 'collapse' }}>
@@ -448,7 +443,7 @@ export default function AhokuCaseStudy() {
                 <tbody>
                   {[
                     { metric: 'Device pairing completion rate', before: '20%', after: '95%' },
-                    { metric: 'Users completing setup independently', before: '—', after: '100% (15/15)' },
+                    { metric: 'Users completing setup independently', before: '—', after: '100% (25/25)' },
                     { metric: 'User sentiment on visual design', before: '"Cold, outdated"', after: '"Warm, modern, professional"' },
                   ].map(({ metric, before, after }, i, arr) => (
                     <tr key={metric} style={{ borderBottom: i < arr.length - 1 ? '1px solid #E5E5E5' : 'none' }}>
