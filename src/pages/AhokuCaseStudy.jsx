@@ -363,10 +363,15 @@ export default function AhokuCaseStudy() {
           <div className="flex flex-col gap-[24px] fade-section" style={{ width: 800 }}>
             <div className="flex flex-col gap-[10px]">
               <SectionLabel text="Solution Highlights" />
-              <h2 className="text-[28px] font-semibold leading-[42px] text-black" style={dm}>Solution 1: Personalized Dashboard</h2>
+              <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 24 }}>
+                <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '5px 0', flexShrink: 0 }}>
+                  <span style={{ ...dm, fontSize: 64, fontWeight: 500, lineHeight: '42px', color: '#D9D9D9' }}>01</span>
+                </div>
+                <h2 style={{ ...dm, fontSize: 28, fontWeight: 500, lineHeight: '42px', color: '#000000', margin: 0 }}>Personalized Dashboard</h2>
+              </div>
             </div>
             <p className="text-[24px] font-bold italic leading-[36px] text-[#4A77FF]" style={dm}>
-              "If users only care about 2–3 metrics, why show them everything?"
+              If users only care about 2–3 metrics, why show them everything?
             </p>
             <p className="text-[17px] font-light leading-[27px] text-[#525252]" style={dm}>
               I designed a customizable dashboard where users select their priority metrics. Their top three appear prominently every time they open the device, with everything else accessible by scrolling. Instead of opening the device and scanning through a cluttered screen, users arrive directly at what they came for. That shift—from searching to arriving—makes the experience feel calmer and more in their control.
@@ -383,7 +388,12 @@ export default function AhokuCaseStudy() {
         {/* SOLUTION 2 */}
         <section id="solution-2" className="flex flex-col items-center bg-white" style={{ padding: '80px 40px', gap: 24 }}>
           <div className="flex flex-col gap-[24px] fade-section" style={{ width: 800 }}>
-            <h2 className="text-[28px] font-semibold leading-[42px] text-black" style={dm}>Solution 2: Automatic Input</h2>
+            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 24 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '5px 0', flexShrink: 0 }}>
+                <span style={{ ...dm, fontSize: 64, fontWeight: 500, lineHeight: '42px', color: '#D9D9D9' }}>02</span>
+              </div>
+              <h2 style={{ ...dm, fontSize: 28, fontWeight: 500, lineHeight: '42px', color: '#000000', margin: 0 }}>Automatic Input</h2>
+            </div>
             <p className="text-[17px] font-light leading-[27px] text-[#525252]" style={dm}>
               The original flow required users to manually navigate between two devices, which causes confusion and easy to get wrong.{' '}
               <strong>The redesign makes it hands-free.</strong>{' '}
@@ -401,9 +411,14 @@ export default function AhokuCaseStudy() {
         {/* SOLUTION 3 */}
         <section id="solution-3" className="flex flex-col items-center bg-white" style={{ padding: '80px 40px', gap: 24 }}>
           <div className="flex flex-col gap-[24px] fade-section" style={{ width: 800 }}>
-            <h2 className="text-[28px] font-semibold leading-[42px] text-black" style={dm}>Solution 3: Manual Input</h2>
+            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 24 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '5px 0', flexShrink: 0 }}>
+                <span style={{ ...dm, fontSize: 64, fontWeight: 500, lineHeight: '42px', color: '#D9D9D9' }}>03</span>
+              </div>
+              <h2 style={{ ...dm, fontSize: 28, fontWeight: 500, lineHeight: '42px', color: '#000000', margin: 0 }}>Manual Input</h2>
+            </div>
             <p className="text-[24px] font-bold leading-[36px] text-[#4A77FF]" style={dm}>
-              "Small buttons, a crowded layout, a notes field no one ever used."
+              Small buttons, a crowded layout, a notes field no one ever used.
             </p>
             <p className="text-[17px] font-light leading-[27px] text-[#525252]" style={dm}>
               For times when automatic input isn't available, users can log data manually. But the original manual flow had its own friction points: easy-to-mis-tap buttons, a number pad with awkward placement, and a notes field almost no one used taking up prime screen space.
