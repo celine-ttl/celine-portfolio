@@ -195,6 +195,12 @@ export default function UiForAiCaseStudy() {
 
   return (
     <>
+      <style>{`
+        @media (max-width: 1200px) {
+          .cs-sidenav { display: none !important; }
+        }
+      `}</style>
+
       <SideNav visible={navVisible} active={activeSection} />
 
       {/* Fixed nav */}
@@ -257,9 +263,10 @@ export default function UiForAiCaseStudy() {
                 Humans don't think in straight lines — but AI chat interfaces are built like they do
               </h2>
             </div>
-            <p style={{ ...dm, fontSize: 17, fontWeight: 400, lineHeight: '27px', color: '#525252', margin: 0 }}>
+            <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#525252', margin: 0 }}>
               Creative work is iterative. Research is non-linear. Ideas get revisited, refined, and built on over time. Yet most AI chat interfaces treat every conversation like a one-way scroll: outputs accumulate, good moments disappear, and users are left starting over instead of building forward.
             </p>
+
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               <img
                 src="/images/ui-for-ai/infinite-scroll-demo.gif"
@@ -326,40 +333,64 @@ export default function UiForAiCaseStudy() {
         </section>
 
         {/* PROBLEM SPACE */}
-        <section id="problem-space" style={{ background: '#F8F8F8', padding: '80px 40px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 24 }}>
+        <section id="problem-space" style={{ background: '#F8F8F8', padding: '80px 40px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 48 }}>
+          <div className="fade-section" style={{ width: '100%', maxWidth: 800, display: 'flex', flexDirection: 'column', gap: 10 }}>
+            <SectionLabel text="Problem space" />
+            <h2 style={{ ...dm, fontSize: 28, fontWeight: 600, lineHeight: '42px', color: '#000000', margin: 0 }}>
+              For frequent AI users, linear chat means starting over.
+            </h2>
+          </div>
           <div className="flex flex-col gap-[24px] fade-section" style={{ width: '100%', maxWidth: 800 }}>
-            <div className="flex flex-col gap-[10px]">
-              <SectionLabel text="Problem Space" />
-              <h2 style={{ ...dm, fontSize: 28, fontWeight: 500, lineHeight: '42px', color: '#000000', margin: 0 }}>
-                Linear chat means starting over for frequent AI users
-              </h2>
-            </div>
-            <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#525252', margin: 0 }}>
+            <p style={{ ...dm, fontSize: 17, fontWeight: 400, lineHeight: '27px', color: '#525252', margin: 0 }}>
               Through these interviews, we synthesized our findings into key pain points. Each one pushes the user toward the same fallback: starting over, and the work already done is effectively lost.
             </p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-              {[
-                {
-                  n: '1',
-                  heading: "The users can't get back to their own work.",
-                  body: "Good outputs and prompts vanished into the scroll, so users couldn't relocate or reuse what worked. Finding cost more than re-asking, so people re-asked and lost the work they'd already done.",
-                },
-                {
-                  n: '2',
-                  heading: "The linear format doesn't fit how people think.",
-                  body: "Thinking is dynamic, but chat only moves down. Users can't act on a single past response without excluding certain part of the conversation, so they copy fragments into other tools just to arrange them the way they actually think.",
-                },
-              ].map(({ n, heading, body }) => (
-                <div key={n} style={{ background: '#FFFFFF', borderRadius: 24, padding: '32px 24px', display: 'flex', flexDirection: 'row', gap: 24, alignItems: 'center', boxShadow: '4px 4px 12px 0px rgba(0,0,0,0.05), -4px -4px 12px 0px rgba(0,0,0,0.05)' }}>
-                  <div style={{ width: 52, flexShrink: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '5px 14px' }}>
-                    <span style={{ ...dm, fontSize: 64, fontWeight: 500, lineHeight: '42px', color: 'rgba(137,197,234,0.3)' }}>{n}</span>
-                  </div>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 8, flex: 1 }}>
-                    <p style={{ ...dm, fontSize: 20, fontWeight: 700, color: '#000000', margin: 0 }}>{heading}</p>
-                    <p style={{ ...dm, fontSize: 14, fontWeight: 300, lineHeight: '24px', color: '#525252', margin: 0 }}>{body}</p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 24, paddingBottom: 24 }}>
+              {/* Card 1 */}
+              <div style={{ background: '#FFFFFF', borderRadius: 24, padding: 24, display: 'flex', flexDirection: 'row', gap: 24, alignItems: 'center', minHeight: 248, boxShadow: '4px 4px 12px 0px rgba(0,0,0,0.05), -4px -4px 12px 0px rgba(0,0,0,0.05)' }}>
+                <div style={{ width: 52, flexShrink: 0, display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '5px 14px' }}>
+                  <span style={{ ...dm, fontSize: 64, fontWeight: 600, lineHeight: '42px', color: 'rgba(137,197,234,0.3)' }}>1</span>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 8, flex: 1 }}>
+                  <p style={{ ...dm, fontSize: 20, fontWeight: 700, color: '#000000', margin: 0 }}>The users can't get back to their own work.</p>
+                  <p style={{ ...dm, fontSize: 14, fontWeight: 400, lineHeight: '24px', color: '#525252', margin: 0 }}>
+                    Good outputs and prompts vanished into the scroll, and finding cost more than re-asking, so people re-asked instead of relocating and reusing them.
+                  </p>
+                </div>
+                <div style={{ position: 'relative', width: 174, height: 180, flexShrink: 0 }}>
+                  <img src="/images/ui-for-ai/avatar-3e07b5.png" alt="" style={{ position: 'absolute', left: 14, top: 17, width: 147, height: 147, borderRadius: '50%', objectFit: 'cover' }} />
+                  <div style={{ position: 'absolute', left: 9, top: 123, width: 157, height: 46, background: '#F8F8F8', borderRadius: 18, padding: 7, textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '3px 3px 9px 0px rgba(0,0,0,0.12), -3px -3px 9px 0px rgba(0,0,0,0.12)' }}>
+                    <span style={{ ...dm, fontSize: 12, fontWeight: 400, lineHeight: '15px', color: '#525252' }}>I had a great idea.<br />Where was it?</span>
                   </div>
                 </div>
-              ))}
+              </div>
+              {/* Card 2 */}
+              <div style={{ background: '#FFFFFF', borderRadius: 24, padding: 24, display: 'flex', flexDirection: 'row', gap: 24, alignItems: 'center', boxShadow: '4px 4px 12px 0px rgba(0,0,0,0.05), -4px -4px 12px 0px rgba(0,0,0,0.05)' }}>
+                <div style={{ width: 52, flexShrink: 0, display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '5px 14px' }}>
+                  <span style={{ ...dm, fontSize: 64, fontWeight: 600, lineHeight: '42px', color: 'rgba(137,197,234,0.3)' }}>2</span>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 8, flex: 1 }}>
+                  <p style={{ ...dm, fontSize: 20, fontWeight: 700, color: '#000000', margin: 0 }}>The linear format doesn't fit how people think.</p>
+                  <p style={{ ...dm, fontSize: 14, fontWeight: 400, lineHeight: '24px', color: '#525252', margin: 0 }}>
+                    People think dynamically, but the chat only moves down. Users can't act on a single past response without excluding part of the conversation, so they copy fragments into other tools to arrange them the way they think.
+                  </p>
+                </div>
+                <div style={{ position: 'relative', width: 174, height: 200, flexShrink: 0 }}>
+                  <img src="/images/ui-for-ai/avatar-6c0e40.png" alt="" style={{ position: 'absolute', left: 14, top: 18, width: 147, height: 147, borderRadius: '50%', objectFit: 'cover' }} />
+                  {/* Connecting lines */}
+                  <svg style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }}>
+                    <line x1="47" y1="38" x2="99" y2="19" stroke="#979797" strokeWidth="1" />
+                    <line x1="131" y1="21" x2="141" y2="35" stroke="#979797" strokeWidth="1" />
+                    <line x1="49" y1="43" x2="131" y2="50" stroke="#979797" strokeWidth="1" />
+                  </svg>
+                  {/* Thought bubble icons */}
+                  <img src="/images/ui-for-ai/thought-bubble-c.svg" alt="" style={{ position: 'absolute', left: 11, top: 22, width: 37, height: 37 }} />
+                  <img src="/images/ui-for-ai/thought-bubble-b.svg" alt="" style={{ position: 'absolute', left: 94, top: 0, width: 37, height: 37 }} />
+                  <img src="/images/ui-for-ai/thought-bubble-a.svg" alt="" style={{ position: 'absolute', left: 127, top: 31, width: 37, height: 37 }} />
+                  <div style={{ position: 'absolute', left: 9, top: 122, width: 157, height: 46, background: '#F8F8F8', borderRadius: 18, padding: 7, textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '3px 3px 9px 0px rgba(0,0,0,0.12), -3px -3px 9px 0px rgba(0,0,0,0.12)' }}>
+                    <span style={{ ...dm, fontSize: 12, fontWeight: 400, lineHeight: '15px', color: '#525252' }}>It's all connected, but it's<br />stuck in a straight line.</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
