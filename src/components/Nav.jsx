@@ -3,7 +3,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom'
 
 const dm = { fontFamily: 'DM Sans, sans-serif' }
 
-const RESUME_URL = 'https://drive.google.com/file/d/1GNHe7o3-5EYDOh62fgcGVD88N6AN_Lh7/view?usp=sharing'
+const RESUME_URL = 'https://drive.google.com/file/d/1ArH6yggi7TaRpMPaHO7UhegLEq7huwDU/view?usp=sharing'
 
 const activeClass = `text-[17px] leading-7 text-[#000000] font-normal transition-opacity`
 const inactiveClass = `text-[17px] leading-7 text-[#525252] font-normal hover:opacity-70 transition-opacity`
