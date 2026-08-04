@@ -27,8 +27,8 @@ function WorkCard({ imageSrc, gifSrc, imageAlt, title, description, tags, href }
   const [hovered, setHovered] = useState(false)
   const card = (
     <div
-      className="flex flex-col bg-white rounded-[24px] overflow-hidden transition-transform duration-300 hover:rotate-[-2deg]"
-      style={{ width: '100%', height: 538, boxShadow: '0px 4px 12px 0px rgba(0,0,0,0.12)' }}
+      className="flex flex-col bg-white rounded-[24px] overflow-hidden transition-transform duration-300 hover:rotate-[-2deg] h-full"
+      style={{ width: '100%', boxShadow: '0px 4px 12px 0px rgba(0,0,0,0.12)' }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -50,7 +50,7 @@ function WorkCard({ imageSrc, gifSrc, imageAlt, title, description, tags, href }
   )
 
   if (href) {
-    return <Link to={href} className="block">{card}</Link>
+    return <Link to={href} className="block h-full">{card}</Link>
   }
   return card
 }
@@ -163,6 +163,14 @@ export default function Home() {
             padding-right: 20px !important;
           }
         }
+        .hero-hint {
+          display: none;
+        }
+        @media (min-width: 1181px) {
+          .hero-hint {
+            display: block;
+          }
+        }
       `}</style>
       <Nav />
 
@@ -214,9 +222,9 @@ export default function Home() {
 
           {/* "try shaking" hint — receipt-style popup, upper-left */}
           <div
-            className="hidden lg:block"
+            className="hero-hint"
             style={{
-              position: 'absolute', top: 164, left: 752, zIndex: 2,
+              position: 'absolute', top: 164, left: '58.75%', zIndex: 2,
               borderRadius: 20,
               overflow: 'hidden',
               boxShadow: '4px 4px 12px 0px rgba(0,0,0,0.08), -4px -4px 12px 0px rgba(0,0,0,0.05)',
@@ -245,8 +253,8 @@ export default function Home() {
               </p>
             </div>
             <p className="hero-animate text-[20px] font-normal leading-[30px]" style={{ ...dm, color: '#525252', animationDelay: '200ms' }}>
-              Currently Pursuing a Master's of HCI
-              <br />@ Carnegie Mellon University
+              Master's of HCI, Carnegie Mellon University
+              <br />2+ years of product design experience
             </p>
           </div>
         </section>

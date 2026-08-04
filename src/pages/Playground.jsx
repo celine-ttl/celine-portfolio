@@ -1,4 +1,5 @@
 import { Link, NavLink } from 'react-router-dom'
+import { useEffect } from 'react'
 import Nav from '../components/Nav'
 
 const dm = { fontFamily: 'DM Sans, sans-serif' }
@@ -183,6 +184,23 @@ function CardTitle({ children }) {
 }
 
 export default function Playground() {
+  useEffect(() => {
+    const els = document.querySelectorAll('.fade-section')
+    const obs = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible')
+            obs.unobserve(entry.target)
+          }
+        })
+      },
+      { threshold: 0.08 }
+    )
+    els.forEach(el => obs.observe(el))
+    return () => obs.disconnect()
+  }, [])
+
   return (
     <>
       <style>{hoverStyles}</style>
@@ -193,7 +211,7 @@ export default function Playground() {
       <div className="pg-layout" style={{ maxWidth: 1280, margin: '0 auto', padding: '80px 24px', display: 'flex', gap: 80, alignItems: 'flex-start' }}>
 
         {/* Left: heading + description */}
-        <div className="pg-sidebar" style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 32, paddingBottom: 40, position: 'sticky', top: 80 }}>
+        <div className="pg-sidebar fade-section" style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 32, paddingBottom: 40, position: 'sticky', top: 80 }}>
           <div className="pg-sidebar-heading" style={{ position: 'relative', minHeight: 160 }}>
             <h1 style={{ ...dm, fontWeight: 700, fontSize: 64, lineHeight: '64px', color: '#000', margin: 0, paddingTop: 24, paddingLeft: 15, maxWidth: 265 }}>
               Off The Menu
@@ -211,7 +229,7 @@ export default function Playground() {
         <div className="pg-gallery" style={{ width: 887, flexShrink: 0, display: 'flex', flexDirection: 'column', gap: 6, overflowX: 'auto' }}>
 
           {/* Row 1: AI-native Browser (600) + Bumble Party (263) */}
-          <div className="pg-row" style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
+          <div className="pg-row fade-section" style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8, flexShrink: 0 }}>
               <div className="pg-card" style={{ width: 600, height: 345, borderRadius: 12, overflow: 'hidden', position: 'relative', background: '#C8CFF2' }}>
@@ -249,7 +267,7 @@ export default function Playground() {
           </div>
 
           {/* Row 2: Activity AI OS (320) + TSA Banner (fill ~543) */}
-          <div className="pg-row" style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
+          <div className="pg-row fade-section" style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12, flexShrink: 0 }}>
               <div className="pg-card" style={{ width: 320, height: 332, borderRadius: 13, overflow: 'hidden', position: 'relative' }}>
@@ -276,7 +294,7 @@ export default function Playground() {
           </div>
 
           {/* Row 3: Prompt DNA (619) + Drageng Show Poster (fill) */}
-          <div className="pg-row" style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
+          <div className="pg-row fade-section" style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10, flexShrink: 0 }}>
               <div className="pg-card" style={{ width: 619, height: 345, borderRadius: 11, overflow: 'hidden', position: 'relative', background: '#1B191E' }}>
@@ -311,7 +329,7 @@ export default function Playground() {
           </div>
 
           {/* Row 4: Figma VC (458) + Fig Build 2026 (fill) */}
-          <div className="pg-row" style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
+          <div className="pg-row fade-section" style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 9, flexShrink: 0 }}>
               <div className="pg-card" style={{ width: 458, height: 294, borderRadius: 10, overflow: 'hidden', position: 'relative' }}>
