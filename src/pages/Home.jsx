@@ -12,6 +12,25 @@ function ArrowDiagonal() {
   )
 }
 
+function GraduationCapIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ display: 'inline-block', verticalAlign: '-3px', marginRight: 8 }}>
+      <path d="M2 8L12 3L22 8L12 13L2 8Z" stroke="#4A77FF" strokeWidth="1.6" strokeLinejoin="round" />
+      <path d="M6 10.5V16C6 16 8.5 18.5 12 18.5C15.5 18.5 18 16 18 16V10.5" stroke="#4A77FF" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M22 8V14" stroke="#4A77FF" strokeWidth="1.6" strokeLinecap="round" />
+    </svg>
+  )
+}
+
+function PencilIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ display: 'inline-block', verticalAlign: '-3px', marginRight: 8 }}>
+      <path d="M14.5 4.5L19.5 9.5L8 21H3V16L14.5 4.5Z" stroke="#4A77FF" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M12 7L17 12" stroke="#4A77FF" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
+
 function MenuIcon() {
   return (
     <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -193,7 +212,7 @@ export default function Home() {
             <img
               src={`/images/${HERO_IMAGES[heroState]}.png`}
               alt=""
-              style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'right top', transition: 'opacity 0.15s ease', display: 'block', transform: 'scale(0.9) translateX(12px)', transformOrigin: 'right top' }}
+              style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'right top', transition: 'opacity 0.15s ease', display: 'block', transform: 'scale(0.9) translateX(32px)', transformOrigin: 'right top' }}
             />
             {/* Spill text */}
             <div style={{
@@ -245,16 +264,16 @@ export default function Home() {
           {/* Text content */}
           <div className="flex flex-col" style={{ gap: 40, position: 'relative', zIndex: 1, maxWidth: 620, paddingTop: 48 }}>
             <div className="flex flex-col" style={{ gap: 24 }}>
-              <p className="hero-animate text-[#4F5256] text-[24px] font-semibold leading-[30px]" style={{ ...dm, animationDelay: '0ms' }}>Hi, this is Celine!</p>
+              <p className="hero-animate text-black text-[24px] font-semibold leading-[30px]" style={{ ...dm, animationDelay: '0ms' }}>Hi, this is Celine!</p>
               <p className="hero-animate text-[48px] font-semibold leading-[60px]" style={{ ...dm, color: '#000000', animationDelay: '100ms' }}>
                 I bring simplicity, human connection, and a touch of caffeine to{' '}
                 <span style={{ color: '#4A77FF', whiteSpace: 'nowrap' }}>AI design</span>
                 {' '}as a product designer.
               </p>
             </div>
-            <p className="hero-animate text-[20px] font-normal leading-[30px]" style={{ ...dm, color: '#525252', animationDelay: '200ms' }}>
-              Master's of HCI, Carnegie Mellon University
-              <br />2+ years of product design experience
+            <p className="hero-animate text-[20px] font-light leading-[30px]" style={{ ...dm, color: '#525252', animationDelay: '200ms' }}>
+              <GraduationCapIcon />Master's of HCI, Carnegie Mellon University
+              <br /><PencilIcon />2+ years in Healthcare, SaaS & Entertainment
             </p>
           </div>
         </section>

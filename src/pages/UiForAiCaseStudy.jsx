@@ -260,7 +260,8 @@ export default function UiForAiCaseStudy() {
             <div className="flex flex-col gap-[10px]">
               <SectionLabel text="Overview" />
               <h2 style={{ ...dm, fontSize: 36, fontWeight: 600, lineHeight: '120%', color: '#000000', margin: 0 }}>
-                Humans don't think in straight lines — but AI chat interfaces are built like they do
+                Humans don't think in straight lines
+                <br />but AI chat interfaces are built like they do
               </h2>
             </div>
             <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#525252', margin: 0 }}>

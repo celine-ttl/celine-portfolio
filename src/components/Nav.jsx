@@ -12,6 +12,23 @@ function navClass({ isActive }) {
   return isActive ? activeClass : inactiveClass
 }
 
+function Dot() {
+  return (
+    <span
+      style={{
+        display: 'inline-block',
+        width: 6,
+        height: 6,
+        borderRadius: '50%',
+        background: '#4A77FF',
+        marginRight: 8,
+        verticalAlign: 'middle',
+        marginTop: -2,
+      }}
+    />
+  )
+}
+
 export default function Nav({ fixed = false }) {
   const [menuOpen, setMenuOpen] = useState(false)
   const [visible, setVisible] = useState(true)
@@ -58,7 +75,7 @@ export default function Nav({ fixed = false }) {
           transition: 'transform 0.3s ease',
         }}
       >
-        <div className="flex items-center justify-between h-full" style={{ padding: '0 24px' }}>
+        <div className="flex items-center justify-between h-full" style={{ paddingLeft: 24, paddingRight: 40 }}>
           <Link to="/" onClick={() => { window.scrollTo(0, 0); close() }}>
             <img src="/images/logo-46ec0d.png" alt="Celine Tseng logo" width={116} height={51} className="object-fill" />
           </Link>
@@ -66,12 +83,18 @@ export default function Nav({ fixed = false }) {
           {/* Desktop links */}
           <div className="hidden sm:flex items-center" style={{ gap: 52 }}>
             {isHome ? (
-              <a href="#work" className={activeClass} style={dm}>Work</a>
+              <a href="#work" className={activeClass} style={dm}><Dot />Work</a>
             ) : (
-              <NavLink to="/" end className={navClass} style={dm}>Work</NavLink>
+              <NavLink to="/" end className={navClass} style={dm}>
+                {({ isActive }) => (<>{isActive && <Dot />}Work</>)}
+              </NavLink>
             )}
-            <NavLink to="/playground" className={navClass} style={dm}>Playground</NavLink>
-            <NavLink to="/about" className={navClass} style={dm}>About</NavLink>
+            <NavLink to="/playground" className={navClass} style={dm}>
+              {({ isActive }) => (<>{isActive && <Dot />}Playground</>)}
+            </NavLink>
+            <NavLink to="/about" className={navClass} style={dm}>
+              {({ isActive }) => (<>{isActive && <Dot />}About</>)}
+            </NavLink>
             <a
               href={RESUME_URL}
               target="_blank"
@@ -124,12 +147,18 @@ export default function Nav({ fixed = false }) {
           }}
         >
           {isHome ? (
-            <a href="#work" onClick={close} className={activeClass} style={dm}>Work</a>
+            <a href="#work" onClick={close} className={activeClass} style={dm}><Dot />Work</a>
           ) : (
-            <NavLink to="/" end className={navClass} style={dm} onClick={close}>Work</NavLink>
+            <NavLink to="/" end className={navClass} style={dm} onClick={close}>
+              {({ isActive }) => (<>{isActive && <Dot />}Work</>)}
+            </NavLink>
           )}
-          <NavLink to="/playground" className={navClass} style={dm} onClick={close}>Playground</NavLink>
-          <NavLink to="/about" className={navClass} style={dm} onClick={close}>About</NavLink>
+          <NavLink to="/playground" className={navClass} style={dm} onClick={close}>
+            {({ isActive }) => (<>{isActive && <Dot />}Playground</>)}
+          </NavLink>
+          <NavLink to="/about" className={navClass} style={dm} onClick={close}>
+            {({ isActive }) => (<>{isActive && <Dot />}About</>)}
+          </NavLink>
           <a
             href={RESUME_URL}
             target="_blank"
