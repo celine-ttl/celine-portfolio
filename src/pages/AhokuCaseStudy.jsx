@@ -196,7 +196,7 @@ export default function AhokuCaseStudy() {
 
       {/* Case study hero */}
       <div ref={heroRef} className="flex justify-center" style={{ background: '#FFFFFF', padding: '40px 24px', marginTop: 80 }}>
-        <div className="ahoku-hero-inner flex flex-col gap-[32px]" style={{ maxWidth: 1000, width: '100%', padding: '40px 0' }}>
+        <div className="ahoku-hero-inner flex flex-col gap-[32px]" style={{ maxWidth: 1080, width: '100%', padding: '40px 0' }}>
           {/* Two-column row: text left, image right */}
           <div className="flex flex-col md:flex-row items-center" style={{ gap: 48 }}>
             <div className="flex flex-col gap-[32px]" style={{ flex: 1 }}>
@@ -245,7 +245,7 @@ export default function AhokuCaseStudy() {
       <main>
         {/* CONTEXT */}
         <section id="context" className="flex flex-col items-center bg-white" style={{ position: 'relative', padding: '60px 55px', gap: 24, overflow: 'visible' }}>
-          <div className="flex flex-col gap-[32px] fade-section" style={{ maxWidth: 800, width: '100%' }}>
+          <div className="flex flex-col gap-[32px] fade-section" style={{ maxWidth: 920, width: '100%' }}>
             <div className="flex flex-col gap-[10px]">
               <SectionLabel text="Context" />
               <h2 className="text-[28px] font-semibold leading-[42px] text-black" style={dm}>
@@ -276,11 +276,11 @@ export default function AhokuCaseStudy() {
 
         {/* PROBLEM SPACE */}
         <section id="problem-space" className="flex flex-col items-center bg-white" style={{ padding: '80px 40px', gap: 24 }}>
-          <div className="flex flex-col gap-[24px] fade-section" style={{ maxWidth: 800, width: '100%' }}>
+          <div className="flex flex-col gap-[24px] fade-section" style={{ maxWidth: 920, width: '100%' }}>
             <div className="flex flex-col gap-[10px]">
               <SectionLabel text="Problem Space" />
               <h2 className="text-[28px] font-semibold leading-[42px] text-black" style={dm}>
-                If elderly users can't log independently, caregivers lose visibility, medical teams lose trust, and the device loses<br />its purpose.
+                If elderly users can't log independently, caregivers lose visibility, medical teams lose trust, and the device loses its purpose.
               </h2>
             </div>
             <p className="text-[17px] font-light leading-[27px] text-[#525252]" style={dm}>
@@ -297,7 +297,7 @@ export default function AhokuCaseStudy() {
 
         {/* USER RESEARCH */}
         <section id="user-research" className="flex flex-col items-center bg-white" style={{ padding: '80px 40px', gap: 24 }}>
-          <div className="flex flex-col gap-[24px] fade-section" style={{ maxWidth: 800, width: '100%' }}>
+          <div className="flex flex-col gap-[24px] fade-section" style={{ maxWidth: 920, width: '100%' }}>
             <div className="flex flex-col gap-[10px]">
               <SectionLabel text="User Research" />
               <h2 className="text-[28px] font-semibold leading-[42px] text-black" style={dm}>Understanding the problem</h2>
@@ -328,7 +328,7 @@ export default function AhokuCaseStudy() {
 
         {/* KEY INSIGHTS */}
         <section id="key-insights" className="flex flex-col items-center" style={{ padding: '80px 40px', gap: 24, background: '#F8F8F8' }}>
-          <div className="flex flex-col gap-[24px] fade-section" style={{ maxWidth: 800, width: '100%' }}>
+          <div className="flex flex-col gap-[24px] fade-section" style={{ maxWidth: 920, width: '100%' }}>
             <div className="flex flex-col gap-[10px]">
               <SectionLabel text="Key Insights" />
               <h2 className="text-[28px] font-semibold leading-[42px] text-black" style={dm}>
@@ -375,7 +375,7 @@ export default function AhokuCaseStudy() {
 
         {/* SOLUTION 1 */}
         <section id="solution-1" className="flex flex-col items-center bg-white" style={{ padding: '80px 40px', gap: 24 }}>
-          <div className="flex flex-col gap-[24px] fade-section" style={{ maxWidth: 800, width: '100%' }}>
+          <div className="flex flex-col gap-[24px] fade-section" style={{ maxWidth: 920, width: '100%' }}>
             <div className="flex flex-col gap-[10px]">
               <SectionLabel text="Solution Highlights" />
               <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 24 }}>
@@ -402,7 +402,7 @@ export default function AhokuCaseStudy() {
 
         {/* SOLUTION 2 */}
         <section id="solution-2" className="flex flex-col items-center bg-white" style={{ padding: '80px 40px', gap: 24 }}>
-          <div className="flex flex-col gap-[24px] fade-section" style={{ maxWidth: 800, width: '100%' }}>
+          <div className="flex flex-col gap-[24px] fade-section" style={{ maxWidth: 920, width: '100%' }}>
             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 24 }}>
               <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '5px 0', flexShrink: 0 }}>
                 <span style={{ ...dm, fontSize: 64, fontWeight: 500, lineHeight: '42px', color: '#D9D9D9' }}>02</span>
@@ -425,7 +425,7 @@ export default function AhokuCaseStudy() {
 
         {/* SOLUTION 3 */}
         <section id="solution-3" className="flex flex-col items-center bg-white" style={{ padding: '80px 40px', gap: 24 }}>
-          <div className="flex flex-col gap-[24px] fade-section" style={{ maxWidth: 800, width: '100%' }}>
+          <div className="flex flex-col gap-[24px] fade-section" style={{ maxWidth: 920, width: '100%' }}>
             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 24 }}>
               <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '5px 0', flexShrink: 0 }}>
                 <span style={{ ...dm, fontSize: 64, fontWeight: 500, lineHeight: '42px', color: '#D9D9D9' }}>03</span>
@@ -451,7 +451,7 @@ export default function AhokuCaseStudy() {
 
         {/* RESULTS */}
         <section id="results" className="flex flex-col items-center bg-white" style={{ padding: '80px 40px', gap: 24 }}>
-          <div className="flex flex-col gap-[24px] fade-section" style={{ maxWidth: 800, width: '100%' }}>
+          <div className="flex flex-col gap-[24px] fade-section" style={{ maxWidth: 920, width: '100%' }}>
             <div className="flex flex-col gap-[10px]">
               <SectionLabel text="Results" />
               <h2 className="text-[28px] font-semibold leading-[42px] text-black" style={dm}>
@@ -490,7 +490,7 @@ export default function AhokuCaseStudy() {
 
         {/* REFLECTION */}
         <section id="reflection" className="flex flex-col items-center bg-white" style={{ padding: '80px 40px', gap: 24 }}>
-          <div className="flex flex-col gap-[24px] fade-section" style={{ maxWidth: 800, width: '100%' }}>
+          <div className="flex flex-col gap-[24px] fade-section" style={{ maxWidth: 920, width: '100%' }}>
             <div className="flex flex-col gap-[10px]">
               <SectionLabel text="Reflection" />
               <h2 className="text-[28px] font-semibold leading-[42px] text-black" style={dm}>What I would've done differently.</h2>

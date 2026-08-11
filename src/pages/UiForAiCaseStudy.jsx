@@ -17,7 +17,7 @@ const NAV_SECTIONS = [
 function SideNav({ visible, active }) {
   return (
     <div className="cs-sidenav" style={{
-      position: 'fixed', top: 200, right: 40,
+      position: 'fixed', top: 100, right: 40,
       display: 'flex', flexDirection: 'column',
       opacity: visible ? 1 : 0,
       transform: visible ? 'translateX(0)' : 'translateX(16px)',
@@ -208,13 +208,13 @@ export default function UiForAiCaseStudy() {
 
       {/* Case study hero */}
       <div ref={heroRef} className="cs-hero-outer" style={{ marginTop: 80, background: '#FFFFFF', display: 'flex', justifyContent: 'center', padding: 40 }}>
-        <div style={{ width: '100%', maxWidth: 1000, display: 'flex', flexDirection: 'column', gap: 32, padding: '40px 0' }}>
+        <div style={{ width: '100%', maxWidth: 1080, display: 'flex', flexDirection: 'column', gap: 32, padding: '40px 0' }}>
           {/* Top row: text + image */}
           <div className="cs-hero-row" style={{ display: 'flex', flexDirection: 'row', gap: 48, alignItems: 'stretch' }}>
             {/* Left: text column */}
             <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 32 }}>
               <h1 style={{ ...dm, fontSize: 48, fontWeight: 700, lineHeight: '60px', color: '#000000', margin: 0 }}>
-                UI for AI -<br />Conversation flow
+                UI for AI:<br />Conversation flow
               </h1>
               <p style={{ ...dm, fontSize: 17, fontWeight: 400, lineHeight: '27px', color: '#2D2D2D', margin: 0 }}>
                 Explores how linear AI chat interfaces might better support the way people actually work — making it easier to go back, find what mattered, and build on what's already there.
@@ -256,7 +256,7 @@ export default function UiForAiCaseStudy() {
       <main>
         {/* OVERVIEW */}
         <section id="overview" className="flex flex-col items-center bg-white" style={{ padding: '60px 55px', gap: 24 }}>
-          <div className="flex flex-col gap-[24px] fade-section" style={{ width: '100%', maxWidth: 800 }}>
+          <div className="flex flex-col gap-[24px] fade-section" style={{ width: '100%', maxWidth: 920 }}>
             <div className="flex flex-col gap-[10px]">
               <SectionLabel text="Overview" />
               <h2 style={{ ...dm, fontSize: 36, fontWeight: 600, lineHeight: '120%', color: '#000000', margin: 0 }}>
@@ -315,7 +315,7 @@ export default function UiForAiCaseStudy() {
 
         {/* USER INTERVIEWS */}
         <section id="user-interviews" style={{ background: '#F8F8F8', padding: '80px 40px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 24 }}>
-          <div className="flex flex-col gap-[24px] fade-section" style={{ width: '100%', maxWidth: 800 }}>
+          <div className="flex flex-col gap-[24px] fade-section" style={{ width: '100%', maxWidth: 920 }}>
             <div className="flex flex-col gap-[10px]">
               <SectionLabel text="User Interviews" />
               <h2 style={{ ...dm, fontSize: 28, fontWeight: 500, lineHeight: '42px', color: '#000000', margin: 0 }}>
@@ -335,13 +335,13 @@ export default function UiForAiCaseStudy() {
 
         {/* PROBLEM SPACE */}
         <section id="problem-space" style={{ background: '#F8F8F8', padding: '80px 40px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 48 }}>
-          <div className="fade-section" style={{ width: '100%', maxWidth: 800, display: 'flex', flexDirection: 'column', gap: 10 }}>
+          <div className="fade-section" style={{ width: '100%', maxWidth: 920, display: 'flex', flexDirection: 'column', gap: 10 }}>
             <SectionLabel text="Problem space" />
             <h2 style={{ ...dm, fontSize: 28, fontWeight: 600, lineHeight: '42px', color: '#000000', margin: 0 }}>
               For frequent AI users, linear chat means starting over.
             </h2>
           </div>
-          <div className="flex flex-col gap-[24px] fade-section" style={{ width: '100%', maxWidth: 800 }}>
+          <div className="flex flex-col gap-[24px] fade-section" style={{ width: '100%', maxWidth: 920 }}>
             <p style={{ ...dm, fontSize: 17, fontWeight: 400, lineHeight: '27px', color: '#525252', margin: 0 }}>
               Through these interviews, we synthesized our findings into key pain points. Each one pushes the user toward the same fallback: starting over, and the work already done is effectively lost.
             </p>
@@ -398,7 +398,7 @@ export default function UiForAiCaseStudy() {
 
         {/* HMW */}
         <section id="hmw" style={{ background: '#525252', padding: '80px 40px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 48 }}>
-          <div className="flex flex-col gap-[24px] fade-section" style={{ width: '100%', maxWidth: 800 }}>
+          <div className="flex flex-col gap-[24px] fade-section" style={{ width: '100%', maxWidth: 920 }}>
             {/* Pill */}
             <div style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', background: '#4A77FF', borderRadius: 100, padding: '0 24px', width: 'fit-content' }}>
               <span style={{ ...dm, fontSize: 17, fontWeight: 500, lineHeight: '42px', color: '#FFFFFF' }}>How might we...</span>
@@ -418,14 +418,14 @@ export default function UiForAiCaseStudy() {
         {/* IDEATION AND TESTING */}
         <section id="ideation" style={{ background: '#FFFFFF', padding: '80px 40px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 48 }}>
           {/* Section title */}
-          <div className="fade-section" style={{ width: '100%', maxWidth: 800, display: 'flex', flexDirection: 'column' }}>
+          <div className="fade-section" style={{ width: '100%', maxWidth: 920, display: 'flex', flexDirection: 'column' }}>
             <SectionLabel text="Ideation and testing" />
             <h2 style={{ ...dm, fontSize: 28, fontWeight: 500, lineHeight: '42px', color: '#000000', margin: 0 }}>
               We tested three concepts, one clear direction emerged
             </h2>
           </div>
           {/* Body + cards */}
-          <div className="fade-section" style={{ width: '100%', maxWidth: 800, display: 'flex', flexDirection: 'column', gap: 24 }}>
+          <div className="fade-section" style={{ width: '100%', maxWidth: 920, display: 'flex', flexDirection: 'column', gap: 24 }}>
             <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#525252', margin: 0 }}>
               Our HMW defined a problem, not a solution, so we explored three potential approaches: navigation, retrieval, and non-linear structure. We tested the concepts with 12 participants, collected rankings to compare preferences, and used affinity diagramming to uncover patterns in the qualitative feedback.
             </p>
@@ -493,11 +493,11 @@ export default function UiForAiCaseStudy() {
         {/* SYNTHESIS */}
         <section id="synthesis" style={{ background: '#FFFFFF', padding: '80px 40px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 48 }}>
           {/* Section label only — no h2 */}
-          <div className="fade-section" style={{ width: '100%', maxWidth: 800 }}>
+          <div className="fade-section" style={{ width: '100%', maxWidth: 920 }}>
             <SectionLabel text="Synthesis" />
           </div>
           {/* Content */}
-          <div className="fade-section" style={{ width: '100%', maxWidth: 800, display: 'flex', flexDirection: 'column', gap: 24 }}>
+          <div className="fade-section" style={{ width: '100%', maxWidth: 920, display: 'flex', flexDirection: 'column', gap: 24 }}>
             {/* Intro body text */}
             <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#525252', margin: 0 }}>
               The clearest signal: users&apos; core struggle was retrieval, not generation. Scrolling and Cmd+F were common workarounds, but most users just re-asked rather than digging back through the chat.
@@ -562,14 +562,14 @@ export default function UiForAiCaseStudy() {
         {/* SOLUTION 01 */}
         <section id="solution-01" style={{ background: '#FFFFFF', padding: '80px 40px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 48 }}>
           {/* Section title block */}
-          <div className="fade-section" style={{ width: '100%', maxWidth: 800, display: 'flex', flexDirection: 'column' }}>
+          <div className="fade-section" style={{ width: '100%', maxWidth: 920, display: 'flex', flexDirection: 'column' }}>
             <SectionLabel text="Solution" />
             <h2 style={{ ...dm, fontSize: 36, fontWeight: 600, lineHeight: '120%', color: '#000000', margin: 0 }}>
               Transforming the linear chat into<br />an interactive workspace
             </h2>
           </div>
           {/* Content block */}
-          <div className="fade-section" style={{ width: '100%', maxWidth: 800, display: 'flex', flexDirection: 'column', gap: 24 }}>
+          <div className="fade-section" style={{ width: '100%', maxWidth: 920, display: 'flex', flexDirection: 'column', gap: 24 }}>
             {/* Number + section name row */}
             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 24 }}>
               <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '5px 0', flexShrink: 0 }}>
@@ -594,7 +594,7 @@ export default function UiForAiCaseStudy() {
 
         {/* SOLUTION 02 */}
         <section id="solution-02" style={{ background: '#FFFFFF', padding: '80px 40px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 48 }}>
-          <div className="fade-section" style={{ width: '100%', maxWidth: 800, display: 'flex', flexDirection: 'column', gap: 24 }}>
+          <div className="fade-section" style={{ width: '100%', maxWidth: 920, display: 'flex', flexDirection: 'column', gap: 24 }}>
             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 24 }}>
               <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '5px 0', flexShrink: 0 }}>
                 <span style={{ ...dm, fontSize: 64, fontWeight: 500, lineHeight: '42px', color: '#D9D9D9' }}>02</span>
@@ -615,7 +615,7 @@ export default function UiForAiCaseStudy() {
 
         {/* SOLUTION 03 */}
         <section id="solution-03" style={{ background: '#FFFFFF', padding: '80px 40px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 48 }}>
-          <div className="fade-section" style={{ width: '100%', maxWidth: 800, display: 'flex', flexDirection: 'column', gap: 24 }}>
+          <div className="fade-section" style={{ width: '100%', maxWidth: 920, display: 'flex', flexDirection: 'column', gap: 24 }}>
             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 24 }}>
               <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '5px 0', flexShrink: 0 }}>
                 <span style={{ ...dm, fontSize: 64, fontWeight: 500, lineHeight: '42px', color: '#D9D9D9' }}>03</span>
@@ -637,14 +637,14 @@ export default function UiForAiCaseStudy() {
         {/* DESIGN DECISIONS */}
         <section id="design-decisions" style={{ background: '#F8F8F8', padding: '80px 40px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 48 }}>
           {/* Title block */}
-          <div className="fade-section" style={{ width: '100%', maxWidth: 800, display: 'flex', flexDirection: 'column' }}>
+          <div className="fade-section" style={{ width: '100%', maxWidth: 920, display: 'flex', flexDirection: 'column' }}>
             <SectionLabel text="Design Decisions Highlights" />
             <h2 style={{ ...dm, fontSize: 28, fontWeight: 500, lineHeight: '42px', color: '#000000', margin: 0 }}>
               How user behavior shaped our design decisions
             </h2>
           </div>
           {/* Content block */}
-          <div className="fade-section" style={{ width: '100%', maxWidth: 800, display: 'flex', flexDirection: 'column', gap: 24 }}>
+          <div className="fade-section" style={{ width: '100%', maxWidth: 920, display: 'flex', flexDirection: 'column', gap: 24 }}>
             <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#525252', margin: 0 }}>
               After converging on a solution, a second round of testing informed deliberate design decisions.
             </p>
@@ -689,7 +689,7 @@ export default function UiForAiCaseStudy() {
 
         {/* REFLECTION */}
         <section id="reflection" style={{ background: '#FFFFFF', padding: '80px 40px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 24 }}>
-          <div className="flex flex-col gap-[24px] fade-section" style={{ width: '100%', maxWidth: 800 }}>
+          <div className="flex flex-col gap-[24px] fade-section" style={{ width: '100%', maxWidth: 920 }}>
             <div className="flex flex-col gap-[10px]">
               <SectionLabel text="Reflection" />
               <h2 style={{ ...dm, fontSize: 28, fontWeight: 600, lineHeight: '42px', color: '#000000', margin: 0 }}>Future Directions</h2>
