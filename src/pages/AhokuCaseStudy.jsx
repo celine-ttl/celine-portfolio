@@ -353,7 +353,7 @@ export default function AhokuCaseStudy() {
                 src="/images/ahoku/original-dashboard.png"
                 alt="Original Health Book Dashboard"
                 className="w-full rounded-[16px]"
-                style={{ height: 422, objectFit: 'cover', boxShadow: '5px 5px 12px 0px rgba(0,0,0,0.12), -4px -4px 12px 0px rgba(82,82,82,0.12)' }}
+                style={{ display: 'block', boxShadow: '5px 5px 12px 0px rgba(0,0,0,0.12), -4px -4px 12px 0px rgba(82,82,82,0.12)' }}
               />
             </div>
             {/* Insight 2 */}
