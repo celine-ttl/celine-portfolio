@@ -663,23 +663,23 @@ export default function UiForAiCaseStudy() {
               <h4 style={{ ...dm, fontSize: 24, fontWeight: 600, lineHeight: '120%', color: '#525252', margin: 0 }}>Collections stay focused: one at a time</h4>
               {/* Images row with arrow between */}
               <div className="cs-decision2-row" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 16 }}>
-                <div style={{ flex: 1, minWidth: 0 }}>
-                  <img src="/images/ui-for-ai/decision-2a-mockup.png" alt="Multiple collections open" style={{ width: '100%', borderRadius: 12, display: 'block' }} />
+                <div style={{ flex: 1, minWidth: 0, aspectRatio: '3 / 2', borderRadius: 12, overflow: 'hidden', background: '#FFFFFF' }}>
+                  <img src="/images/ui-for-ai/decision-2a-mockup.png" alt="Multiple collections open" style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'left', display: 'block' }} />
                 </div>
                 <svg className="cs-decision2-spacer" width="32" height="18" viewBox="0 0 32 18" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0 }}>
                   <path d="M23 1L31 9M31 9L23 17M31 9H1" stroke="#D9D9D9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
-                <div style={{ flex: 1, minWidth: 0 }}>
-                  <img src="/images/ui-for-ai/decision-2b-mockup.png" alt="Single collection open" style={{ width: '100%', borderRadius: 12, display: 'block' }} />
+                <div style={{ flex: 1, minWidth: 0, aspectRatio: '3 / 2', borderRadius: 12, overflow: 'hidden', background: '#FFFFFF' }}>
+                  <img src="/images/ui-for-ai/decision-2b-mockup.png" alt="Single collection open" style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }} />
                 </div>
               </div>
               {/* Text row — spacer width matches arrow width so text aligns under each image */}
               <div className="cs-decision2-row" style={{ display: 'flex', flexDirection: 'row', gap: 16 }}>
-                <p style={{ ...dm, fontSize: 14, fontWeight: 300, lineHeight: '24px', color: '#525252', margin: 0, flex: 1 }}>
+                <p style={{ ...dm, fontSize: 14, fontWeight: 300, lineHeight: '24px', color: '#525252', margin: 0, flex: 1, minWidth: 0 }}>
                   When multiple collections were visible simultaneously, the panel became cluttered and users were back to scrolling — which goes back to the exact problem we were solving.
                 </p>
                 <div className="cs-decision2-spacer" style={{ width: 32, flexShrink: 0 }} />
-                <p style={{ ...dm, fontSize: 14, fontWeight: 300, lineHeight: '24px', color: '#525252', margin: 0, flex: 1 }}>
+                <p style={{ ...dm, fontSize: 14, fontWeight: 300, lineHeight: '24px', color: '#525252', margin: 0, flex: 1, minWidth: 0 }}>
                   Keeping only one collection open at a time removed that overhead and made each collection feel like a dedicated, intentional space rather than another pile to manage.
                 </p>
               </div>

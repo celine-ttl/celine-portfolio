@@ -385,7 +385,7 @@ export default function AhokuCaseStudy() {
                 <h2 style={{ ...dm, fontSize: 28, fontWeight: 500, lineHeight: '42px', color: '#000000', margin: 0 }}>Personalized Dashboard</h2>
               </div>
             </div>
-            <p className="text-[24px] font-bold italic leading-[36px] text-[#4A77FF]" style={dm}>
+            <p className="text-[24px] font-bold leading-[36px] text-[#4A77FF]" style={dm}>
               If users only care about 2–3 metrics, why show them everything?
             </p>
             <p className="text-[17px] font-light leading-[27px] text-[#525252]" style={dm}>
@@ -395,7 +395,7 @@ export default function AhokuCaseStudy() {
               src="/images/ahoku/solution-1.gif"
               alt="Personalized dashboard redesign"
               className="w-full"
-              style={{ borderRadius: 28, boxShadow: '0px 12px 12px 0px rgba(0,0,0,0.12)', height: 450, objectFit: 'cover' }}
+              style={{ borderRadius: 28, boxShadow: '0px 12px 12px 0px rgba(0,0,0,0.12)', display: 'block' }}
             />
           </div>
         </section>
@@ -418,7 +418,7 @@ export default function AhokuCaseStudy() {
               src="/images/ahoku/solution-2.gif"
               alt="Automatic input flow"
               className="w-full"
-              style={{ borderRadius: 28, boxShadow: '0px 12px 12px 0px rgba(0,0,0,0.12)', height: 450, objectFit: 'cover' }}
+              style={{ borderRadius: 28, boxShadow: '0px 12px 12px 0px rgba(0,0,0,0.12)', display: 'block' }}
             />
           </div>
         </section>
@@ -444,7 +444,7 @@ export default function AhokuCaseStudy() {
               src="/images/ahoku/solution-3.gif"
               alt="Manual input flow redesign"
               className="w-full"
-              style={{ borderRadius: 28, boxShadow: '0px 12px 12px 0px rgba(0,0,0,0.12)', height: 450, objectFit: 'cover' }}
+              style={{ borderRadius: 28, boxShadow: '0px 12px 12px 0px rgba(0,0,0,0.12)', display: 'block' }}
             />
           </div>
         </section>
