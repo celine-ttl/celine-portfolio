@@ -102,7 +102,7 @@ function ArrowDiagonal() {
 
 function Pill({ text, bg = '#4A77FF', color = '#FFFFFF' }) {
   return (
-    <div style={{ ...dm, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', background: bg, color, borderRadius: 100, padding: '0 24px', fontSize: 17, fontWeight: 600, lineHeight: '27px', width: 'fit-content' }}>
+    <div style={{ ...dm, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', background: bg, color, borderRadius: 100, padding: '2px 14px', fontSize: 14, fontWeight: 600, lineHeight: '27px', letterSpacing: '0.08em', textTransform: 'uppercase', width: 'fit-content' }}>
       {text}
     </div>
   )
@@ -400,8 +400,8 @@ export default function UiForAiCaseStudy() {
         <section id="hmw" style={{ background: '#525252', padding: '80px 40px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 48 }}>
           <div className="flex flex-col gap-[24px] fade-section" style={{ width: '100%', maxWidth: 920 }}>
             {/* Pill */}
-            <div style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', background: '#4A77FF', borderRadius: 100, padding: '0 24px', width: 'fit-content' }}>
-              <span style={{ ...dm, fontSize: 17, fontWeight: 500, lineHeight: '42px', color: '#FFFFFF' }}>How might we...</span>
+            <div style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', background: '#4A77FF', borderRadius: 100, padding: '2px 14px', width: 'fit-content' }}>
+              <span style={{ ...dm, fontSize: 14, fontWeight: 600, lineHeight: '27px', letterSpacing: '0.08em', textTransform: 'uppercase', color: '#FFFFFF' }}>How might we...</span>
             </div>
             {/* Question + body side by side */}
             <div className="cs-hmw-row" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 24 }}>
@@ -474,8 +474,8 @@ export default function UiForAiCaseStudy() {
                       <p style={{ ...dm, fontSize: 14, fontWeight: 300, lineHeight: '20px', color: descColor, margin: 0 }}>{desc}</p>
                       <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginTop: 24 }}>
                         {/* Rank pill */}
-                        <div style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', background: rankBg, borderRadius: 100, padding: '0 24px', width: 'fit-content' }}>
-                          <span style={{ ...dm, fontSize: 12, fontWeight: 500, lineHeight: '20px', color: rankColor }}>{rank}</span>
+                        <div style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', background: rankBg, borderRadius: 100, padding: '2px 14px', width: 'fit-content' }}>
+                          <span style={{ ...dm, fontSize: 14, fontWeight: 600, lineHeight: '27px', letterSpacing: '0.08em', textTransform: 'uppercase', color: rankColor }}>{rank}</span>
                         </div>
                         {/* Feedback with left border */}
                         <div style={{ borderLeft: `2px solid ${borderColor}`, padding: '0 12px' }}>

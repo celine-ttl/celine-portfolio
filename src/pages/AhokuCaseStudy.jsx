@@ -88,7 +88,7 @@ function ArrowDiagonal() {
 
 function Pill({ text }) {
   return (
-    <div className="flex flex-row justify-center items-center w-fit rounded-full text-white text-[17px] font-semibold leading-[27px]" style={{ ...dm, background: '#4A77FF', padding: '0 24px' }}>
+    <div className="flex flex-row justify-center items-center w-fit rounded-full text-white text-[14px] font-semibold leading-[27px] uppercase" style={{ ...dm, background: '#4A77FF', padding: '2px 14px', letterSpacing: '0.08em' }}>
       {text}
     </div>
   )
