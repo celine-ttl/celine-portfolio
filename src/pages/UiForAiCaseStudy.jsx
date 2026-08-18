@@ -102,7 +102,7 @@ function ArrowDiagonal() {
 
 function Pill({ text, bg = '#4A77FF', color = '#FFFFFF' }) {
   return (
-    <div style={{ ...dm, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', background: bg, color, borderRadius: 100, padding: '2px 14px', fontSize: 14, fontWeight: 600, lineHeight: '27px', letterSpacing: '0.08em', textTransform: 'uppercase', width: 'fit-content' }}>
+    <div style={{ ...dm, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', background: bg, color, borderRadius: 100, padding: '2px 14px', fontSize: 12, fontWeight: 600, lineHeight: '27px', letterSpacing: '0.08em', textTransform: 'uppercase', width: 'fit-content' }}>
       {text}
     </div>
   )
@@ -110,7 +110,7 @@ function Pill({ text, bg = '#4A77FF', color = '#FFFFFF' }) {
 
 function CalloutCard({ pill, body }) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 10, borderRadius: 24, background: '#FFFFFF', padding: 24, boxShadow: '3px 3px 14px 0px rgba(0,0,0,0.06), -3px -3px 14px 0px rgba(0,0,0,0.06)' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 12, borderRadius: 24, background: '#FFFFFF', padding: 24, boxShadow: '2px 2px 10px 0px rgba(0,0,0,0.03), -2px -2px 10px 0px rgba(0,0,0,0.03)', border: '1px solid #ECEEEE' }}>
       <Pill text={pill} />
       <p style={{ ...dm, fontSize: 17, fontWeight: 600, lineHeight: '27px', color: '#000000', margin: 0 }}>{body}</p>
     </div>
@@ -401,7 +401,7 @@ export default function UiForAiCaseStudy() {
           <div className="flex flex-col gap-[24px] fade-section" style={{ width: '100%', maxWidth: 920 }}>
             {/* Pill */}
             <div style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', background: '#4A77FF', borderRadius: 100, padding: '2px 14px', width: 'fit-content' }}>
-              <span style={{ ...dm, fontSize: 14, fontWeight: 600, lineHeight: '27px', letterSpacing: '0.08em', textTransform: 'uppercase', color: '#FFFFFF' }}>How might we...</span>
+              <span style={{ ...dm, fontSize: 12, fontWeight: 600, lineHeight: '27px', letterSpacing: '0.08em', textTransform: 'uppercase', color: '#FFFFFF' }}>How might we...</span>
             </div>
             {/* Question + body side by side */}
             <div className="cs-hmw-row" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 24 }}>
@@ -475,7 +475,7 @@ export default function UiForAiCaseStudy() {
                       <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginTop: 24 }}>
                         {/* Rank pill */}
                         <div style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', background: rankBg, borderRadius: 100, padding: '2px 14px', width: 'fit-content' }}>
-                          <span style={{ ...dm, fontSize: 14, fontWeight: 600, lineHeight: '27px', letterSpacing: '0.08em', textTransform: 'uppercase', color: rankColor }}>{rank}</span>
+                          <span style={{ ...dm, fontSize: 12, fontWeight: 600, lineHeight: '27px', letterSpacing: '0.08em', textTransform: 'uppercase', color: rankColor }}>{rank}</span>
                         </div>
                         {/* Feedback with left border */}
                         <div style={{ borderLeft: `2px solid ${borderColor}`, padding: '0 12px' }}>
@@ -506,7 +506,7 @@ export default function UiForAiCaseStudy() {
             {/* Two user insight cards */}
             <div className="cs-two-col" style={{ display: 'flex', flexDirection: 'row', gap: 24, paddingBottom: 24 }}>
               {/* Everyday users */}
-              <div style={{ flex: 1, background: '#FFFFFF', borderRadius: 24, padding: '32px 24px', display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 24, boxShadow: '4px 4px 12px 0px rgba(0,0,0,0.05), -4px -4px 12px 0px rgba(0,0,0,0.05)' }}>
+              <div style={{ flex: 1, background: '#FFFFFF', borderRadius: 24, padding: '32px 24px', display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 24, boxShadow: '2px 2px 10px 0px rgba(0,0,0,0.03), -2px -2px 10px 0px rgba(0,0,0,0.03)', border: '1px solid #ECEEEE' }}>
                 <svg width="48" height="48" viewBox="0 0 24 24" fill="#4A77FF" style={{ flexShrink: 0 }}>
                   <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
                 </svg>
@@ -516,7 +516,7 @@ export default function UiForAiCaseStudy() {
                 </div>
               </div>
               {/* Power Users */}
-              <div style={{ flex: 1, background: '#FFFFFF', borderRadius: 24, padding: '32px 24px', display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 24, boxShadow: '4px 4px 12px 0px rgba(0,0,0,0.05), -4px -4px 12px 0px rgba(0,0,0,0.05)' }}>
+              <div style={{ flex: 1, background: '#FFFFFF', borderRadius: 24, padding: '32px 24px', display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 24, boxShadow: '2px 2px 10px 0px rgba(0,0,0,0.03), -2px -2px 10px 0px rgba(0,0,0,0.03)', border: '1px solid #ECEEEE' }}>
                 <svg width="48" height="48" viewBox="0 0 24 24" fill="#4A77FF" style={{ flexShrink: 0 }}>
                   <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
                   <path d="M19 3l.94 2.06L22 6l-2.06.94L19 9l-.94-2.06L16 6l2.06-.94z"/>
@@ -695,14 +695,14 @@ export default function UiForAiCaseStudy() {
               <h2 style={{ ...dm, fontSize: 28, fontWeight: 600, lineHeight: '42px', color: '#000000', margin: 0 }}>Future Directions</h2>
             </div>
             <div className="cs-two-col" style={{ display: 'flex', flexDirection: 'row', gap: 24 }}>
-              <div style={{ flex: 1, background: '#FFFFFF', borderRadius: 24, padding: 24, boxShadow: '3px 3px 14px 0px rgba(0,0,0,0.06), -3px -3px 14px 0px rgba(0,0,0,0.06)', display: 'flex', flexDirection: 'column', gap: 16 }}>
+              <div style={{ flex: 1, background: '#FFFFFF', borderRadius: 24, padding: 24, boxShadow: '2px 2px 10px 0px rgba(0,0,0,0.03), -2px -2px 10px 0px rgba(0,0,0,0.03)', border: '1px solid #ECEEEE', display: 'flex', flexDirection: 'column', gap: 12 }}>
                 <Pill text="What I'd done differently" />
                 <h4 style={{ ...dm, fontSize: 24, fontWeight: 700, color: '#000000', margin: 0, whiteSpace: 'pre-line' }}>{'Define success metrics\nup front'}</h4>
                 <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#525252', margin: 0 }}>
                   The core problem was measurable: users re-ask instead of retrieving. I'd have set a target early — reduction in re-asking, or time to find a past output — so the solution could be evaluated against the problem rather than argued for.
                 </p>
               </div>
-              <div style={{ flex: 1, background: '#FFFFFF', borderRadius: 24, padding: 24, boxShadow: '3px 3px 14px 0px rgba(0,0,0,0.06), -3px -3px 14px 0px rgba(0,0,0,0.06)', display: 'flex', flexDirection: 'column', gap: 16 }}>
+              <div style={{ flex: 1, background: '#FFFFFF', borderRadius: 24, padding: 24, boxShadow: '2px 2px 10px 0px rgba(0,0,0,0.03), -2px -2px 10px 0px rgba(0,0,0,0.03)', border: '1px solid #ECEEEE', display: 'flex', flexDirection: 'column', gap: 12 }}>
                 <Pill text="Next step" />
                 <h4 style={{ ...dm, fontSize: 24, fontWeight: 700, color: '#000000', margin: 0, whiteSpace: 'pre-line' }}>{'More on organization,\nsurfacing, versioning'}</h4>
                 <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#525252', margin: 0 }}>
