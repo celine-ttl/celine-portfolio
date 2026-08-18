@@ -110,7 +110,7 @@ function Pill({ text, bg = '#4A77FF', color = '#FFFFFF' }) {
 
 function CalloutCard({ pill, body }) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 10, borderRadius: 24, background: '#FFFFFF', padding: 24, boxShadow: '4px 4px 18px 0px rgba(0,0,0,0.1), -4px -4px 18px 0px rgba(0,0,0,0.1)' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 10, borderRadius: 24, background: '#FFFFFF', padding: 24, boxShadow: '3px 3px 14px 0px rgba(0,0,0,0.06), -3px -3px 14px 0px rgba(0,0,0,0.06)' }}>
       <Pill text={pill} />
       <p style={{ ...dm, fontSize: 17, fontWeight: 600, lineHeight: '27px', color: '#000000', margin: 0 }}>{body}</p>
     </div>
@@ -695,14 +695,14 @@ export default function UiForAiCaseStudy() {
               <h2 style={{ ...dm, fontSize: 28, fontWeight: 600, lineHeight: '42px', color: '#000000', margin: 0 }}>Future Directions</h2>
             </div>
             <div className="cs-two-col" style={{ display: 'flex', flexDirection: 'row', gap: 24 }}>
-              <div style={{ flex: 1, background: '#FFFFFF', borderRadius: 24, padding: 24, boxShadow: '4px 4px 18px rgba(0,0,0,0.1), -4px -4px 18px rgba(0,0,0,0.1)', display: 'flex', flexDirection: 'column', gap: 16 }}>
+              <div style={{ flex: 1, background: '#FFFFFF', borderRadius: 24, padding: 24, boxShadow: '3px 3px 14px 0px rgba(0,0,0,0.06), -3px -3px 14px 0px rgba(0,0,0,0.06)', display: 'flex', flexDirection: 'column', gap: 16 }}>
                 <Pill text="What I'd done differently" />
                 <h4 style={{ ...dm, fontSize: 24, fontWeight: 700, color: '#000000', margin: 0, whiteSpace: 'pre-line' }}>{'Define success metrics\nup front'}</h4>
                 <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#525252', margin: 0 }}>
                   The core problem was measurable: users re-ask instead of retrieving. I'd have set a target early — reduction in re-asking, or time to find a past output — so the solution could be evaluated against the problem rather than argued for.
                 </p>
               </div>
-              <div style={{ flex: 1, background: '#FFFFFF', borderRadius: 24, padding: 24, boxShadow: '4px 4px 18px rgba(0,0,0,0.1), -4px -4px 18px rgba(0,0,0,0.1)', display: 'flex', flexDirection: 'column', gap: 16 }}>
+              <div style={{ flex: 1, background: '#FFFFFF', borderRadius: 24, padding: 24, boxShadow: '3px 3px 14px 0px rgba(0,0,0,0.06), -3px -3px 14px 0px rgba(0,0,0,0.06)', display: 'flex', flexDirection: 'column', gap: 16 }}>
                 <Pill text="Next step" />
                 <h4 style={{ ...dm, fontSize: 24, fontWeight: 700, color: '#000000', margin: 0, whiteSpace: 'pre-line' }}>{'More on organization,\nsurfacing, versioning'}</h4>
                 <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#525252', margin: 0 }}>

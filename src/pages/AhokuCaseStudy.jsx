@@ -96,7 +96,7 @@ function Pill({ text }) {
 
 function CalloutCard({ pill, body }) {
   return (
-    <div className="flex flex-col gap-[10px] rounded-[24px] bg-white" style={{ padding: 24, boxShadow: '4px 4px 18px 0px rgba(0,0,0,0.1), -4px -4px 18px 0px rgba(0,0,0,0.1)' }}>
+    <div className="flex flex-col gap-[10px] rounded-[24px] bg-white" style={{ padding: 24, boxShadow: '3px 3px 14px 0px rgba(0,0,0,0.06), -3px -3px 14px 0px rgba(0,0,0,0.06)' }}>
       <Pill text={pill} />
       <p className="text-[17px] font-semibold leading-[27px] text-black" style={dm}>{body}</p>
     </div>
@@ -510,7 +510,7 @@ export default function AhokuCaseStudy() {
                   body2: 'The next step is understanding how they currently process health updates, and designing an alert system that surfaces critical information without becoming noise they learn to dismiss.',
                 },
               ].map(({ pill, heading, body1, body2 }) => (
-                <div key={pill} className="flex flex-col gap-[16px] bg-white rounded-[24px]" style={{ padding: 24, boxShadow: '4px 4px 18px 0px rgba(0,0,0,0.1), -4px -4px 18px 0px rgba(0,0,0,0.1)' }}>
+                <div key={pill} className="flex flex-col gap-[16px] bg-white rounded-[24px]" style={{ padding: 24, boxShadow: '3px 3px 14px 0px rgba(0,0,0,0.06), -3px -3px 14px 0px rgba(0,0,0,0.06)' }}>
                   <Pill text={pill} />
                   <h3 className="text-[24px] font-bold text-black whitespace-pre-line" style={dm}>{heading}</h3>
                   <p className="text-[17px] font-light leading-[27px] text-[#525252]" style={dm}>{body1}</p>
