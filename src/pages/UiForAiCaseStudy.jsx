@@ -318,7 +318,7 @@ export default function UiForAiCaseStudy() {
           <div className="flex flex-col gap-[24px] fade-section" style={{ width: '100%', maxWidth: 920 }}>
             <div className="flex flex-col gap-[10px]">
               <SectionLabel text="User Interviews" />
-              <h2 style={{ ...dm, fontSize: 28, fontWeight: 500, lineHeight: '42px', color: '#000000', margin: 0 }}>
+              <h2 style={{ ...dm, fontSize: 28, fontWeight: 600, lineHeight: '42px', color: '#000000', margin: 0 }}>
                 Users' struggles with the infinite scroll
               </h2>
             </div>
@@ -420,7 +420,7 @@ export default function UiForAiCaseStudy() {
           {/* Section title */}
           <div className="fade-section" style={{ width: '100%', maxWidth: 920, display: 'flex', flexDirection: 'column' }}>
             <SectionLabel text="Ideation and testing" />
-            <h2 style={{ ...dm, fontSize: 28, fontWeight: 500, lineHeight: '42px', color: '#000000', margin: 0 }}>
+            <h2 style={{ ...dm, fontSize: 28, fontWeight: 600, lineHeight: '42px', color: '#000000', margin: 0 }}>
               We tested three concepts, one clear direction emerged
             </h2>
           </div>
@@ -639,7 +639,7 @@ export default function UiForAiCaseStudy() {
           {/* Title block */}
           <div className="fade-section" style={{ width: '100%', maxWidth: 920, display: 'flex', flexDirection: 'column' }}>
             <SectionLabel text="Design Decisions Highlights" />
-            <h2 style={{ ...dm, fontSize: 28, fontWeight: 500, lineHeight: '42px', color: '#000000', margin: 0 }}>
+            <h2 style={{ ...dm, fontSize: 28, fontWeight: 600, lineHeight: '42px', color: '#000000', margin: 0 }}>
               How user behavior shaped our design decisions
             </h2>
           </div>
