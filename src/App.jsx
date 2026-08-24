@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
+import { Analytics } from '@vercel/analytics/react'
 import Home from './pages/Home'
 import AhokuCaseStudy from './pages/AhokuCaseStudy'
 import UiForAiCaseStudy from './pages/UiForAiCaseStudy'
@@ -23,6 +24,7 @@ export default function App() {
         <Route path="/about" element={<About />} />
         <Route path="/playground" element={<Playground />} />
       </Routes>
+      <Analytics />
     </BrowserRouter>
   )
 }
