@@ -308,7 +308,7 @@ export default function Home() {
               imageAlt="Amazon Music"
               title="Amazon Music"
               description="Bridging the gap between listeners and creators through a reimagined Amazon Music experience"
-              tags={['Capstone', 'Interaction Design']}
+              tags={['Capstone', 'Adaptive UI Design', 'Mobile Design']}
             />
             <WorkCard
               href="/ahoku"
