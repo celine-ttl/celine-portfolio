@@ -1,6 +1,6 @@
 import { Link, NavLink } from 'react-router-dom'
 import Nav from '../components/Nav'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 
 const dm = { fontFamily: 'DM Sans, sans-serif' }
 
@@ -14,15 +14,12 @@ const NAV_SECTIONS = [
   { id: 'reflection', label: 'Reflection' },
 ]
 
-function SideNav({ visible, active }) {
+function SideNav({ active }) {
   return (
     <div className="cs-sidenav" style={{
-      position: 'fixed', top: 100, right: 40,
+      position: 'sticky', top: 190,
       display: 'flex', flexDirection: 'column',
-      opacity: visible ? 1 : 0,
-      transform: visible ? 'translateX(0)' : 'translateX(16px)',
-      transition: 'opacity 0.4s ease, transform 0.4s ease',
-      pointerEvents: visible ? 'auto' : 'none', zIndex: 40,
+      zIndex: 40,
     }}>
       {NAV_SECTIONS.map((s) => {
         const isActive = active === s.id
@@ -124,32 +121,10 @@ function SectionLabel({ text }) {
 }
 
 export default function UiForAiCaseStudy() {
-  const [navVisible, setNavVisible] = useState(false)
   const [activeSection, setActiveSection] = useState('overview')
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 })
   const [cursorVisible, setCursorVisible] = useState(false)
   const [seriesOpen, setSeriesOpen] = useState(false)
-  const heroRef = useRef(null)
-  const nextProjectRef = useRef(null)
-  const heroInViewRef = useRef(true)
-
-  useEffect(() => {
-    const heroObs = new IntersectionObserver(
-      ([e]) => {
-        heroInViewRef.current = e.isIntersecting
-        setNavVisible(!e.isIntersecting)
-      }, { threshold: 0 }
-    )
-    const nextObs = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting) setNavVisible(false)
-        else if (!heroInViewRef.current) setNavVisible(true)
-      }, { threshold: 0 }
-    )
-    if (heroRef.current) heroObs.observe(heroRef.current)
-    if (nextProjectRef.current) nextObs.observe(nextProjectRef.current)
-    return () => { heroObs.disconnect(); nextObs.disconnect() }
-  }, [])
 
   useEffect(() => {
     const sectionMap = {
@@ -196,18 +171,22 @@ export default function UiForAiCaseStudy() {
   return (
     <>
       <style>{`
+        .fade-section {
+          margin-left: 150px;
+        }
         @media (max-width: 1200px) {
           .cs-sidenav { display: none !important; }
+          .fade-section {
+            margin-left: 0;
+          }
         }
       `}</style>
-
-      <SideNav visible={navVisible} active={activeSection} />
 
       {/* Fixed nav */}
       <Nav fixed />
 
       {/* Case study hero */}
-      <div ref={heroRef} className="cs-hero-outer" style={{ marginTop: 80, background: '#FFFFFF', display: 'flex', justifyContent: 'center', padding: 40 }}>
+      <div className="cs-hero-outer" style={{ marginTop: 80, background: '#FFFFFF', display: 'flex', justifyContent: 'center', padding: 40 }}>
         <div style={{ width: '100%', maxWidth: 1080, display: 'flex', flexDirection: 'column', gap: 32, padding: '40px 0' }}>
           {/* Top row: text + image */}
           <div className="cs-hero-row" style={{ display: 'flex', flexDirection: 'row', gap: 48, alignItems: 'stretch' }}>
@@ -253,7 +232,10 @@ export default function UiForAiCaseStudy() {
         </div>
       </div>
 
-      <main>
+      <main style={{ position: 'relative' }}>
+        <div className="cs-sidenav-col" style={{ position: 'absolute', top: 0, left: 40, height: 'calc(100% - 300px)', width: 0 }}>
+          <SideNav active={activeSection} />
+        </div>
         {/* OVERVIEW */}
         <section id="overview" className="flex flex-col items-center bg-white" style={{ padding: '60px 55px', gap: 24 }}>
           <div className="flex flex-col gap-[24px] fade-section" style={{ width: '100%', maxWidth: 920 }}>
@@ -716,7 +698,6 @@ export default function UiForAiCaseStudy() {
 
       {/* Next Project */}
       <div
-        ref={nextProjectRef}
         className="cs-next-project-outer"
         onMouseMove={e => setCursorPos({ x: e.clientX, y: e.clientY })}
         style={{ borderTop: '1px solid #E5E5E5', padding: '61px 125px 60px' }}
@@ -769,13 +750,10 @@ export default function UiForAiCaseStudy() {
 
       {/* Footer */}
       <footer className="w-full bg-[#F3F3F3]">
-        <div className="cs-footer-inner" style={{ maxWidth: 1280, margin: '0 auto', padding: '61px 125px 60px', display: 'flex', flexDirection: 'column', gap: 70 }}>
+        <div className="cs-footer-inner" style={{ padding: '61px 125px 60px', display: 'flex', flexDirection: 'column', gap: 70 }}>
           <div className="cs-footer-top" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'end' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 32 }}>
-              <div style={{ width: 235 }}>
-                <h2 style={{ ...dm, fontSize: 60, fontWeight: 800, lineHeight: '62px', color: '#000000', margin: 0 }}>Let&apos;s work together!</h2>
-              </div>
-              <img src="/images/footer-portrait-303597.png" alt="Celine portrait" style={{ width: 176, height: 185, objectFit: 'cover', flexShrink: 0 }} />
+            <div style={{ width: 235 }}>
+              <h2 style={{ ...dm, fontSize: 60, fontWeight: 800, lineHeight: '62px', color: '#000000', margin: 0 }}>Let&apos;s work together!</h2>
             </div>
             <div style={{ display: 'flex', alignItems: 'end', gap: 32 }}>
               <p style={{ ...dm, fontSize: 17, fontWeight: 400, lineHeight: '27px', color: '#2D2D2D', maxWidth: 447, margin: 0 }}>
@@ -783,6 +761,7 @@ export default function UiForAiCaseStudy() {
                 <br />Feel free to grab a virtual coffee with me via{' '}
                 <a href="mailto:celine900423lu@gmail.com" className="underline hover:opacity-70 transition-opacity">email</a>!
               </p>
+              <img src="/images/footer-portrait-303597.png" alt="Celine portrait" style={{ width: 176, height: 185, objectFit: 'cover', flexShrink: 0 }} />
             </div>
           </div>
           <div className="cs-footer-bottom" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid rgba(0,0,0,0.2)', paddingTop: 24 }}>

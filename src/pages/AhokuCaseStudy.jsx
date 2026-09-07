@@ -1,6 +1,6 @@
 import { Link, NavLink } from 'react-router-dom'
 import Nav from '../components/Nav'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 
 const dm = { fontFamily: 'DM Sans, sans-serif' }
 const ep = { fontFamily: 'Epilogue, sans-serif' }
@@ -14,61 +14,34 @@ const NAV_SECTIONS = [
   { id: 'reflection', label: 'Reflection' },
 ]
 
-function SideNav({ visible, active }) {
+function SideNav({ active }) {
   return (
-    <div
-      className="ahoku-sidenav"
-      style={{
-        position: 'fixed',
-        top: 200,
-        right: 40,
-        display: 'flex',
-        flexDirection: 'column',
-        opacity: visible ? 1 : 0,
-        transform: visible ? 'translateX(0)' : 'translateX(16px)',
-        transition: 'opacity 0.4s ease, transform 0.4s ease',
-        pointerEvents: visible ? 'auto' : 'none',
-        zIndex: 40,
-      }}
-    >
+    <div className="cs-sidenav" style={{
+      position: 'sticky', top: 190,
+      display: 'flex', flexDirection: 'column',
+      zIndex: 40,
+    }}>
       {NAV_SECTIONS.map((s) => {
         const isActive = active === s.id
         return (
-          <a
-            key={s.id}
-            href={`#${s.id}`}
+          <a key={s.id} href={`#${s.id}`}
             style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', padding: 0 }}
-            onClick={e => {
-              e.preventDefault()
-              document.getElementById(s.id)?.scrollIntoView({ behavior: 'smooth' })
-            }}
-          >
-            {/* Continuous line segment — thicker + black when active */}
+            onClick={e => { e.preventDefault(); document.getElementById(s.id)?.scrollIntoView({ behavior: 'smooth' }) }}>
             <div style={{ width: 12, display: 'flex', justifyContent: 'center', alignSelf: 'stretch', flexShrink: 0 }}>
-              <div
-                style={{
-                  width: isActive ? 3 : 1,
-                  alignSelf: 'stretch',
-                  background: isActive ? '#000000' : '#EBEBEB',
-                  transition: 'width 0.25s ease, background 0.25s ease',
-                }}
-              />
+              <div style={{
+                width: isActive ? 3 : 1, alignSelf: 'stretch',
+                background: isActive ? '#000000' : '#EBEBEB',
+                transition: 'width 0.25s ease, background 0.25s ease',
+              }} />
             </div>
-            <span
-              style={{
-                ...dm,
-                marginLeft: 10,
-                fontSize: 12,
-                lineHeight: '20px',
-                fontWeight: isActive ? 600 : 400,
-                color: isActive ? '#000000' : '#999999',
-                transition: 'color 0.25s ease, font-weight 0.25s ease',
-                whiteSpace: 'nowrap',
-                padding: '5px 0',
-                textTransform: 'uppercase',
-                letterSpacing: '0.1em',
-              }}
-            >
+            <span style={{
+              ...dm, marginLeft: 10, fontSize: 12, lineHeight: '20px',
+              fontWeight: isActive ? 600 : 400,
+              color: isActive ? '#000000' : '#999999',
+              transition: 'color 0.25s ease, font-weight 0.25s ease',
+              whiteSpace: 'nowrap', padding: '5px 0',
+              textTransform: 'uppercase', letterSpacing: '0.1em',
+            }}>
               {s.label}
             </span>
           </a>
@@ -110,27 +83,9 @@ function SectionLabel({ text }) {
 }
 
 export default function AhokuCaseStudy() {
-  const [navVisible, setNavVisible] = useState(false)
   const [activeSection, setActiveSection] = useState('context')
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 })
   const [cursorVisible, setCursorVisible] = useState(false)
-  const heroRef = useRef(null)
-  const nextProjectRef = useRef(null)
-
-  // Show side nav after hero scrolls out, hide when next project is reached
-  useEffect(() => {
-    const heroObserver = new IntersectionObserver(
-      ([entry]) => setNavVisible(!entry.isIntersecting),
-      { threshold: 0 }
-    )
-    const nextObserver = new IntersectionObserver(
-      ([entry]) => setNavVisible(!entry.isIntersecting),
-      { threshold: 0 }
-    )
-    if (heroRef.current) heroObserver.observe(heroRef.current)
-    if (nextProjectRef.current) nextObserver.observe(nextProjectRef.current)
-    return () => { heroObserver.disconnect(); nextObserver.disconnect() }
-  }, [])
 
   // Scroll-in fade animation for section content
   useEffect(() => {
@@ -179,23 +134,27 @@ export default function AhokuCaseStudy() {
   return (
     <>
       <style>{`
-        @media (max-width: 1024px) {
-          .ahoku-sidenav { display: none !important; }
+        .fade-section {
+          margin-left: 150px;
+        }
+        @media (max-width: 1200px) {
+          .cs-sidenav { display: none !important; }
+          .fade-section {
+            margin-left: 0;
+          }
         }
         @media (max-width: 768px) {
           .ahoku-hero-inner { padding: 20px 0 !important; }
           .ahoku-meta { padding: 20px 24px !important; flex-wrap: wrap !important; gap: 16px !important; }
           .ahoku-next { padding: 40px 24px !important; }
-          .ahoku-footer-inner { padding: 40px 24px !important; }
           main section { padding-left: 20px !important; padding-right: 20px !important; }
         }
       `}</style>
-      <SideNav visible={navVisible} active={activeSection} />
       {/* Fixed nav */}
       <Nav fixed />
 
       {/* Case study hero */}
-      <div ref={heroRef} className="flex justify-center" style={{ background: '#FFFFFF', padding: '40px 24px', marginTop: 80 }}>
+      <div className="flex justify-center" style={{ background: '#FFFFFF', padding: '40px 24px', marginTop: 80 }}>
         <div className="ahoku-hero-inner flex flex-col gap-[32px]" style={{ maxWidth: 1080, width: '100%', padding: '40px 0' }}>
           {/* Two-column row: text left, image right */}
           <div className="flex flex-col md:flex-row items-center" style={{ gap: 48 }}>
@@ -242,7 +201,10 @@ export default function AhokuCaseStudy() {
         </div>
       </div>
 
-      <main>
+      <main style={{ position: 'relative' }}>
+        <div className="cs-sidenav-col" style={{ position: 'absolute', top: 72, left: 40, height: 'calc(100% - 300px)', width: 0 }}>
+          <SideNav active={activeSection} />
+        </div>
         {/* CONTEXT */}
         <section id="context" className="flex flex-col items-center bg-white" style={{ position: 'relative', padding: '60px 55px', gap: 24, overflow: 'visible' }}>
           <div className="flex flex-col gap-[32px] fade-section" style={{ maxWidth: 920, width: '100%' }}>
@@ -524,7 +486,6 @@ export default function AhokuCaseStudy() {
 
       {/* Next Project */}
       <div
-        ref={nextProjectRef}
         onMouseMove={e => setCursorPos({ x: e.clientX, y: e.clientY })}
         className="ahoku-next"
         style={{ borderTop: '1px solid #E5E5E5', padding: '61px 125px 60px' }}
@@ -581,33 +542,31 @@ export default function AhokuCaseStudy() {
 
       {/* Footer */}
       <footer className="w-full bg-[#F3F3F3]">
-        <div className="ahoku-footer-inner flex flex-col" style={{ maxWidth: 1280, margin: '0 auto', padding: '70px 125px 70px', gap: 70 }}>
-          <div className="flex justify-between items-end">
-            <div style={{ width: 320 }}>
-              <h2 className="text-black text-[60px] leading-[62px]" style={{ ...dm, fontWeight: 800 }}>
-                Let&apos;s work together!
-              </h2>
+        <div className="cs-footer-inner" style={{ padding: '61px 125px 60px', display: 'flex', flexDirection: 'column', gap: 70 }}>
+          <div className="cs-footer-top" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'end' }}>
+            <div style={{ width: 235 }}>
+              <h2 style={{ ...dm, fontSize: 60, fontWeight: 800, lineHeight: '62px', color: '#000000', margin: 0 }}>Let&apos;s work together!</h2>
             </div>
-            <div className="flex items-end" style={{ gap: 32 }}>
-              <p className="text-[#2D2D2D] text-[17px] font-normal leading-[27px]" style={{ ...dm, width: 447 }}>
+            <div style={{ display: 'flex', alignItems: 'end', gap: 32 }}>
+              <p style={{ ...dm, fontSize: 17, fontWeight: 400, lineHeight: '27px', color: '#2D2D2D', maxWidth: 447, margin: 0 }}>
                 I&apos;m currently available for new work.
                 <br />Feel free to grab a virtual coffee with me via{' '}
                 <a href="mailto:celine900423lu@gmail.com" className="underline hover:opacity-70 transition-opacity">email</a>!
               </p>
-              <img src="/images/footer-portrait-303597.png" alt="Celine portrait" className="object-cover flex-shrink-0" style={{ width: 176, height: 185 }} />
+              <img src="/images/footer-portrait-303597.png" alt="Celine portrait" style={{ width: 176, height: 185, objectFit: 'cover', flexShrink: 0 }} />
             </div>
           </div>
-          <div className="flex justify-between items-center" style={{ borderTop: '1px solid rgba(0,0,0,0.2)', paddingTop: 24 }}>
-            <p className="text-[#2D2D2D] text-[17px] font-normal leading-[27px]" style={dm}>
+          <div className="cs-footer-bottom" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid rgba(0,0,0,0.2)', paddingTop: 24 }}>
+            <p style={{ ...dm, fontSize: 17, fontWeight: 400, lineHeight: '27px', color: '#2D2D2D', margin: 0 }}>
               Crafted with Cursor, Claude Code, and too much caffeine.
             </p>
-            <div className="flex items-center" style={{ gap: 38 }}>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="flex items-center hover:opacity-70 transition-opacity">
-                <span className="text-[#4A77FF] text-[17px] leading-[27px]" style={{ ...dm, fontWeight: 500 }}>Linkedin</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 38 }}>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }} className="hover:opacity-70 transition-opacity">
+                <span style={{ ...dm, fontSize: 17, fontWeight: 500, lineHeight: '27px', color: '#4A77FF' }}>Linkedin</span>
                 <ArrowDiagonal />
               </a>
-              <a href="mailto:celine900423lu@gmail.com" className="flex items-center hover:opacity-70 transition-opacity">
-                <span className="text-[#4A77FF] text-[17px] leading-[27px]" style={{ ...dm, fontWeight: 500 }}>Email</span>
+              <a href="mailto:celine900423lu@gmail.com" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }} className="hover:opacity-70 transition-opacity">
+                <span style={{ ...dm, fontSize: 17, fontWeight: 500, lineHeight: '27px', color: '#4A77FF' }}>Email</span>
                 <ArrowDiagonal />
               </a>
             </div>

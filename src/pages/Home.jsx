@@ -311,9 +311,10 @@ export default function Home() {
               tags={['Product Design', 'Healthcare']}
             />
             <WorkCard
+              href="/amazon-music"
               imageSrc="/images/work-card-3.png"
               imageAlt="Amazon Music"
-              title="Amazon Music (Coming soon)"
+              title="Amazon Music"
               description="Bridging the gap between listeners and creators through a reimagined Amazon Music experience"
               tags={['Capstone', 'Interaction Design']}
             />

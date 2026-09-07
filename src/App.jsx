@@ -4,6 +4,7 @@ import { Analytics } from '@vercel/analytics/react'
 import Home from './pages/Home'
 import AhokuCaseStudy from './pages/AhokuCaseStudy'
 import UiForAiCaseStudy from './pages/UiForAiCaseStudy'
+import AmazonMusicCaseStudy from './pages/AmazonMusicCaseStudy'
 import About from './pages/About'
 import Playground from './pages/Playground'
 
@@ -21,6 +22,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/ahoku" element={<AhokuCaseStudy />} />
         <Route path="/ui-for-ai" element={<UiForAiCaseStudy />} />
+        <Route path="/amazon-music" element={<AmazonMusicCaseStudy />} />
         <Route path="/about" element={<About />} />
         <Route path="/playground" element={<Playground />} />
       </Routes>
