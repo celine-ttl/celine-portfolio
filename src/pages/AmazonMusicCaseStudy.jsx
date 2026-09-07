@@ -1179,7 +1179,7 @@ export default function AmazonMusicCaseStudy() {
         <div className="cs-footer-inner" style={{ padding: '61px 125px 60px', display: 'flex', flexDirection: 'column', gap: 70 }}>
           <div className="cs-footer-top" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'end' }}>
             <div style={{ width: 235 }}>
-              <h2 style={{ ...dm, fontSize: 60, fontWeight: 800, lineHeight: '62px', color: '#000000', margin: 0 }}>Let&apos;s work together!</h2>
+              <h2 style={{ ...dm, fontSize: 60, fontWeight: 800, lineHeight: '62px', letterSpacing: '0.05em', color: '#000000', margin: 0 }}>Let&apos;s work together!</h2>
             </div>
             <div style={{ display: 'flex', alignItems: 'end', gap: 32 }}>
               <p style={{ ...dm, fontSize: 17, fontWeight: 400, lineHeight: '27px', color: '#2D2D2D', maxWidth: 447, margin: 0 }}>
