@@ -233,7 +233,7 @@ export default function UiForAiCaseStudy() {
       </div>
 
       <main style={{ position: 'relative' }}>
-        <div className="cs-sidenav-col" style={{ position: 'absolute', top: 0, left: 40, height: 'calc(100% - 300px)', width: 0 }}>
+        <div className="cs-sidenav-col" style={{ position: 'absolute', top: 72, left: 40, height: 'calc(100% - 300px)', width: 0 }}>
           <SideNav active={activeSection} />
         </div>
         {/* OVERVIEW */}
