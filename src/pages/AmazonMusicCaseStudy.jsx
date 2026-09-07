@@ -604,7 +604,7 @@ export default function AmazonMusicCaseStudy() {
         {/* PROBLEM */}
         <section id="problem" className="fade-section" style={{ background: '#FFFFFF', padding: '60px 55px', display: 'flex', justifyContent: 'center' }}>
           <div style={{ position: 'relative', width: '100%', maxWidth: 920, background: '#2E2E2E', borderRadius: 24, padding: '76px 80px 68px', display: 'flex', flexDirection: 'column', gap: 48, overflow: 'hidden' }}>
-            <img src="/images/amazon-music/problem-bg-decoration.svg" alt="" style={{ position: 'absolute', top: 0, left: 0, width: 1194, height: 745, pointerEvents: 'none' }} />
+            <img src="/images/amazon-music/problem-bg-decoration.svg" alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', pointerEvents: 'none' }} />
             <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', gap: 32 }}>
               <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <SectionLabel text="Problem" color="#B9C9FF" />
