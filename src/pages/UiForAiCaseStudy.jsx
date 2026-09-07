@@ -195,7 +195,7 @@ export default function UiForAiCaseStudy() {
               <h1 style={{ ...dm, fontSize: 48, fontWeight: 700, lineHeight: '60px', color: '#000000', margin: 0 }}>
                 UI for AI:<br />Conversation flow
               </h1>
-              <p style={{ ...dm, fontSize: 17, fontWeight: 400, lineHeight: '27px', color: '#2D2D2D', margin: 0 }}>
+              <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#525252', margin: 0 }}>
                 Explores how linear AI chat interfaces might better support the way people actually work — making it easier to go back, find what mattered, and build on what's already there.
               </p>
               <button
@@ -703,27 +703,29 @@ export default function UiForAiCaseStudy() {
         style={{ borderTop: '1px solid #E5E5E5', padding: '61px 125px 60px' }}
       >
         <p style={{ ...dm, fontSize: 36, fontWeight: 600, lineHeight: '42px', color: '#000000', marginBottom: 40, marginTop: 0 }}>Next Project</p>
-        <div
-          className="cs-next-project-row"
-          onMouseEnter={() => setCursorVisible(true)}
-          onMouseLeave={() => setCursorVisible(false)}
-          style={{ display: 'flex', alignItems: 'center', gap: 48 }}
-        >
-          <div className="cs-next-project-img" style={{ width: 499, height: 315, flexShrink: 0, borderRadius: 20, overflow: 'hidden', boxShadow: '4px 4px 12px rgba(0,0,0,0.12)' }}>
-            <img src="/images/ui-for-ai/next-project.png" alt="Amazon Music" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transform: 'scale(1.15)', transformOrigin: 'center center' }} />
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-            <h3 style={{ ...dm, fontSize: 24, fontWeight: 700, color: '#2D2D2D', margin: 0 }}>Amazon Music (Coming soon)</h3>
-            <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#2D2D2D', margin: 0 }}>
-              Bridging the gap between listeners and creators through a reimagined<br />Amazon Music experience
-            </p>
-            <div style={{ display: 'flex', gap: 10 }}>
-              {['Product Design', 'Interaction Design'].map(tag => (
-                <span key={tag} style={{ background: '#F3F3F3', borderRadius: 20, padding: '8px 24px', fontSize: 14, color: '#000000', fontFamily: 'Inter, sans-serif' }}>{tag}</span>
-              ))}
+        <Link to="/amazon-music" style={{ display: 'block', textDecoration: 'none' }}>
+          <div
+            className="cs-next-project-row"
+            onMouseEnter={() => setCursorVisible(true)}
+            onMouseLeave={() => setCursorVisible(false)}
+            style={{ display: 'flex', alignItems: 'center', gap: 48 }}
+          >
+            <div className="cs-next-project-img" style={{ width: 499, height: 315, flexShrink: 0, borderRadius: 20, overflow: 'hidden', boxShadow: '4px 4px 12px rgba(0,0,0,0.12)' }}>
+              <img src="/images/ui-for-ai/next-project.png" alt="Amazon Music" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transform: 'scale(1.15)', transformOrigin: 'center center' }} />
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+              <h3 style={{ ...dm, fontSize: 24, fontWeight: 700, color: '#2D2D2D', margin: 0 }}>Amazon Music</h3>
+              <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#2D2D2D', margin: 0 }}>
+                Bridging the gap between listeners and creators through a reimagined<br />Amazon Music experience
+              </p>
+              <div style={{ display: 'flex', gap: 10 }}>
+                {['Product Design', 'Interaction Design'].map(tag => (
+                  <span key={tag} style={{ background: '#F3F3F3', borderRadius: 20, padding: '8px 24px', fontSize: 14, color: '#000000', fontFamily: 'Inter, sans-serif' }}>{tag}</span>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
+        </Link>
       </div>
 
       {/* Custom cursor for next project */}
@@ -745,7 +747,7 @@ export default function UiForAiCaseStudy() {
         fontWeight: 600,
         whiteSpace: 'nowrap',
       }}>
-        Coming Soon
+        View Project
       </div>
 
       {/* Footer */}

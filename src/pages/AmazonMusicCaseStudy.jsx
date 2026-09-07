@@ -532,7 +532,7 @@ export default function AmazonMusicCaseStudy() {
               <h1 style={{ ...dm, fontSize: 52, fontWeight: 800, lineHeight: '54px', letterSpacing: '-0.0288em', color: '#101314', margin: 0 }}>
                 Adaptive UI for<br />Amazon Music
               </h1>
-              <p style={{ ...dm, fontSize: 17, fontWeight: 400, lineHeight: '27px', color: '#2D2D2D', margin: 0 }}>
+              <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#525252', margin: 0 }}>
                 Led end-to-end design on a 7-month capstone reimagining a recognition system that reshapes in app experience as a listener's relationship with an artist deepens.
               </p>
               <button

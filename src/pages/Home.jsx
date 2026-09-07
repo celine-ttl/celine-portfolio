@@ -303,20 +303,20 @@ export default function Home() {
               tags={['AI Design', 'Interaction Design']}
             />
             <WorkCard
-              href="/ahoku"
-              imageSrc="/images/work-card-1.png"
-              imageAlt="Ahoku Smart Homecare Device"
-              title="Ahoku Smart Homecare Device"
-              description="Designed digital interface of a healthcare device for elders to help track and manage health data."
-              tags={['Product Design', 'Healthcare']}
-            />
-            <WorkCard
               href="/amazon-music"
               imageSrc="/images/work-card-3.png"
               imageAlt="Amazon Music"
               title="Amazon Music"
               description="Bridging the gap between listeners and creators through a reimagined Amazon Music experience"
               tags={['Capstone', 'Interaction Design']}
+            />
+            <WorkCard
+              href="/ahoku"
+              imageSrc="/images/work-card-1.png"
+              imageAlt="Ahoku Smart Homecare Device"
+              title="Ahoku Smart Homecare Device"
+              description="Designed digital interface of a healthcare device for elders to help track and manage health data."
+              tags={['Product Design', 'Healthcare']}
             />
             <WorkCard
               imageSrc="/images/work-card-4.png"

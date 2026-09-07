@@ -161,7 +161,7 @@ export default function AhokuCaseStudy() {
             <div className="flex flex-col gap-[32px]" style={{ flex: 1 }}>
               <div className="flex flex-col gap-[16px]">
                 <h1 className="text-[48px] font-bold leading-[60px] text-black" style={dm}>ANT Health Device Redesign</h1>
-                <p className="text-[17px] font-normal leading-[27px] text-[#2D2D2D]" style={dm}>
+                <p className="text-[17px] font-light leading-[27px] text-[#525252]" style={dm}>
                   Redesigning interface for a compact health monitoring device for independent seniors: making it truly intuitive and empowering.
                 </p>
               </div>
