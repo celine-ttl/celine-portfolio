@@ -614,7 +614,7 @@ export default function AmazonMusicCaseStudy() {
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
                 <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#FFFFFF', margin: 0 }}>
-                  Streaming holds years of listening history and reflects almost none of it back. A fan with 3,200 plays sees the same interface as someone hearing the song for the first time. On the Amazon music app, loyalty exists in memory but invisible to the platform that&apos;s supposed to know you.
+                  Streaming holds years of listening history and reflects almost none of it back. A fan of 10 years sees the same interface as someone hearing the song for the first time. On the Amazon music app, loyalty exists in memory but invisible to the platform that&apos;s supposed to know you.
                 </p>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                   <div className="am-track-row" style={{ display: 'flex', gap: 24 }}>
@@ -821,7 +821,7 @@ export default function AmazonMusicCaseStudy() {
           <div style={{ width: '100%', maxWidth: 920, display: 'flex', flexDirection: 'column', gap: 24, marginTop: 16 }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               <span style={{ ...dm, fontSize: 17, fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#4A77FF' }}>
-                The structure: Three Tier System
+                How does it adapt: Three Tier System
               </span>
               <div className="am-tier-title-row" style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
                 <h3 style={{ ...dm, fontSize: 28, fontWeight: 500, lineHeight: '42px', color: '#000000', margin: 0, flex: 1, whiteSpace: 'pre-line' }}>
@@ -839,7 +839,7 @@ export default function AmazonMusicCaseStudy() {
           <div style={{ width: '100%', maxWidth: 920, display: 'flex', flexDirection: 'column', gap: 24 }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               <span style={{ ...dm, fontSize: 17, fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#4A77FF' }}>
-                Blueprint: Need Layer system
+                Why does it adapt: Need Layer system
               </span>
               <div className="am-tier-title-row" style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
                 <h3 style={{ ...dm, fontSize: 28, fontWeight: 500, lineHeight: '42px', color: '#000000', margin: 0, flex: 1, whiteSpace: 'pre-line' }}>
@@ -856,7 +856,7 @@ export default function AmazonMusicCaseStudy() {
                 caption="Belonging"
                 chips={[
                   { text: '', opacity: 0 },
-                  { text: 'I’m learning', opacity: 0.25 },
+                  { text: '', opacity: 0 },
                   { text: 'I belong here', opacity: 0.4 },
                 ]}
               />
