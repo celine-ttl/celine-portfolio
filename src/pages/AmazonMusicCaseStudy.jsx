@@ -72,8 +72,8 @@ function InfoCard({ pill, heading, body, flex, padding = '26px 24px', gap = 14 }
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap, borderRadius: 24, background: '#FFFFFF', border: '1px solid #ECEEEE', boxShadow: '0px 2px 16px 0px rgba(16,22,23,0.05)', padding, ...(flex ? { flex: 1, minWidth: 0 } : {}) }}>
       <Pill text={pill} />
-      {heading && <span style={{ ...dm, fontSize: 20, fontWeight: 500, color: '#101314' }}>{heading}</span>}
-      <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#525252', margin: 0 }}>{body}</p>
+      {heading && <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 20, fontWeight: 500, color: '#101314' }}>{heading}</span>}
+      <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', letterSpacing: '0.01em', color: '#525252', margin: 0 }}>{body}</p>
     </div>
   )
 }
@@ -112,7 +112,7 @@ function TrackCard({ label }) {
 function GifPlaceholder({ height }) {
   return (
     <div style={{ width: '100%', height, borderRadius: 24, background: '#EDEDED', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-      <span style={{ ...dm, fontSize: 14, color: '#ABABAB' }}>GIF placeholder</span>
+      <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 14, color: '#ABABAB' }}>GIF placeholder</span>
     </div>
   )
 }
@@ -122,10 +122,10 @@ function SolutionBlock({ caption, heading, body, flex, gifSrc, media }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 24, ...(flex ? { flex: 1, minWidth: 0 } : {}) }}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-          <span style={{ ...dm, fontSize: 14, fontWeight: 400, lineHeight: '22px', color: '#979797' }}>{caption}</span>
-          <span style={{ ...dm, fontSize: 24, fontWeight: 500, lineHeight: '42px', color: '#000000' }}>{heading}</span>
+          <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 14, fontWeight: 300, lineHeight: '22px', color: '#979797' }}>{caption}</span>
+          <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 24, fontWeight: 400, lineHeight: '42px', color: '#000000' }}>{heading}</span>
         </div>
-        <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#525252', margin: 0 }}>{body}</p>
+        <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', letterSpacing: '0.01em', color: '#525252', margin: 0 }}>{body}</p>
       </div>
       {media
         ? media
@@ -140,13 +140,13 @@ function ResearchCard({ caption, heading, body, highlight }) {
   return (
     <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 14, background: '#FFFFFF', border: '1px solid #ECEEEE', borderRadius: 20, boxShadow: '0px 2px 16px 0px rgba(16,22,23,0.05)', padding: '30px 24px' }}>
       <span style={{ ...dm, fontSize: 12, fontWeight: 700, letterSpacing: '0.1em', color: '#979797' }}>{caption}</span>
-      <span style={{ ...dm, fontSize: 20, fontWeight: 600, color: '#2B3433', whiteSpace: 'pre-line' }}>{heading}</span>
+      <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 20, fontWeight: 600, color: '#2B3433', whiteSpace: 'pre-line' }}>{heading}</span>
       {highlight ? (
-        <p style={{ ...dm, fontSize: 14, fontWeight: 400, lineHeight: '22px', color: '#525252', margin: 0 }}>
+        <p style={{ ...dm, letterSpacing: '0.01em', fontSize: 14, fontWeight: 400, lineHeight: '22px', color: '#525252', margin: 0 }}>
           <mark style={{ background: '#E4EAFF', color: 'inherit', borderRadius: 4, padding: '1px 4px' }}>69% said mood and context drive their taste</mark>, context gets lost at the transfer.
         </p>
       ) : (
-        <p style={{ ...dm, fontSize: 14, fontWeight: 400, lineHeight: '22px', color: '#525252', margin: 0 }}>{body}</p>
+        <p style={{ ...dm, letterSpacing: '0.01em', fontSize: 14, fontWeight: 400, lineHeight: '22px', color: '#525252', margin: 0 }}>{body}</p>
       )}
     </div>
   )
@@ -155,8 +155,8 @@ function ResearchCard({ caption, heading, body, highlight }) {
 function ChecklistItem({ text }) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-      <span style={{ ...dm, fontSize: 13.5, fontWeight: 700, color: '#B8BFBE' }}>○</span>
-      <span style={{ ...dm, fontSize: 17, fontWeight: 600, lineHeight: '27px', color: '#000000' }}>{text}</span>
+      <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 13.5, fontWeight: 700, color: '#B8BFBE' }}>○</span>
+      <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 17, fontWeight: 600, lineHeight: '27px', color: '#000000' }}>{text}</span>
     </div>
   )
 }
@@ -190,13 +190,13 @@ function ConceptCard({ number, title, body, criteria, winner, dark }) {
         )}
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 14, flex: 1 }}>
-        <span style={{ ...dm, fontSize: 18.5, fontWeight: 600, color: titleColor }}>{title}</span>
-        <p style={{ ...dm, fontSize: 14, fontWeight: 300, lineHeight: '22px', color: bodyColor, margin: 0 }}>{body}</p>
+        <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 18.5, fontWeight: 600, color: titleColor }}>{title}</span>
+        <p style={{ ...dm, letterSpacing: '0.01em', fontSize: 14, fontWeight: 300, lineHeight: '22px', color: bodyColor, margin: 0 }}>{body}</p>
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 9, paddingTop: 20, borderTop: `1px solid ${dividerColor}` }}>
         {criteria.map(({ label, state, symbolColor }) => (
           <div key={label} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ ...dm, fontSize: 13.5, color: labelColor }}>{label}</span>
+            <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 13.5, color: labelColor }}>{label}</span>
             <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 20, height: 20, flexShrink: 0 }}>
               <ScoreDot state={state} color={symbolColor} />
             </span>
@@ -211,13 +211,13 @@ function NeedRow({ label, caption, chips }) {
   return (
     <div style={{ display: 'flex', alignItems: 'stretch', justifyContent: 'space-between', gap: 24, paddingBottom: 12 }}>
       <div style={{ width: 112, flexShrink: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 4 }}>
-        <span style={{ ...dm, fontSize: 17, fontWeight: 600, color: '#525252' }}>{label}</span>
-        <span style={{ ...dm, fontSize: 14, fontWeight: 300, lineHeight: '22px', color: '#525252' }}>{caption}</span>
+        <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 17, fontWeight: 600, color: '#525252' }}>{label}</span>
+        <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 14, fontWeight: 300, lineHeight: '22px', color: '#525252' }}>{caption}</span>
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: 16, flex: 1 }}>
         {chips.map((chip, i) => (
           <div key={i} style={{ flex: 1, textAlign: 'center', padding: '20px 12px', borderRadius: 8, background: `rgba(74,119,255,${chip.opacity})` }}>
-            {chip.text && <span style={{ ...dm, fontSize: 14, fontWeight: 600, color: '#525252' }}>{chip.text}</span>}
+            {chip.text && <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 14, fontWeight: 600, color: '#525252' }}>{chip.text}</span>}
           </div>
         ))}
       </div>
@@ -236,7 +236,7 @@ function MockupBlock({ text, variant }) {
   const s = MOCKUP_BLOCK_STYLES[variant]
   return (
     <div style={{ display: 'flex', padding: '7px 8px', flexDirection: 'column', alignItems: 'center', alignSelf: 'stretch', background: s.bg, borderRadius: 6 }}>
-      <span style={{ ...dm, fontSize: 9, lineHeight: '11.7px', fontWeight: s.weight, color: s.color }}>{text}</span>
+      <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 9, lineHeight: '11.7px', fontWeight: s.weight, color: s.color }}>{text}</span>
     </div>
   )
 }
@@ -305,11 +305,11 @@ function TierMockup({ label, blocks, active, onClick }) {
         }}
       >
         <div style={{ background: '#000000', borderRadius: 8, padding: '11px 8px', textAlign: 'center', marginBottom: 2 }}>
-          <span style={{ ...dm, fontSize: 9.5, fontWeight: 600, color: '#FFFFFF' }}>Header</span>
+          <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 9.5, fontWeight: 600, color: '#FFFFFF' }}>Header</span>
         </div>
         {blocks.map((b, i) => <MockupBlock key={i} {...b} />)}
         <div style={{ background: '#000000', borderRadius: 8, padding: '11px 8px', textAlign: 'center', marginTop: 2 }}>
-          <span style={{ ...dm, fontSize: 9.5, fontWeight: 300, color: '#9A9A9A' }}>Nav bar</span>
+          <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 9.5, fontWeight: 300, color: '#9A9A9A' }}>Nav bar</span>
         </div>
       </button>
     </div>
@@ -320,14 +320,14 @@ function RuleLegend({ label, top, bottom }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6, width: 80, flexShrink: 0, alignSelf: 'stretch' }}>
       <span style={{ ...dm, fontSize: 12, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#979797' }}>{label}</span>
-      <span style={{ ...dm, fontSize: 14, fontWeight: 500, color: '#4A77FF' }}>{top}</span>
+      <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 14, fontWeight: 500, color: '#4A77FF' }}>{top}</span>
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flex: 1 }}>
         <div style={{ width: 0, flex: 1, borderLeft: '1px solid #4A77FF' }} />
         <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M1 1L6 6L11 1" stroke="#4A77FF" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </div>
-      <span style={{ ...dm, fontSize: 14, fontWeight: 500, color: '#4A77FF' }}>{bottom}</span>
+      <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 14, fontWeight: 500, color: '#4A77FF' }}>{bottom}</span>
     </div>
   )
 }
@@ -368,7 +368,7 @@ function RationalePanel({ data }) {
   if (!data) {
     return (
       <div style={{ width: '100%', background: '#F4F7F7', borderRadius: 24, padding: 40, display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: 200 }}>
-        <span style={{ ...dm, fontSize: 14, color: '#ABABAB' }}>Rationale content coming soon</span>
+        <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 14, color: '#ABABAB' }}>Rationale content coming soon</span>
       </div>
     )
   }
@@ -376,24 +376,24 @@ function RationalePanel({ data }) {
     <div style={{ width: '100%', background: '#F4F7F7', borderRadius: 24, padding: 40, display: 'flex', flexDirection: 'column', gap: 10, animation: 'fadeInUp 0.4s ease-out both' }}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
         <span style={{ ...dm, fontSize: 14, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#D998AD' }}>{data.eyebrow}</span>
-        <span style={{ ...dm, fontSize: 24, fontWeight: 400, color: '#000000', whiteSpace: 'pre-line' }}>{data.heading}</span>
-        <p style={{ ...dm, fontSize: 14, fontWeight: 300, lineHeight: '22px', color: '#525252', margin: 0 }}>{data.body}</p>
+        <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 24, fontWeight: 400, color: '#000000', whiteSpace: 'pre-line' }}>{data.heading}</span>
+        <p style={{ ...dm, letterSpacing: '0.01em', fontSize: 14, fontWeight: 300, lineHeight: '22px', color: '#525252', margin: 0 }}>{data.body}</p>
       </div>
       <div className="am-decision1-blocks" style={{ display: 'flex', justifyContent: 'center', gap: 36, padding: '24px 0' }}>
         {data.blocks.map((b, i) => (
           <div key={i} style={{ display: 'flex', flexDirection: 'column', gap: 18, flex: 1, minWidth: 0 }}>
             <img src={b.image} alt={b.title} style={{ width: '100%', height: 297, objectFit: 'cover', borderRadius: 24, display: 'block' }} />
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-              <span style={{ ...dm, fontSize: 17, fontWeight: 500, color: '#000000' }}>{b.title}</span>
-              <span style={{ ...dm, fontSize: 14, fontWeight: 300, lineHeight: '22px', color: '#525252' }}>{b.caption}</span>
+              <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 17, fontWeight: 500, color: '#000000' }}>{b.title}</span>
+              <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 14, fontWeight: 300, lineHeight: '22px', color: '#525252' }}>{b.caption}</span>
             </div>
           </div>
         ))}
       </div>
       {data.stat && (
         <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', gap: 12, paddingTop: 18, borderTop: '1px solid #D9D9D9' }}>
-          <span style={{ ...dm, fontSize: 32, fontWeight: 500, lineHeight: '32px', color: '#4A77FF', flexShrink: 0 }}>{data.stat.value}</span>
-          <span style={{ ...dm, fontSize: 14, fontWeight: 300, lineHeight: '22px', color: '#525252' }}>{data.stat.caption}</span>
+          <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 32, fontWeight: 500, lineHeight: '32px', color: '#4A77FF', flexShrink: 0 }}>{data.stat.value}</span>
+          <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 14, fontWeight: 300, lineHeight: '22px', color: '#525252' }}>{data.stat.caption}</span>
         </div>
       )}
     </div>
@@ -403,7 +403,7 @@ function RationalePanel({ data }) {
 function CycleNode({ number, top, left }) {
   return (
     <div style={{ position: 'absolute', top, left, transform: 'translate(-50%, -50%)', width: 42, height: 42, borderRadius: '50%', background: '#FFFFFF', border: '1px solid #C6D4FF', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <span style={{ ...dm, fontSize: 17, fontWeight: 600, color: '#4A77FF' }}>{number}</span>
+      <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 17, fontWeight: 600, color: '#4A77FF' }}>{number}</span>
     </div>
   )
 }
@@ -412,11 +412,11 @@ function StepItem({ number, title, caption }) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
       <div style={{ width: 34, height: 34, borderRadius: '50%', background: '#FFFFFF', border: '1px solid #C6D4FF', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-        <span style={{ ...dm, fontSize: 14, fontWeight: 600, color: '#4A77FF' }}>{number}</span>
+        <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 14, fontWeight: 600, color: '#4A77FF' }}>{number}</span>
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-        <span style={{ ...dm, fontSize: 17, fontWeight: 600, lineHeight: '22px', color: '#525252' }}>{title}</span>
-        <span style={{ ...dm, fontSize: 14, fontWeight: 300, lineHeight: '22px', color: '#6C7675' }}>{caption}</span>
+        <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 17, fontWeight: 600, lineHeight: '22px', color: '#525252' }}>{title}</span>
+        <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 14, fontWeight: 300, lineHeight: '22px', color: '#6C7675' }}>{caption}</span>
       </div>
     </div>
   )
@@ -532,13 +532,13 @@ export default function AmazonMusicCaseStudy() {
               <h1 style={{ ...dm, fontSize: 52, fontWeight: 800, lineHeight: '54px', letterSpacing: '-0.0288em', color: '#101314', margin: 0 }}>
                 Adaptive UI for<br />Amazon Music
               </h1>
-              <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#525252', margin: 0 }}>
+              <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', letterSpacing: '0.01em', color: '#525252', margin: 0 }}>
                 Led end-to-end design on a 7-month capstone reimagining a recognition system that reshapes in app experience as a listener's relationship with an artist deepens.
               </p>
               <button
                 onClick={() => document.getElementById('solution-01')?.scrollIntoView({ behavior: 'smooth' })}
                 className="jump-btn"
-                style={{ ...dm, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', background: '#525252', borderRadius: 100, padding: '0 24px', width: 'fit-content', cursor: 'pointer', border: 'none', fontSize: 17, fontWeight: 600, lineHeight: '42px', color: '#FFFFFF', boxShadow: '4px 4px 12px 0px rgba(0,0,0,0.05), -4px -4px 12px 0px rgba(0,0,0,0.05)' }}
+                style={{ ...dm, letterSpacing: '0.01em', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', background: '#525252', borderRadius: 100, padding: '0 24px', width: 'fit-content', cursor: 'pointer', border: 'none', fontSize: 17, fontWeight: 600, lineHeight: '42px', color: '#FFFFFF', boxShadow: '4px 4px 12px 0px rgba(0,0,0,0.05), -4px -4px 12px 0px rgba(0,0,0,0.05)' }}
               >
                 Jump to solution
               </button>
@@ -560,7 +560,7 @@ export default function AmazonMusicCaseStudy() {
                 <span style={{ ...dm, fontSize: 14, fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.05em', lineHeight: '21px', color: '#4A77FF' }}>{label}</span>
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                   {values.map(v => (
-                    <span key={v} style={{ ...dm, fontSize: 17, fontWeight: 400, lineHeight: '27px', color: '#2D2D2D' }}>{v}</span>
+                    <span key={v} style={{ ...dm, letterSpacing: '0.01em', fontSize: 17, fontWeight: 400, lineHeight: '27px', color: '#2D2D2D' }}>{v}</span>
                   ))}
                 </div>
               </div>
@@ -582,12 +582,12 @@ export default function AmazonMusicCaseStudy() {
             </h2>
           </div>
           <div style={{ width: '100%', maxWidth: 920, display: 'flex', flexDirection: 'column', gap: 24 }}>
-            <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#525252', margin: 0 }}>
+            <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', letterSpacing: '0.01em', color: '#525252', margin: 0 }}>
               By 2026, distribution of content had stopped being the differentiator for music streaming platforms. The market had matured past &quot;does it have the song&quot; into &quot;does it understand me.&quot; Users and creators want more than just playback.
             </p>
             <img src="/images/amazon-music/context-timeline.png" alt="Timeline: Retail Foundation, Alexa & Echo, HD Lossless / 100M+ Catalog, Distribution: Solved. The remaining gap: it's human, not technical." style={{ width: '100%', display: 'block' }} />
             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 24 }}>
-              <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#525252', margin: 0, flex: 1 }}>
+              <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', letterSpacing: '0.01em', color: '#525252', margin: 0, flex: 1 }}>
                 In our MHCI capstone project at Carnegie Mellon, Amazon Music brought us a challenge:{' '}
                 <strong style={{ fontWeight: 600, color: '#000000' }}>evolve the platform from consumption-centric to an ecosystem that fosters real intimacy between creators and listeners</strong>.
               </p>
@@ -604,16 +604,15 @@ export default function AmazonMusicCaseStudy() {
         {/* PROBLEM */}
         <section id="problem" className="fade-section" style={{ background: '#FFFFFF', padding: '60px 55px', display: 'flex', justifyContent: 'center' }}>
           <div style={{ position: 'relative', width: '100%', maxWidth: 920, background: '#2E2E2E', borderRadius: 24, padding: '76px 80px 68px', display: 'flex', flexDirection: 'column', gap: 48, overflow: 'hidden' }}>
-            <img src="/images/amazon-music/problem-bg-decoration.svg" alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', pointerEvents: 'none' }} />
             <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', gap: 32 }}>
               <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <SectionLabel text="Problem" color="#B9C9FF" />
-                <h2 style={{ ...dm, fontSize: 36, fontWeight: 500, lineHeight: '1.2em', color: '#FFFFFF', margin: 0, whiteSpace: 'pre-line' }}>
+                <h2 style={{ ...dm, letterSpacing: '0.01em', fontSize: 36, fontWeight: 500, lineHeight: '1.2em', color: '#FFFFFF', margin: 0, whiteSpace: 'pre-line' }}>
                   {"You've heard this song 3,200 times.\nThe app still treats you like you just met."}
                 </h2>
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-                <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#FFFFFF', margin: 0 }}>
+                <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', letterSpacing: '0.01em', color: '#FFFFFF', margin: 0 }}>
                   Streaming holds years of listening history and reflects almost none of it back. A fan of 10 years sees the same interface as someone hearing the song for the first time. On the Amazon music app, loyalty exists in memory but invisible to the platform that&apos;s supposed to know you.
                 </p>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
@@ -621,13 +620,13 @@ export default function AmazonMusicCaseStudy() {
                     <TrackCard label="First Listen • Today" />
                     <TrackCard label="3,200 Plays • 10 Years" />
                   </div>
-                  <p style={{ ...dm, fontSize: 15.5, color: '#B4B4B4', textAlign: 'center', margin: 0 }}>
+                  <p style={{ ...dm, letterSpacing: '0.01em', fontSize: 15.5, color: '#B4B4B4', textAlign: 'center', margin: 0 }}>
                     Same layout, same modules, same order, regardless of ten years of listening history.
                   </p>
                 </div>
               </div>
             </div>
-            <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#FFFFFF', margin: 0, position: 'relative' }}>
+            <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', letterSpacing: '0.01em', color: '#FFFFFF', margin: 0, position: 'relative' }}>
               We didn&apos;t know yet if this was a narrow interface gap, or a symptom of the bigger thing Amazon Music had asked us to find:{' '}
               <strong style={{ fontWeight: 600, color: '#FFFFFF' }}>what real intimacy between creators and listeners would require</strong>.
             </p>
@@ -638,7 +637,7 @@ export default function AmazonMusicCaseStudy() {
         <section id="solution" className="fade-section" style={{ background: '#FFFFFF', padding: '60px 55px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 32 }}>
           <div style={{ width: '100%', maxWidth: 920 }}>
             <SectionLabel text="Solution highlights" />
-            <h2 style={{ ...dm, fontSize: 36, fontWeight: 500, lineHeight: '1.2em', letterSpacing: '0.015em', color: '#000000', margin: 0 }}>
+            <h2 style={{ ...dm, fontSize: 36, fontWeight: 500, lineHeight: '120%', letterSpacing: '0.05em', color: '#000000', margin: 0 }}>
               The same page adapts across three tiers, changing what&apos;s shown as recognition builds.
             </h2>
           </div>
@@ -664,14 +663,14 @@ export default function AmazonMusicCaseStudy() {
                 caption="Recognized over time"
                 heading="Guiding recognition, not just content"
                 body="From an artist a listener just met, to a following, to a superfan the platform has actually noticed."
-                gifSrc="/images/amazon-music/solution-2.gif"
+                gifSrc="/images/amazon-music/solution-3.gif"
               />
               <SolutionBlock
                 flex
                 caption="A tab that has to be earned"
                 heading="Turning history into a relationship"
-                body="You & Artist doesn't exist for new listeners. By superfan, it's a full timeline of the relationship, not the catalog."
-                gifSrc="/images/amazon-music/solution-3.gif"
+                body="You & Artist doesn't exist for new listeners. By superfan, it's a full timeline of the relationship."
+                gifSrc="/images/amazon-music/solution-2.gif"
               />
             </div>
           </div>
@@ -686,7 +685,7 @@ export default function AmazonMusicCaseStudy() {
             </h2>
           </div>
           <div style={{ width: '100%', maxWidth: 920, display: 'flex', flexDirection: 'column', gap: 24 }}>
-            <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#525252', margin: 0 }}>
+            <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', letterSpacing: '0.01em', color: '#525252', margin: 0 }}>
               We spent 15 weeks to run three research methods in parallel to find what&apos;s missing. By using affinity diagramming to synthesize the results, the findings converged into a main insight and a constraint.
             </p>
             <div className="am-research-row" style={{ display: 'flex', gap: 22 }}>
@@ -711,18 +710,18 @@ export default function AmazonMusicCaseStudy() {
               <div style={{ width: 292, flexShrink: 0, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: 16, background: '#EFF3FF', border: '1px solid #D5DEFF', borderRadius: 20, padding: '30px 27px' }}>
                 <span style={{ ...dm, fontSize: 12, fontWeight: 700, letterSpacing: '0.115em', color: '#2F55CC', textAlign: 'center' }}>CONSTRAINT</span>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                  <span style={{ ...dm, fontSize: 20, fontWeight: 600, color: '#101314', textAlign: 'center' }}>Never performed for other people.</span>
-                  <span style={{ ...dm, fontSize: 14, fontWeight: 400, lineHeight: '22px', color: '#55605F', textAlign: 'center', whiteSpace: 'pre-line' }}>
+                  <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 20, fontWeight: 600, color: '#101314', textAlign: 'center' }}>Never performed for other people.</span>
+                  <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 14, fontWeight: 400, lineHeight: '22px', color: '#55605F', textAlign: 'center', whiteSpace: 'pre-line' }}>
                     {'Recognition can’t\ncome from exposure.'}
                   </span>
                 </div>
               </div>
               <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 12, justifyContent: 'center', background: '#525252', borderRadius: 20, padding: '30px 34px' }}>
                 <span style={{ ...dm, fontSize: 12, fontWeight: 700, letterSpacing: '0.115em', color: '#B9C9FF', textAlign: 'center' }}>THE GAP TO CLOSE</span>
-                <span style={{ ...dm, fontSize: 20, fontWeight: 600, color: '#FFFFFF', textAlign: 'center', whiteSpace: 'pre-line' }}>
+                <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 20, fontWeight: 600, color: '#FFFFFF', textAlign: 'center', whiteSpace: 'pre-line' }}>
                   {'Not better recommendations or a missing feature. \nThe platform never captured\nwhat actually mattered.'}
                 </span>
-                <span style={{ ...dm, fontSize: 14, fontWeight: 400, lineHeight: '22px', color: '#DCDCDC', textAlign: 'center' }}>
+                <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 14, fontWeight: 400, lineHeight: '22px', color: '#DCDCDC', textAlign: 'center' }}>
                   A fan&apos;s history, a creator&apos;s trust isn&apos;t reflected on the platform.
                 </span>
               </div>
@@ -738,7 +737,7 @@ export default function AmazonMusicCaseStudy() {
                 Choosing a direction
               </h2>
               <div className="am-direction-intro" style={{ display: 'flex', gap: 24, alignItems: 'center' }}>
-                <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#525252', margin: 0, flex: 1 }}>
+                <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', letterSpacing: '0.01em', color: '#525252', margin: 0, flex: 1 }}>
                   Knowing where connection belonged didn&apos;t tell us how to build it. We carried three directions forward and scored each against the same three questions:
                 </p>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 4, flex: 1 }}>
@@ -812,22 +811,22 @@ export default function AmazonMusicCaseStudy() {
             <h2 style={{ ...dm, fontSize: 42, fontWeight: 500, lineHeight: '1.2em', letterSpacing: '0.05em', color: '#000000', margin: 0 }}>
               The catalog stays the same. The interface changes based on how well it knows you.
             </h2>
-            <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#525252', margin: 0 }}>
+            <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', letterSpacing: '0.01em', color: '#525252', margin: 0 }}>
               We designed an <strong style={{ fontWeight: 500, color: '#000000' }}>adaptive UI</strong> for the Amazon Music app, a system that reads a listener&apos;s relationship with one artist and adapts the page as it grows.
             </p>
           </div>
 
           {/* Three Tier System */}
-          <div style={{ width: '100%', maxWidth: 920, display: 'flex', flexDirection: 'column', gap: 24, marginTop: 16 }}>
+          <div style={{ width: '100%', maxWidth: 920, display: 'flex', flexDirection: 'column', gap: 24, marginTop: 32 }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               <span style={{ ...dm, fontSize: 17, fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#4A77FF' }}>
                 How does it adapt: Three Tier System
               </span>
               <div className="am-tier-title-row" style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
-                <h3 style={{ ...dm, fontSize: 28, fontWeight: 500, lineHeight: '42px', color: '#000000', margin: 0, flex: 1, whiteSpace: 'pre-line' }}>
+                <h3 style={{ ...dm, letterSpacing: '0.01em', fontSize: 28, fontWeight: 500, lineHeight: '42px', color: '#000000', margin: 0, flex: 1, whiteSpace: 'pre-line' }}>
                   {'Three tiers are determined\nby user behavior, per artist.'}
                 </h3>
-                <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#525252', margin: 0, flex: 1 }}>
+                <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', letterSpacing: '0.01em', color: '#525252', margin: 0, flex: 1 }}>
                   We chose three because an adaptive interface only works if it stays familiar between adaptations, and three was the fewest that still mapped the need layers.
                 </p>
               </div>
@@ -836,16 +835,16 @@ export default function AmazonMusicCaseStudy() {
           </div>
 
           {/* Need Layer System */}
-          <div style={{ width: '100%', maxWidth: 920, display: 'flex', flexDirection: 'column', gap: 24 }}>
+          <div style={{ width: '100%', maxWidth: 920, display: 'flex', flexDirection: 'column', gap: 24, marginTop: 16 }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               <span style={{ ...dm, fontSize: 17, fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#4A77FF' }}>
                 Why does it adapt: Need Layer system
               </span>
               <div className="am-tier-title-row" style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
-                <h3 style={{ ...dm, fontSize: 28, fontWeight: 500, lineHeight: '42px', color: '#000000', margin: 0, flex: 1, whiteSpace: 'pre-line' }}>
+                <h3 style={{ ...dm, letterSpacing: '0.01em', fontSize: 28, fontWeight: 500, lineHeight: '42px', color: '#000000', margin: 0, flex: 1, whiteSpace: 'pre-line' }}>
                   {'User needs are layered \ninstead of scattered.'}
                 </h3>
-                <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#525252', margin: 0, flex: 1 }}>
+                <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', letterSpacing: '0.01em', color: '#525252', margin: 0, flex: 1 }}>
                   Research surfaced three layers of needs from the users, functional comes first, identity second, and social last.
                 </p>
               </div>
@@ -879,10 +878,10 @@ export default function AmazonMusicCaseStudy() {
                 ]}
               />
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 42, paddingTop: 16, borderTop: '1px solid #D9D9D9' }}>
-                <span style={{ ...dm, fontSize: 17, fontWeight: 600, color: '#525252', width: 104, flexShrink: 0 }}>Three Tiers</span>
+                <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 17, fontWeight: 600, color: '#525252', width: 104, flexShrink: 0 }}>Three Tiers</span>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 24, flex: 1 }}>
                   {['New Listener', 'Engaged', 'Superfan'].map(t => (
-                    <span key={t} style={{ ...dm, fontSize: 17, fontWeight: 600, textTransform: 'uppercase', color: '#000000', textAlign: 'center', flex: 1 }}>{t}</span>
+                    <span key={t} style={{ ...dm, letterSpacing: '0.01em', fontSize: 17, fontWeight: 600, textTransform: 'uppercase', color: '#000000', textAlign: 'center', flex: 1 }}>{t}</span>
                   ))}
                 </div>
               </div>
@@ -898,17 +897,17 @@ export default function AmazonMusicCaseStudy() {
           <div style={{ width: '100%', maxWidth: 920, display: 'flex', flexDirection: 'column', gap: 24 }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               <Pill text="01  Functional" />
-              <h3 style={{ ...dm, fontSize: 28, fontWeight: 500, lineHeight: '42px', color: '#000000', margin: 0 }}>
+              <h3 style={{ ...dm, letterSpacing: '0.01em', fontSize: 28, fontWeight: 500, lineHeight: '42px', color: '#000000', margin: 0 }}>
                 Content leads with the general, then flips to personal
               </h3>
-              <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#525252', margin: 0 }}>
+              <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', letterSpacing: '0.01em', color: '#525252', margin: 0 }}>
                 The more the system knows about users&apos; taste in this artist, the more it assumes. No data means no assumptions, meaning prioritizing general content first. Rich data means personalized leads.
               </p>
             </div>
 
             {/* Interactive architecture diagram */}
             <div style={{ width: '100%', marginTop: 8 }}>
-              <p style={{ ...dm, fontSize: 17, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#979797', margin: '0 0 32px' }}>
+              <p style={{ ...dm, fontSize: 14, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#979797', margin: '0 0 32px' }}>
                 Artist profile Architecture Across Three Tiers
               </p>
               <div className="am-decision1-diagram-row" style={{ display: 'flex', alignItems: 'stretch', gap: 24 }}>
@@ -926,7 +925,7 @@ export default function AmazonMusicCaseStudy() {
                 ))}
                 <RuleLegend label="Rule flip" top="Personalized" bottom="General" />
               </div>
-              <p style={{ ...dm, fontSize: 14, fontWeight: 300, color: '#979797', textAlign: 'right', margin: 0, padding: '12px 0', borderTop: '1px solid #F0F2F2', marginTop: 24 }}>
+              <p style={{ ...dm, letterSpacing: '0.01em', fontSize: 14, fontWeight: 300, color: '#979797', textAlign: 'right', margin: 0, padding: '12px 0', borderTop: '1px solid #F0F2F2', marginTop: 24 }}>
                 Click a tier to see its detailed rationale below.
               </p>
             </div>
@@ -940,10 +939,10 @@ export default function AmazonMusicCaseStudy() {
           <div style={{ width: '100%', maxWidth: 920, display: 'flex', flexDirection: 'column', gap: 24 }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               <Pill text="02  Identity" />
-              <h3 style={{ ...dm, fontSize: 28, fontWeight: 500, lineHeight: '42px', color: '#000000', margin: 0 }}>
+              <h3 style={{ ...dm, letterSpacing: '0.01em', fontSize: 28, fontWeight: 500, lineHeight: '42px', color: '#000000', margin: 0 }}>
                 The header is the first point of recognition
               </h3>
-              <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#525252', margin: 0 }}>
+              <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', letterSpacing: '0.01em', color: '#525252', margin: 0 }}>
                 As a listener&apos;s relationship with an artist deepens, the header itself evolves to recognize the connection.
               </p>
             </div>
@@ -953,13 +952,13 @@ export default function AmazonMusicCaseStudy() {
             <div style={{ width: '100%', background: '#FFFFFF', borderRadius: 24, padding: '12px 24px 24px', display: 'flex', gap: 10 }}>
               <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 12, flex: 1, minWidth: 0 }}>
                 <span style={{ ...dm, fontSize: 48, fontWeight: 500, lineHeight: '42px', letterSpacing: '0.05em', color: '#4A77FF', flexShrink: 0 }}>5/5</span>
-                <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#525252', margin: 0 }}>
+                <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', letterSpacing: '0.01em', color: '#525252', margin: 0 }}>
                   testing participants named this the first thing that made them feel recognized
                 </p>
               </div>
               <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 12, flex: 1, minWidth: 0 }}>
                 <img src="/images/amazon-music/icon-quote.svg" alt="" width={50} height={50} style={{ flexShrink: 0 }} />
-                <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#525252', fontStyle: 'italic', margin: 0 }}>
+                <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', letterSpacing: '0.01em', color: '#525252', fontStyle: 'italic', margin: 0 }}>
                   Seeing our photos together made me feel close to this artist, like it&apos;s mutual, not one-directional.— P5
                 </p>
               </div>
@@ -972,10 +971,10 @@ export default function AmazonMusicCaseStudy() {
           <div style={{ width: '100%', maxWidth: 920, display: 'flex', flexDirection: 'column', gap: 24 }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               <Pill text="03  Belonging" />
-              <h3 style={{ ...dm, fontSize: 28, fontWeight: 500, lineHeight: '42px', color: '#000000', margin: 0 }}>
+              <h3 style={{ ...dm, letterSpacing: '0.01em', fontSize: 28, fontWeight: 500, lineHeight: '42px', color: '#000000', margin: 0 }}>
                 The tab doesn&apos;t exist until there&apos;s a relationship to reflect
               </h3>
-              <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#525252', margin: 0 }}>
+              <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', letterSpacing: '0.01em', color: '#525252', margin: 0 }}>
                 For superfans, artists are woven into memory, not just listening habits. The page reorganizes into eras of users&apos; journey rather than artists&apos; release. It stops being a page about the artist, but about what the artists mean to them.
               </p>
             </div>
@@ -985,13 +984,13 @@ export default function AmazonMusicCaseStudy() {
             <div style={{ width: '100%', background: '#FFFFFF', borderRadius: 24, padding: '12px 24px 24px', display: 'flex', gap: 10 }}>
               <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 12, flex: 1, minWidth: 0 }}>
                 <span style={{ ...dm, fontSize: 48, fontWeight: 500, lineHeight: '42px', letterSpacing: '0.05em', color: '#4A77FF', flexShrink: 0 }}>96%</span>
-                <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#525252', margin: 0 }}>
+                <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', letterSpacing: '0.01em', color: '#525252', margin: 0 }}>
                   of survey respondents said they connect to music through mood, memory, or a part of themselves
                 </p>
               </div>
               <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 12, flex: 1, minWidth: 0 }}>
                 <img src="/images/amazon-music/icon-quote.svg" alt="" width={47} height={47} style={{ flexShrink: 0 }} />
-                <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#525252', fontStyle: 'italic', margin: 0 }}>
+                <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', letterSpacing: '0.01em', color: '#525252', fontStyle: 'italic', margin: 0 }}>
                   I like how it feels like it&apos;s no longer just me viewing the profile, it&apos;s the journey we built together. — P4
                 </p>
               </div>
@@ -1014,7 +1013,7 @@ export default function AmazonMusicCaseStudy() {
               <div style={{ position: 'relative', width: '100%', maxWidth: 300, aspectRatio: '1 / 1' }}>
                 <img src="/images/amazon-music/why-this-works-circle-bg.svg" alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }} />
                 <div style={{ position: 'absolute', top: '28%', left: '28%', width: '44%', height: '44%', borderRadius: '50%', background: '#EFF3FF', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: 8 }}>
-                  <span style={{ ...dm, fontSize: 13.5, fontWeight: 700, lineHeight: '18.23px', color: '#525252', whiteSpace: 'pre-line' }}>{'Adaptive\nRecognition'}</span>
+                  <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 13.5, fontWeight: 700, lineHeight: '18.23px', color: '#525252', whiteSpace: 'pre-line' }}>{'Adaptive\nRecognition'}</span>
                 </div>
                 <CycleNode number="1" top="10%" left="50%" />
                 <CycleNode number="2" top="37.64%" left="88.04%" />
@@ -1033,7 +1032,7 @@ export default function AmazonMusicCaseStudy() {
               <StepItem number="5" title="Strengthen loyalty" caption="Continued listening creates richer signals for future recognition." />
               <div style={{ display: 'flex', alignItems: 'center', gap: 12, paddingTop: 20, marginTop: 6, borderTop: '1px solid #E4E7E7' }}>
                 <img src="/images/amazon-music/icon-heart-solid.svg" alt="" width={28} height={26} style={{ flexShrink: 0 }} />
-                <span style={{ ...dm, fontSize: 17, fontWeight: 700, color: '#4A77FF' }}>Start with superfans.<br />Compound across the listener base.</span>
+                <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 17, fontWeight: 700, color: '#4A77FF' }}>Start with superfans.<br />Compound across the listener base.</span>
               </div>
             </div>
           </div>
@@ -1049,7 +1048,7 @@ export default function AmazonMusicCaseStudy() {
           </div>
 
           <div style={{ width: '100%', maxWidth: 920, display: 'flex', flexDirection: 'column', gap: 24 }}>
-            <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#525252', margin: 0 }}>
+            <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', letterSpacing: '0.01em', color: '#525252', margin: 0 }}>
               We tested our prototypes against the current Amazon Music app in ten moderated sessions with real fans.
             </p>
 
@@ -1070,13 +1069,13 @@ export default function AmazonMusicCaseStudy() {
                   return (
                     <Fragment key={row.surface}>
                       <TableCell lastRow={lastRow}>
-                        <span style={{ ...dm, fontSize: 16, fontWeight: 600, color: '#101314' }}>{row.surface}</span>
+                        <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 16, fontWeight: 600, color: '#101314' }}>{row.surface}</span>
                       </TableCell>
                       <TableCell lastRow={lastRow}>
-                        <span style={{ ...dm, fontSize: 15.5, fontWeight: 300, lineHeight: '24.8px', color: '#2B3433' }}>{row.won}</span>
+                        <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 15.5, fontWeight: 300, lineHeight: '24.8px', color: '#2B3433' }}>{row.won}</span>
                       </TableCell>
                       <TableCell lastCol lastRow={lastRow}>
-                        <span style={{ ...dm, fontSize: 15.5, fontWeight: 300, lineHeight: '24.8px', color: '#6C7675' }}>{row.current}</span>
+                        <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 15.5, fontWeight: 300, lineHeight: '24.8px', color: '#6C7675' }}>{row.current}</span>
                       </TableCell>
                     </Fragment>
                   )
@@ -1085,8 +1084,8 @@ export default function AmazonMusicCaseStudy() {
             </div>
 
             <div style={{ width: '100%', background: '#E4EAFF', borderRadius: 20, padding: '26px 30px', display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '0 18px' }}>
-              <span style={{ ...dm, fontSize: 23, fontWeight: 700, color: '#4A77FF' }}>&quot;It knows me&quot;</span>
-              <span style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#525252' }}>— recognition landed in 3 of 3 prototypes tested.</span>
+              <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 23, fontWeight: 700, color: '#4A77FF' }}>&quot;It knows me&quot;</span>
+              <span style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', letterSpacing: '0.01em', color: '#525252' }}>— recognition landed in 3 of 3 prototypes tested.</span>
             </div>
           </div>
         </section>
@@ -1127,7 +1126,7 @@ export default function AmazonMusicCaseStudy() {
         onMouseMove={e => setCursorPos({ x: e.clientX, y: e.clientY })}
         style={{ borderTop: '1px solid #E5E5E5', padding: '61px 125px 60px' }}
       >
-        <p style={{ ...dm, fontSize: 36, fontWeight: 600, lineHeight: '42px', color: '#000000', marginBottom: 40, marginTop: 0 }}>Next Project</p>
+        <p style={{ ...dm, letterSpacing: '0.01em', fontSize: 36, fontWeight: 600, lineHeight: '42px', color: '#000000', marginBottom: 40, marginTop: 0 }}>Next Project</p>
         <Link
           to="/ahoku"
           className="cs-next-project-row"
@@ -1139,8 +1138,8 @@ export default function AmazonMusicCaseStudy() {
             <img src="/images/work-card-1.png" alt="Ahoku Smart Homecare Device" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-            <h3 style={{ ...dm, fontSize: 24, fontWeight: 700, color: '#2D2D2D', margin: 0 }}>Ahoku Smart Homecare Device</h3>
-            <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#2D2D2D', margin: 0 }}>
+            <h3 style={{ ...dm, letterSpacing: '0.01em', fontSize: 24, fontWeight: 700, color: '#2D2D2D', margin: 0 }}>Ahoku Smart Homecare Device</h3>
+            <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', letterSpacing: '0.01em', color: '#2D2D2D', margin: 0 }}>
               Designed digital interface of a healthcare device for elders to help track and<br />manage health data.
             </p>
             <div style={{ display: 'flex', gap: 10 }}>
@@ -1182,7 +1181,7 @@ export default function AmazonMusicCaseStudy() {
               <h2 style={{ ...dm, fontSize: 60, fontWeight: 800, lineHeight: '62px', letterSpacing: '0.05em', color: '#000000', margin: 0 }}>Let&apos;s work together!</h2>
             </div>
             <div style={{ display: 'flex', alignItems: 'end', gap: 32 }}>
-              <p style={{ ...dm, fontSize: 17, fontWeight: 400, lineHeight: '27px', color: '#2D2D2D', maxWidth: 447, margin: 0 }}>
+              <p style={{ ...dm, letterSpacing: '0.01em', fontSize: 17, fontWeight: 400, lineHeight: '27px', color: '#2D2D2D', maxWidth: 447, margin: 0 }}>
                 I&apos;m currently available for new work.
                 <br />Feel free to grab a virtual coffee with me via{' '}
                 <a href="mailto:celine900423lu@gmail.com" className="underline hover:opacity-70 transition-opacity">email</a>!
@@ -1191,16 +1190,16 @@ export default function AmazonMusicCaseStudy() {
             </div>
           </div>
           <div className="cs-footer-bottom" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid rgba(0,0,0,0.2)', paddingTop: 24 }}>
-            <p style={{ ...dm, fontSize: 17, fontWeight: 400, lineHeight: '27px', color: '#2D2D2D', margin: 0 }}>
+            <p style={{ ...dm, letterSpacing: '0.01em', fontSize: 17, fontWeight: 400, lineHeight: '27px', color: '#2D2D2D', margin: 0 }}>
               Crafted with Cursor, Claude Code, and too much caffeine.
             </p>
             <div style={{ display: 'flex', alignItems: 'center', gap: 38 }}>
               <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }} className="hover:opacity-70 transition-opacity">
-                <span style={{ ...dm, fontSize: 17, fontWeight: 500, lineHeight: '27px', color: '#4A77FF' }}>Linkedin</span>
+                <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 17, fontWeight: 500, lineHeight: '27px', color: '#4A77FF' }}>Linkedin</span>
                 <ArrowDiagonal />
               </a>
               <a href="mailto:celine900423lu@gmail.com" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }} className="hover:opacity-70 transition-opacity">
-                <span style={{ ...dm, fontSize: 17, fontWeight: 500, lineHeight: '27px', color: '#4A77FF' }}>Email</span>
+                <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 17, fontWeight: 500, lineHeight: '27px', color: '#4A77FF' }}>Email</span>
                 <ArrowDiagonal />
               </a>
             </div>
