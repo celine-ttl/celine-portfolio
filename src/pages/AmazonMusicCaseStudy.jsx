@@ -1,6 +1,7 @@
 import { useState, useEffect, Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import Nav from '../components/Nav'
+import Footer from '../components/Footer'
 import SyncedScrollDemo from '../components/SyncedScrollDemo'
 
 const dm = { fontFamily: 'DM Sans, sans-serif' }
@@ -94,8 +95,8 @@ function TrackCard({ label }) {
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, minWidth: 0 }}>
           <img src="/images/amazon-music/album-cover.png" alt="" width={42} height={42} style={{ borderRadius: 3, display: 'block', flexShrink: 0 }} />
           <div style={{ display: 'flex', flexDirection: 'column', gap: 3, minWidth: 0 }}>
-            <span style={{ fontFamily: 'DM Sans, sans-serif', fontSize: 14, fontWeight: 700, color: '#FFFFFF', whiteSpace: 'nowrap' }}>I&apos;ve Seen It</span>
-            <span style={{ fontFamily: 'DM Sans, sans-serif', fontSize: 10, color: '#A6A6A6', whiteSpace: 'nowrap' }}>Olivia Dean • 1,423,456,789</span>
+            <span style={{ fontFamily: 'DM Sans, sans-serif', fontSize: 14, fontWeight: 700, color: '#FFFFFF', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>I&apos;ve Seen It</span>
+            <span style={{ fontFamily: 'DM Sans, sans-serif', fontSize: 10, color: '#A6A6A6', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>Olivia Dean • 1,423,456,789</span>
           </div>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexShrink: 0 }}>
@@ -130,7 +131,7 @@ function SolutionBlock({ caption, heading, body, flex, gifSrc, media }) {
       {media
         ? media
         : gifSrc
-          ? <img src={gifSrc} alt="" style={{ width: '100%', height: 600, objectFit: 'cover', borderRadius: 24, display: 'block', flexShrink: 0 }} />
+          ? <img src={gifSrc} alt="" style={{ width: '100%', aspectRatio: '812 / 1080', objectFit: 'cover', borderRadius: 24, display: 'block', flexShrink: 0 }} />
           : <GifPlaceholder height={600} />}
     </div>
   )
@@ -209,12 +210,12 @@ function ConceptCard({ number, title, body, criteria, winner, dark }) {
 
 function NeedRow({ label, caption, chips }) {
   return (
-    <div style={{ display: 'flex', alignItems: 'stretch', justifyContent: 'space-between', gap: 24, paddingBottom: 12 }}>
-      <div style={{ width: 112, flexShrink: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 4 }}>
+    <div className="am-need-row" style={{ display: 'flex', alignItems: 'stretch', justifyContent: 'space-between', gap: 24, paddingBottom: 12 }}>
+      <div className="am-need-label" style={{ width: 112, flexShrink: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 4 }}>
         <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 17, fontWeight: 600, color: '#525252' }}>{label}</span>
         <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 14, fontWeight: 300, lineHeight: '22px', color: '#525252' }}>{caption}</span>
       </div>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 16, flex: 1 }}>
+      <div className="am-need-chips" style={{ display: 'flex', alignItems: 'center', gap: 16, flex: 1 }}>
         {chips.map((chip, i) => (
           <div key={i} style={{ flex: 1, textAlign: 'center', padding: '20px 12px', borderRadius: 8, background: `rgba(74,119,255,${chip.opacity})` }}>
             {chip.text && <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 14, fontWeight: 600, color: '#525252' }}>{chip.text}</span>}
@@ -444,13 +445,6 @@ const RESULT_ROWS = [
   { surface: 'You & Artist tab', won: 'Era timeline & milestones felt earned', current: 'Clearer hierarchy still needed' },
 ]
 
-function ArrowDiagonal() {
-  return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M7 17L17 7M17 7H7M17 7V17" stroke="#4A77FF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  )
-}
 
 export default function AmazonMusicCaseStudy() {
   const [decision1Tier, setDecision1Tier] = useState('new')
@@ -519,6 +513,82 @@ export default function AmazonMusicCaseStudy() {
             margin-left: 0;
           }
         }
+        /* The role card is a fixed 576px, so the description column gets
+           squeezed to single-word lines well before it visually overflows.
+           Stack description above the card once that column can't hold a
+           readable line, which covers the whole mobile/tablet range. */
+        @media (max-width: 1024px) {
+          .am-context-role-row { flex-direction: column !important; align-items: stretch !important; }
+          .am-context-role-card { width: 100% !important; flex-shrink: 1 !important; }
+        }
+        /* Problem section: the two track cards need ~350px each to hold their
+           fixed-width icons and single-line track info without spilling past
+           the dark card's edge. That never fits two-up on tablet or mobile,
+           so stack them and shrink the card's own padding to match. */
+        @media (max-width: 1024px) {
+          .am-problem-outer { padding: 48px 24px !important; }
+          .am-problem-card { padding: 48px 32px 40px !important; }
+          .am-track-row { flex-direction: column !important; }
+        }
+        @media (max-width: 480px) {
+          .am-problem-outer { padding: 32px 16px !important; }
+          .am-problem-card { padding: 32px 20px 28px !important; }
+        }
+        /* Solution highlights: each GIF needs its own comfortable width to
+           read as a phone screen, not a sliver. Two-up drops each column to
+           ~330px well before mobile; stack them below tablet instead. */
+        @media (max-width: 1024px) {
+          .am-solution-row { flex-direction: column !important; }
+        }
+        /* The three synced-scroll phones follow the same logic, just with a
+           tighter floor since there are three instead of two. */
+        @media (max-width: 700px) {
+          .am-synced-scroll-row { flex-direction: column !important; align-items: center !important; }
+          .am-synced-scroll-row > div { width: 100% !important; max-width: 320px; }
+        }
+        /* Research: the 3-column row + connector graph actually holds up
+           fine through tablet, shrinking proportionally with the row - the
+           real failure is the "gap to close" heading clipping past its own
+           box edge, which starts at ~605-610px (bisected directly). 650px
+           keeps the full graph on screen as long as it genuinely reads,
+           then swaps to a stack once it doesn't. The connector SVG's arrows
+           are baked to the 3-column layout (viewBox positions match each
+           card's center) so they can't scale into a stack themselves -
+           swap to a plain arrow at the same breakpoint. The constraint box
+           is a fixed 292px next to a flexible sibling, the same pattern
+           that squeezed text past its edge in the footer and problem
+           sections earlier; same fix. */
+        @media (max-width: 650px) {
+          .am-research-outer { padding: 48px 24px !important; }
+          .am-research-row { flex-direction: column !important; }
+          .am-research-connector { display: none !important; }
+          .am-research-connector-mobile { display: block !important; }
+          .am-constraint-row { flex-direction: column !important; }
+          .am-constraint-box { width: 100% !important; }
+        }
+        @media (max-width: 480px) {
+          .am-research-outer { padding: 32px 16px !important; }
+        }
+        /* Need Layer / Three Tier System: the heading+paragraph row and the
+           table's fixed-width side labels are the same "fixed sibling
+           squeezes a flexible one" pattern as everywhere else in this file.
+           The tier-footer row is the worst of it: a fixed 104px label plus
+           42px gap left only ~45px per tier name at mobile widths, which is
+           how "SUPERFAN" ended up overflowing past the card edge. */
+        @media (max-width: 900px) {
+          .am-solution-system-outer { padding: 48px 24px !important; }
+          .am-tier-title-row { flex-direction: column !important; align-items: flex-start !important; gap: 16px !important; }
+          .am-need-card { padding: 24px 20px !important; }
+          .am-need-row { flex-direction: column !important; align-items: flex-start !important; gap: 12px !important; padding-bottom: 20px !important; }
+          .am-need-label { width: 100% !important; flex-direction: row !important; align-items: baseline !important; gap: 8px !important; }
+          .am-need-chips { width: 100% !important; }
+          .am-tier-footer-row { flex-direction: column !important; align-items: stretch !important; gap: 12px !important; }
+          .am-tier-footer-label { width: 100% !important; text-align: left !important; }
+        }
+        @media (max-width: 480px) {
+          .am-need-chips { gap: 8px !important; }
+          .am-tier-footer-names { gap: 8px !important; }
+        }
       `}</style>
       <Nav fixed />
 
@@ -586,12 +656,12 @@ export default function AmazonMusicCaseStudy() {
               By 2026, distribution of content had stopped being the differentiator for music streaming platforms. The market had matured past &quot;does it have the song&quot; into &quot;does it understand me.&quot; Users and creators want more than just playback.
             </p>
             <img src="/images/amazon-music/context-timeline.png" alt="Timeline: Retail Foundation, Alexa & Echo, HD Lossless / 100M+ Catalog, Distribution: Solved. The remaining gap: it's human, not technical." style={{ width: '100%', display: 'block' }} />
-            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 24 }}>
+            <div className="am-context-role-row" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 24 }}>
               <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', letterSpacing: '0.01em', color: '#525252', margin: 0, flex: 1 }}>
                 In our MHCI capstone project at Carnegie Mellon, Amazon Music brought us a challenge:{' '}
                 <strong style={{ fontWeight: 600, color: '#000000' }}>evolve the platform from consumption-centric to an ecosystem that fosters real intimacy between creators and listeners</strong>.
               </p>
-              <div style={{ width: 576, flexShrink: 0 }}>
+              <div className="am-context-role-card" style={{ width: 576, flexShrink: 0 }}>
                 <InfoCard
                   pill="My Role"
                   body="As the design lead, I owned the Artist Profile end to end, including the Music tab and the You & Artist tab, the two surfaces that carry most of the tier logic in this case study, while directing how all the work rolled up into one coherent system."
@@ -602,8 +672,8 @@ export default function AmazonMusicCaseStudy() {
         </section>
 
         {/* PROBLEM */}
-        <section id="problem" className="fade-section" style={{ background: '#FFFFFF', padding: '60px 55px', display: 'flex', justifyContent: 'center' }}>
-          <div style={{ position: 'relative', width: '100%', maxWidth: 920, background: '#2E2E2E', borderRadius: 24, padding: '76px 80px 68px', display: 'flex', flexDirection: 'column', gap: 48, overflow: 'hidden' }}>
+        <section id="problem" className="fade-section am-problem-outer" style={{ background: '#FFFFFF', padding: '60px 55px', display: 'flex', justifyContent: 'center' }}>
+          <div className="am-problem-card" style={{ position: 'relative', width: '100%', maxWidth: 920, background: '#2E2E2E', borderRadius: 24, padding: '76px 80px 68px', display: 'flex', flexDirection: 'column', gap: 48, overflow: 'hidden' }}>
             <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', gap: 32 }}>
               <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <SectionLabel text="Problem" color="#B9C9FF" />
@@ -677,7 +747,7 @@ export default function AmazonMusicCaseStudy() {
         </section>
 
         {/* RESEARCH */}
-        <section id="research" className="fade-section" style={{ background: '#F8F8F8', padding: '80px 40px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 32 }}>
+        <section id="research" className="fade-section am-research-outer" style={{ background: '#F8F8F8', padding: '80px 40px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 32 }}>
           <div style={{ width: '100%', maxWidth: 920 }}>
             <SectionLabel text="Research" />
             <h2 style={{ ...dm, fontSize: 28, fontWeight: 500, lineHeight: '42px', letterSpacing: '0.015em', color: '#000000', margin: 0 }}>
@@ -705,11 +775,15 @@ export default function AmazonMusicCaseStudy() {
                 body="Creators build trust through live events. Streaming data felt useless and misleading."
               />
             </div>
-            <img src="/images/amazon-music/research-connector.svg" alt="" style={{ width: '100%', height: 96, display: 'block', marginTop: -16, marginBottom: -16 }} />
+            <img className="am-research-connector" src="/images/amazon-music/research-connector.svg" alt="" style={{ width: '100%', height: 96, display: 'block', marginTop: -16, marginBottom: -16 }} />
+            <svg className="am-research-connector-mobile" width="16" height="32" viewBox="0 0 16 32" fill="none" style={{ display: 'none', margin: '-8px auto' }}>
+              <line x1="8" y1="0" x2="8" y2="21" stroke="#4A77FF" strokeWidth="1.5" strokeDasharray="4 3" />
+              <path d="M8 32L14 20H2L8 32Z" fill="#4A77FF" />
+            </svg>
             <div className="am-constraint-row" style={{ display: 'flex', gap: 26 }}>
-              <div style={{ width: 292, flexShrink: 0, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: 16, background: '#EFF3FF', border: '1px solid #D5DEFF', borderRadius: 20, padding: '30px 27px' }}>
+              <div className="am-constraint-box" style={{ width: 292, flexShrink: 0, display: 'flex', flexDirection: 'column', gap: 16, background: '#EFF3FF', border: '1px solid #D5DEFF', borderRadius: 20, padding: '30px 27px' }}>
                 <span style={{ ...dm, fontSize: 12, fontWeight: 700, letterSpacing: '0.115em', color: '#2F55CC', textAlign: 'center' }}>CONSTRAINT</span>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 8 }}>
                   <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 20, fontWeight: 600, color: '#101314', textAlign: 'center' }}>Never performed for other people.</span>
                   <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 14, fontWeight: 400, lineHeight: '22px', color: '#55605F', textAlign: 'center', whiteSpace: 'pre-line' }}>
                     {'Recognition can’t\ncome from exposure.'}
@@ -805,7 +879,7 @@ export default function AmazonMusicCaseStudy() {
         </section>
 
         {/* SOLUTION SYSTEM */}
-        <section id="solution-system" className="fade-section" style={{ background: '#FFFFFF', padding: '80px 40px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 32 }}>
+        <section id="solution-system" className="fade-section am-solution-system-outer" style={{ background: '#FFFFFF', padding: '80px 40px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 32 }}>
           <div style={{ width: '100%', maxWidth: 920, display: 'flex', flexDirection: 'column', gap: 24 }}>
             <SectionLabel text="Solution system" />
             <h2 style={{ ...dm, fontSize: 42, fontWeight: 500, lineHeight: '1.2em', letterSpacing: '0.05em', color: '#000000', margin: 0 }}>
@@ -849,7 +923,7 @@ export default function AmazonMusicCaseStudy() {
                 </p>
               </div>
             </div>
-            <div style={{ width: '100%', background: '#FFFFFF', border: '1px solid #ECEEEE', borderRadius: 24, boxShadow: '0px 2px 16px 0px rgba(16,22,23,0.05)', padding: '36px 36px 24px', display: 'flex', flexDirection: 'column', gap: 16 }}>
+            <div className="am-need-card" style={{ width: '100%', background: '#FFFFFF', border: '1px solid #ECEEEE', borderRadius: 24, boxShadow: '0px 2px 16px 0px rgba(16,22,23,0.05)', padding: '36px 36px 24px', display: 'flex', flexDirection: 'column', gap: 16 }}>
               <NeedRow
                 label="Social"
                 caption="Belonging"
@@ -877,9 +951,9 @@ export default function AmazonMusicCaseStudy() {
                   { text: 'What’s new?', opacity: 0.4 },
                 ]}
               />
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 42, paddingTop: 16, borderTop: '1px solid #D9D9D9' }}>
-                <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 17, fontWeight: 600, color: '#525252', width: 104, flexShrink: 0 }}>Three Tiers</span>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 24, flex: 1 }}>
+              <div className="am-tier-footer-row" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 42, paddingTop: 16, borderTop: '1px solid #D9D9D9' }}>
+                <span className="am-tier-footer-label" style={{ ...dm, letterSpacing: '0.01em', fontSize: 17, fontWeight: 600, color: '#525252', width: 104, flexShrink: 0 }}>Three Tiers</span>
+                <div className="am-tier-footer-names" style={{ display: 'flex', alignItems: 'center', gap: 24, flex: 1 }}>
                   {['New Listener', 'Engaged', 'Superfan'].map(t => (
                     <span key={t} style={{ ...dm, letterSpacing: '0.01em', fontSize: 17, fontWeight: 600, textTransform: 'uppercase', color: '#000000', textAlign: 'center', flex: 1 }}>{t}</span>
                   ))}
@@ -1173,39 +1247,7 @@ export default function AmazonMusicCaseStudy() {
         View Project
       </div>
 
-      {/* Footer */}
-      <footer className="w-full bg-[#F3F3F3]">
-        <div className="cs-footer-inner" style={{ padding: '61px 125px 60px', display: 'flex', flexDirection: 'column', gap: 70 }}>
-          <div className="cs-footer-top" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'end' }}>
-            <div style={{ width: 235 }}>
-              <h2 style={{ ...dm, fontSize: 60, fontWeight: 800, lineHeight: '62px', letterSpacing: '0.05em', color: '#000000', margin: 0 }}>Let&apos;s work together!</h2>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'end', gap: 32 }}>
-              <p style={{ ...dm, letterSpacing: '0.01em', fontSize: 17, fontWeight: 400, lineHeight: '27px', color: '#2D2D2D', maxWidth: 447, margin: 0 }}>
-                I&apos;m currently available for new work.
-                <br />Feel free to grab a virtual coffee with me via{' '}
-                <a href="mailto:celine900423lu@gmail.com" className="underline hover:opacity-70 transition-opacity">email</a>!
-              </p>
-              <img src="/images/footer-portrait-303597.png" alt="Celine portrait" style={{ width: 176, height: 185, objectFit: 'cover', flexShrink: 0 }} />
-            </div>
-          </div>
-          <div className="cs-footer-bottom" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid rgba(0,0,0,0.2)', paddingTop: 24 }}>
-            <p style={{ ...dm, letterSpacing: '0.01em', fontSize: 17, fontWeight: 400, lineHeight: '27px', color: '#2D2D2D', margin: 0 }}>
-              Crafted with Cursor, Claude Code, and too much caffeine.
-            </p>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 38 }}>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }} className="hover:opacity-70 transition-opacity">
-                <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 17, fontWeight: 500, lineHeight: '27px', color: '#4A77FF' }}>Linkedin</span>
-                <ArrowDiagonal />
-              </a>
-              <a href="mailto:celine900423lu@gmail.com" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }} className="hover:opacity-70 transition-opacity">
-                <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 17, fontWeight: 500, lineHeight: '27px', color: '#4A77FF' }}>Email</span>
-                <ArrowDiagonal />
-              </a>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </>
   )
 }

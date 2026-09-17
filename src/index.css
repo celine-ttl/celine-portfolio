@@ -97,9 +97,19 @@ body {
   .cs-next-project-outer { padding: 40px 24px !important; }
   .cs-next-project-row { flex-direction: column !important; }
   .cs-next-project-img { width: 100% !important; height: 220px !important; }
-  .cs-footer-inner { padding: 40px 24px !important; }
-  .cs-footer-top { flex-direction: column !important; align-items: flex-start !important; gap: 24px !important; }
-  .cs-footer-bottom { flex-direction: column !important; align-items: flex-start !important; gap: 16px !important; }
   .cs-decision2-row { flex-direction: column !important; }
   .cs-decision2-spacer { display: none !important; }
+}
+
+/* Site footer (src/components/Footer.jsx) - shared by every page. */
+@media (max-width: 639px) {
+  .site-footer-inner { padding: 40px 20px !important; gap: 40px !important; }
+  .site-footer-top { flex-direction: column !important; align-items: flex-start !important; gap: 24px !important; }
+  .site-footer-identity { flex-direction: column !important; align-items: flex-start !important; gap: 16px !important; }
+  .site-footer-identity h2 { font-size: 36px !important; line-height: 40px !important; }
+  .site-footer-identity img { width: 120px !important; height: 126px !important; }
+  .site-footer-bottom { flex-direction: column !important; align-items: flex-start !important; }
+}
+@media (max-width: 1200px) and (min-width: 640px) {
+  .site-footer-inner { padding: 48px 24px !important; }
 }

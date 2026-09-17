@@ -147,7 +147,7 @@ export default function SyncedScrollDemo({ screens, navBarSrc }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 32, width: '100%', background: '#F4F7F7', borderRadius: 24, padding: 32 }}>
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start', gap: 24, width: '100%' }}>
+      <div className="am-synced-scroll-row" style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start', gap: 24, width: '100%' }}>
         {screens.map((screen, i) => (
           <PhoneFrame
             key={screen.label}

@@ -1,17 +1,10 @@
 import { Link, NavLink } from 'react-router-dom'
 import Nav from '../components/Nav'
+import Footer from '../components/Footer'
 import { useState, useEffect, useRef } from 'react'
 
 const dm = { fontFamily: 'DM Sans, sans-serif' }
 const serif = { fontFamily: 'DM Serif Text, serif' }
-
-function ArrowDiagonal() {
-  return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M7 17L17 7M17 7H7M17 7V17" stroke="#4A77FF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  )
-}
 
 const TABS = [
   {
@@ -343,39 +336,7 @@ export default function About() {
         </div>
       </div>
 
-      {/* Footer */}
-      <footer id="contact" className="w-full bg-[#F3F3F3]">
-        <div className="cs-footer-inner flex flex-col" style={{ maxWidth: 1280, margin: '0 auto', padding: '61px 125px 60px', gap: 70 }}>
-          <div className="cs-footer-top flex justify-between items-end">
-            <div className="flex items-center" style={{ gap: 32 }}>
-              <div style={{ width: 235 }}>
-                <h2 style={{ ...dm, fontSize: 60, fontWeight: 800, lineHeight: '62px', color: '#000000', margin: 0 }}>Let&apos;s work together!</h2>
-              </div>
-              <img src="/images/footer-portrait-303597.png" alt="Celine portrait" style={{ width: 176, height: 185, objectFit: 'cover', flexShrink: 0 }} />
-            </div>
-            <p style={{ ...dm, fontSize: 17, fontWeight: 400, lineHeight: '27px', color: '#2D2D2D', maxWidth: 447, margin: 0 }}>
-              I&apos;m currently available for new work.
-              <br />Feel free to grab a virtual coffee with me via{' '}
-              <a href="mailto:celine900423lu@gmail.com" className="underline hover:opacity-70 transition-opacity">email</a>!
-            </p>
-          </div>
-          <div className="cs-footer-bottom flex justify-between items-center" style={{ borderTop: '1px solid rgba(0,0,0,0.2)', paddingTop: 24 }}>
-            <p style={{ ...dm, fontSize: 17, fontWeight: 400, lineHeight: '27px', color: '#2D2D2D', margin: 0 }}>
-              Crafted with Cursor, Claude Code, and too much caffeine.
-            </p>
-            <div className="flex items-center" style={{ gap: 38 }}>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="flex items-center hover:opacity-70 transition-opacity" style={{ textDecoration: 'none' }}>
-                <span style={{ ...dm, fontSize: 17, fontWeight: 500, lineHeight: '27px', color: '#4A77FF' }}>Linkedin</span>
-                <ArrowDiagonal />
-              </a>
-              <a href="mailto:celine900423lu@gmail.com" className="flex items-center hover:opacity-70 transition-opacity" style={{ textDecoration: 'none' }}>
-                <span style={{ ...dm, fontSize: 17, fontWeight: 500, lineHeight: '27px', color: '#4A77FF' }}>Email</span>
-                <ArrowDiagonal />
-              </a>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer id="contact" />
     </>
   )
 }

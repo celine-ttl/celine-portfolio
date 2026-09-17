@@ -1,5 +1,6 @@
 import { Link, NavLink } from 'react-router-dom'
 import Nav from '../components/Nav'
+import Footer from '../components/Footer'
 import { useState, useEffect } from 'react'
 
 const dm = { fontFamily: 'DM Sans, sans-serif' }
@@ -51,13 +52,6 @@ function SideNav({ active }) {
   )
 }
 
-function ArrowDiagonal() {
-  return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M7 17L17 7M17 7H7M17 7V17" stroke="#4A77FF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  )
-}
 
 function Pill({ text }) {
   return (
@@ -540,39 +534,7 @@ export default function AhokuCaseStudy() {
         View Project
       </div>
 
-      {/* Footer */}
-      <footer className="w-full bg-[#F3F3F3]">
-        <div className="cs-footer-inner" style={{ padding: '61px 125px 60px', display: 'flex', flexDirection: 'column', gap: 70 }}>
-          <div className="cs-footer-top" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'end' }}>
-            <div style={{ width: 235 }}>
-              <h2 style={{ ...dm, fontSize: 60, fontWeight: 800, lineHeight: '62px', letterSpacing: '0.05em', color: '#000000', margin: 0 }}>Let&apos;s work together!</h2>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'end', gap: 32 }}>
-              <p style={{ ...dm, fontSize: 17, fontWeight: 400, lineHeight: '27px', color: '#2D2D2D', maxWidth: 447, margin: 0 }}>
-                I&apos;m currently available for new work.
-                <br />Feel free to grab a virtual coffee with me via{' '}
-                <a href="mailto:celine900423lu@gmail.com" className="underline hover:opacity-70 transition-opacity">email</a>!
-              </p>
-              <img src="/images/footer-portrait-303597.png" alt="Celine portrait" style={{ width: 176, height: 185, objectFit: 'cover', flexShrink: 0 }} />
-            </div>
-          </div>
-          <div className="cs-footer-bottom" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid rgba(0,0,0,0.2)', paddingTop: 24 }}>
-            <p style={{ ...dm, fontSize: 17, fontWeight: 400, lineHeight: '27px', color: '#2D2D2D', margin: 0 }}>
-              Crafted with Cursor, Claude Code, and too much caffeine.
-            </p>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 38 }}>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }} className="hover:opacity-70 transition-opacity">
-                <span style={{ ...dm, fontSize: 17, fontWeight: 500, lineHeight: '27px', color: '#4A77FF' }}>Linkedin</span>
-                <ArrowDiagonal />
-              </a>
-              <a href="mailto:celine900423lu@gmail.com" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }} className="hover:opacity-70 transition-opacity">
-                <span style={{ ...dm, fontSize: 17, fontWeight: 500, lineHeight: '27px', color: '#4A77FF' }}>Email</span>
-                <ArrowDiagonal />
-              </a>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </>
   )
 }
