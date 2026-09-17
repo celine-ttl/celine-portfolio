@@ -264,7 +264,7 @@ export default function Home() {
                 {' '}as a product designer.
               </p>
             </div>
-            <p className="hero-animate text-[20px] font-light leading-[30px]" style={{ ...dm, color: '#525252', animationDelay: '200ms' }}>
+            <p className="hero-animate text-[17px] font-light leading-[30px]" style={{ ...dm, color: '#525252', animationDelay: '200ms' }}>
               <GraduationCapIcon />Master's of HCI, Carnegie Mellon University
               <br /><PencilIcon />2+ years in Healthcare, SaaS & Entertainment
             </p>
