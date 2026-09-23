@@ -200,7 +200,7 @@ export default function Home() {
       <div className="bg-white" style={{ maxWidth: 1280, margin: '0 auto' }}>
 
         {/* Hero Section */}
-        <section id="about" className="bg-white" style={{ position: 'relative', padding: '60px 40px 80px', minHeight: 720, overflow: 'hidden' }}>
+        <section id="about" className="bg-white" style={{ position: 'relative', padding: '60px 40px 80px', minHeight: 620, overflow: 'hidden' }}>
           {/* Background image — full width, character sits on the right naturally */}
           <div
             ref={imgRef}
@@ -300,10 +300,10 @@ export default function Home() {
             <WorkCard
               href="/ui-for-ai"
               imageSrc="/images/ui-for-ai/work-card-thumbnail.gif"
-              gifSrc="/images/ui-for-ai/work-card-thumbnail.gif"
+              videoSrc="/videos/ui-for-ai-thumbnail.mp4"
               imageAlt="Re-imagining UI for AI"
               title="Re-imagining UI for AI"
-              description={"Tackling the conversation flow problem with\ncurrent chatbot design of AI."}
+              description="Helping AI chat interfaces support how people actually work — making it easier to go back, find what mattered, and build on what's already there."
               tags={['AI Design', 'Interaction Design']}
             />
             <WorkCard
