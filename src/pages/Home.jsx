@@ -35,7 +35,7 @@ function MenuIcon() {
   )
 }
 
-function WorkCard({ imageSrc, gifSrc, imageAlt, title, description, tags, href }) {
+function WorkCard({ imageSrc, gifSrc, videoSrc, imageAlt, title, description, tags, href }) {
   const [hovered, setHovered] = useState(false)
   const card = (
     <div
@@ -45,7 +45,18 @@ function WorkCard({ imageSrc, gifSrc, imageAlt, title, description, tags, href }
       onMouseLeave={() => setHovered(false)}
     >
       <div className="relative w-full flex-shrink-0" style={{ height: 330 }}>
-        <img src={hovered && gifSrc ? gifSrc : imageSrc} alt={imageAlt} className="object-cover rounded-t-[20px] w-full h-full" />
+        {videoSrc ? (
+          <video
+            src={videoSrc}
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="object-cover rounded-t-[20px] w-full h-full"
+          />
+        ) : (
+          <img src={hovered && gifSrc ? gifSrc : imageSrc} alt={imageAlt} className="object-cover rounded-t-[20px] w-full h-full" />
+        )}
       </div>
       <div className="flex flex-col gap-[14px] px-6 pt-0 pb-6 mt-[25px]">
         <h3 className="text-[#2D2D2D] text-[24px] font-bold leading-tight" style={dm}>{title}</h3>
@@ -298,6 +309,7 @@ export default function Home() {
             <WorkCard
               href="/amazon-music"
               imageSrc="/images/work-card-3.png"
+              videoSrc="/videos/am_thumbnail.mp4"
               imageAlt="Amazon Music"
               title="Amazon Music"
               description="Bridging the gap between listeners and creators through a reimagined Amazon Music experience"
