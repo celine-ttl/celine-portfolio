@@ -312,7 +312,7 @@ export default function Home() {
               videoSrc="/videos/am_thumbnail.mp4"
               imageAlt="Amazon Music"
               title="Amazon Music"
-              description="Bridging the gap between listeners and creators through a reimagined Amazon Music experience"
+              description="Designing an adaptive Amazon Music artist profile that grows with each listener's relationship to the artist."
               tags={['Capstone', 'Adaptive UI Design', 'Mobile Design']}
             />
             <WorkCard
@@ -321,7 +321,7 @@ export default function Home() {
               videoSrc="/videos/ant-metrics-thumbnail.mp4"
               imageAlt="Ahoku Smart Homecare Device"
               title="Ahoku Smart Homecare Device"
-              description="Designed digital interface of a healthcare device for elders to help track and manage health data."
+              description="Simplifying and personalizing health tracking on a compact home care device for elders."
               tags={['Product Design', 'Healthcare']}
             />
             <WorkCard
