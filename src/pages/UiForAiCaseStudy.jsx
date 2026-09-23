@@ -202,7 +202,14 @@ export default function UiForAiCaseStudy() {
             </div>
             {/* Right: image */}
             <div className="cs-hero-image" style={{ width: 464, flexShrink: 0 }}>
-              <img src="/images/ui-for-ai/hero-card.gif" alt="UI for AI preview" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 17, display: 'block' }} />
+              <video
+                src="/videos/ui-for-ai-thumbnail.mp4"
+                autoPlay
+                muted
+                loop
+                playsInline
+                style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 17, display: 'block' }}
+              />
             </div>
           </div>
           {/* Metadata row */}
@@ -705,7 +712,14 @@ export default function UiForAiCaseStudy() {
             style={{ display: 'flex', alignItems: 'center', gap: 48 }}
           >
             <div className="cs-next-project-img" style={{ width: 499, height: 315, flexShrink: 0, borderRadius: 20, overflow: 'hidden', boxShadow: '4px 4px 12px rgba(0,0,0,0.12)' }}>
-              <img src="/images/ui-for-ai/next-project.png" alt="Amazon Music" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transform: 'scale(1.15)', transformOrigin: 'center center' }} />
+              <video
+                src="/videos/am_thumbnail.mp4"
+                autoPlay
+                muted
+                loop
+                playsInline
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transform: 'scale(1.15)', transformOrigin: 'center center' }}
+              />
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
               <h3 style={{ ...dm, fontSize: 24, fontWeight: 700, color: '#2D2D2D', margin: 0 }}>Amazon Music</h3>

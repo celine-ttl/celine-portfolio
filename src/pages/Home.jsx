@@ -303,7 +303,7 @@ export default function Home() {
               videoSrc="/videos/ui-for-ai-thumbnail.mp4"
               imageAlt="Re-imagining UI for AI"
               title="Re-imagining UI for AI"
-              description="Helping AI chat interfaces support how people actually work — making it easier to go back, find what mattered, and build on what's already there."
+              description={"Rethinking linear chat interfaces so conversations\ncan be revisited, not just scrolled through."}
               tags={['AI Design', 'Interaction Design']}
             />
             <WorkCard

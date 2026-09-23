@@ -491,9 +491,12 @@ export default function AhokuCaseStudy() {
             onMouseEnter={() => setCursorVisible(true)}
             onMouseLeave={() => setCursorVisible(false)}
           >
-            <img
-              src="/images/ui-for-ai/work-card-thumbnail.gif"
-              alt="Re-imagining UI for AI"
+            <video
+              src="/videos/ui-for-ai-thumbnail.mp4"
+              autoPlay
+              muted
+              loop
+              playsInline
               className="object-cover rounded-[20px] flex-shrink-0 w-full md:w-auto"
               style={{ maxWidth: 499, height: 315, boxShadow: '4px 4px 12px rgba(0,0,0,0.12)' }}
             />
