@@ -303,7 +303,7 @@ export default function Home() {
               videoSrc="/videos/ui-for-ai-thumbnail.mp4"
               imageAlt="Re-imagining UI for AI"
               title="Re-imagining UI for AI"
-              description={"Rethinking linear chat interfaces so conversations\ncan be revisited, not just scrolled through."}
+              description="Turning linear AI chats into a workspace where past responses can be saved and built on."
               tags={['AI Design', 'Interaction Design']}
             />
             <WorkCard
@@ -318,6 +318,7 @@ export default function Home() {
             <WorkCard
               href="/ahoku"
               imageSrc="/images/work-card-1.png"
+              videoSrc="/videos/ant-metrics-thumbnail.mp4"
               imageAlt="Ahoku Smart Homecare Device"
               title="Ahoku Smart Homecare Device"
               description="Designed digital interface of a healthcare device for elders to help track and manage health data."
