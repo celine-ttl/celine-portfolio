@@ -655,7 +655,6 @@ export default function AmazonMusicCaseStudy() {
             <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', letterSpacing: '0.01em', color: '#525252', margin: 0 }}>
               By 2026, distribution of content had stopped being the differentiator for music streaming platforms. The market had matured past &quot;does it have the song&quot; into &quot;does it understand me.&quot; Users and creators want more than just playback.
             </p>
-            <img src="/images/amazon-music/context-timeline.png" alt="Timeline: Retail Foundation, Alexa & Echo, HD Lossless / 100M+ Catalog, Distribution: Solved. The remaining gap: it's human, not technical." style={{ width: '100%', display: 'block' }} />
             <div className="am-context-role-row" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 24 }}>
               <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', letterSpacing: '0.01em', color: '#525252', margin: 0, flex: 1 }}>
                 In our MHCI capstone project at Carnegie Mellon, Amazon Music brought us a challenge:{' '}
