@@ -568,11 +568,12 @@ export default function AmazonMusicCaseStudy() {
       <div className="cs-hero-outer" style={{ background: '#FFFFFF', display: 'flex', justifyContent: 'center', padding: '160px 40px 40px' }}>
         <div id="overview" className="cs-hero-inner" style={{ width: '100%', maxWidth: 920, display: 'flex', flexDirection: 'column', gap: 40 }}>
           <h1 style={{ ...dm, fontSize: 52, fontWeight: 800, lineHeight: '54px', letterSpacing: '-0.0288em', color: '#101314', margin: 0 }}>
-            Adaptive UI for Amazon Music
+            Designing Recognition for Amazon Music
           </h1>
           <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', letterSpacing: '0.01em', color: '#525252', margin: 0 }}>
             As catalog size stopped being music streaming&apos;s differentiator, Amazon Music asked us to build{' '}
-            <strong style={{ fontWeight: 600, color: '#000000' }}>real intimacy between creators and listeners</strong>. We designed an adaptive artist profile to recognize loyal fans and create belonging without requiring performance.
+            <strong style={{ fontWeight: 600, color: '#000000' }}>real intimacy between creators and listeners</strong>. We designed an{' '}
+            <strong style={{ fontWeight: 600, color: '#000000' }}>adaptive artist profile</strong> to recognize loyal fans and create belonging without requiring performance.
           </p>
           {/* Metadata row */}
           <div className="cs-metadata" style={{ background: '#F4F6F6', borderRadius: 24, padding: 24, display: 'flex', justifyContent: 'space-between' }}>
