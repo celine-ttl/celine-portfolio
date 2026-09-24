@@ -185,6 +185,14 @@ export default function Home() {
             padding-left: 20px !important;
             padding-right: 20px !important;
           }
+          .home-work-header {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 16px !important;
+          }
+          .home-work-header p.text-right {
+            text-align: left !important;
+          }
         }
         .hero-hint {
           display: none;
@@ -284,13 +292,12 @@ export default function Home() {
 
         {/* Work Section */}
         <section id="work" className="bg-white flex flex-col items-center" style={{ padding: '20px 40px 120px', gap: 60 }}>
-          <div className="flex flex-col items-center" style={{ gap: 16 }}>
-            <div className="flex items-center justify-center relative" style={{ width: 328.6, height: 54 }}>
-              <div style={{ position: 'absolute', left: 0, top: 11 }}><MenuIcon /></div>
-              <p className="text-[36px] font-semibold leading-[54px] text-black text-center" style={dm}>Today&apos;s Menu</p>
-              <div style={{ position: 'absolute', right: 0, top: 11 }}><MenuIcon /></div>
+          <div className="home-work-header flex items-center justify-between" style={{ width: '100%', padding: '20px 0', borderTop: '1px solid #F0F2F2', borderBottom: '1px solid #F0F2F2' }}>
+            <div className="flex items-center" style={{ gap: 12 }}>
+              <MenuIcon />
+              <p className="text-[28px] font-semibold" style={{ ...dm, lineHeight: '42px', color: '#525252' }}>Today&apos;s Menu</p>
             </div>
-            <p className="text-[18px] font-normal leading-[27px] text-[#525252] text-center" style={dm}>
+            <p className="text-[17px] font-light text-right" style={{ ...dm, lineHeight: '27px', color: '#525252' }}>
               A carefully curated selection of design projects,{' '}
               <br />each brewed with care and attention to detail.
             </p>
