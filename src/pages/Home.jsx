@@ -217,31 +217,15 @@ export default function Home() {
             onMouseLeave={handleMouseLeave}
             className="hidden lg:block"
             style={{
-              position: 'absolute', right: 0, top: -96, bottom: 0, left: 0,
+              position: 'absolute', right: 0, top: -50, bottom: 0, left: 0,
               cursor: 'pointer',
             }}
           >
             <img
               src={`/images/${HERO_IMAGES[heroState]}.png`}
               alt=""
-              style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'right top', transition: 'opacity 0.15s ease', display: 'block', transform: 'scale(0.9) translateX(32px)', transformOrigin: 'right top' }}
+              style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'right top', transition: 'opacity 0.15s ease', display: 'block', transform: 'scale(1.03) translateX(32px) translateY(20px)', transformOrigin: 'right top' }}
             />
-            {/* Spill text */}
-            <div style={{
-              position: 'absolute', top: 24, left: 0, right: 0,
-              display: 'flex', justifyContent: 'center',
-              opacity: heroState === 3 ? 1 : 0,
-              transform: heroState === 3 ? 'translateY(0)' : 'translateY(-6px)',
-              transition: 'opacity 0.2s ease, transform 0.2s ease',
-              pointerEvents: 'none',
-            }}>
-              <span style={{
-                fontFamily: 'DM Serif Text, serif', fontSize: 20,
-                color: 'rgba(98, 77, 63, 0.85)',
-                background: 'rgba(255,255,255,0.88)', borderRadius: 24,
-                padding: '6px 20px', boxShadow: '0 2px 12px rgba(0,0,0,0.08)',
-              }}>oops — ideas everywhere!</span>
-            </div>
             {/* Idea bubbles */}
             {bubbles.map(b => (
               <div key={b.id} className="brewing-bubble" style={{ left: b.x, top: b.y, transform: 'translate(-50%, -100%)' }}>
