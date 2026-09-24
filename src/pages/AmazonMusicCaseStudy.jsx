@@ -707,14 +707,14 @@ export default function AmazonMusicCaseStudy() {
           <div style={{ width: '100%', maxWidth: 920 }}>
             <SectionLabel text="Solution highlights" />
             <h2 style={{ ...dm, fontSize: 36, fontWeight: 500, lineHeight: '120%', letterSpacing: '0.05em', color: '#000000', margin: 0 }}>
-              The same page adapts across three tiers, changing what&apos;s shown as recognition builds.
+              An artist profile that adapts across three tiers, changing what&apos;s shown as recognition builds.
             </h2>
           </div>
           <div style={{ width: '100%', maxWidth: 920, display: 'flex', flexDirection: 'column', gap: 48 }}>
             <SolutionBlock
-              caption="Reordered, not rebuilt"
+              caption="Opening an artist's page"
               heading="One page, reorganized for what each listener needs"
-              body="New listeners get modules that orient them to the artist. Engaged listeners get modules for exploring deeper. Superfans get modules built around their own history with it."
+              body="Modules built for where users are with the artist. New listeners get introduced to the artist. Engaged listeners get modules for exploring deeper. Superfans get modules built around their own history."
               media={
                 <SyncedScrollDemo
                   navBarSrc="/images/amazon-music/synced-scroll/nav-bar.jpeg"
@@ -729,16 +729,16 @@ export default function AmazonMusicCaseStudy() {
             <div className="am-solution-row" style={{ display: 'flex', gap: 48 }}>
               <SolutionBlock
                 flex
-                caption="Recognized over time"
+                caption="Being noticed by the platform"
                 heading="Guiding recognition, not just content"
-                body="From an artist a listener just met, to a following, to a superfan the platform has actually noticed."
+                body="Signals accumulate as the relationship deepens, each one appearing only once it's earned."
                 gifSrc="/images/amazon-music/solution-3.gif"
               />
               <SolutionBlock
                 flex
-                caption="A tab that has to be earned"
+                caption="Revisiting your history with an artist"
                 heading="Turning history into a relationship"
-                body="You & Artist doesn't exist for new listeners. By superfan, it's a full timeline of the relationship."
+                body="A new tab that reflects users' timeline with the artist, earned through history instead of artist's release dates."
                 gifSrc="/images/amazon-music/solution-2.gif"
               />
             </div>
