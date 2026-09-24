@@ -7,11 +7,11 @@ import SyncedScrollDemo from '../components/SyncedScrollDemo'
 const dm = { fontFamily: 'DM Sans, sans-serif' }
 
 const NAV_SECTIONS = [
+  { id: 'overview', label: 'Overview' },
   { id: 'context', label: 'Context' },
-  { id: 'problem', label: 'Problem' },
-  { id: 'solution', label: 'Solution Highlights' },
   { id: 'research', label: 'Research' },
-  { id: 'solution-system', label: 'System' },
+  { id: 'direction', label: 'Ideation' },
+  { id: 'solution-system', label: 'System Design' },
   { id: 'decision-1', label: 'Design Decisions' },
   { id: 'why-this-works', label: 'Why This Works' },
   { id: 'result', label: 'Result' },
@@ -137,72 +137,30 @@ function SolutionBlock({ caption, heading, body, flex, gifSrc, media }) {
   )
 }
 
-function ResearchCard({ caption, heading, body, highlight }) {
+function ResearchCard({ caption, image, heading, body }) {
   return (
     <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 14, background: '#FFFFFF', border: '1px solid #ECEEEE', borderRadius: 20, boxShadow: '0px 2px 16px 0px rgba(16,22,23,0.05)', padding: '30px 24px' }}>
       <span style={{ ...dm, fontSize: 12, fontWeight: 700, letterSpacing: '0.1em', color: '#979797' }}>{caption}</span>
+      <img src={image} alt="" style={{ width: '100%', height: 202, objectFit: 'cover', borderRadius: 24, display: 'block' }} />
       <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 20, fontWeight: 600, color: '#2B3433', whiteSpace: 'pre-line' }}>{heading}</span>
-      {highlight ? (
-        <p style={{ ...dm, letterSpacing: '0.01em', fontSize: 14, fontWeight: 400, lineHeight: '22px', color: '#525252', margin: 0 }}>
-          <mark style={{ background: '#E4EAFF', color: 'inherit', borderRadius: 4, padding: '1px 4px' }}>69% said mood and context drive their taste</mark>, context gets lost at the transfer.
-        </p>
-      ) : (
-        <p style={{ ...dm, letterSpacing: '0.01em', fontSize: 14, fontWeight: 400, lineHeight: '22px', color: '#525252', margin: 0 }}>{body}</p>
-      )}
+      <p style={{ ...dm, letterSpacing: '0.01em', fontSize: 14, fontWeight: 400, lineHeight: '22px', color: '#525252', margin: 0 }}>{body}</p>
     </div>
   )
 }
 
-function ChecklistItem({ text }) {
+function IdeationCard({ title, subtitle, rationale, image, winner }) {
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-      <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 13.5, fontWeight: 700, color: '#B8BFBE' }}>○</span>
-      <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 17, fontWeight: 600, lineHeight: '27px', color: '#000000' }}>{text}</span>
-    </div>
-  )
-}
-
-function ScoreDot({ state, color }) {
-  const isFull = state === 'full'
-  const isHalf = state === 'half'
-  return (
-    <svg width="16" height="16" viewBox="0 0 16 16" style={{ display: 'block' }}>
-      <circle cx="8" cy="8" r="6.25" fill={isFull ? color : 'none'} stroke={color} strokeWidth={isFull ? '1.5' : '1'} />
-      {isHalf && <path d="M8 1.75 A6.25 6.25 0 0 1 8 14.25 Z" fill={color} />}
-    </svg>
-  )
-}
-
-function ConceptCard({ number, title, body, criteria, winner, dark }) {
-  const bg = dark ? '#525252' : '#FFFFFF'
-  const border = dark ? '#525252' : '#ECEEEE'
-  const shadow = dark ? '0px 14px 34px 0px rgba(0,0,0,0.16)' : '0px 2px 16px 0px rgba(16,22,23,0.04)'
-  const titleColor = dark ? '#F4F6FF' : '#101314'
-  const bodyColor = dark ? '#E4E7F0' : '#55605F'
-  const dividerColor = dark ? 'rgba(255,255,255,0.14)' : '#F0F2F2'
-  const labelColor = dark ? '#DDE0EA' : '#6C7675'
-
-  return (
-    <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 20, background: bg, border: `1px solid ${border}`, borderRadius: 20, boxShadow: shadow, padding: '30px 24px 26px' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-        <span style={{ ...dm, fontSize: 64, fontWeight: 500, lineHeight: '42px', letterSpacing: '0.08em', color: 'rgba(137,197,234,0.3)' }}>{number}</span>
+    <div className="am-ideation-card" style={{ display: 'flex', alignItems: 'center', gap: 32, background: '#FFFFFF', border: `1px solid ${winner ? '#4A77FF' : '#ECEEEE'}`, boxShadow: '0px 2px 16px 0px rgba(16,22,23,0.04)', borderRadius: 20, padding: '12px 24px' }}>
+      <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 14 }}>
+        <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 20, fontWeight: 600, color: '#101314' }}>{title}</span>
+        <span style={{ ...dm, fontSize: 14, fontStyle: 'italic', lineHeight: '22px', color: '#55605F' }}>{subtitle}</span>
+        <span style={{ ...dm, fontSize: 14, lineHeight: '22px', color: '#4A4A55', paddingTop: 12, borderTop: '1px solid #F0F2F2' }}>{rationale}</span>
+      </div>
+      <div className="am-ideation-card-image" style={{ position: 'relative', width: 292, height: 202, flexShrink: 0 }}>
+        <img src={image} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 24, display: 'block' }} />
         {winner && (
-          <span style={{ ...dm, fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#FFFFFF', background: '#4A77FF', borderRadius: 20, padding: '4px 10px' }}>Winner</span>
+          <span style={{ position: 'absolute', top: 12, left: 12, ...dm, fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#FFFFFF', background: '#4A77FF', borderRadius: 20, padding: '4px 10px' }}>Winner</span>
         )}
-      </div>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 14, flex: 1 }}>
-        <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 18.5, fontWeight: 600, color: titleColor }}>{title}</span>
-        <p style={{ ...dm, letterSpacing: '0.01em', fontSize: 14, fontWeight: 300, lineHeight: '22px', color: bodyColor, margin: 0 }}>{body}</p>
-      </div>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 9, paddingTop: 20, borderTop: `1px solid ${dividerColor}` }}>
-        {criteria.map(({ label, state, symbolColor }) => (
-          <div key={label} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 13.5, color: labelColor }}>{label}</span>
-            <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 20, height: 20, flexShrink: 0 }}>
-              <ScoreDot state={state} color={symbolColor} />
-            </span>
-          </div>
-        ))}
       </div>
     </div>
   )
@@ -450,16 +408,15 @@ export default function AmazonMusicCaseStudy() {
   const [decision1Tier, setDecision1Tier] = useState('new')
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 })
   const [cursorVisible, setCursorVisible] = useState(false)
-  const [activeSection, setActiveSection] = useState('context')
+  const [activeSection, setActiveSection] = useState('overview')
 
   useEffect(() => {
     const sectionMap = {
-      'direction': 'solution-system',
-      'problem-statement': 'solution-system',
+      'hmw': 'research',
       'decision-2': 'decision-1',
       'decision-3': 'decision-1',
     }
-    const allIds = ['context', 'problem', 'solution', 'research', 'direction', 'problem-statement', 'solution-system', 'decision-1', 'decision-2', 'decision-3', 'why-this-works', 'result', 'reflection']
+    const allIds = ['overview', 'problem', 'solution', 'context', 'research', 'hmw', 'direction', 'solution-system', 'decision-1', 'decision-2', 'decision-3', 'why-this-works', 'result', 'reflection']
     const update = () => {
       const threshold = window.innerHeight * 0.35
       let active = allIds[0]
@@ -504,22 +461,14 @@ export default function AmazonMusicCaseStudy() {
         .am-tier-mockup-btn.active:hover {
           transform: none;
         }
-        section.fade-section > div {
+        section.fade-section > div, .cs-hero-inner {
           margin-left: 225px;
         }
         @media (max-width: 1200px) {
           .cs-sidenav { display: none !important; }
-          section.fade-section > div {
+          section.fade-section > div, .cs-hero-inner {
             margin-left: 0;
           }
-        }
-        /* The role card is a fixed 576px, so the description column gets
-           squeezed to single-word lines well before it visually overflows.
-           Stack description above the card once that column can't hold a
-           readable line, which covers the whole mobile/tablet range. */
-        @media (max-width: 1024px) {
-          .am-context-role-row { flex-direction: column !important; align-items: stretch !important; }
-          .am-context-role-card { width: 100% !important; flex-shrink: 1 !important; }
         }
         /* Problem section: the two track cards need ~350px each to hold their
            fixed-width icons and single-line track info without spilling past
@@ -546,25 +495,29 @@ export default function AmazonMusicCaseStudy() {
           .am-synced-scroll-row { flex-direction: column !important; align-items: center !important; }
           .am-synced-scroll-row > div { width: 100% !important; max-width: 320px; }
         }
-        /* Research: the 3-column row + connector graph actually holds up
-           fine through tablet, shrinking proportionally with the row - the
-           real failure is the "gap to close" heading clipping past its own
-           box edge, which starts at ~605-610px (bisected directly). 650px
-           keeps the full graph on screen as long as it genuinely reads,
-           then swaps to a stack once it doesn't. The connector SVG's arrows
-           are baked to the 3-column layout (viewBox positions match each
-           card's center) so they can't scale into a stack themselves -
-           swap to a plain arrow at the same breakpoint. The constraint box
-           is a fixed 292px next to a flexible sibling, the same pattern
-           that squeezed text past its edge in the footer and problem
-           sections earlier; same fix. */
+        /* Context: the photo is a fixed 478px next to a flexible text column,
+           the same "fixed sibling squeezes a flexible one" pattern as
+           elsewhere in this file. Stack before that column runs out of room. */
+        @media (max-width: 1024px) {
+          .am-context-row { flex-direction: column !important; }
+          .am-context-photo { width: 100% !important; height: auto !important; aspect-ratio: 478 / 327; }
+        }
+        /* Ideation cards: same fixed-image-next-to-flexible-text pattern as
+           the context photo above, just repeated three times. */
+        @media (max-width: 1024px) {
+          .am-ideation-card { flex-direction: column !important; align-items: stretch !important; padding: 20px !important; }
+          .am-ideation-card-image { width: 100% !important; height: auto !important; aspect-ratio: 292 / 202; }
+        }
+        /* Research: the 3-column row holds up fine through tablet, shrinking
+           proportionally with the row - it only needs to stack once cards
+           genuinely can't fit side by side. The assumed/found row's vertical
+           divider can't rotate into a stack, so it swaps to a horizontal
+           rule at the same breakpoint. */
         @media (max-width: 650px) {
           .am-research-outer { padding: 48px 24px !important; }
           .am-research-row { flex-direction: column !important; }
-          .am-research-connector { display: none !important; }
-          .am-research-connector-mobile { display: block !important; }
-          .am-constraint-row { flex-direction: column !important; }
-          .am-constraint-box { width: 100% !important; }
+          .am-assumed-found-row { flex-direction: column !important; gap: 24px !important; }
+          .am-assumed-found-divider { width: 100% !important; height: 0 !important; align-self: stretch !important; border-left: none !important; border-top: 1px solid #4A77FF !important; }
         }
         @media (max-width: 480px) {
           .am-research-outer { padding: 32px 16px !important; }
@@ -589,45 +542,48 @@ export default function AmazonMusicCaseStudy() {
           .am-need-chips { gap: 8px !important; }
           .am-tier-footer-names { gap: 8px !important; }
         }
+        /* Hero: What I Did/My Impact are two flexible columns with no fixed
+           sibling, so they can shrink a long time before they break - stack
+           at the same point the impact card's number+text row does, since
+           both share the hero's 920px column. */
+        @media (max-width: 650px) {
+          .cs-hero-overview-row { flex-direction: column !important; gap: 24px !important; }
+          .cs-impact-card { flex-direction: column !important; align-items: stretch !important; gap: 16px !important; }
+        }
       `}</style>
       <Nav fixed />
 
+      {/* Banner */}
+      <div style={{ marginTop: 80, width: '100%', aspectRatio: '1280 / 400', overflow: 'hidden' }}>
+        <img src="/images/amazon-music/case-study-banner.png" alt="Amazon Music Superfan artist profile shown on a phone" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+      </div>
+
+      {/* Case study hero + main share one relative wrapper so the sidenav can
+          start at the hero title instead of at the Problem section. */}
+      <div style={{ position: 'relative' }}>
+      <div className="cs-sidenav-col" style={{ position: 'absolute', top: 68, left: 40, height: 'calc(100% - 300px)', width: 0 }}>
+        <SideNav active={activeSection} />
+      </div>
       {/* Case study hero */}
-      <div className="cs-hero-outer" style={{ marginTop: 80, background: '#FFFFFF', display: 'flex', justifyContent: 'center', padding: 40 }}>
-        <div style={{ width: '100%', maxWidth: 1080, display: 'flex', flexDirection: 'column', gap: 32, padding: '40px 0' }}>
-          {/* Top row: text + image */}
-          <div className="cs-hero-row" style={{ display: 'flex', flexDirection: 'row', gap: 48, alignItems: 'center' }}>
-            {/* Left: text column */}
-            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 24 }}>
-              <h1 style={{ ...dm, fontSize: 52, fontWeight: 800, lineHeight: '54px', letterSpacing: '-0.0288em', color: '#101314', margin: 0 }}>
-                Adaptive UI for<br />Amazon Music
-              </h1>
-              <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', letterSpacing: '0.01em', color: '#525252', margin: 0 }}>
-                Led end-to-end design on a 7-month capstone reimagining a recognition system that reshapes in app experience as a listener's relationship with an artist deepens.
-              </p>
-              <button
-                onClick={() => document.getElementById('solution-01')?.scrollIntoView({ behavior: 'smooth' })}
-                className="jump-btn"
-                style={{ ...dm, letterSpacing: '0.01em', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', background: '#525252', borderRadius: 100, padding: '0 24px', width: 'fit-content', cursor: 'pointer', border: 'none', fontSize: 17, fontWeight: 600, lineHeight: '42px', color: '#FFFFFF', boxShadow: '4px 4px 12px 0px rgba(0,0,0,0.05), -4px -4px 12px 0px rgba(0,0,0,0.05)' }}
-              >
-                Jump to solution
-              </button>
-            </div>
-            {/* Right: image */}
-            <div className="cs-hero-image" style={{ width: 559, height: 370, flexShrink: 0 }}>
-              <img src="/images/amazon-music/hero.png" alt="Amazon Music preview" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 17, display: 'block' }} />
-            </div>
-          </div>
+      <div className="cs-hero-outer" style={{ background: '#FFFFFF', display: 'flex', justifyContent: 'center', padding: '60px 40px 40px' }}>
+        <div id="overview" className="cs-hero-inner" style={{ width: '100%', maxWidth: 920, display: 'flex', flexDirection: 'column', gap: 40 }}>
+          <h1 style={{ ...dm, fontSize: 52, fontWeight: 800, lineHeight: '54px', letterSpacing: '-0.0288em', color: '#101314', margin: 0 }}>
+            Adaptive UI for Amazon Music
+          </h1>
+          <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', letterSpacing: '0.01em', color: '#525252', margin: 0 }}>
+            As catalog size stopped being music streaming&apos;s differentiator, Amazon Music asked us to build{' '}
+            <strong style={{ fontWeight: 600, color: '#000000' }}>real intimacy between creators and listeners</strong>. We designed an adaptive artist profile to recognize loyal fans and create belonging without requiring performance.
+          </p>
           {/* Metadata row */}
-          <div className="cs-metadata" style={{ background: '#F3F3F3', borderRadius: 24, padding: '24px 72px', display: 'flex', justifyContent: 'space-between' }}>
+          <div className="cs-metadata" style={{ background: '#F4F6F6', borderRadius: 24, padding: 24, display: 'flex', justifyContent: 'space-between' }}>
             {[
+              { label: 'Project type', values: ['Amazon Music - Capstone Project'] },
               { label: 'Role', values: ['Product Designer'] },
               { label: 'Timeline', values: ['Jan 2026 -', 'Aug 2026'] },
               { label: 'Team', values: ['2 Design Lead (me!)', '2 Technical Lead', '1 Product Manager'] },
-              { label: 'Tools', values: ['Figma', 'Interaction Design'] },
             ].map(({ label, values }) => (
               <div key={label} style={{ display: 'flex', flexDirection: 'column', gap: 8, width: 160 }}>
-                <span style={{ ...dm, fontSize: 14, fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.05em', lineHeight: '21px', color: '#4A77FF' }}>{label}</span>
+                <span style={{ ...dm, fontSize: 14, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em', lineHeight: '21px', color: '#4A77FF' }}>{label}</span>
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                   {values.map(v => (
                     <span key={v} style={{ ...dm, letterSpacing: '0.01em', fontSize: 17, fontWeight: 400, lineHeight: '27px', color: '#2D2D2D' }}>{v}</span>
@@ -636,40 +592,38 @@ export default function AmazonMusicCaseStudy() {
               </div>
             ))}
           </div>
-        </div>
-      </div>
-
-      <main style={{ position: 'relative' }}>
-        <div className="cs-sidenav-col" style={{ position: 'absolute', top: 72, left: 40, height: 'calc(100% - 300px)', width: 0 }}>
-          <SideNav active={activeSection} />
-        </div>
-        {/* CONTEXT */}
-        <section id="context" className="fade-section" style={{ background: '#FFFFFF', padding: '60px 55px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 32 }}>
-          <div style={{ width: '100%', maxWidth: 920 }}>
-            <SectionLabel text="Context" />
-            <h2 style={{ ...dm, fontSize: 28, fontWeight: 500, lineHeight: '42px', letterSpacing: '0.015em', color: '#000000', margin: 0 }}>
-              The music was all there. The connection wasn&apos;t.
-            </h2>
-          </div>
-          <div style={{ width: '100%', maxWidth: 920, display: 'flex', flexDirection: 'column', gap: 24 }}>
-            <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', letterSpacing: '0.01em', color: '#525252', margin: 0 }}>
-              By 2026, distribution of content had stopped being the differentiator for music streaming platforms. The market had matured past &quot;does it have the song&quot; into &quot;does it understand me.&quot; Users and creators want more than just playback.
-            </p>
-            <div className="am-context-role-row" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 24 }}>
-              <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', letterSpacing: '0.01em', color: '#525252', margin: 0, flex: 1 }}>
-                In our MHCI capstone project at Carnegie Mellon, Amazon Music brought us a challenge:{' '}
-                <strong style={{ fontWeight: 600, color: '#000000' }}>evolve the platform from consumption-centric to an ecosystem that fosters real intimacy between creators and listeners</strong>.
-              </p>
-              <div className="am-context-role-card" style={{ width: 576, flexShrink: 0 }}>
-                <InfoCard
-                  pill="My Role"
-                  body="As the design lead, I owned the Artist Profile end to end, including the Music tab and the You & Artist tab, the two surfaces that carry most of the tier logic in this case study, while directing how all the work rolled up into one coherent system."
-                />
+          {/* What I Did + My Impact */}
+          <div className="cs-hero-overview-row" style={{ display: 'flex', gap: 52 }}>
+            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12 }}>
+              <span style={{ ...dm, fontSize: 14, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em', lineHeight: '21px', color: '#4A77FF' }}>What I Did</span>
+              <ul style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', letterSpacing: '0.01em', color: '#525252', margin: 0, paddingLeft: 20, listStyleType: 'disc' }}>
+                <li>Owned the Artist Profile end to end</li>
+                <li>Designed the Music tab and You &amp; Artist tab, the two surfaces that carry most of the tier logic</li>
+                <li>Defined the tier system and need layers that tied the team&apos;s screens together</li>
+              </ul>
+            </div>
+            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 24 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                <span style={{ ...dm, fontSize: 14, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em', lineHeight: '21px', color: '#4A77FF' }}>My Impact</span>
+                <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#525252' }}>
+                  Testing showed the adaptive system made recognition felt, not just visible.
+                </span>
+              </div>
+              <div className="cs-impact-card" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 20 }}>
+                <span style={{ ...dm, fontSize: 36, fontWeight: 500, lineHeight: '1.2em', color: '#525252', flexShrink: 0 }}>10/10</span>
+                <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+                  <span style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#525252' }}>testers said &quot;it knows me,&quot; unprompted</span>
+                  <span style={{ ...dm, fontSize: 14, fontWeight: 300, lineHeight: '22px', color: '#979797' }}>
+                    <strong style={{ fontWeight: 600 }}>—</strong> Based on moderated testing sessions
+                  </span>
+                </div>
               </div>
             </div>
           </div>
-        </section>
+        </div>
+      </div>
 
+      <main>
         {/* PROBLEM */}
         <section id="problem" className="fade-section am-problem-outer" style={{ background: '#FFFFFF', padding: '60px 55px', display: 'flex', justifyContent: 'center' }}>
           <div className="am-problem-card" style={{ position: 'relative', width: '100%', maxWidth: 920, background: '#2E2E2E', borderRadius: 24, padding: '76px 80px 68px', display: 'flex', flexDirection: 'column', gap: 48, overflow: 'hidden' }}>
@@ -695,17 +649,13 @@ export default function AmazonMusicCaseStudy() {
                 </div>
               </div>
             </div>
-            <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', letterSpacing: '0.01em', color: '#FFFFFF', margin: 0, position: 'relative' }}>
-              We didn&apos;t know yet if this was a narrow interface gap, or a symptom of the bigger thing Amazon Music had asked us to find:{' '}
-              <strong style={{ fontWeight: 600, color: '#FFFFFF' }}>what real intimacy between creators and listeners would require</strong>.
-            </p>
           </div>
         </section>
 
         {/* SOLUTION HIGHLIGHTS */}
-        <section id="solution" className="fade-section" style={{ background: '#FFFFFF', padding: '60px 55px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 32 }}>
-          <div style={{ width: '100%', maxWidth: 920 }}>
-            <SectionLabel text="Solution highlights" />
+        <section id="solution" className="fade-section" style={{ background: '#FFFFFF', padding: '60px 55px 100px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 32 }}>
+          <div style={{ width: '100%', maxWidth: 920, display: 'flex', flexDirection: 'column', gap: 8 }}>
+            <span style={{ ...dm, fontSize: 14, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em', lineHeight: '21px', color: '#4A77FF' }}>Solution highlights</span>
             <h2 style={{ ...dm, fontSize: 36, fontWeight: 500, lineHeight: '120%', letterSpacing: '0.05em', color: '#000000', margin: 0 }}>
               An artist profile that adapts across three tiers, changing what&apos;s shown as recognition builds.
             </h2>
@@ -745,134 +695,133 @@ export default function AmazonMusicCaseStudy() {
           </div>
         </section>
 
+        {/* CONTEXT */}
+        <section id="context" className="fade-section" style={{ background: '#F8F8F8', padding: '80px 55px 40px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 32 }}>
+          <div className="am-context-row" style={{ width: '100%', maxWidth: 920, display: 'flex', gap: 28 }}>
+            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 32 }}>
+              <div>
+                <SectionLabel text="Context" />
+                <h2 style={{ ...dm, fontSize: 28, fontWeight: 500, lineHeight: '42px', letterSpacing: '0.015em', color: '#000000', margin: 0, whiteSpace: 'pre-line' }}>
+                  {"The music was all there. \nThe connection wasn't."}
+                </h2>
+              </div>
+              <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', letterSpacing: '0.01em', color: '#525252', margin: 0 }}>
+                By 2026, distribution of content had stopped being the differentiator for music streaming platforms. The market had matured past &quot;does it have the song&quot; into &quot;does it understand me.&quot;{' '}
+                <strong style={{ fontWeight: 600, color: '#000000' }}>Users and creators want more than just playback.</strong>
+              </p>
+            </div>
+            <img className="am-context-photo" src="/images/amazon-music/context-photo.png" alt="" style={{ width: 478, height: 327, flexShrink: 0, objectFit: 'cover', borderRadius: 24, display: 'block' }} />
+          </div>
+        </section>
+
         {/* RESEARCH */}
-        <section id="research" className="fade-section am-research-outer" style={{ background: '#F8F8F8', padding: '80px 40px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 32 }}>
+        <section id="research" className="fade-section am-research-outer" style={{ background: '#F8F8F8', padding: '80px 40px 120px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 32 }}>
           <div style={{ width: '100%', maxWidth: 920 }}>
             <SectionLabel text="Research" />
             <h2 style={{ ...dm, fontSize: 28, fontWeight: 500, lineHeight: '42px', letterSpacing: '0.015em', color: '#000000', margin: 0 }}>
-              The missing piece wasn&apos;t more features. It was recognition.
+              We spent weeks looking at how to build connection. Turns out it already existed.
             </h2>
           </div>
           <div style={{ width: '100%', maxWidth: 920, display: 'flex', flexDirection: 'column', gap: 24 }}>
             <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', letterSpacing: '0.01em', color: '#525252', margin: 0 }}>
-              We spent 15 weeks to run three research methods in parallel to find what&apos;s missing. By using affinity diagramming to synthesize the results, the findings converged into a main insight and a constraint.
+              We wanted to find out how listeners build connections with creators, and where those connections actually live. Over 15 weeks, we ran three research methods in parallel and synthesized the results through affinity diagramming.
             </p>
             <div className="am-research-row" style={{ display: 'flex', gap: 22 }}>
               <ResearchCard
                 caption="SURVEY · 85 RESPONDENTS"
+                image="/images/amazon-music/research-card-1.png"
                 heading={'Recognition, \nnot social features'}
                 body="Listeners don't want streaming to replicate social media."
               />
               <ResearchCard
                 caption="LISTENER INTERVIEWS · 30 SESH"
-                heading="The app forgets why a song mattered"
-                highlight
+                image="/images/amazon-music/research-card-2.png"
+                heading="Fans gather outside of the platform"
+                body="Listeners use Discord, IG, and other platforms to interact with creators and other fans."
               />
               <ResearchCard
                 caption="CREATOR INTERVIEWS · 12 ARTISTS"
+                image="/images/amazon-music/research-card-3.png"
                 heading="Streaming metrics don't show real fans"
                 body="Creators build trust through live events. Streaming data felt useless and misleading."
               />
             </div>
-            <img className="am-research-connector" src="/images/amazon-music/research-connector.svg" alt="" style={{ width: '100%', height: 96, display: 'block', marginTop: -16, marginBottom: -16 }} />
-            <svg className="am-research-connector-mobile" width="16" height="32" viewBox="0 0 16 32" fill="none" style={{ display: 'none', margin: '-8px auto' }}>
-              <line x1="8" y1="0" x2="8" y2="21" stroke="#4A77FF" strokeWidth="1.5" strokeDasharray="4 3" />
-              <path d="M8 32L14 20H2L8 32Z" fill="#4A77FF" />
-            </svg>
-            <div className="am-constraint-row" style={{ display: 'flex', gap: 26 }}>
-              <div className="am-constraint-box" style={{ width: 292, flexShrink: 0, display: 'flex', flexDirection: 'column', gap: 16, background: '#EFF3FF', border: '1px solid #D5DEFF', borderRadius: 20, padding: '30px 27px' }}>
-                <span style={{ ...dm, fontSize: 12, fontWeight: 700, letterSpacing: '0.115em', color: '#2F55CC', textAlign: 'center' }}>CONSTRAINT</span>
-                <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 8 }}>
-                  <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 20, fontWeight: 600, color: '#101314', textAlign: 'center' }}>Never performed for other people.</span>
-                  <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 14, fontWeight: 400, lineHeight: '22px', color: '#55605F', textAlign: 'center', whiteSpace: 'pre-line' }}>
-                    {'Recognition can’t\ncome from exposure.'}
-                  </span>
-                </div>
-              </div>
-              <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 12, justifyContent: 'center', background: '#525252', borderRadius: 20, padding: '30px 34px' }}>
-                <span style={{ ...dm, fontSize: 12, fontWeight: 700, letterSpacing: '0.115em', color: '#B9C9FF', textAlign: 'center' }}>THE GAP TO CLOSE</span>
-                <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 20, fontWeight: 600, color: '#FFFFFF', textAlign: 'center', whiteSpace: 'pre-line' }}>
-                  {'Not better recommendations or a missing feature. \nThe platform never captured\nwhat actually mattered.'}
+            <div className="am-assumed-found-row" style={{ display: 'flex', gap: 48, padding: '0 12px', marginTop: 24 }}>
+              <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 20 }}>
+                <span style={{ ...dm, fontSize: 14, fontWeight: 700, letterSpacing: '0.12em', color: '#6A6A78' }}>WE ASSUMED</span>
+                <span style={{ ...dm, fontSize: 20, fontWeight: 400, lineHeight: '30px', color: '#6A6A78' }}>
+                  Fan connection was missing from the app, so we should bring in social features.
                 </span>
-                <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 14, fontWeight: 400, lineHeight: '22px', color: '#DCDCDC', textAlign: 'center' }}>
-                  A fan&apos;s history, a creator&apos;s trust isn&apos;t reflected on the platform.
+              </div>
+              <div className="am-assumed-found-divider" style={{ width: 0, alignSelf: 'stretch', borderLeft: '1px solid #4A77FF' }} />
+              <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 20 }}>
+                <span style={{ ...dm, fontSize: 14, fontWeight: 700, letterSpacing: '0.12em', color: '#4A77FF' }}>WE FOUND</span>
+                <span style={{ ...dm, fontSize: 20, fontWeight: 400, lineHeight: '30px', color: '#1C1C24' }}>
+                  The connection already exists. It lives on social media, in fan communities.
+                </span>
+                <span style={{ ...dm, fontSize: 20, fontWeight: 700, lineHeight: '30px', color: '#4A77FF' }}>
+                  Superfans didn&apos;t want it replicated here.
                 </span>
               </div>
             </div>
           </div>
         </section>
 
-        {/* CHOOSING A DIRECTION */}
-        <section id="direction" className="fade-section" style={{ background: '#F8F8F8', padding: '80px 40px', display: 'flex', justifyContent: 'center' }}>
+        {/* REFRAMING THE CHALLENGE */}
+        <section id="hmw" className="fade-section" style={{ background: '#525252', padding: '80px 40px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 48 }}>
           <div style={{ width: '100%', maxWidth: 920, display: 'flex', flexDirection: 'column', gap: 24 }}>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
+            <Pill text="Reframing the challenge" />
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+              <span style={{ ...dm, fontSize: 24, fontWeight: 600, lineHeight: '1.4em', color: '#B9C9FF', textDecoration: 'line-through', textDecorationColor: '#FFFFFF' }}>
+                How do we help build connection in the platform.
+              </span>
+              <span style={{ ...dm, fontSize: 32, fontWeight: 600, lineHeight: '1.4em', color: '#FFFFFF' }}>
+                How do we make someone feel recognized for a relationship the platform has never acknowledged.
+              </span>
+            </div>
+          </div>
+        </section>
+
+        {/* IDEATION */}
+        <section id="direction" className="fade-section" style={{ background: '#FFFFFF', padding: '80px 40px', display: 'flex', justifyContent: 'center' }}>
+          <div style={{ width: '100%', maxWidth: 920, display: 'flex', flexDirection: 'column', gap: 24 }}>
+            <div>
+              <SectionLabel text="Ideation" />
               <h2 style={{ ...dm, fontSize: 28, fontWeight: 500, lineHeight: '42px', letterSpacing: '0.015em', color: '#000000', margin: 0 }}>
-                Choosing a direction
+                The favorite concept wasn&apos;t the one we built.
               </h2>
-              <div className="am-direction-intro" style={{ display: 'flex', gap: 24, alignItems: 'center' }}>
-                <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', letterSpacing: '0.01em', color: '#525252', margin: 0, flex: 1 }}>
-                  Knowing where connection belonged didn&apos;t tell us how to build it. We carried three directions forward and scored each against the same three questions:
-                </p>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 4, flex: 1 }}>
-                  <ChecklistItem text="Would it move Amazon Music?" />
-                  <ChecklistItem text="Can the ecosystem carry it?" />
-                  <ChecklistItem text="How strongly did our own research point here?" />
-                </div>
-              </div>
             </div>
-            <div className="am-direction-row" style={{ display: 'flex', gap: 22 }}>
-              <ConceptCard
-                number="01"
-                title="Shared Context"
-                body="Restore the context a song had when it was discovered. Real listener interest, but artist value stayed indirect and cold-start content refresh was expensive."
-                criteria={[
-                  { label: 'Moves Amazon Music', state: 'empty', symbolColor: '#D9DCDC' },
-                  { label: 'Ecosystem can carry it', state: 'empty', symbolColor: '#D9DCDC' },
-                  { label: 'Evidence points here', state: 'half', symbolColor: '#4A77FF' },
-                ]}
-              />
-              <ConceptCard
-                number="02"
-                title="Creator Feedback"
-                body="Low-stakes sandboxes rewarding participation over algorithmic optimization. Strong creator signal, weak listener signal, needed simultaneous creator and fan adoption."
-                criteria={[
-                  { label: 'Moves Amazon Music', state: 'half', symbolColor: '#4A77FF' },
-                  { label: 'Ecosystem can carry it', state: 'empty', symbolColor: '#D9DCDC' },
-                  { label: 'Evidence points here', state: 'empty', symbolColor: '#D9DCDC' },
-                ]}
-              />
-              <ConceptCard
-                number="03"
-                title="Recognized Listening"
-                body="Make loyal fans feel seen through the listening experience itself, can be extended to Alexa instead of requiring new infrastructure, and superfan loyalty is where retention concentrates."
-                winner
-                dark
-                criteria={[
-                  { label: 'Moves Amazon Music', state: 'full', symbolColor: '#B9C9FF' },
-                  { label: 'Ecosystem can carry it', state: 'full', symbolColor: '#B9C9FF' },
-                  { label: 'Evidence points here', state: 'full', symbolColor: '#B9C9FF' },
-                ]}
-              />
-            </div>
-          </div>
-        </section>
-
-        {/* PROBLEM STATEMENT */}
-        <section id="problem-statement" className="fade-section" style={{ background: '#2E2E2E', padding: '80px 40px', display: 'flex', justifyContent: 'center' }}>
-          <div style={{ width: '100%', maxWidth: 920, display: 'flex', flexDirection: 'column', gap: 24 }}>
-            <Pill text="Problem Statement" />
-            <div className="am-problem-statement-row" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 24 }}>
-              <div style={{ width: 507, flexShrink: 0, display: 'flex', flexDirection: 'column', gap: 24 }}>
-                <span style={{ ...dm, fontSize: 36, fontWeight: 500, lineHeight: '1.4em', letterSpacing: '0.05em', color: '#FFFFFF' }}>
-                  Amazon Music can make loyal fans feel seen and part of an artist&apos;s tribe.
-                </span>
-                <span style={{ ...dm, fontSize: 24, fontWeight: 600, letterSpacing: '0.05em', color: '#B9C9FF', whiteSpace: 'pre-line' }}>
-                  {'Through listening experience itself.  \nNot a social layer.'}
-                </span>
-              </div>
-              <p style={{ ...dm, fontSize: 17, fontWeight: 200, lineHeight: '27px', letterSpacing: '0.05em', color: '#FFFFFF', opacity: 0.7, width: 275, flexShrink: 0, margin: 0 }}>
-                Choosing this direction meant setting the creator research aside for this phase. If this system extends to the creator side later, that research is where it starts.
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 48 }}>
+              <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', letterSpacing: '0.01em', color: '#525252', margin: 0 }}>
+                We sketched about two hundred ideas, narrowed them to three concepts. Each a different take on how a platform could acknowledge a relationship that already exists. Then we tested them in parallel with over twenty participants.
               </p>
+              <div className="am-scored-against-row" style={{ display: 'flex', alignItems: 'center', gap: 20, flexWrap: 'wrap' }}>
+                <span style={{ ...dm, fontSize: 14, color: '#979797' }}>SCORED AGAINST</span>
+                {['Comprehension', 'Desirability', 'RICE-style comparison'].map(tag => (
+                  <span key={tag} style={{ ...dm, fontSize: 14, color: '#4A4A55', background: '#E2E2E9', borderRadius: 7, padding: '7px 14px' }}>{tag}</span>
+                ))}
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 22 }}>
+                <IdeationCard
+                  winner
+                  title="Adaptive UI"
+                  subtitle="Shifted the interface as users' relationship with the artists grow."
+                  rationale="It wasn't the favorite, but it pays off over the whole relationship rather than one session, and it asks nothing new of the user, working from listening they already do."
+                  image="/images/amazon-music/concept-adaptive-ui.png"
+                />
+                <IdeationCard
+                  title="Character/gamification"
+                  subtitle="Turned listening history into a character that evolves with you."
+                  rationale="Most loved, but riskiest: the novelty would fade, and it favored bigger artists. We dropped the concept but kept listening history as the signal for recognition."
+                  image="/images/amazon-music/concept-gamification.png"
+                />
+                <IdeationCard
+                  title="Situational Context"
+                  subtitle="Adapted content to moment, activity, and intent, with more manual control."
+                  rationale="It helped new users, but it didn't scale and participants are hesitant about more manual input. We kept the context-aware mindset carried forward."
+                  image="/images/amazon-music/concept-situational-context.png"
+                />
+              </div>
             </div>
           </div>
         </section>
@@ -880,12 +829,12 @@ export default function AmazonMusicCaseStudy() {
         {/* SOLUTION SYSTEM */}
         <section id="solution-system" className="fade-section am-solution-system-outer" style={{ background: '#FFFFFF', padding: '80px 40px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 32 }}>
           <div style={{ width: '100%', maxWidth: 920, display: 'flex', flexDirection: 'column', gap: 24 }}>
-            <SectionLabel text="Solution system" />
+            <SectionLabel text="System design" />
             <h2 style={{ ...dm, fontSize: 42, fontWeight: 500, lineHeight: '1.2em', letterSpacing: '0.05em', color: '#000000', margin: 0 }}>
               The catalog stays the same. The interface changes based on how well it knows you.
             </h2>
             <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', letterSpacing: '0.01em', color: '#525252', margin: 0 }}>
-              We designed an <strong style={{ fontWeight: 500, color: '#000000' }}>adaptive UI</strong> for the Amazon Music app, a system that reads a listener&apos;s relationship with one artist and adapts the page as it grows.
+              <strong style={{ fontWeight: 500, color: '#000000' }}>Adaptive UI</strong> won because it asks nothing new of listeners, so I led the design of a system that works from listening alone. It reads each person&apos;s relationship with an artist and adapts the page as that relationship grows.
             </p>
           </div>
 
@@ -1192,6 +1141,7 @@ export default function AmazonMusicCaseStudy() {
           </div>
         </section>
       </main>
+      </div>
 
       {/* Next Project */}
       <div
@@ -1208,7 +1158,14 @@ export default function AmazonMusicCaseStudy() {
           style={{ display: 'flex', alignItems: 'center', gap: 48, textDecoration: 'none' }}
         >
           <div className="cs-next-project-img" style={{ width: 499, height: 315, flexShrink: 0, borderRadius: 20, overflow: 'hidden', boxShadow: '4px 4px 12px rgba(0,0,0,0.12)' }}>
-            <img src="/images/work-card-1.png" alt="Ahoku Smart Homecare Device" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+            <video
+              src="/videos/ant-metrics-thumbnail.mp4"
+              autoPlay
+              muted
+              loop
+              playsInline
+              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            />
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
             <h3 style={{ ...dm, letterSpacing: '0.01em', fontSize: 24, fontWeight: 700, color: '#2D2D2D', margin: 0 }}>Ahoku Smart Homecare Device</h3>
