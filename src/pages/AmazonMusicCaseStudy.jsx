@@ -554,18 +554,18 @@ export default function AmazonMusicCaseStudy() {
       <Nav fixed />
 
       {/* Banner */}
-      <div style={{ marginTop: 80, width: '100%', aspectRatio: '1280 / 400', overflow: 'hidden' }}>
-        <img src="/images/amazon-music/case-study-banner.png" alt="Amazon Music Superfan artist profile shown on a phone" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+      <div style={{ marginTop: 80, width: '100%', aspectRatio: '1280 / 520', overflow: 'hidden' }}>
+        <img src="/images/amazon-music/case-study-banner-v2.png" alt="Amazon Music artist profile's You &amp; Olivia and Superfan screens shown on two phones" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
       </div>
 
       {/* Case study hero + main share one relative wrapper so the sidenav can
           start at the hero title instead of at the Problem section. */}
       <div style={{ position: 'relative' }}>
-      <div className="cs-sidenav-col" style={{ position: 'absolute', top: 68, left: 40, height: 'calc(100% - 300px)', width: 0 }}>
+      <div className="cs-sidenav-col" style={{ position: 'absolute', top: 168, left: 40, height: 'calc(100% - 300px)', width: 0 }}>
         <SideNav active={activeSection} />
       </div>
       {/* Case study hero */}
-      <div className="cs-hero-outer" style={{ background: '#FFFFFF', display: 'flex', justifyContent: 'center', padding: '60px 40px 40px' }}>
+      <div className="cs-hero-outer" style={{ background: '#FFFFFF', display: 'flex', justifyContent: 'center', padding: '160px 40px 40px' }}>
         <div id="overview" className="cs-hero-inner" style={{ width: '100%', maxWidth: 920, display: 'flex', flexDirection: 'column', gap: 40 }}>
           <h1 style={{ ...dm, fontSize: 52, fontWeight: 800, lineHeight: '54px', letterSpacing: '-0.0288em', color: '#101314', margin: 0 }}>
             Adaptive UI for Amazon Music
