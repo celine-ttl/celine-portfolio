@@ -2,6 +2,25 @@ import { useEffect, useState } from 'react'
 
 const dm = { fontFamily: 'DM Sans, sans-serif' }
 const STAMPS_PER_CARD = 10
+const STAMP_IMAGES = [
+  '/images/footer/stamp-mark.png',
+  '/images/footer/stamp-beans.png',
+  '/images/footer/stamp-coffee.png',
+  '/images/footer/stamp-crossaint.png',
+  '/images/footer/stamp-toast.png',
+]
+const CURSOR_IMAGES = [
+  { src: '/images/footer/cursor-stamp-mark.png', hotspot: [21, 24] },
+  { src: '/images/footer/cursor-stamp-beans.png', hotspot: [24, 24] },
+  { src: '/images/footer/cursor-stamp-coffee.png', hotspot: [24, 24] },
+  { src: '/images/footer/cursor-stamp-crossaint.png', hotspot: [24, 24] },
+  { src: '/images/footer/cursor-stamp-toast.png', hotspot: [24, 24] },
+]
+
+function pickNextImg(excludeImg) {
+  const choices = [0, 1, 2, 3, 4].filter(i => i !== excludeImg)
+  return choices[Math.floor(Math.random() * choices.length)]
+}
 
 function ArrowDiagonal() {
   return (
@@ -11,8 +30,9 @@ function ArrowDiagonal() {
   )
 }
 
-function Stamp({ x, y }) {
+function Stamp({ x, y, img }) {
   const rotate = ((Math.round(x * 7 + y * 13) % 30) - 15)
+  const src = STAMP_IMAGES[img] ?? STAMP_IMAGES[0]
   return (
     <span
       style={{
@@ -23,7 +43,7 @@ function Stamp({ x, y }) {
       }}
     >
       <img
-        src="/images/footer/stamp-mark.png"
+        src={src}
         alt=""
         className="footer-stamp-pop"
         style={{ width: '100%', height: 'auto', display: 'block' }}
@@ -32,7 +52,8 @@ function Stamp({ x, y }) {
   )
 }
 
-function StampCard({ card, count, stamps, onStamp, canStamp, cardAnim }) {
+function StampCard({ card, total, stamps, onStamp, canStamp, cardAnim, nextImg }) {
+  const cursor = CURSOR_IMAGES[nextImg] ?? CURSOR_IMAGES[0]
   return (
     <div className="footer-stampcard-wrap" style={{ position: 'relative', width: 470, height: 270, flexShrink: 0 }}>
       {/* Older card peeking out from behind for depth */}
@@ -55,7 +76,7 @@ function StampCard({ card, count, stamps, onStamp, canStamp, cardAnim }) {
           position: 'absolute', inset: 0,
           background: '#C8DBF1',
           boxShadow: '0px 2px 16px rgba(16,22,23,0.05)',
-          border: 'none', padding: '28px 32px', cursor: canStamp ? 'url(/images/footer/stamp-cursor.png) 21 24, pointer' : 'default',
+          border: 'none', padding: '28px 32px', cursor: canStamp ? `url(${cursor.src}) ${cursor.hotspot[0]} ${cursor.hotspot[1]}, pointer` : 'default',
           display: 'flex', flexDirection: 'column', gap: 18, textAlign: 'left',
           WebkitTapHighlightColor: 'transparent', overflow: 'hidden',
         }}
@@ -81,10 +102,10 @@ function StampCard({ card, count, stamps, onStamp, canStamp, cardAnim }) {
           </div>
         </div>
         {stamps.map((s, i) => (
-          <Stamp key={`${card}-${i}`} x={s.x} y={s.y} />
+          <Stamp key={`${card}-${i}`} x={s.x} y={s.y} img={s.img} />
         ))}
         <span style={{ ...dm, fontSize: 14, fontWeight: 700, letterSpacing: '0.04em', textTransform: 'uppercase', color: '#B40205', marginTop: 'auto', transform: 'translateY(4px)' }}>
-          Card No.{card} · {count} {count === 1 ? 'stamp' : 'stamps'} collected
+          Card No.{card} · {total} {total === 1 ? 'stamp' : 'stamps'} collected
         </span>
       </button>
     </div>
@@ -92,9 +113,10 @@ function StampCard({ card, count, stamps, onStamp, canStamp, cardAnim }) {
 }
 
 export default function Footer({ id }) {
-  const [stampState, setStampState] = useState({ card: 1, count: 0, stamps: [] })
+  const [stampState, setStampState] = useState({ card: 1, count: 0, total: 0, stamps: [] })
   const [canStamp, setCanStamp] = useState(false)
   const [cardAnim, setCardAnim] = useState('idle')
+  const [nextImg, setNextImg] = useState(() => pickNextImg())
 
   useEffect(() => {
     let cancelled = false
@@ -104,6 +126,8 @@ export default function Footer({ id }) {
         if (cancelled || !data) return
         setStampState(data)
         setCanStamp(true)
+        const lastImg = data.stamps?.[data.stamps.length - 1]?.img
+        setNextImg(pickNextImg(lastImg))
       })
       .catch(() => {})
     return () => { cancelled = true }
@@ -114,21 +138,23 @@ export default function Footer({ id }) {
     const rect = e.currentTarget.getBoundingClientRect()
     const x = Math.min(94, Math.max(6, ((e.clientX - rect.left) / rect.width) * 100))
     const y = Math.min(82, Math.max(22, ((e.clientY - rect.top) / rect.height) * 100))
+    const img = nextImg
     setCanStamp(false)
     fetch('/api/stamps', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ x, y }),
+      body: JSON.stringify({ x, y, img }),
     })
       .then(r => (r.ok ? r.json() : null))
       .then(data => {
         if (!data) { setCanStamp(true); return }
         setStampState(data)
         setCanStamp(true)
+        setNextImg(pickNextImg(img))
         if (data.count === STAMPS_PER_CARD) {
           setTimeout(() => setCardAnim('leaving'), 500)
           setTimeout(() => {
-            setStampState(prev => (prev.card === data.card ? { card: data.card + 1, count: 0, stamps: [] } : prev))
+            setStampState(prev => (prev.card === data.card ? { card: data.card + 1, count: 0, total: data.total, stamps: [] } : prev))
             setCardAnim('entering')
           }, 950)
           setTimeout(() => setCardAnim('idle'), 1350)
@@ -178,11 +204,12 @@ export default function Footer({ id }) {
           </div>
           <StampCard
             card={stampState.card}
-            count={stampState.count}
+            total={stampState.total}
             stamps={stampState.stamps ?? []}
             onStamp={handleStamp}
             canStamp={canStamp}
             cardAnim={cardAnim}
+            nextImg={nextImg}
           />
         </div>
         <div className="site-footer-bottom flex flex-col sm:flex-row justify-between items-start sm:items-center" style={{ borderTop: '1px solid rgba(0,0,0,0.2)', paddingTop: 24, gap: 16 }}>

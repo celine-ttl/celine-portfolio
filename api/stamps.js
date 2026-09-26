@@ -1,8 +1,14 @@
 import { Redis } from '@upstash/redis'
 
 const STAMPS_PER_CARD = 10
+const STAMP_IMAGE_COUNT = 5
 const TOTAL_KEY = 'portfolio:stamp-total'
 const POSITIONS_KEY = 'portfolio:stamp-positions'
+
+function pickImage(prevImg) {
+  const choices = Array.from({ length: STAMP_IMAGE_COUNT }, (_, i) => i).filter(i => i !== prevImg)
+  return choices[Math.floor(Math.random() * choices.length)]
+}
 
 function getClient() {
   const url = process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL
@@ -40,16 +46,24 @@ export default async function handler(req, res) {
   }
 
   if (req.method === 'POST') {
-    const { x, y } = req.body ?? {}
+    const { x, y, img: requestedImg } = req.body ?? {}
     const nx = Number(x)
     const ny = Number(y)
     if (!Number.isFinite(nx) || !Number.isFinite(ny)) {
       res.status(400).json({ error: 'Expected numeric x and y (0-100).' })
       return
     }
+    const [lastRaw] = await redis.lrange(POSITIONS_KEY, -1, -1)
+    const last = lastRaw ? (typeof lastRaw === 'string' ? JSON.parse(lastRaw) : lastRaw) : null
+    // Trust the client's chosen image (it's what the cursor showed), but
+    // never let it repeat the previous stamp's image, even if the client's
+    // state was stale.
+    const isValid = Number.isInteger(requestedImg) && requestedImg >= 0 && requestedImg < STAMP_IMAGE_COUNT
+    const img = isValid && requestedImg !== last?.img ? requestedImg : pickImage(last?.img)
+
     const total = await redis.incr(TOTAL_KEY)
     const state = describe(total)
-    await redis.rpush(POSITIONS_KEY, JSON.stringify({ x: nx, y: ny }))
+    await redis.rpush(POSITIONS_KEY, JSON.stringify({ x: nx, y: ny, img }))
     const stamps = await currentStamps(redis, state.count)
     res.status(200).json({ ...state, stamps })
     return
