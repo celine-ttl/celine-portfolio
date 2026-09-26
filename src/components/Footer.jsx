@@ -60,7 +60,7 @@ function StampCard({ card, count, stamps, onStamp, canStamp }) {
           WebkitTapHighlightColor: 'transparent', overflow: 'hidden',
         }}
       >
-        <img src="/images/footer/stampcard-title.png" alt="Visitor Stamp Card" style={{ height: 36, width: 'auto', display: 'block', objectFit: 'contain' }} />
+        <img src="/images/footer/stampcard-title.png" alt="Visitor Stamp Card" style={{ height: 36, width: 'auto', display: 'block', objectFit: 'contain', marginTop: -8 }} />
         <img src="/images/footer/footer-coffee.png" alt="" style={{ position: 'absolute', right: -20, bottom: -30, width: 130, height: 130, opacity: 0.9, pointerEvents: 'none' }} />
         <div
           aria-hidden="true"
