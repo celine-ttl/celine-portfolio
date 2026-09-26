@@ -124,6 +124,11 @@ export default function Footer({ id }) {
         if (!data) { setCanStamp(true); return }
         setStampState(data)
         setCanStamp(true)
+        if (data.count === STAMPS_PER_CARD) {
+          setTimeout(() => {
+            setStampState(prev => (prev.card === data.card ? { card: data.card + 1, count: 0, stamps: [] } : prev))
+          }, 900)
+        }
       })
       .catch(() => setCanStamp(true))
   }
