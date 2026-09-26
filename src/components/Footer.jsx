@@ -9,6 +9,7 @@ const STAMP_IMAGES = [
   '/images/footer/stamp-crossaint.png',
   '/images/footer/stamp-toast.png',
 ]
+const STAMP_SIZES = [60, 52, 52, 52, 52]
 const CURSOR_IMAGES = [
   { src: '/images/footer/cursor-stamp-mark.png', hotspot: [21, 24] },
   { src: '/images/footer/cursor-stamp-beans.png', hotspot: [24, 17] },
@@ -31,14 +32,14 @@ function ArrowDiagonal() {
 }
 
 function Stamp({ x, y, img }) {
-  const rotate = ((Math.round(x * 7 + y * 13) % 30) - 15)
   const src = STAMP_IMAGES[img] ?? STAMP_IMAGES[0]
+  const size = STAMP_SIZES[img] ?? 52
   return (
     <span
       style={{
         position: 'absolute', left: `${x}%`, top: `${y}%`,
-        width: 52, height: 52,
-        transform: `translate(-50%, -50%) rotate(${rotate}deg)`,
+        width: size, height: size,
+        transform: 'translate(-50%, -50%)',
         pointerEvents: 'none', display: 'block',
       }}
     >
