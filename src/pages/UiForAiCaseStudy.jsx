@@ -680,9 +680,9 @@ export default function UiForAiCaseStudy() {
             <div className="cs-two-col" style={{ display: 'flex', flexDirection: 'row', gap: 24 }}>
               <div style={{ flex: 1, background: '#FFFFFF', borderRadius: 24, padding: 24, boxShadow: '2px 2px 10px 0px rgba(0,0,0,0.03), -2px -2px 10px 0px rgba(0,0,0,0.03)', border: '1px solid #ECEEEE', display: 'flex', flexDirection: 'column', gap: 12 }}>
                 <Pill text="What I'd done differently" />
-                <h4 style={{ ...dm, fontSize: 24, fontWeight: 700, color: '#000000', margin: 0, whiteSpace: 'pre-line' }}>{'Define success metrics\nup front'}</h4>
+                <h4 style={{ ...dm, fontSize: 24, fontWeight: 700, color: '#000000', margin: 0, whiteSpace: 'pre-line' }}>{'Segment by why,\nnot just how much.'}</h4>
                 <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#525252', margin: 0 }}>
-                  The core problem was measurable: users re-ask instead of retrieving. I'd have set a target early — reduction in re-asking, or time to find a past output — so the solution could be evaluated against the problem rather than argued for.
+                  Testing surfaced two user types: everyday users and power users. But intensity doesn&apos;t capture the full picture. Someone doing creative synthesis and someone doing casual research behave differently not because of how much they use AI chat, but because of why they&apos;re there. Next time I&apos;d segment by use case from the start so the solution gets tested against the actual workflows it&apos;s meant to serve.
                 </p>
               </div>
               <div style={{ flex: 1, background: '#FFFFFF', borderRadius: 24, padding: 24, boxShadow: '2px 2px 10px 0px rgba(0,0,0,0.03), -2px -2px 10px 0px rgba(0,0,0,0.03)', border: '1px solid #ECEEEE', display: 'flex', flexDirection: 'column', gap: 12 }}>
