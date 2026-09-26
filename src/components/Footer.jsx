@@ -11,10 +11,10 @@ const STAMP_IMAGES = [
 ]
 const CURSOR_IMAGES = [
   { src: '/images/footer/cursor-stamp-mark.png', hotspot: [21, 24] },
-  { src: '/images/footer/cursor-stamp-beans.png', hotspot: [24, 24] },
-  { src: '/images/footer/cursor-stamp-coffee.png', hotspot: [24, 24] },
-  { src: '/images/footer/cursor-stamp-crossaint.png', hotspot: [24, 24] },
-  { src: '/images/footer/cursor-stamp-toast.png', hotspot: [24, 24] },
+  { src: '/images/footer/cursor-stamp-beans.png', hotspot: [24, 17] },
+  { src: '/images/footer/cursor-stamp-coffee.png', hotspot: [24, 18] },
+  { src: '/images/footer/cursor-stamp-crossaint.png', hotspot: [24, 15] },
+  { src: '/images/footer/cursor-stamp-toast.png', hotspot: [21, 24] },
 ]
 
 function pickNextImg(excludeImg) {
