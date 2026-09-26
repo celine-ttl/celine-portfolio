@@ -409,6 +409,24 @@ export default function AmazonMusicCaseStudy() {
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 })
   const [cursorVisible, setCursorVisible] = useState(false)
   const [activeSection, setActiveSection] = useState('overview')
+  const [bannerOffset, setBannerOffset] = useState(0)
+
+  useEffect(() => {
+    let ticking = false
+    const update = () => {
+      setBannerOffset(Math.min(window.scrollY * 0.2, 60))
+      ticking = false
+    }
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true
+        requestAnimationFrame(update)
+      }
+    }
+    update()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   useEffect(() => {
     const sectionMap = {
@@ -555,7 +573,11 @@ export default function AmazonMusicCaseStudy() {
 
       {/* Banner */}
       <div style={{ marginTop: 80, width: '100%', aspectRatio: '1280 / 520', overflow: 'hidden' }}>
-        <img src="/images/amazon-music/case-study-banner-v2.png" alt="Amazon Music artist profile's You &amp; Olivia and Superfan screens shown on two phones" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+        <img
+          src="/images/amazon-music/case-study-banner-v2.png"
+          alt="Amazon Music artist profile's You &amp; Olivia and Superfan screens shown on two phones"
+          style={{ width: '100%', height: '120%', objectFit: 'cover', objectPosition: 'top', display: 'block', transform: `translateY(-${bannerOffset}px)`, willChange: 'transform' }}
+        />
       </div>
 
       {/* Case study hero + main share one relative wrapper so the sidenav can
