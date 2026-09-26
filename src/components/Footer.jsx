@@ -65,7 +65,7 @@ function StampCard({ card, count, stamps, onStamp, canStamp, cardAnim }) {
         <div
           aria-hidden="true"
           style={{
-            position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)',
+            position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, calc(-50% + 4px))',
             display: 'flex', flexDirection: 'column', gap: 12, pointerEvents: 'none',
           }}
         >
@@ -83,8 +83,8 @@ function StampCard({ card, count, stamps, onStamp, canStamp, cardAnim }) {
         {stamps.map((s, i) => (
           <Stamp key={`${card}-${i}`} x={s.x} y={s.y} />
         ))}
-        <span style={{ ...dm, fontSize: 14, fontWeight: 700, letterSpacing: '0.04em', textTransform: 'uppercase', color: '#B40205', marginTop: 'auto' }}>
-          Card No.{card} · {count} of {STAMPS_PER_CARD} stamped
+        <span style={{ ...dm, fontSize: 14, fontWeight: 700, letterSpacing: '0.04em', textTransform: 'uppercase', color: '#B40205', marginTop: 'auto', transform: 'translateY(4px)' }}>
+          Card No.{card} · {count} {count === 1 ? 'stamp' : 'stamps'} collected
         </span>
       </button>
     </div>
