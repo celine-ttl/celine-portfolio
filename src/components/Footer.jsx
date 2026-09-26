@@ -62,6 +62,24 @@ function StampCard({ card, count, stamps, onStamp, canStamp }) {
       >
         <img src="/images/footer/stampcard-title.png" alt="Visitor Stamp Card" style={{ height: 36, width: 'auto', display: 'block', objectFit: 'contain' }} />
         <img src="/images/footer/footer-coffee.png" alt="" style={{ position: 'absolute', right: -20, bottom: -30, width: 130, height: 130, opacity: 0.9, pointerEvents: 'none' }} />
+        <div
+          aria-hidden="true"
+          style={{
+            position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)',
+            display: 'flex', flexDirection: 'column', gap: 12, pointerEvents: 'none',
+          }}
+        >
+          <div style={{ display: 'flex', gap: 20 }}>
+            {[0, 1, 2, 3, 4].map(i => (
+              <div key={i} style={{ width: 64, height: 64, borderRadius: '50%', background: '#FCF9F2', flexShrink: 0 }} />
+            ))}
+          </div>
+          <div style={{ display: 'flex', gap: 20 }}>
+            {[5, 6, 7, 8, 9].map(i => (
+              <div key={i} style={{ width: 64, height: 64, borderRadius: '50%', background: '#FCF9F2', flexShrink: 0 }} />
+            ))}
+          </div>
+        </div>
         {stamps.map((s, i) => (
           <Stamp key={`${card}-${i}`} x={s.x} y={s.y} />
         ))}
