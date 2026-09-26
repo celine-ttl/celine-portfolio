@@ -195,7 +195,8 @@ export default function Footer({ id }) {
         <div className="site-footer-top flex flex-col lg:flex-row justify-between items-start lg:items-center" style={{ gap: 48 }}>
           <div className="site-footer-identity flex flex-col" style={{ gap: 32, maxWidth: 447 }}>
             <h2 className="text-black text-[48px] leading-[48px]" style={{ ...dm, fontWeight: 800 }}>
-              Let&apos;s work together!
+              Thank&apos;s for
+              <br />stopping by!
             </h2>
             <p className="text-[#2D2D2D] text-[17px] font-normal leading-[27px]" style={dm}>
               I&apos;m currently available for new work.
