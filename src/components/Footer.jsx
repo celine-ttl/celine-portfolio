@@ -11,18 +11,28 @@ function ArrowDiagonal() {
   )
 }
 
-function StampSlot({ filled, justStamped }) {
+function Stamp({ x, y }) {
+  const rotate = ((Math.round(x * 7 + y * 13) % 30) - 15)
   return (
-    <div
-      className={justStamped ? 'footer-stamp-pop' : undefined}
-      style={{ width: 64, height: 64, borderRadius: '50%', background: '#FCF9F2', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}
+    <span
+      style={{
+        position: 'absolute', left: `${x}%`, top: `${y}%`,
+        width: 52, height: 52,
+        transform: `translate(-50%, -50%) rotate(${rotate}deg)`,
+        pointerEvents: 'none', display: 'block',
+      }}
     >
-      {filled && <img src="/images/footer/stamp-mark.png" alt="" style={{ width: 40, height: 'auto', display: 'block' }} />}
-    </div>
+      <img
+        src="/images/footer/stamp-mark.png"
+        alt=""
+        className="footer-stamp-pop"
+        style={{ width: '100%', height: 'auto', display: 'block' }}
+      />
+    </span>
   )
 }
 
-function StampCard({ card, count, onStamp, canStamp, justStampedAt }) {
+function StampCard({ card, count, stamps, onStamp, canStamp }) {
   return (
     <div className="footer-stampcard-wrap" style={{ position: 'relative', width: 470, height: 270, flexShrink: 0 }}>
       {/* Older card peeking out from behind for depth */}
@@ -52,19 +62,10 @@ function StampCard({ card, count, onStamp, canStamp, justStampedAt }) {
       >
         <img src="/images/footer/stampcard-title.png" alt="Visitor Stamp Card" style={{ height: 36, width: 'auto', display: 'block', objectFit: 'contain' }} />
         <img src="/images/footer/footer-coffee.png" alt="" style={{ position: 'absolute', right: -20, bottom: -30, width: 130, height: 130, opacity: 0.9, pointerEvents: 'none' }} />
-        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 12 }}>
-          <div style={{ display: 'flex', gap: 20 }}>
-            {[0, 1, 2, 3, 4].map(i => (
-              <StampSlot key={i} filled={i < count} justStamped={i === justStampedAt} />
-            ))}
-          </div>
-          <div style={{ display: 'flex', gap: 20 }}>
-            {[5, 6, 7, 8, 9].map(i => (
-              <StampSlot key={i} filled={i < count} justStamped={i === justStampedAt} />
-            ))}
-          </div>
-        </div>
-        <span style={{ ...dm, fontSize: 14, fontWeight: 700, letterSpacing: '0.04em', textTransform: 'uppercase', color: '#B40205' }}>
+        {stamps.map((s, i) => (
+          <Stamp key={`${card}-${i}`} x={s.x} y={s.y} />
+        ))}
+        <span style={{ ...dm, fontSize: 14, fontWeight: 700, letterSpacing: '0.04em', textTransform: 'uppercase', color: '#B40205', marginTop: 'auto' }}>
           Card No.{card} · {count} of {STAMPS_PER_CARD} stamped
         </span>
       </button>
@@ -73,9 +74,8 @@ function StampCard({ card, count, onStamp, canStamp, justStampedAt }) {
 }
 
 export default function Footer({ id }) {
-  const [stampState, setStampState] = useState({ card: 1, count: 0 })
+  const [stampState, setStampState] = useState({ card: 1, count: 0, stamps: [] })
   const [canStamp, setCanStamp] = useState(false)
-  const [justStampedAt, setJustStampedAt] = useState(null)
 
   useEffect(() => {
     let cancelled = false
@@ -90,16 +90,21 @@ export default function Footer({ id }) {
     return () => { cancelled = true }
   }, [])
 
-  const handleStamp = () => {
+  const handleStamp = (e) => {
     if (!canStamp) return
+    const rect = e.currentTarget.getBoundingClientRect()
+    const x = Math.min(94, Math.max(6, ((e.clientX - rect.left) / rect.width) * 100))
+    const y = Math.min(82, Math.max(22, ((e.clientY - rect.top) / rect.height) * 100))
     setCanStamp(false)
-    fetch('/api/stamps', { method: 'POST' })
+    fetch('/api/stamps', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ x, y }),
+    })
       .then(r => (r.ok ? r.json() : null))
       .then(data => {
         if (!data) { setCanStamp(true); return }
         setStampState(data)
-        setJustStampedAt((data.count - 1 + STAMPS_PER_CARD) % STAMPS_PER_CARD)
-        setTimeout(() => setJustStampedAt(null), 500)
         setCanStamp(true)
       })
       .catch(() => setCanStamp(true))
@@ -113,7 +118,7 @@ export default function Footer({ id }) {
           60% { transform: scale(1.15); opacity: 1; }
           100% { transform: scale(1); opacity: 1; }
         }
-        .footer-stamp-pop img { animation: footerStampPop 0.4s ease; }
+        .footer-stamp-pop { animation: footerStampPop 0.4s ease; }
         .footer-stampcard { transition: transform 0.2s ease, box-shadow 0.2s ease; }
         .footer-stampcard:not(:disabled):hover { transform: translateY(-4px); box-shadow: 0px 8px 24px rgba(16,22,23,0.14); }
         .footer-stampcard:not(:disabled):active { transform: translateY(-1px) scale(0.99); }
@@ -137,9 +142,9 @@ export default function Footer({ id }) {
           <StampCard
             card={stampState.card}
             count={stampState.count}
+            stamps={stampState.stamps ?? []}
             onStamp={handleStamp}
             canStamp={canStamp}
-            justStampedAt={justStampedAt}
           />
         </div>
         <div className="site-footer-bottom flex flex-col sm:flex-row justify-between items-start sm:items-center" style={{ borderTop: '1px solid rgba(0,0,0,0.2)', paddingTop: 24, gap: 16 }}>

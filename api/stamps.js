@@ -1,7 +1,8 @@
 import { Redis } from '@upstash/redis'
 
 const STAMPS_PER_CARD = 10
-const KEY = 'portfolio:stamp-total'
+const TOTAL_KEY = 'portfolio:stamp-total'
+const POSITIONS_KEY = 'portfolio:stamp-positions'
 
 function getClient() {
   const url = process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL
@@ -17,6 +18,12 @@ function describe(total) {
   return { card, count, total }
 }
 
+async function currentStamps(redis, count) {
+  if (count <= 0) return []
+  const raw = await redis.lrange(POSITIONS_KEY, -count, -1)
+  return raw.map(entry => (typeof entry === 'string' ? JSON.parse(entry) : entry))
+}
+
 export default async function handler(req, res) {
   const redis = getClient()
   if (!redis) {
@@ -25,14 +32,26 @@ export default async function handler(req, res) {
   }
 
   if (req.method === 'GET') {
-    const total = Number((await redis.get(KEY)) ?? 0)
-    res.status(200).json(describe(total))
+    const total = Number((await redis.get(TOTAL_KEY)) ?? 0)
+    const state = describe(total)
+    const stamps = await currentStamps(redis, state.count)
+    res.status(200).json({ ...state, stamps })
     return
   }
 
   if (req.method === 'POST') {
-    const total = await redis.incr(KEY)
-    res.status(200).json(describe(total))
+    const { x, y } = req.body ?? {}
+    const nx = Number(x)
+    const ny = Number(y)
+    if (!Number.isFinite(nx) || !Number.isFinite(ny)) {
+      res.status(400).json({ error: 'Expected numeric x and y (0-100).' })
+      return
+    }
+    const total = await redis.incr(TOTAL_KEY)
+    const state = describe(total)
+    await redis.rpush(POSITIONS_KEY, JSON.stringify({ x: nx, y: ny }))
+    const stamps = await currentStamps(redis, state.count)
+    res.status(200).json({ ...state, stamps })
     return
   }
 
