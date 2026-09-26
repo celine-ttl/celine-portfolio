@@ -32,7 +32,7 @@ function Stamp({ x, y }) {
   )
 }
 
-function StampCard({ card, count, stamps, onStamp, canStamp }) {
+function StampCard({ card, count, stamps, onStamp, canStamp, cardAnim }) {
   return (
     <div className="footer-stampcard-wrap" style={{ position: 'relative', width: 470, height: 270, flexShrink: 0 }}>
       {/* Older card peeking out from behind for depth */}
@@ -50,7 +50,7 @@ function StampCard({ card, count, stamps, onStamp, canStamp }) {
         type="button"
         onClick={onStamp}
         disabled={!canStamp}
-        className="footer-stampcard"
+        className={`footer-stampcard${cardAnim === 'leaving' ? ' footer-card-leaving' : cardAnim === 'entering' ? ' footer-card-entering' : ''}`}
         style={{
           position: 'absolute', inset: 0,
           background: '#C8DBF1',
@@ -94,6 +94,7 @@ function StampCard({ card, count, stamps, onStamp, canStamp }) {
 export default function Footer({ id }) {
   const [stampState, setStampState] = useState({ card: 1, count: 0, stamps: [] })
   const [canStamp, setCanStamp] = useState(false)
+  const [cardAnim, setCardAnim] = useState('idle')
 
   useEffect(() => {
     let cancelled = false
@@ -125,9 +126,12 @@ export default function Footer({ id }) {
         setStampState(data)
         setCanStamp(true)
         if (data.count === STAMPS_PER_CARD) {
+          setTimeout(() => setCardAnim('leaving'), 500)
           setTimeout(() => {
             setStampState(prev => (prev.card === data.card ? { card: data.card + 1, count: 0, stamps: [] } : prev))
-          }, 900)
+            setCardAnim('entering')
+          }, 950)
+          setTimeout(() => setCardAnim('idle'), 1350)
         }
       })
       .catch(() => setCanStamp(true))
@@ -145,6 +149,16 @@ export default function Footer({ id }) {
         .footer-stampcard { transition: transform 0.2s ease, box-shadow 0.2s ease; }
         .footer-stampcard:not(:disabled):hover { transform: translateY(-4px); box-shadow: 0px 8px 24px rgba(16,22,23,0.14); }
         .footer-stampcard:not(:disabled):active { transform: translateY(-1px) scale(0.99); }
+        @keyframes footerCardLeave {
+          0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 1; }
+          100% { transform: translateY(-36px) rotate(7deg) scale(0.94); opacity: 0; }
+        }
+        @keyframes footerCardEnter {
+          0% { transform: translateY(16px) scale(0.95); opacity: 0; }
+          100% { transform: translateY(0) scale(1); opacity: 1; }
+        }
+        .footer-card-leaving { animation: footerCardLeave 0.45s ease forwards; }
+        .footer-card-entering { animation: footerCardEnter 0.4s ease; }
         @media (max-width: 900px) {
           .site-footer-top { flex-direction: column !important; align-items: flex-start !important; }
           .footer-stampcard-wrap { width: 100% !important; max-width: 470px; height: 260px !important; }
@@ -168,6 +182,7 @@ export default function Footer({ id }) {
             stamps={stampState.stamps ?? []}
             onStamp={handleStamp}
             canStamp={canStamp}
+            cardAnim={cardAnim}
           />
         </div>
         <div className="site-footer-bottom flex flex-col sm:flex-row justify-between items-start sm:items-center" style={{ borderTop: '1px solid rgba(0,0,0,0.2)', paddingTop: 24, gap: 16 }}>
