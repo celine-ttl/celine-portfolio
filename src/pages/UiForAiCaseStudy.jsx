@@ -114,6 +114,54 @@ function SectionLabel({ text }) {
   )
 }
 
+function ComparePoint({ good, icon = 'minus', fontSize = 12, children }) {
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+      {good ? (
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0 }}>
+          <circle cx="12" cy="12" r="10" fill="#3AA76D" />
+          <path d="M7.5 12.5L10.3 15.3L16.5 9" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      ) : icon === 'x' ? (
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0 }}>
+          <path fillRule="evenodd" clipRule="evenodd" d="M8 1C11.8656 1 15 4.13438 15 8C15 11.8656 11.8656 15 8 15C4.13438 15 1 11.8656 1 8C1 4.13438 4.13438 1 8 1ZM9.99912 5.29416C9.99876 5.29427 9.99847 5.29444 9.99783 5.29508L8 7.29289L6.00219 5.29508C6.00153 5.29444 6.00125 5.29427 6.00087 5.29416C6.00052 5.29405 6.00014 5.29405 5.99978 5.29416C5.99944 5.29427 5.99914 5.29444 5.9985 5.29508L5.29506 5.9985C5.29444 5.99913 5.29428 5.99944 5.29416 5.9998C5.29405 6.00015 5.29405 6.00053 5.29416 6.00089L5.29431 6.00123C5.29453 6.00158 5.29478 6.00189 5.29508 6.00217L7.29289 8L5.29508 9.99784C5.29444 9.99847 5.29427 9.99878 5.29416 9.99914C5.29405 9.9995 5.29405 9.99988 5.29416 10.0002C5.29427 10.0006 5.29444 10.0009 5.29508 10.0015L5.9985 10.705C5.99913 10.7056 5.99944 10.7057 5.9998 10.7059C6.00015 10.706 6.00053 10.706 6.00089 10.7059C6.00123 10.7057 6.00153 10.7056 6.00217 10.7049L8 8.70709L9.99784 10.7049C9.99847 10.7056 9.99878 10.7057 9.99914 10.7058C9.9995 10.706 9.99988 10.706 10.0002 10.7058C10.0006 10.7057 10.0009 10.7056 10.0015 10.7049L10.705 10.0015C10.7056 10.0009 10.7057 10.0006 10.7059 10.0002C10.706 9.99985 10.706 9.99947 10.7059 9.99911L10.7057 9.99877C10.7055 9.99842 10.7052 9.99811 10.7049 9.99783L8.70709 8L10.7049 6.00219C10.7056 6.00153 10.7057 6.00125 10.7058 6.00087C10.706 6.00052 10.706 6.00014 10.7058 5.99978C10.7057 5.99944 10.7056 5.99914 10.7049 5.9985L10.0015 5.29506C10.0012 5.29465 10.0007 5.29434 10.0002 5.29416C9.99985 5.29405 9.99948 5.29405 9.99912 5.29416Z" fill="#E22D2D" />
+        </svg>
+      ) : (
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0 }}>
+          <circle cx="12" cy="12" r="10" fill="#C6C6C6" />
+          <path d="M9 12H15" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      )}
+      <span style={{ ...dm, fontSize, fontWeight: 300, lineHeight: '24px', color: '#525252' }}>{children}</span>
+    </div>
+  )
+}
+
+function VersionCard({ image, imageAlt, title, points, winner, imageMaxWidth = '100%', imageBoxHeight, textOffset = 0, pointFontSize = 12, contentGap = 24 }) {
+  return (
+    <div style={{ position: 'relative', flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: contentGap, background: '#FFFFFF', border: '1px solid #ECEEEE', boxShadow: '0px 2px 16px 0px rgba(16,22,23,0.05)', borderRadius: 24, padding: '40px 32px 24px' }}>
+      {imageBoxHeight ? (
+        <div className="cs-versioncard-imgbox" style={{ alignSelf: 'stretch', height: imageBoxHeight, display: 'flex', alignItems: 'flex-end', justifyContent: 'center' }}>
+          <img src={image} alt={imageAlt} style={{ maxWidth: imageMaxWidth, height: 'auto', display: 'block' }} />
+        </div>
+      ) : (
+        <img src={image} alt={imageAlt} style={{ maxWidth: imageMaxWidth, height: 'auto', display: 'block' }} />
+      )}
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10, marginTop: textOffset }}>
+        <h5 style={{ ...dm, fontSize: 17, fontWeight: 500, lineHeight: '24px', color: '#000000', margin: 0, textAlign: 'center' }}>{title}</h5>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+          {points.map((p, i) => (
+            <ComparePoint key={i} good={p.good} icon={p.icon} fontSize={pointFontSize}>{p.text}</ComparePoint>
+          ))}
+        </div>
+      </div>
+      {winner && (
+        <span style={{ position: 'absolute', top: 16, right: 20, ...dm, fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#FFFFFF', background: '#4A77FF', borderRadius: 20, padding: '4px 10px' }}>Winner</span>
+      )}
+    </div>
+  )
+}
+
 export default function UiForAiCaseStudy() {
   const [activeSection, setActiveSection] = useState('overview')
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 })
@@ -330,7 +378,7 @@ export default function UiForAiCaseStudy() {
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 24, paddingBottom: 24 }}>
               {/* Card 1 */}
-              <div style={{ background: '#FFFFFF', borderRadius: 24, padding: 24, display: 'flex', flexDirection: 'row', gap: 24, alignItems: 'center', minHeight: 248, boxShadow: '4px 4px 12px 0px rgba(0,0,0,0.05), -4px -4px 12px 0px rgba(0,0,0,0.05)' }}>
+              <div style={{ background: '#FFFFFF', borderRadius: 24, padding: 24, display: 'flex', flexDirection: 'row', gap: 24, alignItems: 'center', minHeight: 248, border: '1px solid #ECEEEE', boxShadow: '0px 2px 16px 0px rgba(16,22,23,0.05)' }}>
                 <div style={{ width: 52, flexShrink: 0, display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '5px 14px' }}>
                   <span style={{ ...dm, fontSize: 64, fontWeight: 600, lineHeight: '42px', color: 'rgba(137,197,234,0.3)' }}>1</span>
                 </div>
@@ -348,7 +396,7 @@ export default function UiForAiCaseStudy() {
                 </div>
               </div>
               {/* Card 2 */}
-              <div style={{ background: '#FFFFFF', borderRadius: 24, padding: 24, display: 'flex', flexDirection: 'row', gap: 24, alignItems: 'center', boxShadow: '4px 4px 12px 0px rgba(0,0,0,0.05), -4px -4px 12px 0px rgba(0,0,0,0.05)' }}>
+              <div style={{ background: '#FFFFFF', borderRadius: 24, padding: 24, display: 'flex', flexDirection: 'row', gap: 24, alignItems: 'center', border: '1px solid #ECEEEE', boxShadow: '0px 2px 16px 0px rgba(16,22,23,0.05)' }}>
                 <div style={{ width: 52, flexShrink: 0, display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '5px 14px' }}>
                   <span style={{ ...dm, fontSize: 64, fontWeight: 600, lineHeight: '42px', color: 'rgba(137,197,234,0.3)' }}>2</span>
                 </div>
@@ -511,10 +559,11 @@ export default function UiForAiCaseStudy() {
               </div>
             </div>
             {/* Affinity diagram + text side by side */}
-            <div style={{ display: 'flex', flexDirection: 'row', gap: 32, alignItems: 'flex-start' }}>
+            <div className="cs-affinity-row" style={{ display: 'flex', flexDirection: 'row', gap: 32, alignItems: 'flex-start' }}>
               <img
                 src="/images/ui-for-ai/affinity-diagram.png"
                 alt="Affinity diagram"
+                className="cs-affinity-img"
                 style={{ width: 340, height: 320, objectFit: 'cover', borderRadius: 20, display: 'block', flexShrink: 0 }}
               />
               {/* Text block */}
@@ -569,7 +618,7 @@ export default function UiForAiCaseStudy() {
               Users can directly save any output and revisit AI responses. By separating retrieval from generation, it removes the need to scroll or re-ask, so users can quickly reorient when returning to a long conversation. As the conversation grows, the panel becomes a non-linear map of the thread, not a reflection of its length.
             </p>
             {/* GIF */}
-            <div className="cs-gif-container" style={{ width: '100%', height: 570, overflow: 'hidden', borderRadius: 28, boxShadow: '0px 12px 12px 0px rgba(0,0,0,0.12)' }}>
+            <div className="cs-gif-container" style={{ width: '100%', height: 570, overflow: 'hidden', borderRadius: 28, border: '1px solid #ECEEEE' }}>
               <img src="/images/ui-for-ai/feature-01.gif" alt="Bookmarking and navigation demo" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
             </div>
           </div>
@@ -590,7 +639,7 @@ export default function UiForAiCaseStudy() {
             <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#525252', margin: 0 }}>
               Users can organize bookmarks into self-created Collections, structured around any grouping that makes sense to them. What once disappeared into the scroll becomes something users can return to, build on, and organize according to their own mental model across sessions, projects, and time.
             </p>
-            <div className="cs-gif-container" style={{ width: '100%', height: 570, overflow: 'hidden', borderRadius: 28, boxShadow: '0px 12px 12px 0px rgba(0,0,0,0.12)' }}>
+            <div className="cs-gif-container" style={{ width: '100%', height: 570, overflow: 'hidden', borderRadius: 28, border: '1px solid #ECEEEE' }}>
               <img src="/images/ui-for-ai/feature-02.gif" alt="Bookmark collections demo" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
             </div>
           </div>
@@ -611,60 +660,101 @@ export default function UiForAiCaseStudy() {
             <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#525252', margin: 0 }}>
               Users can select one or multiple bookmarked outputs, even across chats, and apply a new prompt directly to them. Unrelated responses no longer interrupt the thread. Users can refine, combine, or build on exactly what they've chosen, with full clarity about what the AI is responding to.
             </p>
-            <div className="cs-gif-container" style={{ width: '100%', height: 570, overflow: 'hidden', borderRadius: 28, boxShadow: '0px 12px 12px 0px rgba(0,0,0,0.12)' }}>
+            <div className="cs-gif-container" style={{ width: '100%', height: 570, overflow: 'hidden', borderRadius: 28, border: '1px solid #ECEEEE' }}>
               <img src="/images/ui-for-ai/feature-03.gif" alt="Direct iteration demo" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
             </div>
           </div>
         </section>
 
         {/* DESIGN DECISIONS */}
-        <section id="design-decisions" style={{ background: '#F8F8F8', padding: '80px 40px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 48 }}>
-          {/* Title block */}
-          <div className="fade-section" style={{ width: '100%', maxWidth: 920, display: 'flex', flexDirection: 'column' }}>
-            <SectionLabel text="Design Decisions Highlights" />
-            <h2 style={{ ...dm, fontSize: 28, fontWeight: 600, lineHeight: '42px', color: '#000000', margin: 0 }}>
-              How user behavior shaped our design decisions
-            </h2>
-          </div>
-          {/* Content block */}
+        <section id="design-decisions" style={{ background: '#FFFFFF', padding: '80px 40px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 24 }}>
           <div className="fade-section" style={{ width: '100%', maxWidth: 920, display: 'flex', flexDirection: 'column', gap: 24 }}>
+            {/* Title block */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+              <SectionLabel text="Design Decisions Highlights" />
+              <h2 style={{ ...dm, fontSize: 28, fontWeight: 600, lineHeight: '42px', color: '#000000', margin: 0 }}>
+                How user behavior shaped our design decisions
+              </h2>
+            </div>
             <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#525252', margin: 0 }}>
-              After converging on a solution, a second round of testing informed deliberate design decisions.
+              After converging on a solution, a second round of testing shaped several deliberate choices.
             </p>
             {/* Decision 1 */}
-            <div style={{ background: '#FFFFFF', border: '1px solid #D9D9D9', borderRadius: 24, padding: 24, display: 'flex', flexDirection: 'column', gap: 24 }}>
-              <p style={{ ...dm, fontSize: 16, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em', lineHeight: '42px', color: '#4A77FF', margin: 0 }}>Decision 1</p>
-              <h4 style={{ ...dm, fontSize: 24, fontWeight: 600, lineHeight: '120%', color: '#525252', margin: 0 }}>Bookmarking across chats, not just within one</h4>
-              <img src="/images/ui-for-ai/decision-1-mockup.png" alt="Decision 1 mockup" style={{ width: '100%', borderRadius: 16, display: 'block' }} />
-              <p style={{ ...dm, fontSize: 14, fontWeight: 300, lineHeight: '24px', color: '#525252', margin: 0 }}>
-                Early designs scoped bookmarks to a single conversation. But in testing, users naturally wanted to pull strong outputs across chats, especially on ongoing projects. That invisible wall sat right where users most wanted to move freely. So we expanded bookmarks cross-chat, letting the panel become a workspace that lives above any single conversation.
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 24, marginTop: 24 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                <p style={{ ...dm, fontSize: 16, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', lineHeight: '42px', color: '#4A77FF', margin: 0 }}>Decision 1</p>
+                <h4 style={{ ...dm, fontSize: 24, fontWeight: 600, lineHeight: '120%', color: '#525252', margin: 0 }}>Bookmarking across chats, not just within one</h4>
+              </div>
+              <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#525252', margin: 0 }}>
+                Early designs scoped bookmarks to a single conversation. In testing, users naturally wanted to pull strong outputs across chats, especially on ongoing projects. The boundary sat right where users most wanted to move freely.
               </p>
+              <div className="cs-two-col" style={{ display: 'flex', flexDirection: 'row', gap: 24 }}>
+                <VersionCard
+                  image="/images/ui-for-ai/decision-1a-mockup.png"
+                  imageAlt="Bookmark within chat"
+                  title="Version A: Bookmark within chat"
+                  imageMaxWidth="75%"
+                  imageBoxHeight={386}
+                  pointFontSize={14}
+                  contentGap={40}
+                  points={[
+                    { good: true, text: 'Simpler, contained experience' },
+                    { good: false, icon: 'x', text: 'Breaks down when working across multiple sessions' },
+                  ]}
+                />
+                <VersionCard
+                  image="/images/ui-for-ai/decision-1b-mockup.png"
+                  imageAlt="Bookmark across chats"
+                  title="Version B: Bookmark across chats"
+                  winner
+                  imageMaxWidth="75%"
+                  imageBoxHeight={386}
+                  pointFontSize={14}
+                  contentGap={40}
+                  points={[
+                    { good: true, text: 'More flexible, can build on any output from any session' },
+                    { good: false, text: 'Adds complexity to how bookmarks are organized' },
+                  ]}
+                />
+              </div>
             </div>
             {/* Decision 2 */}
-            <div style={{ background: '#FFFFFF', border: '1px solid #D9D9D9', borderRadius: 24, padding: '36px 24px', display: 'flex', flexDirection: 'column', gap: 16 }}>
-              <p style={{ ...dm, fontSize: 16, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em', lineHeight: '42px', color: '#4A77FF', margin: 0 }}>Decision 2</p>
-              <h4 style={{ ...dm, fontSize: 24, fontWeight: 600, lineHeight: '120%', color: '#525252', margin: 0 }}>Collections stay focused: one at a time</h4>
-              {/* Images row with arrow between */}
-              <div className="cs-decision2-row" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 16 }}>
-                <div style={{ flex: 1, minWidth: 0, aspectRatio: '3 / 2', borderRadius: 12, overflow: 'hidden', background: '#FFFFFF' }}>
-                  <img src="/images/ui-for-ai/decision-2a-mockup.png" alt="Multiple collections open" style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'left', display: 'block' }} />
-                </div>
-                <svg className="cs-decision2-spacer" width="32" height="18" viewBox="0 0 32 18" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0 }}>
-                  <path d="M23 1L31 9M31 9L23 17M31 9H1" stroke="#D9D9D9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-                <div style={{ flex: 1, minWidth: 0, aspectRatio: '3 / 2', borderRadius: 12, overflow: 'hidden', background: '#FFFFFF' }}>
-                  <img src="/images/ui-for-ai/decision-2b-mockup.png" alt="Single collection open" style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }} />
-                </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 24, marginTop: 24 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                <p style={{ ...dm, fontSize: 16, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', lineHeight: '42px', color: '#4A77FF', margin: 0 }}>Decision 2</p>
+                <h4 style={{ ...dm, fontSize: 24, fontWeight: 600, lineHeight: '120%', color: '#525252', margin: 0 }}>Collections stay focused: one at a time</h4>
               </div>
-              {/* Text row — spacer width matches arrow width so text aligns under each image */}
-              <div className="cs-decision2-row" style={{ display: 'flex', flexDirection: 'row', gap: 16 }}>
-                <p style={{ ...dm, fontSize: 14, fontWeight: 300, lineHeight: '24px', color: '#525252', margin: 0, flex: 1, minWidth: 0 }}>
-                  When multiple collections were visible simultaneously, the panel became cluttered and users were back to scrolling — which goes back to the exact problem we were solving.
-                </p>
-                <div className="cs-decision2-spacer" style={{ width: 32, flexShrink: 0 }} />
-                <p style={{ ...dm, fontSize: 14, fontWeight: 300, lineHeight: '24px', color: '#525252', margin: 0, flex: 1, minWidth: 0 }}>
-                  Keeping only one collection open at a time removed that overhead and made each collection feel like a dedicated, intentional space rather than another pile to manage.
-                </p>
+              <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#525252', margin: 0 }}>
+                Saving outputs is only useful if users can find them again. When multiple collections were visible at once, the panel became cluttered and users were back to scrolling, which is the exact problem we set out to solve.
+              </p>
+              <div className="cs-two-col" style={{ display: 'flex', flexDirection: 'row', gap: 24 }}>
+                <VersionCard
+                  image="/images/ui-for-ai/decision-2a-mockup.png"
+                  imageAlt="Multiple collections visible"
+                  title="Version A: Multiple collections visible"
+                  imageMaxWidth="85%"
+                  imageBoxHeight={226}
+                  pointFontSize={14}
+                  contentGap={40}
+                  points={[
+                    { good: true, text: 'More flexible, everything accessible at a glance' },
+                    { good: false, icon: 'x', text: 'Panel gets cluttered, back to scrolling' },
+                  ]}
+                />
+                <VersionCard
+                  image="/images/ui-for-ai/decision-2b-mockup.png"
+                  imageAlt="One collection at a time"
+                  title="Version B: One collection at a time"
+                  winner
+                  imageMaxWidth="85%"
+                  imageBoxHeight={226}
+                  pointFontSize={14}
+                  contentGap={40}
+                  points={[
+                    { good: true, text: 'Each collection feels like a dedicated, intentional space' },
+                    { good: false, text: 'Less immediate access to other collections' },
+                  ]}
+                />
               </div>
             </div>
           </div>
@@ -678,19 +768,23 @@ export default function UiForAiCaseStudy() {
               <h2 style={{ ...dm, fontSize: 28, fontWeight: 600, lineHeight: '42px', color: '#000000', margin: 0 }}>Future Directions</h2>
             </div>
             <div className="cs-two-col" style={{ display: 'flex', flexDirection: 'row', gap: 24 }}>
-              <div style={{ flex: 1, background: '#FFFFFF', borderRadius: 24, padding: 24, boxShadow: '2px 2px 10px 0px rgba(0,0,0,0.03), -2px -2px 10px 0px rgba(0,0,0,0.03)', border: '1px solid #ECEEEE', display: 'flex', flexDirection: 'column', gap: 12 }}>
+              <div style={{ flex: 1, background: '#FFFFFF', borderRadius: 24, padding: 24, boxShadow: '2px 2px 10px 0px rgba(0,0,0,0.03), -2px -2px 10px 0px rgba(0,0,0,0.03)', border: '1px solid #ECEEEE', display: 'flex', flexDirection: 'column', gap: 32 }}>
                 <Pill text="What I'd done differently" />
-                <h4 style={{ ...dm, fontSize: 24, fontWeight: 700, color: '#000000', margin: 0, whiteSpace: 'pre-line' }}>{'Segment by why,\nnot just how much.'}</h4>
-                <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#525252', margin: 0 }}>
-                  Testing surfaced two user types: everyday users and power users. But intensity doesn&apos;t capture the full picture. Someone doing creative synthesis and someone doing casual research behave differently not because of how much they use AI chat, but because of why they&apos;re there. Next time I&apos;d segment by use case from the start so the solution gets tested against the actual workflows it&apos;s meant to serve.
-                </p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                  <h4 style={{ ...dm, fontSize: 24, fontWeight: 600, color: '#000000', margin: 0, whiteSpace: 'pre-line' }}>{'Segment by why,\nnot just how much.'}</h4>
+                  <p style={{ ...dm, fontSize: 14, fontWeight: 300, lineHeight: '27px', color: '#525252', margin: 0 }}>
+                    Testing surfaced two user types: everyday users and power users. But intensity doesn&apos;t capture the full picture. Someone doing creative synthesis and someone doing casual research behave differently not because of how much they use AI chat, but because of why they&apos;re there. Next time I&apos;d segment by use case from the start so the solution gets tested against the actual workflows it&apos;s meant to serve.
+                  </p>
+                </div>
               </div>
-              <div style={{ flex: 1, background: '#FFFFFF', borderRadius: 24, padding: 24, boxShadow: '2px 2px 10px 0px rgba(0,0,0,0.03), -2px -2px 10px 0px rgba(0,0,0,0.03)', border: '1px solid #ECEEEE', display: 'flex', flexDirection: 'column', gap: 12 }}>
+              <div style={{ flex: 1, background: '#FFFFFF', borderRadius: 24, padding: 24, boxShadow: '2px 2px 10px 0px rgba(0,0,0,0.03), -2px -2px 10px 0px rgba(0,0,0,0.03)', border: '1px solid #ECEEEE', display: 'flex', flexDirection: 'column', gap: 32 }}>
                 <Pill text="Next step" />
-                <h4 style={{ ...dm, fontSize: 24, fontWeight: 700, color: '#000000', margin: 0, whiteSpace: 'pre-line' }}>{'More on organization,\nsurfacing, versioning'}</h4>
-                <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#525252', margin: 0 }}>
-                  This project focused on improving conversation flow within existing chat interfaces. The larger opportunity lies in rethinking how conversations accumulate value over time, AI-assisted organization, smarter surfacing of relationships between saved outputs, and versioning that tracks how an idea evolves across iterations.
-                </p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                  <h4 style={{ ...dm, fontSize: 24, fontWeight: 600, color: '#000000', margin: 0, whiteSpace: 'pre-line' }}>{'More on organization,\nsurfacing, versioning'}</h4>
+                  <p style={{ ...dm, fontSize: 14, fontWeight: 300, lineHeight: '27px', color: '#525252', margin: 0 }}>
+                    This project focused on improving conversation flow within existing chat interfaces. The larger opportunity lies in rethinking how conversations accumulate value over time, AI-assisted organization, smarter surfacing of relationships between saved outputs, and versioning that tracks how an idea evolves across iterations.
+                  </p>
+                </div>
               </div>
             </div>
           </div>

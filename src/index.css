@@ -97,8 +97,9 @@ body {
   .cs-next-project-outer { padding: 40px 24px !important; }
   .cs-next-project-row { flex-direction: column !important; }
   .cs-next-project-img { width: 100% !important; height: 220px !important; }
-  .cs-decision2-row { flex-direction: column !important; }
-  .cs-decision2-spacer { display: none !important; }
+  .cs-versioncard-imgbox { height: auto !important; align-items: center !important; }
+  .cs-affinity-row { flex-direction: column !important; }
+  .cs-affinity-img { width: 100% !important; height: auto !important; aspect-ratio: 340 / 320; }
 }
 
 /* Site footer (src/components/Footer.jsx) - shared by every page. */
