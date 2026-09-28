@@ -320,7 +320,7 @@ export default function Home() {
               imageAlt="MyInfluency (Coming Soon)"
               title="MyInfluency (Coming Soon)"
               description={"Redesigning a platform for business–influencer\ncollaboration and management"}
-              tags={['Startup', 'SaSS Design']}
+              tags={['Startup', 'SaaS Design']}
             />
           </div>
         </section>
