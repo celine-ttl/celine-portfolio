@@ -417,8 +417,8 @@ export default function AhokuCaseStudy() {
             <p className="text-[17px] font-light leading-[27px] text-[#2D2D2D]" style={dm}>
               To validate the redesign, I tested with 25 elderly users — 15 from the original research group and 10 new participants. 24 of 25 completed device pairing and logging on their own, up from the 80% who abandoned the original flow.
             </p>
-            <div className="rounded-[24px] bg-white" style={{ padding: 24, boxShadow: '4px 4px 12px 0px rgba(0,0,0,0.12), -4px -4px 12px 0px rgba(0,0,0,0.12)' }}>
-              <table className="w-full" style={{ borderCollapse: 'collapse' }}>
+            <div className="rounded-[24px] bg-white" style={{ padding: 24, boxShadow: '4px 4px 12px 0px rgba(0,0,0,0.12), -4px -4px 12px 0px rgba(0,0,0,0.12)', overflowX: 'auto' }}>
+              <table className="w-full" style={{ borderCollapse: 'collapse', minWidth: 480 }}>
                 <thead>
                   <tr style={{ borderBottom: '2px solid #525252' }}>
                     {['Metric', 'Before', 'After'].map(h => (
@@ -481,13 +481,13 @@ export default function AhokuCaseStudy() {
       {/* Next Project */}
       <div
         onMouseMove={e => setCursorPos({ x: e.clientX, y: e.clientY })}
-        className="ahoku-next"
-        style={{ borderTop: '1px solid #E5E5E5', padding: '61px 125px 60px' }}
+        className="ahoku-next px-6 md:px-[60px] lg:px-[125px]"
+        style={{ borderTop: '1px solid #E5E5E5', paddingTop: 61, paddingBottom: 60 }}
       >
         <p className="text-[36px] font-semibold leading-[42px] text-black" style={{ ...dm, marginBottom: 40 }}>Next Project</p>
         <Link to="/ui-for-ai" style={{ display: 'block', textDecoration: 'none' }}>
           <div
-            className="flex flex-col md:flex-row items-center gap-[48px]"
+            className="flex flex-col lg:flex-row items-center gap-[48px]"
             onMouseEnter={() => setCursorVisible(true)}
             onMouseLeave={() => setCursorVisible(false)}
           >
@@ -497,8 +497,8 @@ export default function AhokuCaseStudy() {
               muted
               loop
               playsInline
-              className="object-cover rounded-[20px] flex-shrink-0 w-full md:w-auto"
-              style={{ maxWidth: 499, height: 315, boxShadow: '4px 4px 12px rgba(0,0,0,0.12)' }}
+              className="object-cover rounded-[20px] flex-shrink-0 w-full lg:w-auto h-[220px] lg:h-[315px]"
+              style={{ maxWidth: 499, boxShadow: '4px 4px 12px rgba(0,0,0,0.12)' }}
             />
             <div className="flex flex-col gap-[16px]">
               <h3 className="text-[24px] font-semibold leading-[30px] text-[#2D2D2D]" style={dm}>Re-imagining UI for AI</h3>

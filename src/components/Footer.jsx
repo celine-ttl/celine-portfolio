@@ -60,6 +60,7 @@ function StampCard({ card, total, stamps, onStamp, canStamp, cardAnim, nextImg }
       {/* Older card peeking out from behind for depth */}
       <div
         aria-hidden="true"
+        className="footer-stampcard-back"
         style={{
           position: 'absolute', left: -18, top: 18, width: 380, height: 196,
           background: '#B2C5DB',
@@ -82,10 +83,11 @@ function StampCard({ card, total, stamps, onStamp, canStamp, cardAnim, nextImg }
           WebkitTapHighlightColor: 'transparent', overflow: 'hidden',
         }}
       >
-        <img src="/images/footer/stampcard-title.png" alt="Visitor Stamp Card" style={{ height: 36, width: 'auto', display: 'block', objectFit: 'contain', marginTop: -8 }} />
-        <img src="/images/footer/footer-coffee.png" alt="" style={{ position: 'absolute', right: -20, bottom: -30, width: 130, height: 130, opacity: 0.9, pointerEvents: 'none' }} />
+        <img src="/images/footer/stampcard-title.png" alt="Visitor Stamp Card" className="footer-stampcard-title" style={{ height: 36, width: 'auto', display: 'block', objectFit: 'contain', marginTop: -8 }} />
+        <img src="/images/footer/footer-coffee.png" alt="" className="footer-stampcard-coffee" style={{ position: 'absolute', right: -20, bottom: -30, width: 130, height: 130, opacity: 0.9, pointerEvents: 'none' }} />
         <div
           aria-hidden="true"
+          className="footer-stampcard-circles"
           style={{
             position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, calc(-50% + 4px))',
             display: 'flex', flexDirection: 'column', gap: 12, pointerEvents: 'none',
@@ -93,12 +95,12 @@ function StampCard({ card, total, stamps, onStamp, canStamp, cardAnim, nextImg }
         >
           <div style={{ display: 'flex', gap: 20 }}>
             {[0, 1, 2, 3, 4].map(i => (
-              <div key={i} style={{ width: 64, height: 64, borderRadius: '50%', background: '#FCF9F2', flexShrink: 0 }} />
+              <div key={i} className="footer-stampcard-circle" style={{ width: 64, height: 64, borderRadius: '50%', background: '#FCF9F2', flexShrink: 0 }} />
             ))}
           </div>
           <div style={{ display: 'flex', gap: 20 }}>
             {[5, 6, 7, 8, 9].map(i => (
-              <div key={i} style={{ width: 64, height: 64, borderRadius: '50%', background: '#FCF9F2', flexShrink: 0 }} />
+              <div key={i} className="footer-stampcard-circle" style={{ width: 64, height: 64, borderRadius: '50%', background: '#FCF9F2', flexShrink: 0 }} />
             ))}
           </div>
         </div>
@@ -187,9 +189,28 @@ export default function Footer({ id }) {
         .footer-card-leaving { animation: footerCardLeave 0.45s ease forwards; }
         .footer-card-entering { animation: footerCardEnter 0.4s ease; }
         @media (max-width: 900px) {
-          .site-footer-top { flex-direction: column !important; align-items: flex-start !important; }
+          .site-footer-top { flex-direction: column !important; align-items: center !important; text-align: center; }
+          .site-footer-identity { align-items: center !important; text-align: center !important; }
+          .site-footer-bottom { align-items: center !important; text-align: center !important; }
           .footer-stampcard-wrap { width: 100% !important; max-width: 470px; height: 260px !important; }
+          .footer-stampcard-back { left: -3% !important; top: 14px !important; width: 94% !important; height: 84% !important; }
+          .footer-stampcard { padding: 28px 24px !important; }
+          .footer-stampcard-circles { gap: 8px !important; }
+          .footer-stampcard-circle { width: 48px !important; height: 48px !important; }
+          .footer-stampcard-circle + .footer-stampcard-circle { margin-left: 0; }
+          .footer-stampcard-circles > div { gap: 10px !important; }
+          .footer-stampcard-coffee { width: 96px !important; height: 96px !important; right: -12px !important; bottom: -18px !important; }
         }
+        @media (max-width: 480px) {
+          .footer-stampcard-wrap { height: 230px !important; }
+          .footer-stampcard { padding: 24px 20px !important; }
+          .footer-stampcard-circles { gap: 6px !important; }
+          .footer-stampcard-circles > div { gap: 8px !important; }
+          .footer-stampcard-circle { width: 38px !important; height: 38px !important; }
+          .footer-stampcard-title { height: 28px !important; }
+          .footer-stampcard-coffee { width: 70px !important; height: 70px !important; right: -8px !important; bottom: -12px !important; }
+        }
+        .footer-social-link { min-height: 44px; padding: 8px 0; }
       `}</style>
       <div className="site-footer-inner flex flex-col" style={{ maxWidth: 1280, margin: '0 auto', padding: '61px 40px 60px', gap: 70 }}>
         <div className="site-footer-top flex flex-col lg:flex-row justify-between items-start lg:items-center" style={{ gap: 48 }}>
@@ -219,11 +240,11 @@ export default function Footer({ id }) {
             Crafted with Cursor, Claude Code, and too much caffeine.
           </p>
           <div className="flex items-center" style={{ gap: 38 }}>
-            <a href="https://www.linkedin.com/in/celine-tseng" target="_blank" rel="noopener noreferrer" className="flex items-center hover:opacity-70 transition-opacity">
+            <a href="https://www.linkedin.com/in/celine-tseng" target="_blank" rel="noopener noreferrer" className="footer-social-link flex items-center hover:opacity-70 transition-opacity">
               <span className="text-[#4A77FF] text-[17px] leading-[27px]" style={{ ...dm, fontWeight: 500 }}>Linkedin</span>
               <ArrowDiagonal />
             </a>
-            <a href="mailto:celine900423lu@gmail.com" className="flex items-center hover:opacity-70 transition-opacity">
+            <a href="mailto:celine900423lu@gmail.com" className="footer-social-link flex items-center hover:opacity-70 transition-opacity">
               <span className="text-[#4A77FF] text-[17px] leading-[27px]" style={{ ...dm, fontWeight: 500 }}>Email</span>
               <ArrowDiagonal />
             </a>

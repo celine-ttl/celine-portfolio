@@ -193,6 +193,9 @@ export default function Home() {
           .home-work-header p.text-right {
             text-align: left !important;
           }
+          .home-menu-break {
+            display: none;
+          }
         }
         .hero-hint {
           display: none;
@@ -283,7 +286,7 @@ export default function Home() {
             </div>
             <p className="text-[17px] font-light text-right" style={{ ...dm, lineHeight: '27px', color: '#525252' }}>
               A carefully curated selection of design projects,{' '}
-              <br />each brewed with care and attention to detail.
+              <br className="home-menu-break" />each brewed with care and attention to detail.
             </p>
           </div>
 

@@ -378,17 +378,17 @@ export default function UiForAiCaseStudy() {
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 24, paddingBottom: 24 }}>
               {/* Card 1 */}
-              <div style={{ background: '#FFFFFF', borderRadius: 24, padding: 24, display: 'flex', flexDirection: 'row', gap: 24, alignItems: 'center', minHeight: 248, border: '1px solid #ECEEEE', boxShadow: '0px 2px 16px 0px rgba(16,22,23,0.05)' }}>
-                <div style={{ width: 52, flexShrink: 0, display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '5px 14px' }}>
+              <div className="cs-problem-card" style={{ background: '#FFFFFF', borderRadius: 24, padding: 24, display: 'flex', flexDirection: 'row', gap: 24, alignItems: 'center', minHeight: 248, border: '1px solid #ECEEEE', boxShadow: '0px 2px 16px 0px rgba(16,22,23,0.05)' }}>
+                <div className="cs-problem-number" style={{ width: 52, flexShrink: 0, display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '5px 14px' }}>
                   <span style={{ ...dm, fontSize: 64, fontWeight: 600, lineHeight: '42px', color: 'rgba(137,197,234,0.3)' }}>1</span>
                 </div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 8, flex: 1 }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 8, flex: 1, minWidth: 0 }}>
                   <p style={{ ...dm, fontSize: 20, fontWeight: 700, color: '#000000', margin: 0 }}>The users can't get back to their own work.</p>
-                  <p style={{ ...dm, fontSize: 14, fontWeight: 400, lineHeight: '24px', color: '#525252', margin: 0 }}>
+                  <p className="cs-problem-body" style={{ ...dm, fontSize: 14, fontWeight: 400, lineHeight: '24px', color: '#525252', margin: 0 }}>
                     Good outputs and prompts vanished into the scroll, and finding cost more than re-asking, so people re-asked instead of relocating and reusing them.
                   </p>
                 </div>
-                <div style={{ position: 'relative', width: 174, height: 180, flexShrink: 0 }}>
+                <div className="cs-problem-illustration" style={{ position: 'relative', width: 174, height: 180, flexShrink: 0 }}>
                   <img src="/images/ui-for-ai/avatar-3e07b5.png" alt="" style={{ position: 'absolute', left: 14, top: 17, width: 147, height: 147, borderRadius: '50%', objectFit: 'cover' }} />
                   <div style={{ position: 'absolute', left: 9, top: 123, width: 157, height: 46, background: '#F8F8F8', borderRadius: 18, padding: 7, textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '3px 3px 9px 0px rgba(0,0,0,0.12), -3px -3px 9px 0px rgba(0,0,0,0.12)' }}>
                     <span style={{ ...dm, fontSize: 12, fontWeight: 400, lineHeight: '15px', color: '#525252' }}>I had a great idea.<br />Where was it?</span>
@@ -396,17 +396,17 @@ export default function UiForAiCaseStudy() {
                 </div>
               </div>
               {/* Card 2 */}
-              <div style={{ background: '#FFFFFF', borderRadius: 24, padding: 24, display: 'flex', flexDirection: 'row', gap: 24, alignItems: 'center', border: '1px solid #ECEEEE', boxShadow: '0px 2px 16px 0px rgba(16,22,23,0.05)' }}>
-                <div style={{ width: 52, flexShrink: 0, display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '5px 14px' }}>
+              <div className="cs-problem-card" style={{ background: '#FFFFFF', borderRadius: 24, padding: 24, display: 'flex', flexDirection: 'row', gap: 24, alignItems: 'center', border: '1px solid #ECEEEE', boxShadow: '0px 2px 16px 0px rgba(16,22,23,0.05)' }}>
+                <div className="cs-problem-number" style={{ width: 52, flexShrink: 0, display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '5px 14px' }}>
                   <span style={{ ...dm, fontSize: 64, fontWeight: 600, lineHeight: '42px', color: 'rgba(137,197,234,0.3)' }}>2</span>
                 </div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 8, flex: 1 }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 8, flex: 1, minWidth: 0 }}>
                   <p style={{ ...dm, fontSize: 20, fontWeight: 700, color: '#000000', margin: 0 }}>The linear format doesn't fit how people think.</p>
-                  <p style={{ ...dm, fontSize: 14, fontWeight: 400, lineHeight: '24px', color: '#525252', margin: 0 }}>
+                  <p className="cs-problem-body" style={{ ...dm, fontSize: 14, fontWeight: 400, lineHeight: '24px', color: '#525252', margin: 0 }}>
                     People think dynamically, but the chat only moves down. Users can't act on a single past response without excluding part of the conversation, so they copy fragments into other tools to arrange them the way they think.
                   </p>
                 </div>
-                <div style={{ position: 'relative', width: 174, height: 200, flexShrink: 0 }}>
+                <div className="cs-problem-illustration" style={{ position: 'relative', width: 174, height: 200, flexShrink: 0 }}>
                   <img src="/images/ui-for-ai/avatar-6c0e40.png" alt="" style={{ position: 'absolute', left: 14, top: 18, width: 147, height: 147, borderRadius: '50%', objectFit: 'cover' }} />
                   {/* Connecting lines */}
                   <svg style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }}>
@@ -436,10 +436,10 @@ export default function UiForAiCaseStudy() {
             </div>
             {/* Question + body side by side */}
             <div className="cs-hmw-row" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 24 }}>
-              <h2 style={{ ...dm, fontSize: 36, fontWeight: 500, lineHeight: '140%', color: '#FFFFFF', margin: 0, width: 444, flexShrink: 0 }}>
-                Help frequent users navigate, revisit, and iterate on previous inputs and outputs within a<br />long-running, linear chat?
+              <h2 className="cs-hmw-title" style={{ ...dm, fontSize: 36, fontWeight: 500, lineHeight: '140%', color: '#FFFFFF', margin: 0, width: 444, flexShrink: 0 }}>
+                Help frequent users navigate, revisit, and iterate on previous inputs and outputs within a <br className="cs-hmw-break" />long-running, linear chat?
               </h2>
-              <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#FFFFFF', opacity: 0.7, margin: 0, width: 195, flexShrink: 0, marginLeft: 'auto' }}>
+              <p className="cs-hmw-caption" style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#FFFFFF', opacity: 0.7, margin: 0, width: 195, flexShrink: 0, marginLeft: 'auto' }}>
                 The longer the session ran, the wider that gap. Until the tool people came to for thinking became one they had to leave in order to think.
               </p>
             </div>

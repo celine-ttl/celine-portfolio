@@ -375,7 +375,7 @@ function StepItem({ number, title, caption }) {
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
         <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 17, fontWeight: 600, lineHeight: '22px', color: '#525252' }}>{title}</span>
-        <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 14, fontWeight: 300, lineHeight: '22px', color: '#6C7675' }}>{caption}</span>
+        <span className="am-step-caption" style={{ ...dm, letterSpacing: '0.01em', fontSize: 14, fontWeight: 300, lineHeight: '22px', color: '#6C7675' }}>{caption}</span>
       </div>
     </div>
   )
@@ -1053,7 +1053,7 @@ export default function AmazonMusicCaseStudy() {
           </div>
 
           <div className="am-whythisworks-row" style={{ width: '100%', maxWidth: 920, display: 'flex', alignItems: 'center', gap: 40 }}>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14, width: 400, flexShrink: 0 }}>
+            <div className="am-whythisworks-diagram" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14, width: 400, flexShrink: 0 }}>
               <span style={{ ...dm, fontSize: 12, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#525252', textAlign: 'center' }}>Starts with the 10%</span>
               <div style={{ position: 'relative', width: '100%', maxWidth: 300, aspectRatio: '1 / 1' }}>
                 <img src="/images/amazon-music/why-this-works-circle-bg.svg" alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }} />
@@ -1097,7 +1097,7 @@ export default function AmazonMusicCaseStudy() {
               We tested our prototypes against the current Amazon Music app in ten moderated sessions with real fans.
             </p>
 
-            <div style={{ width: '100%', background: '#FFFFFF', border: '1px solid #ECEEEE', borderRadius: 20, boxShadow: '0px 2px 16px 0px rgba(16,22,23,0.05)', overflow: 'hidden' }}>
+            <div className="am-result-desktop" style={{ width: '100%', background: '#FFFFFF', border: '1px solid #ECEEEE', borderRadius: 20, boxShadow: '0px 2px 16px 0px rgba(16,22,23,0.05)', overflow: 'hidden' }}>
               <div className="am-result-table" style={{ display: 'grid', gridTemplateColumns: '220px 1.6fr 1.6fr' }}>
                 <TableCell header>
                   <span style={{ ...dm, fontSize: 12.5, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#8A9391' }}>Surface</span>
@@ -1126,6 +1126,23 @@ export default function AmazonMusicCaseStudy() {
                   )
                 })}
               </div>
+            </div>
+
+            {/* Mobile: stacked cards instead of the 3-column table (avoids clipped/hidden columns) */}
+            <div className="am-result-mobile" style={{ display: 'none', width: '100%', flexDirection: 'column', gap: 16 }}>
+              {RESULT_ROWS.map(row => (
+                <div key={row.surface} style={{ background: '#FFFFFF', border: '1px solid #ECEEEE', borderRadius: 20, boxShadow: '0px 2px 16px 0px rgba(16,22,23,0.05)', padding: '20px', display: 'flex', flexDirection: 'column', gap: 14 }}>
+                  <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 16, fontWeight: 600, color: '#101314' }}>{row.surface}</span>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+                    <span style={{ ...dm, fontSize: 12.5, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#4A77FF' }}>Adaptive won on</span>
+                    <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 16, fontWeight: 300, lineHeight: '25px', color: '#2B3433' }}>{row.won}</span>
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 4, paddingTop: 10, borderTop: '1px solid #ECEEEE' }}>
+                    <span style={{ ...dm, fontSize: 12.5, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#8A9391' }}>Current app / what still needs work</span>
+                    <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 16, fontWeight: 300, lineHeight: '25px', color: '#6C7675' }}>{row.current}</span>
+                  </div>
+                </div>
+              ))}
             </div>
 
             <div style={{ width: '100%', background: '#E4EAFF', borderRadius: 20, padding: '26px 30px', display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '0 18px' }}>

@@ -100,16 +100,29 @@ body {
   .cs-versioncard-imgbox { height: auto !important; align-items: center !important; }
   .cs-affinity-row { flex-direction: column !important; }
   .cs-affinity-img { width: 100% !important; height: auto !important; aspect-ratio: 340 / 320; }
+  .cs-hmw-title { width: 100% !important; }
+  .cs-hmw-break { display: none; }
+  .cs-hmw-caption { width: 100% !important; margin-left: 0 !important; }
+  .cs-problem-card { flex-direction: column !important; align-items: stretch !important; min-height: auto !important; gap: 16px !important; }
+  .cs-problem-number { align-self: center; }
+  .cs-problem-illustration { align-self: center; }
+  .cs-problem-body { font-size: 16px !important; }
+  .am-whythisworks-row { flex-direction: column !important; }
+  .am-whythisworks-diagram { width: 100% !important; max-width: 320px !important; }
+  .am-step-caption { font-size: 16px !important; }
+  .am-result-desktop { display: none !important; }
+  .am-result-mobile { display: flex !important; }
+  .am-reflection-row { flex-direction: column !important; }
 }
 
 /* Site footer (src/components/Footer.jsx) - shared by every page. */
 @media (max-width: 639px) {
-  .site-footer-inner { padding: 40px 20px !important; gap: 40px !important; }
-  .site-footer-top { flex-direction: column !important; align-items: flex-start !important; gap: 24px !important; }
-  .site-footer-identity { flex-direction: column !important; align-items: flex-start !important; gap: 16px !important; }
+  .site-footer-inner { padding: 40px 24px !important; gap: 40px !important; }
+  .site-footer-top { flex-direction: column !important; align-items: center !important; gap: 24px !important; text-align: center; }
+  .site-footer-identity { flex-direction: column !important; align-items: center !important; gap: 16px !important; text-align: center; }
   .site-footer-identity h2 { font-size: 36px !important; line-height: 40px !important; }
   .site-footer-identity img { width: 120px !important; height: 126px !important; }
-  .site-footer-bottom { flex-direction: column !important; align-items: flex-start !important; }
+  .site-footer-bottom { flex-direction: column !important; align-items: center !important; text-align: center; }
 }
 @media (max-width: 1200px) and (min-width: 640px) {
   .site-footer-inner { padding: 48px 24px !important; }
