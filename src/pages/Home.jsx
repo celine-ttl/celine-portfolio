@@ -245,7 +245,7 @@ export default function Home() {
               position: 'absolute', top: 164, left: '58.75%', zIndex: 2,
               borderRadius: 20,
               overflow: 'hidden',
-              boxShadow: '4px 4px 12px 0px rgba(0,0,0,0.08), -4px -4px 12px 0px rgba(0,0,0,0.05)',
+              boxShadow: '2px 2px 16px 0px rgba(0,0,0,0.04), -2px -2px 16px 0px rgba(0,0,0,0.03)',
               opacity: showHint && heroState !== 3 ? 1 : 0,
               transform: showHint && heroState !== 3 ? undefined : 'translateY(-8px)',
               transition: 'opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
@@ -263,11 +263,10 @@ export default function Home() {
           {/* Text content */}
           <div className="flex flex-col" style={{ gap: 40, position: 'relative', zIndex: 1, maxWidth: 620, paddingTop: 48 }}>
             <div className="flex flex-col" style={{ gap: 24 }}>
-              <p className="hero-animate text-black text-[24px] font-semibold leading-[30px]" style={{ ...dm, animationDelay: '0ms' }}>Hi, this is Celine!</p>
+              <p className="hero-animate text-black text-[24px] font-semibold leading-[30px]" style={{ ...dm, animationDelay: '0ms' }}>Hi, I'm Celine!</p>
               <p className="hero-animate text-[48px] font-semibold leading-[60px]" style={{ ...dm, color: '#000000', animationDelay: '100ms' }}>
-                I bring simplicity, human connection, and a touch of caffeine to{' '}
-                <span style={{ color: '#4A77FF', whiteSpace: 'nowrap' }}>AI design</span>
-                {' '}as a product designer.
+                A product designer making digital experiences feel <span style={{ color: '#4A77FF' }}>personal</span>, and a tinkerer{' '}
+                <span style={{ whiteSpace: 'nowrap' }}>at heart.</span>
               </p>
             </div>
             <p className="hero-animate text-[17px] font-light leading-[30px]" style={{ ...dm, color: '#525252', animationDelay: '200ms' }}>
