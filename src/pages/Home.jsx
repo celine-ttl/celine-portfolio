@@ -265,8 +265,10 @@ export default function Home() {
             <div className="flex flex-col" style={{ gap: 24 }}>
               <p className="hero-animate text-black text-[24px] font-semibold leading-[30px]" style={{ ...dm, animationDelay: '0ms' }}>Hi, I'm Celine!</p>
               <p className="hero-animate text-[48px] font-semibold leading-[60px]" style={{ ...dm, color: '#000000', animationDelay: '100ms' }}>
-                A product designer making digital experiences feel <span style={{ color: '#4A77FF' }}>personal</span>, and a tinkerer{' '}
-                <span style={{ whiteSpace: 'nowrap' }}>at heart.</span>
+                A product designer<br />
+                making digital experiences<br />
+                feel <span style={{ color: '#4A77FF' }}>personal</span>, and a<br />
+                tinkerer at heart.
               </p>
             </div>
             <p className="hero-animate text-[17px] font-light leading-[30px]" style={{ ...dm, color: '#525252', animationDelay: '200ms' }}>
