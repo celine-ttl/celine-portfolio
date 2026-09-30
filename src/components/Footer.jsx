@@ -107,7 +107,7 @@ function StampCard({ card, total, stamps, onStamp, canStamp, cardAnim, nextImg }
         {stamps.map((s, i) => (
           <Stamp key={`${card}-${i}`} x={s.x} y={s.y} img={s.img} />
         ))}
-        <span style={{ ...dm, fontSize: 14, fontWeight: 700, letterSpacing: '0.04em', textTransform: 'uppercase', color: '#B40205', marginTop: 'auto', transform: 'translateY(4px)' }}>
+        <span style={{ ...dm, fontSize: 14, fontWeight: 700, letterSpacing: '0.04em', textTransform: 'uppercase', color: '#6F4E37', marginTop: 'auto', transform: 'translateY(4px)' }}>
           Card No.{card} · {total} {total === 1 ? 'stamp' : 'stamps'} collected
         </span>
       </button>
