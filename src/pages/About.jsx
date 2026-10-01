@@ -147,7 +147,8 @@ export default function About() {
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               <p style={{ ...dm, fontSize: 17, fontWeight: 400, lineHeight: '27px', color: '#525252', margin: 0, maxWidth: 611 }}>
-                I&apos;m a UX designer and HCI master&apos;s student at Carnegie Mellon.{' '}
+                I&apos;m a product designer and I recently graduated from{' '}
+                <br />the MHCI program at Carnegie Mellon.{' '}
                 <br />I believe technology should bring people closer, not further apart.
               </p>
               <p style={{ ...dm, fontSize: 17, fontWeight: 400, lineHeight: '27px', color: '#525252', margin: 0, maxWidth: 611 }}>
@@ -294,15 +295,6 @@ export default function About() {
               )}
             </div>
           </div>
-
-          {/* Enjoy your order! — always at card bottom, right-aligned */}
-          <p style={{
-            position: 'relative', zIndex: 2,
-            ...serif, fontSize: 36, lineHeight: '27px', color: '#D9D9D9',
-            margin: 0, textAlign: 'right', width: '100%',
-          }}>
-            Enjoy your order!
-          </p>
         </div>
       </section>
 

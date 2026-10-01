@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 const dm = { fontFamily: 'DM Sans, sans-serif' }
 const STAMPS_PER_CARD = 10
@@ -40,14 +40,14 @@ function Stamp({ x, y, img }) {
         position: 'absolute', left: `${x}%`, top: `${y}%`,
         width: size, height: size,
         transform: 'translate(-50%, -50%)',
-        pointerEvents: 'none', display: 'block',
+        pointerEvents: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center',
       }}
     >
       <img
         src={src}
         alt=""
         className="footer-stamp-pop"
-        style={{ width: '100%', height: 'auto', display: 'block' }}
+        style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', display: 'block' }}
       />
     </span>
   )
@@ -72,19 +72,20 @@ function StampCard({ card, total, stamps, onStamp, canStamp, cardAnim, nextImg }
       <button
         type="button"
         onClick={onStamp}
-        disabled={!canStamp}
+        disabled={!canStamp || stamps.length >= STAMPS_PER_CARD}
         className={`footer-stampcard${cardAnim === 'leaving' ? ' footer-card-leaving' : cardAnim === 'entering' ? ' footer-card-entering' : ''}`}
         style={{
           position: 'absolute', inset: 0,
-          background: '#C8DBF1',
+          background: '#D6E6F9',
           boxShadow: '0px 2px 16px rgba(16,22,23,0.05)',
           border: 'none', padding: '28px 32px', cursor: canStamp ? `url(${cursor.src}) ${cursor.hotspot[0]} ${cursor.hotspot[1]}, pointer` : 'default',
           display: 'flex', flexDirection: 'column', gap: 18, textAlign: 'left',
           WebkitTapHighlightColor: 'transparent', overflow: 'hidden',
         }}
       >
+        <div aria-hidden="true" style={{ position: 'absolute', inset: 0, backgroundImage: 'url(/images/footer/paper-texture.svg)', backgroundSize: '200px 200px', opacity: 0.2, pointerEvents: 'none' }} />
         <img src="/images/footer/stampcard-title.png" alt="Visitor Stamp Card" className="footer-stampcard-title" style={{ height: 36, width: 'auto', display: 'block', objectFit: 'contain', marginTop: -8 }} />
-        <img src="/images/footer/footer-coffee.png" alt="" className="footer-stampcard-coffee" style={{ position: 'absolute', right: -20, bottom: -30, width: 130, height: 130, opacity: 0.9, pointerEvents: 'none' }} />
+        <img src="/images/footer/footer-coffee.png" alt="" className="footer-stampcard-coffee" style={{ position: 'absolute', right: -20, bottom: -42, width: 130, height: 130, opacity: 0.9, pointerEvents: 'none' }} />
         <div
           aria-hidden="true"
           className="footer-stampcard-circles"
@@ -107,7 +108,7 @@ function StampCard({ card, total, stamps, onStamp, canStamp, cardAnim, nextImg }
         {stamps.map((s, i) => (
           <Stamp key={`${card}-${i}`} x={s.x} y={s.y} img={s.img} />
         ))}
-        <span style={{ ...dm, fontSize: 14, fontWeight: 700, letterSpacing: '0.04em', textTransform: 'uppercase', color: '#6F4E37', marginTop: 'auto', transform: 'translateY(4px)' }}>
+        <span style={{ ...dm, fontSize: 14, fontWeight: 700, letterSpacing: '0.04em', textTransform: 'uppercase', color: '#6F4E37', marginTop: 'auto', transform: 'translateY(8px)' }}>
           Card No.{card} · {total} {total === 1 ? 'stamp' : 'stamps'} collected
         </span>
       </button>
@@ -120,6 +121,11 @@ export default function Footer({ id }) {
   const [canStamp, setCanStamp] = useState(false)
   const [cardAnim, setCardAnim] = useState('idle')
   const [nextImg, setNextImg] = useState(() => pickNextImg())
+  // Tracks which card number we've already scheduled the leave/reset/enter
+  // sequence for, so the effect below can never fire it twice for the same
+  // completed card (StrictMode double-invokes effects in dev, and without
+  // this guard a rapid-fire double-render could trigger it twice too).
+  const rolloverHandledRef = useRef(null)
 
   useEffect(() => {
     let cancelled = false
@@ -136,33 +142,44 @@ export default function Footer({ id }) {
     return () => { cancelled = true }
   }, [])
 
+  // Drive the "card full" transition off the actual rendered state rather
+  // than a value captured in the click handler's closure — that closure can
+  // go stale (e.g. two clicks landing before React re-renders in between),
+  // which was letting the 10th stamp occasionally land without ever
+  // triggering the rollover.
+  useEffect(() => {
+    if (stampState.count === STAMPS_PER_CARD && rolloverHandledRef.current !== stampState.card) {
+      rolloverHandledRef.current = stampState.card
+      const completedCard = stampState.card
+      setTimeout(() => setCardAnim('leaving'), 500)
+      setTimeout(() => {
+        setStampState(p => (p.card === completedCard ? { card: p.card + 1, count: 0, total: p.total, stamps: [] } : p))
+        setCardAnim('entering')
+      }, 950)
+      setTimeout(() => setCardAnim('idle'), 1350)
+    }
+  }, [stampState.count, stampState.card])
+
   const handleStamp = (e) => {
-    if (!canStamp) return
+    if (!canStamp || stampState.count >= STAMPS_PER_CARD) return
     const rect = e.currentTarget.getBoundingClientRect()
     const x = Math.min(94, Math.max(6, ((e.clientX - rect.left) / rect.width) * 100))
     const y = Math.min(82, Math.max(22, ((e.clientY - rect.top) / rect.height) * 100))
     const img = nextImg
     setCanStamp(false)
+    setNextImg(pickNextImg(img))
+
+    // Render the stamp immediately instead of waiting on the network round
+    // trip — we already know exactly what will be stamped (x/y/img), so
+    // there's no reason the pop-in should lag behind the click.
+    setStampState(prev => ({ ...prev, count: prev.count + 1, total: prev.total + 1, stamps: [...prev.stamps, { x, y, img }] }))
+
     fetch('/api/stamps', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ x, y, img }),
     })
-      .then(r => (r.ok ? r.json() : null))
-      .then(data => {
-        if (!data) { setCanStamp(true); return }
-        setStampState(data)
-        setCanStamp(true)
-        setNextImg(pickNextImg(img))
-        if (data.count === STAMPS_PER_CARD) {
-          setTimeout(() => setCardAnim('leaving'), 500)
-          setTimeout(() => {
-            setStampState(prev => (prev.card === data.card ? { card: data.card + 1, count: 0, total: data.total, stamps: [] } : prev))
-            setCardAnim('entering')
-          }, 950)
-          setTimeout(() => setCardAnim('idle'), 1350)
-        }
-      })
+      .then(() => setCanStamp(true))
       .catch(() => setCanStamp(true))
   }
 
@@ -241,7 +258,7 @@ export default function Footer({ id }) {
           </p>
           <div className="flex items-center" style={{ gap: 38 }}>
             <a href="https://www.linkedin.com/in/celine-tseng" target="_blank" rel="noopener noreferrer" className="footer-social-link flex items-center hover:opacity-70 transition-opacity">
-              <span className="text-[#4A77FF] text-[17px] leading-[27px]" style={{ ...dm, fontWeight: 500 }}>Linkedin</span>
+              <span className="text-[#4A77FF] text-[17px] leading-[27px]" style={{ ...dm, fontWeight: 500 }}>LinkedIn</span>
               <ArrowDiagonal />
             </a>
             <a href="mailto:celine900423lu@gmail.com" className="footer-social-link flex items-center hover:opacity-70 transition-opacity">

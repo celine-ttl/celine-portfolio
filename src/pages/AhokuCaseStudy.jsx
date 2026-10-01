@@ -411,16 +411,16 @@ export default function AhokuCaseStudy() {
             <div className="flex flex-col gap-[10px]">
               <SectionLabel text="Results" />
               <h2 className="text-[28px] font-semibold leading-[42px] text-black" style={dm}>
-                95% paired their device and logged a reading on their own, up from 80% who abandoned the old setup.
+                96% paired their device and logged a reading on their own, up from 80% who abandoned the old setup.
               </h2>
             </div>
             <p className="text-[17px] font-light leading-[27px] text-[#2D2D2D]" style={dm}>
               To validate the redesign, I tested with 25 elderly users — 15 from the original research group and 10 new participants. 24 of 25 completed device pairing and logging on their own, up from the 80% who abandoned the original flow.
             </p>
-            <div className="rounded-[24px] bg-white" style={{ padding: 24, boxShadow: '4px 4px 12px 0px rgba(0,0,0,0.12), -4px -4px 12px 0px rgba(0,0,0,0.12)', overflowX: 'auto' }}>
+            <div className="rounded-[24px] bg-white" style={{ padding: 24, border: '1px solid #ECEEEE', boxShadow: '0px 2px 16px 0px rgba(16,22,23,0.05)', overflowX: 'auto' }}>
               <table className="w-full" style={{ borderCollapse: 'collapse', minWidth: 480 }}>
                 <thead>
-                  <tr style={{ borderBottom: '2px solid #525252' }}>
+                  <tr style={{ borderBottom: '1px solid #525252' }}>
                     {['Metric', 'Before', 'After'].map(h => (
                       <th key={h} className="text-left text-[17px] font-bold text-[#525252] pb-[12px]" style={dm}>{h}</th>
                     ))}
@@ -428,7 +428,7 @@ export default function AhokuCaseStudy() {
                 </thead>
                 <tbody>
                   {[
-                    { metric: 'Device pairing completion rate', before: '20%', after: '95%' },
+                    { metric: 'Device pairing completion rate', before: '20%', after: '96%' },
                     { metric: 'Users completing setup independently', before: '—', after: '100% (25/25)' },
                     { metric: 'User sentiment on visual design', before: '"Cold, outdated"', after: '"Warm, modern, professional"' },
                   ].map(({ metric, before, after }, i, arr) => (

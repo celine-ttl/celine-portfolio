@@ -205,7 +205,7 @@ export default function Playground() {
                 }} />
                 {/* Prototype screenshot */}
                 <div style={{ position: 'absolute', top: 37, left: 87, width: 427, height: 270, borderRadius: 8, overflow: 'hidden', boxShadow: '0px 4px 12px 0px rgba(0,0,0,0.12)' }}>
-                  <img src="/images/playground/ai-browser-prototype-5d1b08.png" alt="AI-native Browser prototype" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                  <video src="/videos/ui-for-ai-playground-demo.mov" autoPlay muted loop playsInline style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
                 </div>
                 {/* Tags */}
                 <div className="pg-tags" style={{ position: 'absolute', bottom: 12, left: 12, display: 'flex', gap: 12 }}>
