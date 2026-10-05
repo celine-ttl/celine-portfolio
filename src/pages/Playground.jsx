@@ -27,6 +27,14 @@ const hoverStyles = `
     opacity: 1;
   }
 
+  .pg-gallery {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .pg-gallery::-webkit-scrollbar {
+    display: none;
+  }
+
   /* Responsive */
   @media (max-width: 1200px) {
     .pg-layout {
