@@ -409,24 +409,6 @@ export default function AmazonMusicCaseStudy() {
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 })
   const [cursorVisible, setCursorVisible] = useState(false)
   const [activeSection, setActiveSection] = useState('overview')
-  const [bannerOffset, setBannerOffset] = useState(0)
-
-  useEffect(() => {
-    let ticking = false
-    const update = () => {
-      setBannerOffset(Math.min(window.scrollY * 0.2, 60))
-      ticking = false
-    }
-    const onScroll = () => {
-      if (!ticking) {
-        ticking = true
-        requestAnimationFrame(update)
-      }
-    }
-    update()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
 
   useEffect(() => {
     const sectionMap = {
@@ -572,11 +554,14 @@ export default function AmazonMusicCaseStudy() {
       <Nav fixed />
 
       {/* Banner */}
-      <div style={{ marginTop: 80, width: '100%', aspectRatio: '1280 / 520', overflow: 'hidden' }}>
+      <div style={{ position: 'relative', margin: '104px auto 0', width: 'calc(100% - 96px)', aspectRatio: '1182 / 520', borderRadius: 24, overflow: 'hidden', background: '#23262B' }} role="img" aria-label="Amazon Music artist profile's You &amp; Olivia and Superfan screens shown on two phones">
+        <img src="/images/amazon-music/cover/blur.svg" alt="" style={{ position: 'absolute', width: '168.2%', left: '-34.1%', top: '-78%', maxWidth: 'none' }} />
+        <img src="/images/amazon-music/cover/logo.png" alt="" style={{ position: 'absolute', left: '13.6%', top: '-8.3%', width: '50.5%', opacity: 0.2, borderRadius: 25 }} />
+        <div style={{ position: 'absolute', inset: 0, opacity: 0.25, backgroundImage: 'url(/images/amazon-music/cover/texture.png)', backgroundSize: '320px 320px', backgroundRepeat: 'repeat' }} />
         <img
-          src="/images/amazon-music/case-study-banner-v2.png"
-          alt="Amazon Music artist profile's You &amp; Olivia and Superfan screens shown on two phones"
-          style={{ width: '100%', height: '120%', objectFit: 'cover', objectPosition: 'top', display: 'block', transform: `translateY(-${bannerOffset}px)`, willChange: 'transform' }}
+          src="/images/amazon-music/cover/mockup.png"
+          alt=""
+          style={{ position: 'absolute', left: '23.9%', top: '4.6%', width: '77.8%', maxWidth: 'none', display: 'block' }}
         />
       </div>
 
