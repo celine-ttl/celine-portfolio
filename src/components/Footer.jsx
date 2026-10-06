@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 
 const dm = { fontFamily: 'DM Sans, sans-serif' }
-const STAMPS_PER_CARD = 10
+const STAMPS_PER_CARD = 8
+// 3x3 grid: 8 stampable circles plus the fixed dashed cup slot in the last cell
+const GRID_SLOTS = 9
 const STAMP_IMAGES = [
   '/images/footer/stamp-mark.png',
   '/images/footer/stamp-beans.png',
@@ -53,21 +55,22 @@ function Stamp({ x, y, img }) {
   )
 }
 
-function StampCard({ card, total, stamps, onStamp, canStamp, cardAnim, nextImg }) {
+function StampCard({ card, stamps, onStamp, canStamp, cardAnim, nextImg }) {
   const cursor = CURSOR_IMAGES[nextImg] ?? CURSOR_IMAGES[0]
   return (
-    <div className="footer-stampcard-wrap" style={{ position: 'relative', width: 470, height: 270, flexShrink: 0 }}>
+    <div className="footer-stampcard-wrap" style={{ position: 'relative', width: 470, aspectRatio: '470 / 247', flexShrink: 0 }}>
       {/* Older card peeking out from behind for depth */}
       <div
         aria-hidden="true"
         className="footer-stampcard-back"
         style={{
           position: 'absolute', left: -18, top: 18, width: 380, height: 196,
-          background: '#B2C5DB',
-          boxShadow: '0px 2px 12px rgba(16,22,23,0.05)',
           transform: 'rotate(-4deg)',
         }}
-      />
+      >
+        {/* The artwork has a soft shadow baked into transparent padding, so it's oversized to keep the card edge on the box */}
+        <img src="/images/footer/stampcard-back.png" alt="" style={{ position: 'absolute', left: '-3.6%', top: '-5.8%', width: '107.1%', maxWidth: 'none', display: 'block' }} />
+      </div>
       {/* Active card */}
       <button
         type="button"
@@ -76,41 +79,39 @@ function StampCard({ card, total, stamps, onStamp, canStamp, cardAnim, nextImg }
         className={`footer-stampcard${cardAnim === 'leaving' ? ' footer-card-leaving' : cardAnim === 'entering' ? ' footer-card-entering' : ''}`}
         style={{
           position: 'absolute', inset: 0,
-          background: '#D6E6F9',
+          background: '#B2C9EA',
           boxShadow: '0px 2px 16px rgba(16,22,23,0.05)',
-          border: 'none', padding: '28px 32px', cursor: canStamp ? `url(${cursor.src}) ${cursor.hotspot[0]} ${cursor.hotspot[1]}, pointer` : 'default',
-          display: 'flex', flexDirection: 'column', gap: 18, textAlign: 'left',
+          border: 'none', padding: 0, cursor: canStamp ? `url(${cursor.src}) ${cursor.hotspot[0]} ${cursor.hotspot[1]}, pointer` : 'default',
+          display: 'block', textAlign: 'left',
           WebkitTapHighlightColor: 'transparent', overflow: 'hidden',
         }}
       >
-        <div aria-hidden="true" style={{ position: 'absolute', inset: 0, backgroundImage: 'url(/images/footer/paper-texture.svg)', backgroundSize: '200px 200px', opacity: 0.2, pointerEvents: 'none' }} />
-        <img src="/images/footer/stampcard-title.png" alt="Visitor Stamp Card" className="footer-stampcard-title" style={{ height: 36, width: 'auto', display: 'block', objectFit: 'contain', marginTop: -8 }} />
-        <img src="/images/footer/footer-coffee.png" alt="" className="footer-stampcard-coffee" style={{ position: 'absolute', right: -20, bottom: -42, width: 130, height: 130, opacity: 0.9, pointerEvents: 'none' }} />
+        <div aria-hidden="true" style={{ position: 'absolute', inset: 0, backgroundImage: 'url(/images/footer/paper-texture.svg)', backgroundSize: '200px 200px', opacity: 0.3, pointerEvents: 'none' }} />
+        <img src="/images/footer/stampcard-title-v2.png" alt="Visitor Stamp Card" className="footer-stampcard-title" style={{ position: 'absolute', left: 0, top: '41%', width: '44%', height: 'auto', display: 'block', pointerEvents: 'none' }} />
+        <span className="footer-stampcard-meta" style={{ ...dm, position: 'absolute', left: '5.3%', top: '76%', fontSize: 14, lineHeight: '1.2em', fontWeight: 600, letterSpacing: '0.04em', textTransform: 'uppercase', color: '#FCF9F2', pointerEvents: 'none' }}>
+          Card No.{card}<br />{stamps.length} of {STAMPS_PER_CARD} stamped
+        </span>
         <div
           aria-hidden="true"
           className="footer-stampcard-circles"
           style={{
-            position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, calc(-50% + 4px))',
-            display: 'flex', flexDirection: 'column', gap: 12, pointerEvents: 'none',
+            position: 'absolute', right: '5.5%', top: '50%', transform: 'translateY(-50%)',
+            display: 'grid', gridTemplateColumns: 'repeat(3, auto)', gap: 12, pointerEvents: 'none',
           }}
         >
-          <div style={{ display: 'flex', gap: 20 }}>
-            {[0, 1, 2, 3, 4].map(i => (
-              <div key={i} className="footer-stampcard-circle" style={{ width: 64, height: 64, borderRadius: '50%', background: '#FCF9F2', flexShrink: 0 }} />
-            ))}
-          </div>
-          <div style={{ display: 'flex', gap: 20 }}>
-            {[5, 6, 7, 8, 9].map(i => (
-              <div key={i} className="footer-stampcard-circle" style={{ width: 64, height: 64, borderRadius: '50%', background: '#FCF9F2', flexShrink: 0 }} />
-            ))}
-          </div>
+          {Array.from({ length: GRID_SLOTS }, (_, i) => (
+            i === GRID_SLOTS - 1 ? (
+              <div key={i} className="footer-stampcard-circle footer-stampcard-next" style={{ width: 62, height: 62, borderRadius: '50%', border: '2px dashed #F3F3F3', boxSizing: 'border-box', position: 'relative', flexShrink: 0 }}>
+                <img src="/images/footer/stampcard-cup.png" alt="" style={{ position: 'absolute', inset: -2, width: 'calc(100% + 4px)', height: 'calc(100% + 4px)' }} />
+              </div>
+            ) : (
+              <div key={i} className="footer-stampcard-circle" style={{ width: 62, height: 62, borderRadius: '50%', background: '#FCF9F2', flexShrink: 0 }} />
+            )
+          ))}
         </div>
         {stamps.map((s, i) => (
           <Stamp key={`${card}-${i}`} x={s.x} y={s.y} img={s.img} />
         ))}
-        <span style={{ ...dm, fontSize: 14, fontWeight: 700, letterSpacing: '0.04em', textTransform: 'uppercase', color: '#6F4E37', marginTop: 'auto', transform: 'translateY(8px)' }}>
-          Card No.{card} · {total} {total === 1 ? 'stamp' : 'stamps'} collected
-        </span>
       </button>
     </div>
   )
@@ -209,23 +210,15 @@ export default function Footer({ id }) {
           .site-footer-top { flex-direction: column !important; align-items: center !important; text-align: center; }
           .site-footer-identity { align-items: center !important; text-align: center !important; }
           .site-footer-bottom { align-items: center !important; text-align: center !important; }
-          .footer-stampcard-wrap { width: 100% !important; max-width: 470px; height: 260px !important; }
+          .footer-stampcard-wrap { width: 100% !important; max-width: 470px; }
           .footer-stampcard-back { left: -3% !important; top: 14px !important; width: 94% !important; height: 84% !important; }
-          .footer-stampcard { padding: 28px 24px !important; }
           .footer-stampcard-circles { gap: 8px !important; }
-          .footer-stampcard-circle { width: 48px !important; height: 48px !important; }
-          .footer-stampcard-circle + .footer-stampcard-circle { margin-left: 0; }
-          .footer-stampcard-circles > div { gap: 10px !important; }
-          .footer-stampcard-coffee { width: 96px !important; height: 96px !important; right: -12px !important; bottom: -18px !important; }
+          .footer-stampcard-circle { width: 52px !important; height: 52px !important; }
         }
         @media (max-width: 480px) {
-          .footer-stampcard-wrap { height: 230px !important; }
-          .footer-stampcard { padding: 24px 20px !important; }
           .footer-stampcard-circles { gap: 6px !important; }
-          .footer-stampcard-circles > div { gap: 8px !important; }
-          .footer-stampcard-circle { width: 38px !important; height: 38px !important; }
-          .footer-stampcard-title { height: 28px !important; }
-          .footer-stampcard-coffee { width: 70px !important; height: 70px !important; right: -8px !important; bottom: -12px !important; }
+          .footer-stampcard-circle { width: 42px !important; height: 42px !important; }
+          .footer-stampcard-meta { font-size: 11px !important; }
         }
         .footer-social-link { min-height: 44px; padding: 8px 0; }
       `}</style>
@@ -244,7 +237,6 @@ export default function Footer({ id }) {
           </div>
           <StampCard
             card={stampState.card}
-            total={stampState.total}
             stamps={stampState.stamps ?? []}
             onStamp={handleStamp}
             canStamp={canStamp}

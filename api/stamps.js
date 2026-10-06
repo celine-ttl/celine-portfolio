@@ -1,6 +1,6 @@
 import { Redis } from '@upstash/redis'
 
-const STAMPS_PER_CARD = 10
+const STAMPS_PER_CARD = 8
 const STAMP_IMAGE_COUNT = 5
 const TOTAL_KEY = 'portfolio:stamp-total'
 const POSITIONS_KEY = 'portfolio:stamp-positions'
