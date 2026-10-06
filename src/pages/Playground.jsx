@@ -252,7 +252,7 @@ export default function Playground() {
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 9, flex: 1, minWidth: 0 }}>
               <div className="pg-card" style={{ height: 332, borderRadius: 12, overflow: 'hidden', position: 'relative' }}>
-                <img src="/images/playground/tsa-banner-card.png" alt="TSA Cultural Night Banner - Journey" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                <img src="/images/playground/tsa-banner-illustration.png" alt="TSA Cultural Night Banner - Journey" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'calc(50% + 24px) 50%', display: 'block' }} />
                 <div className="pg-tags" style={{ position: 'absolute', bottom: 12, left: 12, display: 'flex', gap: 12 }}>
                   <GlassTag>Illustration</GlassTag>
                   <GlassTag>Branding</GlassTag>
@@ -267,12 +267,9 @@ export default function Playground() {
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10, flexShrink: 0 }}>
               <div className="pg-card" style={{ width: 619, height: 345, borderRadius: 11, overflow: 'hidden', position: 'relative', background: '#1B191E' }}>
-                {/* Purple glow */}
-                <div style={{
-                  position: 'absolute', top: 29, left: 24, width: 572, height: 286,
-                  background: 'radial-gradient(circle, rgba(162,96,225,0.84) 0%, rgba(89,52,123,0.84) 100%)',
-                  filter: 'blur(10px)',
-                }} />
+                {/* Background photo */}
+                <img src="/images/playground/prompt-dna-bg.jpg" alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                <div style={{ position: 'absolute', inset: 0, background: '#000', opacity: 0.4 }} />
                 {/* GIF */}
                 <div style={{ position: 'absolute', top: 45, left: 36, width: 547, height: 255, borderRadius: 11, overflow: 'hidden' }}>
                   <img src="/images/playground/prompt-dna.gif" alt="Prompt DNA" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />

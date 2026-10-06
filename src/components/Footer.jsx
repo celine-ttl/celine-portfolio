@@ -69,7 +69,7 @@ function StampCard({ card, stamps, onStamp, canStamp, cardAnim, nextImg }) {
         }}
       >
         {/* The artwork has a soft shadow baked into transparent padding, so it's oversized to keep the card edge on the box */}
-        <img src="/images/footer/stampcard-back.png" alt="" style={{ position: 'absolute', left: '-3.6%', top: '-5.8%', width: '107.1%', maxWidth: 'none', display: 'block' }} />
+        <img src="/images/footer/stampcard-back.png" alt="" style={{ position: 'absolute', left: '-3.6%', top: '-5.8%', width: '107.1%', maxWidth: 'none', display: 'block', filter: 'saturate(1.4) brightness(0.88)' }} />
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'url(/images/footer/ink-texture.svg)', backgroundSize: '400px 400px', opacity: 0.08, pointerEvents: 'none' }} />
       </div>
       {/* Active card */}
