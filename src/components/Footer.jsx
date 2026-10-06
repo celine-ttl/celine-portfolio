@@ -70,7 +70,7 @@ function StampCard({ card, stamps, onStamp, canStamp, cardAnim, nextImg }) {
       >
         {/* The artwork has a soft shadow baked into transparent padding, so it's oversized to keep the card edge on the box */}
         <img src="/images/footer/stampcard-back.png" alt="" style={{ position: 'absolute', left: '-3.6%', top: '-5.8%', width: '107.1%', maxWidth: 'none', display: 'block' }} />
-        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'url(/images/footer/ink-texture.svg)', backgroundSize: '400px 400px', opacity: 0.15, pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'url(/images/footer/ink-texture.svg)', backgroundSize: '400px 400px', opacity: 0.08, pointerEvents: 'none' }} />
       </div>
       {/* Active card */}
       <button
@@ -87,7 +87,7 @@ function StampCard({ card, stamps, onStamp, canStamp, cardAnim, nextImg }) {
           WebkitTapHighlightColor: 'transparent', overflow: 'hidden',
         }}
       >
-        <div aria-hidden="true" style={{ position: 'absolute', inset: 0, backgroundImage: 'url(/images/footer/ink-texture.svg)', backgroundSize: '400px 400px', opacity: 0.2, pointerEvents: 'none' }} />
+        <div aria-hidden="true" style={{ position: 'absolute', inset: 0, backgroundImage: 'url(/images/footer/ink-texture.svg)', backgroundSize: '400px 400px', opacity: 0.15, pointerEvents: 'none' }} />
         <img src="/images/footer/stampcard-title-v2.png" alt="Visitor Stamp Card" className="footer-stampcard-title" style={{ position: 'absolute', left: 0, top: '41%', width: '44%', height: 'auto', display: 'block', pointerEvents: 'none' }} />
         <span className="footer-stampcard-meta" style={{ ...dm, position: 'absolute', left: '5.3%', top: '76%', fontSize: 14, lineHeight: '1.2em', fontWeight: 600, letterSpacing: '0.04em', textTransform: 'uppercase', color: '#FCF9F2', pointerEvents: 'none' }}>
           Card No.{card}<br />{stamps.length} of {STAMPS_PER_CARD} stamped
