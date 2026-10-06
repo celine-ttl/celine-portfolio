@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400">
+  <filter id="ink" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+    <!-- fine pitted speckle, like ink that didn't fully take on the paper -->
+    <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="4" stitchTiles="stitch" result="fine"/>
+    <feColorMatrix in="fine" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 -10 5.9" result="speckle"/>
+    <!-- large soft blotches so the wear is uneven instead of uniform -->
+    <feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="3" seed="11" stitchTiles="stitch" result="blotch"/>
+    <feColorMatrix in="blotch" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 -3.5 2.6" result="wear"/>
+    <feComposite in="speckle" in2="wear" operator="in"/>
+  </filter>
+  <rect width="400" height="400" filter="url(#ink)"/>
+</svg>
