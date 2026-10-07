@@ -78,9 +78,8 @@ body {
 
 @media (max-width: 900px) {
   .about-coffee-section { padding-left: 24px !important; padding-right: 24px !important; }
-  .about-content-row { flex-direction: column !important; align-items: stretch !important; gap: 32px !important; }
+  .about-content-row { flex-direction: column !important; align-items: stretch !important; gap: 80px !important; }
   .about-left-panel { width: 100% !important; flex-shrink: 1 !important; }
-  .about-divider { display: none !important; }
 }
 
 @media (max-width: 768px) {

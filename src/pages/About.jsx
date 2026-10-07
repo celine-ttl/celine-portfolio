@@ -158,20 +158,35 @@ export default function About() {
             </div>
           </div>
 
-          {/* Right: photo collage */}
-          <img
+          {/* Right: photo collage. The clip lives in the same wrapper so it moves with the parallax. */}
+          <div
             className="about-hero-photo fade-section"
             ref={heroRef}
-            src="/images/about/aboutme-collage.png"
-            alt="Celine"
             onMouseMove={handleHeroMouseMove}
             onMouseLeave={handleHeroMouseLeave}
             style={{
-              width: 435, height: 508, objectFit: 'contain', flexShrink: 0, display: 'block',
+              position: 'relative', width: 435, height: 508, flexShrink: 0,
               transform: `translate(${parallax.x * 12}px, ${parallax.y * 8}px) rotate(${parallax.x * 2}deg)`,
               transition: 'transform 0.4s ease-out',
             }}
-          />
+          >
+            <img
+              src="/images/about/aboutme-collage.png"
+              alt="Celine"
+              style={{ width: '100%', height: 'auto', display: 'block' }}
+            />
+            {/* Binder clip gripping the polaroid's top-right edge: the origin sits on the edge and the tilt matches the polaroid's ~5° slope */}
+            <img
+              src="/images/about/silver-binder.png"
+              alt=""
+              aria-hidden="true"
+              style={{
+                position: 'absolute', left: '69.7%', top: '2.6%', width: '21.6%', height: 'auto',
+                transform: 'rotate(5deg)', transformOrigin: '50% 72%',
+                filter: 'drop-shadow(0 3px 4px rgba(0,0,0,0.25))', pointerEvents: 'none',
+              }}
+            />
+          </div>
         </div>
       </section>
 
@@ -187,39 +202,47 @@ export default function About() {
           </p>
         </div>
 
-        {/* Card */}
-        <div className="fade-section" style={{
-          position: 'relative',
-          width: '100%',
-          padding: 48,
-          borderRadius: 24,
-          boxShadow: '4px 4px 12px 0px rgba(0,0,0,0.05), -4px -4px 12px 0px rgba(0,0,0,0.05)',
-          display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 32,
-          overflow: 'hidden',
-        }}>
-          {/* BG image at 20% opacity */}
-          <div style={{
-            position: 'absolute', inset: 0, borderRadius: 24,
+        {/* Menu card (paper texture) holds only the drink list; the right-hand
+            text sits directly on the page. The card's -48px margins cancel its
+            48px padding, so the layout matches the old full-width card. */}
+        <div className="fade-section" style={{ position: 'relative', width: '100%', padding: 48 }}>
+          <div className="about-content-row" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 120, width: '100%' }}>
+          <div className="about-menu-card" style={{
+            position: 'relative', margin: -48, padding: 48, borderRadius: 24,
+            boxShadow: '4px 4px 12px 0px rgba(0,0,0,0.05), -4px -4px 12px 0px rgba(0,0,0,0.05)',
+          }}>
+          {/* Clipping layer for the paper bg and the watermark that peeks out of the left edge */}
+          <div style={{ position: 'absolute', inset: 0, borderRadius: 24, overflow: 'hidden', pointerEvents: 'none' }}>
+            {/* "Today's Menu" watermark — vertical, peeking out from left edge */}
+            <p style={{
+              position: 'absolute', left: -34.5, top: 117,
+              ...serif, fontSize: 70.67, lineHeight: '106px', color: '#979797',
+              margin: 0, writingMode: 'vertical-lr', zIndex: 1,
+            }}>
+              Today&apos;s Menu
+            </p>
+          </div>
+
+          {/* Paper texture over the menu content so it reads as printed on the paper. Multiply keeps the page-colored
+              background identical to the old 20% underlay while letting the grain show through the text and drinks. */}
+          <div aria-hidden="true" style={{
+            position: 'absolute', inset: 0, borderRadius: 24, pointerEvents: 'none', zIndex: 3,
             backgroundImage: 'url(/images/about/coffee-card-bg.png)',
             backgroundSize: 'cover', backgroundPosition: 'center',
-            opacity: 0.2, zIndex: 0,
+            opacity: 0.2, mixBlendMode: 'multiply',
           }} />
 
-          {/* "Today's Menu" watermark — vertical, peeking out from left edge */}
-          <p style={{
-            position: 'absolute', left: -34.5, top: 117,
-            ...serif, fontSize: 70.67, lineHeight: '106px', color: '#979797',
-            margin: 0, writingMode: 'vertical-lr', zIndex: 1, pointerEvents: 'none',
-          }}>
-            Today&apos;s Menu
-          </p>
-
-          {/* Main content row */}
-          <div className="about-content-row" style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 52, width: '100%' }}>
+          {/* Paper clip: the shadow band across its middle (52% down the image) sits on the card's top edge */}
+          <img
+            src="/images/about/paper-clip.png"
+            alt=""
+            aria-hidden="true"
+            style={{ position: 'absolute', top: -84.2, left: 2, width: 136.1, height: 162, zIndex: 4, pointerEvents: 'none' }}
+          />
 
             {/* Left panel: drink items + vertical divider */}
             <div className="about-left-panel" style={{
-              width: 486, minWidth: 0, padding: 24, borderRadius: 48,
+              position: 'relative', zIndex: 2, width: 418, minWidth: 0, padding: 24, borderRadius: 48,
               display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 4,
             }}>
               {/* Drink items column */}
@@ -259,9 +282,8 @@ export default function About() {
                 })}
               </div>
 
-              {/* Vertical divider */}
-              <div className="about-divider" style={{ width: 1, height: 480, background: '#C6C6C6', flexShrink: 0 }} />
             </div>
+          </div>
 
             {/* Right panel */}
             <div key={active.id} style={{ display: 'flex', flexDirection: 'column', gap: 24, flex: 1, justifyContent: 'center', alignSelf: 'stretch', animation: 'fadeInUp 0.35s ease-out both' }}>
