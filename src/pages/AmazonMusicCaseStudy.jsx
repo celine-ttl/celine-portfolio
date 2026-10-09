@@ -1,4 +1,4 @@
-import { useState, useEffect, Fragment } from 'react'
+import { useState, useEffect, useRef, Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
@@ -381,26 +381,53 @@ function StepItem({ number, title, caption }) {
   )
 }
 
-function TableCell({ children, header, lastCol, lastRow }) {
-  return (
-    <div
-      style={{
-        display: 'flex', alignItems: 'center',
-        padding: header ? '16px 20px' : 20,
-        background: header ? '#F7F8F8' : 'transparent',
-        borderRight: lastCol ? 'none' : '1px solid #ECEEEE',
-        borderBottom: lastRow ? 'none' : '1px solid #ECEEEE',
-      }}
-    >
-      {children}
-    </div>
-  )
+// Numbers that have already animated; survives route changes so the count-up
+// only plays the first time the section is scrolled to.
+const playedCounts = new Set()
+
+// Counts from 0 up to `value` the first time it scrolls into view.
+function CountUp({ value, prefix = '', suffix = '', duration = 1400, delay = 0, style }) {
+  const ref = useRef(null)
+  const key = `${prefix}${value}${suffix}`
+  const reduceMotion = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  // Decided once on mount, so marking it played mid-animation doesn't cancel it.
+  const [skip] = useState(() => reduceMotion || playedCounts.has(key))
+  const [n, setN] = useState(skip ? value : 0)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el || skip) return
+    let raf
+    let timer
+    const obs = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return
+      obs.disconnect()
+      playedCounts.add(key)
+      timer = setTimeout(() => {
+        const start = performance.now()
+        const tick = now => {
+          const t = Math.min((now - start) / duration, 1)
+          setN(Math.round(value * (1 - Math.pow(1 - t, 3))))
+          if (t < 1) raf = requestAnimationFrame(tick)
+        }
+        raf = requestAnimationFrame(tick)
+      }, delay)
+    }, { threshold: 0.6 })
+    obs.observe(el)
+    return () => {
+      obs.disconnect()
+      clearTimeout(timer)
+      cancelAnimationFrame(raf)
+    }
+  }, [value, duration, delay, key, skip])
+
+  return <span ref={ref} style={{ ...style, fontVariantNumeric: 'tabular-nums' }}>{prefix}{n}{suffix}</span>
 }
 
-const RESULT_ROWS = [
-  { surface: 'Landing', won: 'Recognition & instant resume', current: 'Variety & control when exploring' },
-  { surface: 'Music tab', won: 'Tier-composed order & badges', current: 'Trust depends on explaining the metrics' },
-  { surface: 'You & Artist tab', won: 'Era timeline & milestones felt earned', current: 'Clearer hierarchy still needed' },
+const RESULT_STATS = [
+  { value: 76, label: 'in feeling their loyalty is noticed', rating: 'Rating: 3.3 → 5.8 / 7' },
+  { value: 49, label: 'in feeling recognized as a fan', rating: 'Rating: 3.9 → 5.8 / 7' },
+  { value: 38, label: 'in feeling connected to the artist', rating: 'Rating: 4.0 → 5.5 / 7' },
 ]
 
 
@@ -557,7 +584,7 @@ export default function AmazonMusicCaseStudy() {
       <div style={{ position: 'relative', margin: '104px auto 0', width: 'calc(100% - 96px)', aspectRatio: '1182 / 520', borderRadius: 24, overflow: 'hidden', background: '#23262B' }} role="img" aria-label="Amazon Music artist profile's You &amp; Olivia and Superfan screens shown on two phones">
         <img src="/images/amazon-music/cover/blur.svg" alt="" style={{ position: 'absolute', width: '168.2%', left: '-34.1%', top: '-78%', maxWidth: 'none' }} />
         <img src="/images/amazon-music/cover/logo.png" alt="" style={{ position: 'absolute', left: '13.6%', top: '-8.3%', width: '50.5%', opacity: 0.2, borderRadius: 25 }} />
-        <div style={{ position: 'absolute', inset: 0, opacity: 0.25, backgroundImage: 'url(/images/amazon-music/cover/texture.png)', backgroundSize: '320px 320px', backgroundRepeat: 'repeat' }} />
+        <div style={{ position: 'absolute', inset: 0, opacity: 0.2, backgroundImage: 'url(/images/amazon-music/cover/texture.png)', backgroundSize: '320px 320px', backgroundRepeat: 'repeat' }} />
         <img
           src="/images/amazon-music/cover/mockup.png"
           alt=""
@@ -614,13 +641,13 @@ export default function AmazonMusicCaseStudy() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                 <span style={{ ...dm, fontSize: 14, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em', lineHeight: '21px', color: '#4A77FF' }}>My Impact</span>
                 <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#525252' }}>
-                  Testing showed the adaptive system made recognition felt, not just visible.
+                  Superfans felt more recognized, more noticed, and more connected to the artist with the adaptive profile.
                 </span>
               </div>
               <div className="cs-impact-card" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 20 }}>
-                <span style={{ ...dm, fontSize: 36, fontWeight: 500, lineHeight: '1.2em', color: '#525252', flexShrink: 0 }}>10/10</span>
+                <span style={{ ...dm, fontSize: 36, fontWeight: 500, lineHeight: '1.2em', color: '#525252', flexShrink: 0 }}>10 of 10</span>
                 <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-                  <span style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#525252' }}>testers said &quot;it knows me,&quot; unprompted</span>
+                  <span style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#525252' }}>superfans rated the adaptive profile higher on every measure.</span>
                   <span style={{ ...dm, fontSize: 14, fontWeight: 300, lineHeight: '22px', color: '#979797' }}>
                     <strong style={{ fontWeight: 600 }}>—</strong> Based on moderated testing sessions
                   </span>
@@ -1073,67 +1100,44 @@ export default function AmazonMusicCaseStudy() {
           <div style={{ width: '100%', maxWidth: 920 }}>
             <SectionLabel text="Result" />
             <h2 style={{ ...dm, fontSize: 28, fontWeight: 500, lineHeight: '42px', letterSpacing: '0.015em', color: '#101314', margin: 0 }}>
-              Fans feels recognized. What they didn&apos;t want to lose was control.
+              Testing showed superfans felt more recognized, noticed, and connected with the adaptive profile
             </h2>
           </div>
 
-          <div style={{ width: '100%', maxWidth: 920, display: 'flex', flexDirection: 'column', gap: 24 }}>
+          <div style={{ width: '100%', maxWidth: 920, display: 'flex', flexDirection: 'column', gap: 12 }}>
             <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', letterSpacing: '0.01em', color: '#525252', margin: 0 }}>
-              We tested our prototypes against the current Amazon Music app in ten moderated sessions with real fans.
+              I ran moderated, one-on-one sessions with 10 superfans. Compared with the current app, all ten rated the adaptive profile higher on loyalty, recognition, and connection:
             </p>
 
-            <div className="am-result-desktop" style={{ width: '100%', background: '#FFFFFF', border: '1px solid #ECEEEE', borderRadius: 20, boxShadow: '0px 2px 16px 0px rgba(16,22,23,0.05)', overflow: 'hidden' }}>
-              <div className="am-result-table" style={{ display: 'grid', gridTemplateColumns: '220px 1.6fr 1.6fr' }}>
-                <TableCell header>
-                  <span style={{ ...dm, fontSize: 12.5, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#8A9391' }}>Surface</span>
-                </TableCell>
-                <TableCell header>
-                  <span style={{ ...dm, fontSize: 12.5, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#4A77FF' }}>Adaptive won on</span>
-                </TableCell>
-                <TableCell header lastCol>
-                  <span style={{ ...dm, fontSize: 12.5, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#8A9391' }}>Current app / what still needs work</span>
-                </TableCell>
-
-                {RESULT_ROWS.map((row, i) => {
-                  const lastRow = i === RESULT_ROWS.length - 1
-                  return (
-                    <Fragment key={row.surface}>
-                      <TableCell lastRow={lastRow}>
-                        <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 16, fontWeight: 600, color: '#101314' }}>{row.surface}</span>
-                      </TableCell>
-                      <TableCell lastRow={lastRow}>
-                        <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 15.5, fontWeight: 300, lineHeight: '24.8px', color: '#2B3433' }}>{row.won}</span>
-                      </TableCell>
-                      <TableCell lastCol lastRow={lastRow}>
-                        <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 15.5, fontWeight: 300, lineHeight: '24.8px', color: '#6C7675' }}>{row.current}</span>
-                      </TableCell>
-                    </Fragment>
-                  )
-                })}
-              </div>
-            </div>
-
-            {/* Mobile: stacked cards instead of the 3-column table (avoids clipped/hidden columns) */}
-            <div className="am-result-mobile" style={{ display: 'none', width: '100%', flexDirection: 'column', gap: 16 }}>
-              {RESULT_ROWS.map(row => (
-                <div key={row.surface} style={{ background: '#FFFFFF', border: '1px solid #ECEEEE', borderRadius: 20, boxShadow: '0px 2px 16px 0px rgba(16,22,23,0.05)', padding: '20px', display: 'flex', flexDirection: 'column', gap: 14 }}>
-                  <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 16, fontWeight: 600, color: '#101314' }}>{row.surface}</span>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-                    <span style={{ ...dm, fontSize: 12.5, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#4A77FF' }}>Adaptive won on</span>
-                    <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 16, fontWeight: 300, lineHeight: '25px', color: '#2B3433' }}>{row.won}</span>
+            <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 20, paddingTop: 12 }}>
+              {RESULT_STATS.map((stat, i) => (
+                <div key={stat.label} style={{ flex: '1 1 240px', background: 'transparent', borderRadius: 20, padding: '26px 24px', display: 'flex', flexDirection: 'column', gap: 12 }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 9 }}>
+                    <CountUp value={stat.value} prefix="+" suffix="%" delay={i * 150} style={{ ...dm, fontSize: 40, fontWeight: 500, lineHeight: '42px', letterSpacing: '0.05em', color: '#4A77FF' }} />
+                    <span style={{ ...dm, fontSize: 15.5, fontWeight: 500, lineHeight: '23.25px', color: '#525252' }}>{stat.label}</span>
                   </div>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 4, paddingTop: 10, borderTop: '1px solid #ECEEEE' }}>
-                    <span style={{ ...dm, fontSize: 12.5, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#8A9391' }}>Current app / what still needs work</span>
-                    <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 16, fontWeight: 300, lineHeight: '25px', color: '#6C7675' }}>{row.current}</span>
-                  </div>
+                  <span style={{ ...dm, fontSize: 14, fontWeight: 300, lineHeight: '22px', color: '#9AA3A2' }}>{stat.rating}</span>
                 </div>
               ))}
             </div>
 
             <div style={{ width: '100%', background: '#E4EAFF', borderRadius: 20, padding: '26px 30px', display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '0 18px' }}>
-              <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 23, fontWeight: 700, color: '#4A77FF' }}>&quot;It knows me&quot;</span>
-              <span style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', letterSpacing: '0.01em', color: '#525252' }}>— recognition landed in 3 of 3 prototypes tested.</span>
+              <span style={{ ...dm, fontSize: 23, fontWeight: 600, color: '#000000' }}>&quot;It knows me&quot;</span>
+              <span style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#525252' }}>— P4</span>
             </div>
+
+            <div style={{ borderTop: '1px solid #DDE1E1', paddingTop: 12, marginTop: 20 }}>
+              <span style={{ ...dm, fontSize: 14, fontWeight: 400, lineHeight: '22px', color: '#979797' }}>
+                Participants rated each statement from 1 (strongly disagree) to 7 (strongly agree) after using each version.
+              </span>
+            </div>
+          </div>
+
+          <div style={{ width: '100%', maxWidth: 920, paddingTop: 24, display: 'flex', flexDirection: 'column', gap: 12 }}>
+            <span style={{ ...dm, fontSize: 14, fontWeight: 800, lineHeight: '21px', letterSpacing: '0.05em', textTransform: 'uppercase', color: '#4A77FF' }}>What surprised me</span>
+            <p style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', letterSpacing: '0.01em', color: '#525252', margin: 0 }}>
+              You &amp; Artist was the feature that made people feel closest to the artist, but almost nobody expected to use it day to day. They said they&apos;d still start from the Music tab to search for a song or press play. <strong style={{ fontWeight: 500, color: '#000000' }}>Feeling close to an artist and using certain features daily turned out to be two different things.</strong>
+            </p>
           </div>
         </section>
 
