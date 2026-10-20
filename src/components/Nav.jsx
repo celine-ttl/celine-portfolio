@@ -84,7 +84,7 @@ export default function Nav({ fixed = false }) {
           </Link>
 
           {/* Desktop links */}
-          <div className="hidden sm:flex items-center" style={{ gap: 52 }}>
+          <div className="hidden sm:flex items-center" style={{ gap: 48 }}>
             {isHome ? (
               <a href="#work" className={activeClass} style={dm}><Dot />Work</a>
             ) : (
