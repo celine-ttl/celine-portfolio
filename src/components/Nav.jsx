@@ -3,6 +3,9 @@ import { Link, NavLink, useLocation } from 'react-router-dom'
 
 const dm = { fontFamily: 'DM Sans, sans-serif' }
 
+// Coffee sticker from the chat page; the nav button that opens it.
+const CHAT_ICON = '/images/coffee-sticker.png'
+
 const RESUME_URL = 'https://drive.google.com/file/d/1ArH6yggi7TaRpMPaHO7UhegLEq7huwDU/view?usp=sharing'
 
 const activeClass = `text-[17px] leading-7 text-[#000000] font-normal transition-opacity`
@@ -104,6 +107,9 @@ export default function Nav({ fixed = false }) {
             >
               Resume
             </a>
+            <NavLink to="/chat" aria-label="Chat" className="group" style={{ display: 'flex' }}>
+              <img src={CHAT_ICON} alt="" width={50} height={41} className="rotate-5 transition-transform duration-300 ease-out group-hover:-rotate-12 group-hover:scale-110" />
+            </NavLink>
           </div>
 
           {/* Hamburger button */}
@@ -169,6 +175,9 @@ export default function Nav({ fixed = false }) {
           >
             Resume
           </a>
+          <NavLink to="/chat" aria-label="Chat" onClick={close} className="group" style={{ display: 'flex', width: 'fit-content' }}>
+            <img src={CHAT_ICON} alt="" width={50} height={41} className="rotate-5 transition-transform duration-300 ease-out group-hover:-rotate-12 group-hover:scale-110" />
+          </NavLink>
         </div>
       )}
     </>

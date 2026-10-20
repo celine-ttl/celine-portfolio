@@ -1111,7 +1111,7 @@ export default function AmazonMusicCaseStudy() {
 
             <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 20, paddingTop: 12 }}>
               {RESULT_STATS.map((stat, i) => (
-                <div key={stat.label} style={{ flex: '1 1 240px', background: 'transparent', borderRadius: 20, padding: '26px 24px', display: 'flex', flexDirection: 'column', gap: 12 }}>
+                <div key={stat.label} style={{ flex: '1 1 240px', background: '#FFFFFF', borderRadius: 20, padding: '36px 24px', display: 'flex', flexDirection: 'column', gap: 12 }}>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 9 }}>
                     <CountUp value={stat.value} prefix="+" suffix="%" delay={i * 150} style={{ ...dm, fontSize: 40, fontWeight: 500, lineHeight: '42px', letterSpacing: '0.05em', color: '#4A77FF' }} />
                     <span style={{ ...dm, fontSize: 15.5, fontWeight: 500, lineHeight: '23.25px', color: '#525252' }}>{stat.label}</span>
@@ -1121,7 +1121,7 @@ export default function AmazonMusicCaseStudy() {
               ))}
             </div>
 
-            <div style={{ width: '100%', background: '#E4EAFF', borderRadius: 20, padding: '26px 30px', display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '0 18px' }}>
+            <div style={{ width: '100%', background: '#E4EAFF', borderRadius: 20, padding: '16px 24px', marginTop: 8, display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '0 18px' }}>
               <span style={{ ...dm, fontSize: 23, fontWeight: 600, color: '#000000' }}>&quot;It knows me&quot;</span>
               <span style={{ ...dm, fontSize: 17, fontWeight: 300, lineHeight: '27px', color: '#525252' }}>— P4</span>
             </div>

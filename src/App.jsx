@@ -7,6 +7,7 @@ import UiForAiCaseStudy from './pages/UiForAiCaseStudy'
 import AmazonMusicCaseStudy from './pages/AmazonMusicCaseStudy'
 import About from './pages/About'
 import Playground from './pages/Playground'
+import Chat from './pages/Chat'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -25,6 +26,7 @@ export default function App() {
         <Route path="/amazon-music" element={<AmazonMusicCaseStudy />} />
         <Route path="/about" element={<About />} />
         <Route path="/playground" element={<Playground />} />
+        <Route path="/chat" element={<Chat />} />
       </Routes>
       <Analytics />
     </BrowserRouter>
