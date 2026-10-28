@@ -1,10 +1,7 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 
 const dm = { fontFamily: 'DM Sans, sans-serif' }
 
-// Preserved exactly from the source prototype (synced-scroll-capture.html)
-const SPEED = 55
-const HOLD_DURATION = 900
 const BOTTOM_GAP = 12
 
 function PhoneFrame({ label, src, alt, navBarSrc, phoneRef, contentRef, navBarRef }) {
@@ -17,6 +14,7 @@ function PhoneFrame({ label, src, alt, navBarSrc, phoneRef, contentRef, navBarRe
           position: 'relative', width: '100%', aspectRatio: '280 / 586', borderRadius: 38,
           background: '#000000', border: '7px solid #2B1B12', overflow: 'hidden',
           boxShadow: '0 8px 24px rgba(43,27,18,0.15)',
+          cursor: 'ns-resize', touchAction: 'pan-x',
         }}
       >
         <div ref={contentRef} style={{ position: 'absolute', top: 0, left: 0, width: '100%', willChange: 'transform' }}>
@@ -30,123 +28,93 @@ function PhoneFrame({ label, src, alt, navBarSrc, phoneRef, contentRef, navBarRe
   )
 }
 
+// Three phones side by side. Each one scrolls on its own while the cursor (or a finger) is inside it,
+// so viewers can compare the tiers at their own pace. Once a phone hits its top or bottom, the page scrolls as usual.
 export default function SyncedScrollDemo({ screens, navBarSrc }) {
   const contentRefs = [useRef(null), useRef(null), useRef(null)]
   const phoneRefs = [useRef(null), useRef(null), useRef(null)]
   const navBarRefs = [useRef(null), useRef(null), useRef(null)]
-  const controlsRef = useRef(null)
-  const [isPaused, setIsPaused] = useState(false)
 
   useEffect(() => {
-    let running = true
-    let rafId = null
-
-    let startTime = null
-    let pausedAt = 0
-    let holdStart = null
-    const speed = SPEED
-    const holdDuration = HOLD_DURATION
     const frames = contentRefs.map(r => r.current)
     const phones = phoneRefs.map(r => r.current)
     const navBars = navBarRefs.map(r => r.current)
-    let maxScroll = [0, 0, 0]
+    const offsets = [0, 0, 0]
+    const maxScroll = [0, 0, 0]
+    const cleanups = []
 
     function computeMaxScroll() {
       frames.forEach((f, i) => {
         const contentHeight = f.getBoundingClientRect().height
-        const phoneHeight = phones[i].clientHeight
-        const navBarHeight = navBars[i].getBoundingClientRect().height
-        const visibleHeight = phoneHeight - navBarHeight
+        const visibleHeight = phones[i].clientHeight - navBars[i].getBoundingClientRect().height
         maxScroll[i] = Math.max(contentHeight - visibleHeight + BOTTOM_GAP, 0)
+        offsets[i] = Math.min(offsets[i], maxScroll[i])
       })
     }
 
-    function imagesReady() {
-      return frames.every(f => {
-        const img = f.querySelector('img')
-        return img.complete && img.naturalHeight > 0
-      })
+    function apply(i) {
+      frames[i].style.transform = 'translateY(' + -offsets[i] + 'px)'
     }
 
+    // Returns true if phone i actually moved, so the page only scrolls once the phone is at an end.
+    function scrollBy(i, dy) {
+      const next = Math.min(Math.max(offsets[i] + dy, 0), maxScroll[i])
+      if (next === offsets[i]) return false
+      offsets[i] = next
+      apply(i)
+      return true
+    }
+
+    phones.forEach((ph, i) => {
+      function onWheel(e) {
+        if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return
+        const unit = e.deltaMode === 1 ? 16 : 1
+        if (scrollBy(i, e.deltaY * unit)) e.preventDefault()
+      }
+      let touchY = null
+      function onTouchStart(e) { touchY = e.touches[0].clientY }
+      function onTouchMove(e) {
+        if (touchY === null) return
+        const y = e.touches[0].clientY
+        if (scrollBy(i, touchY - y)) e.preventDefault()
+        touchY = y
+      }
+      function onTouchEnd() { touchY = null }
+      ph.addEventListener('wheel', onWheel, { passive: false })
+      ph.addEventListener('touchstart', onTouchStart, { passive: true })
+      ph.addEventListener('touchmove', onTouchMove, { passive: false })
+      ph.addEventListener('touchend', onTouchEnd)
+      ph.addEventListener('touchcancel', onTouchEnd)
+      cleanups.push(() => {
+        ph.removeEventListener('wheel', onWheel)
+        ph.removeEventListener('touchstart', onTouchStart)
+        ph.removeEventListener('touchmove', onTouchMove)
+        ph.removeEventListener('touchend', onTouchEnd)
+        ph.removeEventListener('touchcancel', onTouchEnd)
+      })
+    })
+
+    // Measure once the images have loaded (and again if the layout changes size)
+    let alive = true
     function waitForImages() {
-      if (!running) return
-      if (imagesReady()) {
-        computeMaxScroll()
-        rafId = requestAnimationFrame(animate)
-      } else {
-        setTimeout(waitForImages, 50)
-      }
+      if (!alive) return
+      const ready = frames.every(f => { const img = f.querySelector('img'); return img.complete && img.naturalHeight > 0 })
+      if (ready) computeMaxScroll()
+      else setTimeout(waitForImages, 50)
     }
-
-    function animate(time) {
-      if (!running) return
-
-      if (holdStart !== null) {
-        if (time - holdStart >= holdDuration) {
-          holdStart = null
-          startTime = null
-          pausedAt = 0
-        } else {
-          rafId = requestAnimationFrame(animate)
-          return
-        }
-      }
-
-      if (startTime === null) startTime = time - pausedAt
-      const elapsed = time - startTime
-      const traveled = (elapsed / 1000) * speed
-
-      let allDone = true
-      frames.forEach((f, i) => {
-        const y = -Math.min(traveled, maxScroll[i])
-        f.style.transform = 'translateY(' + y + 'px)'
-        if (traveled < maxScroll[i]) allDone = false
-      })
-
-      pausedAt = elapsed
-
-      if (allDone) {
-        holdStart = time
-      }
-
-      rafId = requestAnimationFrame(animate)
-    }
-
-    function toggleScroll() {
-      running = !running
-      setIsPaused(!running)
-      if (running) {
-        startTime = holdStart !== null ? startTime : null
-        rafId = requestAnimationFrame(animate)
-      }
-    }
-
-    function resetScroll() {
-      startTime = null
-      pausedAt = 0
-      holdStart = null
-      frames.forEach(f => { f.style.transform = 'translateY(0px)' })
-    }
-
-    controlsRef.current = { toggleScroll, resetScroll }
-
+    function onResize() { computeMaxScroll(); frames.forEach((_, i) => apply(i)) }
+    window.addEventListener('resize', onResize)
     waitForImages()
 
     return () => {
-      running = false
-      if (rafId) cancelAnimationFrame(rafId)
+      alive = false
+      window.removeEventListener('resize', onResize)
+      cleanups.forEach(fn => fn())
     }
   }, [])
 
-  const buttonStyle = {
-    ...dm, display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-    background: '#525252', borderRadius: 100, padding: '0 24px', cursor: 'pointer',
-    border: 'none', fontSize: 17, fontWeight: 600, lineHeight: '42px', color: '#FFFFFF',
-    boxShadow: '4px 4px 12px 0px rgba(0,0,0,0.05), -4px -4px 12px 0px rgba(0,0,0,0.05)',
-  }
-
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 32, width: '100%', background: '#F4F7F7', borderRadius: 24, padding: 32 }}>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 24, width: '100%', background: '#F4F7F7', borderRadius: 24, padding: 32 }}>
       <div className="am-synced-scroll-row" style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start', gap: 24, width: '100%' }}>
         {screens.map((screen, i) => (
           <PhoneFrame
@@ -161,14 +129,9 @@ export default function SyncedScrollDemo({ screens, navBarSrc }) {
           />
         ))}
       </div>
-      <div style={{ display: 'flex', gap: 12 }}>
-        <button className="jump-btn" style={buttonStyle} onClick={() => controlsRef.current?.toggleScroll()}>
-          {isPaused ? 'Resume' : 'Pause'}
-        </button>
-        <button className="jump-btn" style={buttonStyle} onClick={() => controlsRef.current?.resetScroll()}>
-          Restart
-        </button>
-      </div>
+      <span style={{ ...dm, fontSize: 14, fontWeight: 400, lineHeight: '22px', color: '#979797', textAlign: 'center' }}>
+        Scroll inside a phone to explore that tier.
+      </span>
     </div>
   )
 }

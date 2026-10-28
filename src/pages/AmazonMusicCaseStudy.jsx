@@ -191,10 +191,15 @@ const MOCKUP_BLOCK_STYLES = {
   highlight3: { bg: '#2F55CC', color: '#FFFFFF', weight: 600 },
 }
 
-function MockupBlock({ text, variant }) {
+function MockupBlock({ text, variant, dim }) {
   const s = MOCKUP_BLOCK_STYLES[variant]
   return (
-    <div style={{ display: 'flex', padding: '7px 8px', flexDirection: 'column', alignItems: 'center', alignSelf: 'stretch', background: s.bg, borderRadius: 6 }}>
+    <div style={{
+      display: 'flex', padding: '7px 8px', flexDirection: 'column', alignItems: 'center', alignSelf: 'stretch', background: s.bg, borderRadius: 6,
+      // on the selected tier, the modules its rationale cards talk about stay at full strength; the rest recede
+      opacity: dim ? 0.45 : 1,
+      transition: 'opacity 0.25s ease',
+    }}>
       <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 9, lineHeight: '11.7px', fontWeight: s.weight, color: s.color }}>{text}</span>
     </div>
   )
@@ -208,8 +213,8 @@ const TIER_MOCKUPS = [
       { text: 'New album announcement', variant: 'highlight1' },
       { text: 'Top songs', variant: 'plain' },
       { text: 'Top albums', variant: 'plain' },
-      { text: 'Because you like …', variant: 'highlight1' },
-      { text: 'Fan favorites', variant: 'highlight1' },
+      { text: 'Because you like …', variant: 'highlight1', decision: true },
+      { text: 'Fan favorites', variant: 'highlight1', decision: true },
       { text: 'Releases', variant: 'plain' },
       { text: 'Podcasts about Olivia', variant: 'plain' },
       { text: 'Related radio stations', variant: 'plain' },
@@ -223,8 +228,8 @@ const TIER_MOCKUPS = [
       { text: 'New album announcement', variant: 'highlight1' },
       { text: 'Top songs', variant: 'plain' },
       { text: 'Top albums', variant: 'plain' },
-      { text: 'Continue your journey', variant: 'highlight2' },
-      { text: 'More to explore', variant: 'highlight2' },
+      { text: 'Continue your journey', variant: 'highlight2', decision: true },
+      { text: 'More to explore', variant: 'highlight2', decision: true },
       { text: 'Superfan favorites', variant: 'highlight2' },
       { text: 'Releases', variant: 'plain' },
       { text: 'Podcasts about Olivia', variant: 'plain' },
@@ -237,8 +242,8 @@ const TIER_MOCKUPS = [
     label: 'Superfan',
     blocks: [
       { text: 'New album announcement', variant: 'highlight1' },
-      { text: 'Since your last visit', variant: 'highlight3' },
-      { text: 'Your favorites', variant: 'highlight3' },
+      { text: 'Since your last visit', variant: 'highlight3', decision: true },
+      { text: 'Your favorites', variant: 'highlight3', decision: true },
       { text: 'Top songs', variant: 'plain' },
       { text: 'Top albums', variant: 'plain' },
       { text: 'Your playlists with Olivia', variant: 'highlight3' },
@@ -256,20 +261,41 @@ function TierMockup({ label, blocks, active, onClick }) {
       <span style={{ ...dm, fontSize: 14, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', textAlign: 'center', color: active ? '#D998AD' : '#979797' }}>{label}</span>
       <button
         onClick={onClick}
+        aria-pressed={active}
+        aria-label={`${label}: ${active ? 'showing' : 'show'} detailed rationale`}
         style={{
           display: 'flex', flexDirection: 'column', gap: 5, padding: 10,
           background: '#1C1C1C', borderRadius: 20,
-          border: active ? '4px solid #E494AE' : '4px solid transparent',
+          border: active ? '4px solid #F1C3D1' : '4px solid transparent',
           cursor: 'pointer', textAlign: 'left', width: '100%', font: 'inherit',
         }}
       >
         <div style={{ background: '#000000', borderRadius: 8, padding: '11px 8px', textAlign: 'center', marginBottom: 2 }}>
           <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 9.5, fontWeight: 600, color: '#FFFFFF' }}>Header</span>
         </div>
-        {blocks.map((b, i) => <MockupBlock key={i} {...b} />)}
+        {blocks.map((b, i) => <MockupBlock key={i} text={b.text} variant={b.variant} dim={active && !b.decision} />)}
         <div style={{ background: '#000000', borderRadius: 8, padding: '11px 8px', textAlign: 'center', marginTop: 2 }}>
           <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 9.5, fontWeight: 300, color: '#9A9A9A' }}>Nav bar</span>
         </div>
+      </button>
+      <button
+        type="button"
+        tabIndex={-1}
+        aria-hidden="true"
+        onClick={onClick}
+        className="am-tier-cta"
+        style={{
+          ...dm, alignSelf: 'center', marginTop: 'auto', border: 'none',
+          // selected tier gets a soft status tag (not clickable-looking); the hover hint on the others stays plain text
+          cursor: active ? 'default' : 'pointer',
+          padding: active ? '8px 16px' : '8px 0',
+          borderRadius: 100,
+          background: active ? '#FDEEF3' : 'none',
+          fontSize: 14, fontWeight: active ? 400 : 300, letterSpacing: '0.01em', lineHeight: '22px',
+          color: active ? '#C96A89' : '#979797',
+        }}
+      >
+        {active ? 'Viewing rationale \u2193' : 'View rationale'}
       </button>
     </div>
   )
@@ -277,7 +303,7 @@ function TierMockup({ label, blocks, active, onClick }) {
 
 function RuleLegend({ label, top, bottom }) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6, width: 80, flexShrink: 0, alignSelf: 'stretch' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6, width: 80, flexShrink: 0, alignSelf: 'stretch', marginBottom: 46 /* line up the bottom text with the bottom edge of the phone frames (the rationale labels sit below) */ }}>
       <span style={{ ...dm, fontSize: 12, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#979797' }}>{label}</span>
       <span style={{ ...dm, letterSpacing: '0.01em', fontSize: 14, fontWeight: 500, color: '#4A77FF' }}>{top}</span>
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flex: 1 }}>
@@ -487,6 +513,22 @@ export default function AmazonMusicCaseStudy() {
         }
         .am-tier-mockup-btn.active:hover {
           transform: none;
+        }
+        .am-tier-mockup-btn:not(.active):hover button {
+          border-color: rgba(228,148,174,0.7) !important;
+        }
+        .am-tier-mockup-btn button:focus-visible {
+          outline: 3px solid #4A77FF;
+          outline-offset: 3px;
+        }
+        .am-tier-cta {
+          opacity: 0;
+          transition: opacity 0.2s ease;
+        }
+        .am-tier-mockup-btn:hover .am-tier-cta,
+        .am-tier-mockup-btn:focus-within .am-tier-cta,
+        .am-tier-mockup-btn.active .am-tier-cta {
+          opacity: 1;
         }
         section.fade-section > div, .cs-hero-inner {
           margin-left: 225px;
@@ -982,9 +1024,6 @@ export default function AmazonMusicCaseStudy() {
                 ))}
                 <RuleLegend label="Rule flip" top="Personalized" bottom="General" />
               </div>
-              <p style={{ ...dm, letterSpacing: '0.01em', fontSize: 14, fontWeight: 300, color: '#979797', textAlign: 'right', margin: 0, padding: '12px 0', borderTop: '1px solid #F0F2F2', marginTop: 24 }}>
-                Click a tier to see its detailed rationale below.
-              </p>
             </div>
 
             <RationalePanel key={decision1Tier} data={DECISION1_RATIONALE[decision1Tier]} />
