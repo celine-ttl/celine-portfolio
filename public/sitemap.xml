@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://celinetseng.com/</loc><priority>1.0</priority></url>
+  <url><loc>https://celinetseng.com/amazon-music</loc><priority>0.8</priority></url>
+  <url><loc>https://celinetseng.com/ui-for-ai</loc><priority>0.8</priority></url>
+  <url><loc>https://celinetseng.com/ahoku</loc><priority>0.8</priority></url>
+  <url><loc>https://celinetseng.com/about</loc><priority>0.6</priority></url>
+  <url><loc>https://celinetseng.com/playground</loc><priority>0.5</priority></url>
+  <url><loc>https://celinetseng.com/chat</loc><priority>0.4</priority></url>
+</urlset>
