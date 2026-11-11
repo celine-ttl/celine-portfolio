@@ -294,7 +294,6 @@
     content: ""; position: absolute; top: 1cqw; right: 1cqw; width: .9cqw; height: .9cqw; border-radius: 50%;
     background: #2342ff; box-shadow: 0 0 0 .2cqw #fff;
   }
-  .key.nav.active { filter: brightness(1.15); transform: translateY(.4cqw); }
   .key.nav::after, .key.nav.active::after { display: none; }
   .key.nav.active::after { background: #ffe58a; box-shadow: 0 0 0 .2cqw #2342ff; }
   .hint { margin: 22px 0 0; text-align: center; font-size: 12px; color: var(--muted); letter-spacing: .06em; line-height: 1.8; }
@@ -377,7 +376,7 @@
   .boot-bar i.on { background: #41549a; }
   .boot-sub { font-family: "Silkscreen", monospace; font-size: 13px; color: var(--text); letter-spacing: .15em; }
 
-  .desk { position: relative; z-index: 1; margin-top: -42px; padding: 76px 16px 48px; background-color: var(--desk); border-top: 4px solid var(--outline); overflow: hidden; }
+  .desk { position: relative; z-index: 1; margin-top: -42px; padding: 76px 16px 48px; background-color: var(--desk); border-top: 2px solid var(--outline); overflow: hidden; }
   .desk::before { content: ""; position: absolute; left: -60%; right: -60%; top: 0; height: 720px; background-image: linear-gradient(var(--desk-line) 3px, transparent 3px), linear-gradient(90deg, var(--desk-line) 3px, transparent 3px); background-size: 64px 64px; background-position: 50% 0; transform-origin: 50% 0; transform: perspective(900px) rotateX(58deg); pointer-events: none; }
   .desk-in { position: relative; z-index: 1; }
   .desk-in { max-width: 820px; margin: 0 auto; }
@@ -499,7 +498,7 @@
   .drive { height: 26px; border-width: 2px; border-radius: 6px; box-shadow: inset 0 3px 6px rgba(42,54,112,.35); }
   .drive-slot { left: 16%; right: 16%; bottom: 6px; height: 10px; border-width: 2px; border-radius: 4px; }
   .drive-slot i { height: 2px; margin-top: -1px; }
-  .desk { margin-top: 8px; padding: 64px 16px 56px; background-color: var(--desk); border-top: 4px solid var(--outline); overflow: hidden; }
+  .desk { margin-top: 8px; padding: 64px 16px 56px; background-color: var(--desk); border-top: 2px solid var(--outline); overflow: hidden; }
   .desk::before { display: block; }
   .desk-in { max-width: 1000px; }
   .kb-wrap { margin-top: -30px; }
@@ -530,7 +529,7 @@
   /* ---------- keyboard lies on the same tilted plane as the table grid ---------- */
   .desk { padding: 0; height: clamp(250px, 37vw, 390px); perspective: 1200px; perspective-origin: 50% 0%; overflow: hidden; }
   .desk::before { display: none; }
-  .desk-in { position: absolute; left: -45%; right: -45%; bottom: 8px; max-width: none; height: 2400px; transform-origin: 50% 100%; transform: rotateX(48deg); background-image: linear-gradient(var(--desk-line) 3px, transparent 3px), linear-gradient(90deg, var(--desk-line) 3px, transparent 3px); background-size: 64px 64px; background-position: 50% 100%; display: flex; justify-content: center; align-items: flex-end; padding-bottom: 10px; z-index: 1; }
+  .desk-in { position: absolute; left: -45%; right: -45%; bottom: 8px; max-width: none; height: 2400px; transform-origin: 50% 100%; transform: rotateX(48deg); background-image: linear-gradient(var(--desk-line) 3px, transparent 3px), linear-gradient(90deg, var(--desk-line) 3px, transparent 3px); background-size: 96px 96px; background-position: 50% 100%; display: flex; justify-content: center; align-items: flex-end; padding-bottom: 10px; z-index: 1; }
   .kb-wrap { width: min(1000px, calc(100vw - 32px)); margin-top: 0; perspective: none; }
   .kb { transform: none; }
   @media (max-width: 680px) { .desk { margin-top: -14px; padding-top: 0; height: clamp(190px, 50vw, 260px); } }
@@ -978,8 +977,8 @@
   function K(id, label, u, cls, o) { return Object.assign({ id: id, label: label || id.toUpperCase(), u: u || 1, cls: cls || 'b' }, o || {}); }
   var ROWS = [
     [K('`', '` ~'), K('1', '1 !', 1, 'y'), K('2', '2 @', 1, 'r'), K('3', '3 #'), K('4', '4 $', 1, 'r'), K('5', '5 %'), K('6', '6 ^', 1, 'y'), K('7', '7 &', 1, 'r'), K('8', '8 *'), K('9', '9 (', 1, 'y'), K('0', '0 )', 1, 'r'), K('-', '- _'), K('=', '= +', 1, 'y'), K('back', '← BACK', 2, 'brick')],
-    [K('tab', 'TAB', 1.5, 'brick'), K('q'), K('w', 'W', 1, 'y', { nav: 'work', sub: 'HOME' }), K('e', 'E', 1, 'b', { nav: 'exp', sub: 'EXP' }), K('r'), K('t'), K('y'), K('u'), K('i'), K('o'), K('p'), K('[', '[ {'), K(']', '] }'), K('\\', '\\ |', 1.5)],
-    [K('caps', 'CAPS', 1.75, 'brick'), K('a', 'A', 1, 'b', { nav: 'about', sub: 'ABOUT' }), K('s'), K('d'), K('f'), K('g'), K('h'), K('j'), K('k'), K('l'), K(';', '; :'), K("'", '\' "'), K('enter', 'ENTER', 2.25, 'y', { nav: 'talk', sub: 'LET’S TALK' })],
+    [K('tab', 'TAB', 1.5, 'brick'), K('q'), K('w', 'W', 1, 'b', { nav: 'work', sub: 'HOME', hideSub: true }), K('e', 'E', 1, 'b', { nav: 'exp', sub: 'EXP', hideSub: true }), K('r'), K('t'), K('y'), K('u'), K('i'), K('o'), K('p'), K('[', '[ {'), K(']', '] }'), K('\\', '\\ |', 1.5)],
+    [K('caps', 'CAPS', 1.75, 'brick'), K('a', 'A', 1, 'b', { nav: 'about', sub: 'ABOUT', hideSub: true }), K('s'), K('d'), K('f'), K('g'), K('h'), K('j'), K('k'), K('l'), K(';', '; :'), K("'", '\' "'), K('enter', 'ENTER', 2.25, 'y', { nav: 'talk', sub: 'LET’S TALK', hideSub: true })],
     [K('shiftl', 'SHIFT', 2.25, 'b'), K('z'), K('x'), K('c'), K('v'), K('b'), K('n'), K('m'), K(',', ', <'), K('.', '. >'), K('/', '/ ?', 1, 'y'), K('shiftr', 'SHIFT', 2.75, 'g')],
     [K('ctrll', 'CTRL', 1.25, 'brick'), K('win', '▦', 1.25, 'w'), K('altl', 'ALT', 1.25, 'brick'), K('space', 'ASK ME ANYTHING', 7.5, 'sp'), K('altr', 'ALT', 1.25, 'brick'), K('fn', 'FN', 1.25, 'w'), K('ctrlr', 'CTRL', 1.25, 'brick')]
   ];
@@ -993,7 +992,7 @@
       b.className = 'key ' + k.cls + (k.nav ? ' nav' : '') + (k.id === 'space' ? ' sp' : '');
       if (k.u > 1.25) b.style.flexGrow = k.u; else b.classList.add('round');
       b.dataset.k = k.id;
-      b.innerHTML = '<span>' + k.label + '</span>' + (k.sub ? '<small>' + k.sub + '</small>' : '');
+      b.innerHTML = '<span>' + k.label + '</span>' + (k.sub && !k.hideSub ? '<small>' + k.sub + '</small>' : '');
       if (k.nav) b.setAttribute('aria-label', k.sub);
       b.addEventListener('click', function () { onKey(k, 'click'); });
       keyEls[k.id] = b; row.appendChild(b);
@@ -1365,7 +1364,7 @@
     sceneEl.style.left = Math.max(0, (vw - 1500 * sc) / 2) + 'px';
     reportHeight(Math.ceil(TOP_GAP + sceneEl.offsetHeight * sc));
     var y = document.querySelector('.desk').getBoundingClientRect().top;
-    document.body.style.background = 'linear-gradient(var(--wall) 0, var(--wall) ' + y + 'px, var(--outline) ' + y + 'px, var(--outline) ' + (y + 4 * sc) + 'px, var(--desk) ' + (y + 4 * sc) + 'px, var(--desk) 100%)';
+    document.body.style.background = 'linear-gradient(var(--wall) 0, var(--wall) ' + y + 'px, var(--outline) ' + y + 'px, var(--outline) ' + (y + 2 * sc) + 'px, var(--desk) ' + (y + 2 * sc) + 'px, var(--desk) 100%)';
   }
   fitScene();
   window.addEventListener('resize', fitScene);
